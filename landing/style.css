@@ -227,9 +227,7 @@ main>section{padding-block:0 var(--sec)}
   width: 100%;
   max-width: 697px;
   margin: 0 auto;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-  transition: transform 0.2s ease-out;
+  user-select: none;
 }
 .hero-stage__img {
   display: block;
@@ -252,9 +250,7 @@ main>section{padding-block:0 var(--sec)}
   gap: 8px;
   padding: 6px 14px;
   border-radius: 999px;
-  background: rgba(18, 19, 26, 0.78);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: #14151e;
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: rgba(255, 255, 255, 0.9);
   font-size: 12px;
@@ -262,7 +258,7 @@ main>section{padding-block:0 var(--sec)}
   letter-spacing: 0.01em;
   pointer-events: none;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity 0.3s ease;
 }
 .hero-stage__hint-dot {
   width: 7px;
@@ -270,133 +266,90 @@ main>section{padding-block:0 var(--sec)}
   border-radius: 50%;
   background: var(--lime, #c4f449);
   box-shadow: 0 0 10px var(--lime, #c4f449);
-  animation: heroHintPulse 2s ease-in-out infinite;
-}
-@keyframes heroHintPulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.5; }
 }
 
-/* Интерактивные хотспоты */
+/* Интерактивные хотспоты, вживленные в предметы рисунка */
 .hero-spot {
   position: absolute;
-  left: var(--spot-x);
-  top: var(--spot-y);
-  transform: translate(-50%, -50%);
-  z-index: 20;
   cursor: pointer;
+  z-index: 20;
   outline: none;
   -webkit-tap-highlight-color: transparent;
 }
 .hero-spot:focus-visible {
   outline: 2px solid var(--lime, #c4f449);
-  outline-offset: 4px;
-  border-radius: 50%;
-}
-
-/* Разные фазы парения для эффекта живой сцены */
-.hero-spot--bulb   { animation: heroFloat1 4.4s ease-in-out infinite; }
-.hero-spot--code   { animation: heroFloat2 5.0s ease-in-out 0.4s infinite; }
-.hero-spot--speed  { animation: heroFloat1 4.6s ease-in-out 0.8s infinite; }
-.hero-spot--gear   { animation: heroFloat2 5.3s ease-in-out 1.2s infinite; }
-.hero-spot--rating { animation: heroFloat1 4.8s ease-in-out 0.6s infinite; }
-.hero-spot--design { animation: heroFloat2 5.1s ease-in-out 1.5s infinite; }
-.hero-spot--team   { animation: heroFloat1 5.8s ease-in-out 0.2s infinite; }
-
-@keyframes heroFloat1 {
-  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-  50% { transform: translate(-50%, -50%) translateY(-5px); }
-}
-@keyframes heroFloat2 {
-  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-  50% { transform: translate(-50%, -50%) translateY(4px); }
-}
-
-/* Кнопка-пин хотспота */
-.hero-spot__pin {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: rgba(18, 19, 26, 0.88);
-  color: #fff;
-  border: 1.5px solid rgba(255, 255, 255, 0.24);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 16px rgba(196, 244, 73, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
-  position: relative;
-  z-index: 2;
-}
-.hero-spot__pin svg {
-  display: block;
-  transition: transform 0.25s ease;
-}
-.hero-spot:hover .hero-spot__pin,
-.hero-spot.is-open .hero-spot__pin,
-.hero-spot:focus-visible .hero-spot__pin {
-  transform: scale(1.16);
-  background: #101117;
-  color: var(--lime, #c4f449);
-  border-color: var(--lime, #c4f449);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 24px rgba(196, 244, 73, 0.65);
-}
-.hero-spot:hover .hero-spot__pin svg,
-.hero-spot.is-open .hero-spot__pin svg {
-  transform: scale(1.1);
-}
-
-/* Пульсирующее неоновое кольцо */
-.hero-spot__pulse {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 38px;
-  height: 38px;
-  margin: -19px 0 0 -19px;
-  border-radius: 50%;
-  border: 2px solid var(--lime, #c4f449);
-  opacity: 0;
-  pointer-events: none;
-  animation: heroSpotPulse 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
-}
-.hero-spot--code .hero-spot__pulse   { animation-delay: 0.5s; }
-.hero-spot--speed .hero-spot__pulse  { animation-delay: 1.0s; }
-.hero-spot--gear .hero-spot__pulse   { animation-delay: 1.5s; }
-.hero-spot--rating .hero-spot__pulse { animation-delay: 2.0s; }
-.hero-spot--design .hero-spot__pulse { animation-delay: 2.5s; }
-.hero-spot--team .hero-spot__pulse   { animation-delay: 0.8s; }
-
-@keyframes heroSpotPulse {
-  0% { transform: scale(0.9); opacity: 0.85; }
-  60% { transform: scale(2.2); opacity: 0; }
-  100% { transform: scale(2.2); opacity: 0; }
-}
-
-/* Всплывающая карточка с преимуществом команды */
-.hero-spot__pop {
-  position: absolute;
-  width: 280px;
-  padding: 16px 18px;
-  border-radius: 18px;
-  background: rgba(17, 18, 24, 0.94);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(196, 244, 73, 0.15);
-  color: #fff;
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1), visibility 0.25s;
-  z-index: 50;
+  outline-offset: 2px;
 }
 .hero-spot:hover,
 .hero-spot.is-open,
 .hero-spot:focus-visible {
-  z-index: 60;
+  z-index: 70;
+}
+
+/* Интерактивная зона подсветки прямо на предмете рисунка */
+.hero-spot__area {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  border: 1.5px solid transparent;
+  background: transparent;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+.hero-spot:hover .hero-spot__area,
+.hero-spot.is-open .hero-spot__area,
+.hero-spot:focus-visible .hero-spot__area {
+  border-color: var(--lime, #c4f449);
+  background: rgba(196, 244, 73, 0.12);
+  box-shadow: 0 0 24px rgba(196, 244, 73, 0.4), inset 0 0 16px rgba(196, 244, 73, 0.15);
+}
+
+/* Аккуратный микрометчик в углу предмета */
+.hero-spot__marker {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(20, 21, 30, 0.75);
+  border: 1px solid rgba(196, 244, 73, 0.4);
+  color: var(--lime, #c4f449);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  opacity: 0.75;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+.hero-spot:hover .hero-spot__marker,
+.hero-spot.is-open .hero-spot__marker {
+  transform: scale(1.15) rotate(45deg);
+  background: var(--lime, #c4f449);
+  color: #111;
+  opacity: 1;
+  box-shadow: 0 0 14px rgba(196, 244, 73, 0.7);
+}
+
+/* Всплывающая карточка: быстрый GPU-рендер без лагов */
+.hero-spot__pop {
+  position: absolute;
+  width: 275px;
+  padding: 15px 17px;
+  border-radius: 16px;
+  background: #14151e;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(196, 244, 73, 0.18);
+  color: #fff;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.14s ease, transform 0.14s ease, visibility 0.14s;
+  z-index: 80;
 }
 .hero-spot:hover .hero-spot__pop,
 .hero-spot.is-open .hero-spot__pop,
@@ -406,41 +359,38 @@ main>section{padding-block:0 var(--sec)}
   pointer-events: auto;
 }
 
-/* Позиционирование всплывашек по сторонам */
+/* Позиционирование всплывашек */
 .hero-spot__pop--left {
-  right: calc(100% + 14px);
+  right: calc(100% + 10px);
   top: 50%;
-  transform: translateY(-50%) translateX(12px) scale(0.94);
-  transform-origin: right center;
+  transform: translateY(-50%) translateX(6px);
 }
 .hero-spot:hover .hero-spot__pop--left,
 .hero-spot.is-open .hero-spot__pop--left,
 .hero-spot:focus-visible .hero-spot__pop--left {
-  transform: translateY(-50%) translateX(0) scale(1);
+  transform: translateY(-50%) translateX(0);
 }
 
 .hero-spot__pop--right {
-  left: calc(100% + 14px);
+  left: calc(100% + 10px);
   top: 50%;
-  transform: translateY(-50%) translateX(-12px) scale(0.94);
-  transform-origin: left center;
+  transform: translateY(-50%) translateX(-6px);
 }
 .hero-spot:hover .hero-spot__pop--right,
 .hero-spot.is-open .hero-spot__pop--right,
 .hero-spot:focus-visible .hero-spot__pop--right {
-  transform: translateY(-50%) translateX(0) scale(1);
+  transform: translateY(-50%) translateX(0);
 }
 
 .hero-spot__pop--bottom {
-  top: calc(100% + 14px);
+  top: calc(100% + 10px);
   left: 50%;
-  transform: translateX(-50%) translateY(-12px) scale(0.94);
-  transform-origin: top center;
+  transform: translateX(-50%) translateY(-6px);
 }
 .hero-spot:hover .hero-spot__pop--bottom,
 .hero-spot.is-open .hero-spot__pop--bottom,
 .hero-spot:focus-visible .hero-spot__pop--bottom {
-  transform: translateX(-50%) translateY(0) scale(1);
+  transform: translateX(-50%) translateY(0);
 }
 
 .hero-spot__tag {
@@ -451,50 +401,48 @@ main>section{padding-block:0 var(--sec)}
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--lime, #c4f449);
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 .hero-spot__title {
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 700;
   line-height: 1.3;
   color: #ffffff;
-  margin-bottom: 6px;
+  margin-bottom: 5px;
 }
 .hero-spot__desc {
-  font-size: 12.5px;
-  line-height: 1.45;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  line-height: 1.44;
+  color: rgba(255, 255, 255, 0.82);
   margin: 0;
   font-weight: 400;
 }
 
 @media (max-width: 900px) {
   .hero-spot__pop {
-    width: 250px;
-    padding: 14px 16px;
+    width: 240px;
+    padding: 12px 14px;
   }
 }
 
 @media (max-width: 760px) {
-  .hero-spot__pin {
-    width: 32px;
-    height: 32px;
-  }
-  .hero-spot__pulse {
-    width: 32px;
-    height: 32px;
-    margin: -16px 0 0 -16px;
-  }
   .hero-spot__pop {
     width: 220px;
     padding: 12px 14px;
-    border-radius: 14px;
+    border-radius: 12px;
+  }
+  .hero-spot__marker {
+    width: 17px;
+    height: 17px;
+    font-size: 12px;
+    top: 2px;
+    right: 2px;
   }
   .hero-spot__title {
-    font-size: 13.5px;
+    font-size: 13px;
   }
   .hero-spot__desc {
-    font-size: 11.5px;
+    font-size: 11px;
   }
   .hero-stage__hint {
     top: 8px;

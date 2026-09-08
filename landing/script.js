@@ -47,35 +47,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- интерактивная 3D-иллюстрация первого экрана ---------- */
+  /* ---------- интерактивная иллюстрация первого экрана ---------- */
   initHeroInteractive();
 
   function initHeroInteractive() {
     const stage = document.getElementById('heroStage');
     if (!stage) return;
 
-    const heroCard = stage.closest('.hero__card') || stage.parentElement;
     const spots = Array.from(stage.querySelectorAll('.hero-spot'));
     const hint = stage.querySelector('.hero-stage__hint');
     if (!spots.length) return;
 
-    const isTouch = window.matchMedia('(hover: none)').matches || ('ontouchstart' in window);
-    const isReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
     let activeSpot = null;
-    let autoTimer = null;
-    let autoIndex = 0;
-    let userInteracted = false;
 
     function setActive(spot) {
       if (activeSpot === spot) return;
-      if (activeSpot) {
-        activeSpot.classList.remove('is-open');
-      }
+      if (activeSpot) activeSpot.classList.remove('is-open');
       activeSpot = spot;
-      if (activeSpot) {
-        activeSpot.classList.add('is-open');
-      }
+      if (activeSpot) activeSpot.classList.add('is-open');
     }
 
     function clearActive() {
@@ -89,8 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Клик / тап
       spot.addEventListener('click', (e) => {
         e.stopPropagation();
-        userInteracted = true;
-        stopAuto();
         if (hint) hint.style.opacity = '0';
         if (activeSpot === spot) {
           clearActive();
@@ -99,26 +86,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // Ховер на десктопе
+      // Мышь: мгновенное появление без задержек и лагов
       spot.addEventListener('mouseenter', () => {
-        userInteracted = true;
-        stopAuto();
         if (hint) hint.style.opacity = '0';
         setActive(spot);
       });
 
       spot.addEventListener('mouseleave', () => {
-        if (!isTouch) {
-          clearActive();
-        }
+        clearActive();
       });
 
       // Доступность с клавиатуры
       spot.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          userInteracted = true;
-          stopAuto();
           if (hint) hint.style.opacity = '0';
           if (activeSpot === spot) clearActive();
           else setActive(spot);
@@ -138,66 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') clearActive();
     });
-
-    // Мягкий 3D-параллакс от курсора мыши
-    if (!isTouch && !isReduce && heroCard) {
-      let rafId = null;
-      let targetRotX = 0;
-      let targetRotY = 0;
-      let curRotX = 0;
-      let curRotY = 0;
-
-      heroCard.addEventListener('mousemove', (e) => {
-        const rect = heroCard.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        targetRotX = -y * 8; // макс +-4 градуса
-        targetRotY = x * 8;
-        if (!rafId) rafId = requestAnimationFrame(updateTilt);
-      });
-
-      heroCard.addEventListener('mouseleave', () => {
-        targetRotX = 0;
-        targetRotY = 0;
-        if (!rafId) rafId = requestAnimationFrame(updateTilt);
-      });
-
-      function updateTilt() {
-        curRotX += (targetRotX - curRotX) * 0.12;
-        curRotY += (targetRotY - curRotY) * 0.12;
-        stage.style.transform = `perspective(1000px) rotateX(${curRotX.toFixed(2)}deg) rotateY(${curRotY.toFixed(2)}deg)`;
-        if (Math.abs(targetRotX - curRotX) > 0.02 || Math.abs(targetRotY - curRotY) > 0.02) {
-          rafId = requestAnimationFrame(updateTilt);
-        } else {
-          rafId = null;
-        }
-      }
-    }
-
-    // Демо-показ: если пользователь не трогает сцену, подсвечиваем по очереди хотспоты
-    function startAuto() {
-      if (isTouch || isReduce || userInteracted) return;
-      autoTimer = setInterval(() => {
-        if (userInteracted) { stopAuto(); return; }
-        const next = spots[autoIndex % spots.length];
-        setActive(next);
-        autoIndex++;
-        setTimeout(() => {
-          if (!userInteracted && activeSpot === next) {
-            clearActive();
-          }
-        }, 2500);
-      }, 4000);
-    }
-
-    function stopAuto() {
-      if (autoTimer) {
-        clearInterval(autoTimer);
-        autoTimer = null;
-      }
-    }
-
-    setTimeout(startAuto, 2800);
   }
 
   /* ---------- выпадашка «Услуги» ---------- */
