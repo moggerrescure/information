@@ -295,6 +295,14 @@
     </div>
 
     <div class="cases-carousel" id="casesCarousel">
+      <!-- Боковые плавающие кнопки влево и вправо -->
+      <button class="cases-carousel__side-arrow cases-carousel__side-arrow--prev" id="casesSidePrev" type="button" aria-label="Предыдущий проект" title="Предыдущий проект" disabled>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="cases-carousel__side-arrow cases-carousel__side-arrow--next" id="casesSideNext" type="button" aria-label="Следующий проект" title="Следующий проект">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+
       <div class="cases cases--track stagger" id="casesTrack" tabindex="0" role="region" aria-label="Карусель проектов">
         <!-- 1. Swift iOS App -->
         <article class="case" data-tags="swift">

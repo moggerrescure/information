@@ -114,6 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const casesTrack = document.getElementById('casesTrack');
   const prevBtn = document.getElementById('casesPrev');
   const nextBtn = document.getElementById('casesNext');
+  const sidePrevBtn = document.getElementById('casesSidePrev');
+  const sideNextBtn = document.getElementById('casesSideNext');
   const currEl = document.getElementById('casesCounterCurr');
   const totalEl = document.getElementById('casesCounterTotal');
   const progressFill = document.getElementById('casesProgress');
@@ -127,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let startX = 0;
     let scrollLeftStart = 0;
     let hasMoved = false;
+    let animId = null;
 
     const updateCarouselUI = () => {
       const visible = getVisibleCases();
@@ -138,6 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (progressFill) progressFill.style.width = '0%';
         if (prevBtn) prevBtn.disabled = true;
         if (nextBtn) nextBtn.disabled = true;
+        if (sidePrevBtn) sidePrevBtn.disabled = true;
+        if (sideNextBtn) sideNextBtn.disabled = true;
         if (dotsContainer) dotsContainer.innerHTML = '';
         return;
       }
@@ -169,9 +174,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Стрелки навигации
-      if (prevBtn) prevBtn.disabled = activeIndex === 0 && casesTrack.scrollLeft <= 10;
-      if (nextBtn) nextBtn.disabled = activeIndex >= total - 1 || (maxScroll > 10 && casesTrack.scrollLeft >= maxScroll - 15);
+      // Стрелки навигации (и в шапке, и плавающие боковые)
+      const isStart = activeIndex === 0 && casesTrack.scrollLeft <= 12;
+      const isEnd = activeIndex >= total - 1 || (maxScroll > 10 && casesTrack.scrollLeft >= maxScroll - 16);
+
+      if (prevBtn) prevBtn.disabled = isStart;
+      if (nextBtn) nextBtn.disabled = isEnd;
+      if (sidePrevBtn) sidePrevBtn.disabled = isStart;
+      if (sideNextBtn) sideNextBtn.disabled = isEnd;
 
       // Точки
       if (dotsContainer) {
@@ -181,6 +191,46 @@ document.addEventListener('DOMContentLoaded', () => {
           dot.setAttribute('aria-selected', idx === activeIndex ? 'true' : 'false');
         });
       }
+    };
+
+    // Мягкая, плавная интерполяция перемотки без резких рывков
+    const smoothScrollTo = (targetX, duration = 620) => {
+      if (animId) cancelAnimationFrame(animId);
+
+      const start = casesTrack.scrollLeft;
+      const maxScroll = casesTrack.scrollWidth - casesTrack.clientWidth;
+      const clampedTarget = Math.max(0, Math.min(targetX, maxScroll));
+      const dist = clampedTarget - start;
+
+      if (Math.abs(dist) < 2) return;
+
+      const startTime = performance.now();
+      casesTrack.style.scrollSnapType = 'none';
+      casesTrack.style.scrollBehavior = 'auto';
+
+      // Кубическая функция замедления: мягкий старт и очень плавное торможение
+      const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+      const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+      const step = (now) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = easeInOutCubic(progress);
+
+        casesTrack.scrollLeft = start + dist * ease;
+
+        if (progress < 1) {
+          animId = requestAnimationFrame(step);
+        } else {
+          casesTrack.scrollLeft = clampedTarget;
+          casesTrack.style.scrollSnapType = '';
+          casesTrack.style.scrollBehavior = '';
+          animId = null;
+          updateCarouselUI();
+        }
+      };
+
+      animId = requestAnimationFrame(step);
     };
 
     const renderDots = () => {
@@ -204,26 +254,29 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!visible[index]) return;
       const targetCard = visible[index];
       const leftPos = targetCard.offsetLeft - casesTrack.offsetLeft;
-      casesTrack.scrollTo({ left: Math.max(0, leftPos), behavior: 'smooth' });
+      smoothScrollTo(leftPos, 620);
     };
 
-    // Клики по кнопкам-стрелкам
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        const visible = getVisibleCases();
-        const currentNum = parseInt(currEl?.textContent || '1', 10) - 1;
-        const nextIndex = Math.min(visible.length - 1, currentNum + 1);
-        scrollToCard(nextIndex);
-      });
-    }
+    const goNext = () => {
+      const visible = getVisibleCases();
+      const currentNum = parseInt(currEl?.textContent || '1', 10) - 1;
+      const nextIndex = Math.min(visible.length - 1, currentNum + 1);
+      scrollToCard(nextIndex);
+    };
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        const currentNum = parseInt(currEl?.textContent || '1', 10) - 1;
-        const prevIndex = Math.max(0, currentNum - 1);
-        scrollToCard(prevIndex);
-      });
-    }
+    const goPrev = () => {
+      const currentNum = parseInt(currEl?.textContent || '1', 10) - 1;
+      const prevIndex = Math.max(0, currentNum - 1);
+      scrollToCard(prevIndex);
+    };
+
+    // Клики по кнопкам-стрелкам в шапке
+    if (nextBtn) nextBtn.addEventListener('click', goNext);
+    if (prevBtn) prevBtn.addEventListener('click', goPrev);
+
+    // Клики по боковым плавающим стрелкам
+    if (sideNextBtn) sideNextBtn.addEventListener('click', goNext);
+    if (sidePrevBtn) sidePrevBtn.addEventListener('click', goPrev);
 
     // Слушатель скролла с requestAnimationFrame
     let scrollTicking = false;
