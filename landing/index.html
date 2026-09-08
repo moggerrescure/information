@@ -270,7 +270,7 @@
 
         <!-- Кнопки управления каруселью в десктопе -->
         <div class="cases__nav" aria-label="Управление каруселью проектов">
-          <button class="cases__arrow cases__arrow--prev" id="casesPrev" type="button" aria-label="Предыдущий проект" disabled>
+          <button class="cases__arrow cases__arrow--prev js-cases-prev" id="casesPrev" type="button" aria-label="Предыдущий проект" disabled>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
           </button>
           <div class="cases__counter">
@@ -278,7 +278,7 @@
             <span class="cases__counter-sep">/</span>
             <span class="cases__counter-total" id="casesCounterTotal">06</span>
           </div>
-          <button class="cases__arrow cases__arrow--next" id="casesNext" type="button" aria-label="Следующий проект">
+          <button class="cases__arrow cases__arrow--next js-cases-next" id="casesNext" type="button" aria-label="Следующий проект">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </button>
         </div>
@@ -295,17 +295,17 @@
     </div>
 
     <div class="cases-carousel" id="casesCarousel">
-      <!-- Боковые плавающие кнопки влево и вправо -->
-      <button class="cases-carousel__side-arrow cases-carousel__side-arrow--prev" id="casesSidePrev" type="button" aria-label="Предыдущий проект" title="Предыдущий проект" disabled>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-      <button class="cases-carousel__side-arrow cases-carousel__side-arrow--next" id="casesSideNext" type="button" aria-label="Следующий проект" title="Следующий проект">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </button>
+      <div class="cases-carousel__row">
+        <!-- Кнопка ВЛЕВО: расположена слева от карточек с расстоянием -->
+        <button class="cases-btn cases-btn--prev js-cases-prev" id="casesSidePrev" type="button" aria-label="Предыдущий проект" title="Предыдущий проект" disabled>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
 
-      <div class="cases cases--track stagger" id="casesTrack" tabindex="0" role="region" aria-label="Карусель проектов">
-        <!-- 1. Swift iOS App -->
-        <article class="case" data-tags="swift">
+        <!-- Обертка трека с карточками -->
+        <div class="cases-carousel__track-wrap">
+          <div class="cases cases--track stagger" id="casesTrack" tabindex="0" role="region" aria-label="Карусель проектов">
+            <!-- 1. Swift iOS App -->
+            <article class="case" data-tags="swift">
           <div class="case__media">
             <img class="case__img" src="img/case-swift-ios.jpg" width="800" height="450" alt="Приложение на Swift Vital Health под iOS" loading="lazy" decoding="async">
             <div class="case__badges">
@@ -484,13 +484,20 @@
           </div>
         </article>
       </div>
-
-      <!-- Прогрессбар и точки управления -->
-      <div class="cases__progress-bar">
-        <div class="cases__progress-fill" id="casesProgress"></div>
-      </div>
-      <div class="cases__dots" id="casesDots" aria-label="Точки навигации карусели"></div>
     </div>
+
+    <!-- Кнопка ВПРАВО: расположена справа от карточек с расстоянием -->
+    <button class="cases-btn cases-btn--next js-cases-next" id="casesSideNext" type="button" aria-label="Следующий проект" title="Следующий проект">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <!-- Прогрессбар и точки управления -->
+  <div class="cases__progress-bar">
+    <div class="cases__progress-fill" id="casesProgress"></div>
+  </div>
+  <div class="cases__dots" id="casesDots" aria-label="Точки навигации карусели"></div>
+</div>
 
     <p class="cases__empty" hidden>По выбранному направлению кейсы скоро появятся — напишите нам, покажем свежие примеры прямо в переписке.</p>
 

@@ -174,14 +174,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Стрелки навигации (и в шапке, и плавающие боковые)
+      // Стрелки навигации: синхронно обновляем все кнопки влево и вправо
       const isStart = activeIndex === 0 && casesTrack.scrollLeft <= 12;
       const isEnd = activeIndex >= total - 1 || (maxScroll > 10 && casesTrack.scrollLeft >= maxScroll - 16);
 
-      if (prevBtn) prevBtn.disabled = isStart;
-      if (nextBtn) nextBtn.disabled = isEnd;
-      if (sidePrevBtn) sidePrevBtn.disabled = isStart;
-      if (sideNextBtn) sideNextBtn.disabled = isEnd;
+      document.querySelectorAll('.js-cases-prev').forEach(btn => { btn.disabled = isStart; });
+      document.querySelectorAll('.js-cases-next').forEach(btn => { btn.disabled = isEnd; });
 
       // Точки
       if (dotsContainer) {
