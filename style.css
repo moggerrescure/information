@@ -319,7 +319,35 @@ main>section{padding-block:0 var(--sec)}
 
 /* кейсы / проекты */
 .cases__header{margin-bottom:32px;position:relative;z-index:2}
+.cases__header-top{display:flex;justify-content:space-between;align-items:flex-end;gap:28px}
+.cases__header-text{flex:1}
+.cases__h{margin-top:14px}
 .cases__lead{font-size:clamp(16px,1.4vw,19px);line-height:1.55;color:rgba(255,255,255,.76);max-width:820px;margin-top:12px}
+
+.cases__nav{
+  display:flex;align-items:center;gap:12px;flex-shrink:0;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  padding:8px 14px;border-radius:var(--r-pill);backdrop-filter:blur(14px);
+}
+.cases__arrow{
+  width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.08);color:#fff;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .25s var(--ease);
+}
+.cases__arrow:hover:not(:disabled){
+  background:var(--lime);border-color:var(--lime);color:var(--lime-ink);
+  transform:translateY(-2px);box-shadow:0 8px 22px rgba(196,244,73,.35);
+}
+.cases__arrow:active:not(:disabled){transform:translateY(0) scale(.95)}
+.cases__arrow:disabled{opacity:.28;cursor:not-allowed;pointer-events:none}
+
+.cases__counter{
+  display:flex;align-items:baseline;gap:5px;font-family:var(--head);font-weight:700;
+  font-size:15px;letter-spacing:.05em;padding:0 6px;user-select:none;
+}
+.cases__counter-curr{color:var(--lime);font-size:18px}
+.cases__counter-sep{color:rgba(255,255,255,.3)}
+.cases__counter-total{color:rgba(255,255,255,.65)}
 
 .chips{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:38px}
 .chip{
@@ -330,7 +358,41 @@ main>section{padding-block:0 var(--sec)}
 .chip:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.28);color:#fff;transform:translateY(-2px)}
 .chip.is-on{background:var(--lime);border-color:var(--lime);color:var(--lime-ink);font-weight:700;box-shadow:0 8px 24px rgba(196,244,73,.25)}
 
+/* Карусель проектов */
+.cases-carousel{position:relative;margin-top:8px}
+
 .cases{display:grid;grid-template-columns:repeat(2,1fr);gap:32px}
+.cases.cases--track{
+  display:flex!important;grid-template-columns:none!important;gap:28px;
+  overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;scroll-behavior:smooth;
+  padding:12px 6px 30px;margin:-12px -6px 0;
+  scrollbar-width:none;-ms-overflow-style:none;cursor:grab;
+}
+.cases.cases--track::-webkit-scrollbar{display:none}
+.cases.cases--track.is-dragging{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto;user-select:none}
+
+.cases.cases--track .case{
+  flex:0 0 min(540px,84vw);max-width:540px;scroll-snap-align:start;scroll-snap-stop:normal;
+}
+
+.cases__progress-bar{
+  width:100%;height:4px;background:rgba(255,255,255,.1);border-radius:var(--r-pill);
+  overflow:hidden;position:relative;margin-top:12px;
+}
+.cases__progress-fill{
+  height:100%;width:16.666%;background:linear-gradient(90deg,var(--lime) 0%,#a2f24c 100%);
+  border-radius:var(--r-pill);box-shadow:0 0 14px rgba(196,244,73,.5);transition:width .28s var(--ease);
+}
+
+.cases__dots{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:22px}
+.cases__dot{
+  width:10px;height:10px;border-radius:var(--r-pill);background:rgba(255,255,255,.2);
+  border:none;padding:0;cursor:pointer;transition:all .25s var(--ease);
+}
+.cases__dot:hover:not(.is-active){background:rgba(255,255,255,.5);transform:scale(1.2)}
+.cases__dot.is-active{width:32px;background:var(--lime);box-shadow:0 0 12px rgba(196,244,73,.45)}
+
 .case{
   position:relative;overflow:hidden;border-radius:28px;
   background:linear-gradient(180deg,rgba(32,32,38,.96) 0%,rgba(20,20,24,.98) 100%);
@@ -1184,6 +1246,8 @@ main>section{padding-block:0 var(--sec)}
   .plan{border-radius:40px}
   .steps__grid,.blog__grid{grid-template-columns:1fr}
   .cases{grid-template-columns:1fr;gap:24px}
+  .cases__header-top{flex-direction:column;align-items:flex-start;gap:20px}
+  .cases__nav{align-self:flex-start}
   .founder{grid-template-columns:1fr;padding:0 30px 30px;gap:0}
   .founder__pic{padding:24px 0 0;max-width:340px;margin:0 auto}
   .founder__body{padding:20px 0 10px}
@@ -1241,6 +1305,8 @@ main>section{padding-block:0 var(--sec)}
   .chip{padding:13px 20px;min-height:48px;font-size:14px}
   .ptab{min-height:56px;padding:10px 18px;font-size:14px;border-radius:16px}
 
+  .cases.cases--track .case{flex:0 0 86vw;max-width:86vw}
+  .cases__arrow{width:40px;height:40px}
   .case{border-radius:22px}
   .case__body{padding:20px 18px 24px}
   .case__title{font-size:19px}

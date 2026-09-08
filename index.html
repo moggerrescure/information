@@ -256,14 +256,33 @@
     </ul>
 
     <div class="cases__header" id="cases">
-      <div class="founders__badge">
-        <span class="founders__badge-dot" aria-hidden="true"></span>
-        <span>Портфолио проектов • В деле с 2018 года</span>
+      <div class="cases__header-top">
+        <div class="cases__header-text">
+          <div class="founders__badge">
+            <span class="founders__badge-dot" aria-hidden="true"></span>
+            <span>Портфолио проектов • В деле с 2018 года</span>
+          </div>
+          <h2 class="h2 h2--light cases__h">Реализованные проекты: приложения на Swift, веб-сервисы и сайты</h2>
+          <p class="cases__lead">
+            Листайте карусель наших работ. Каждый продукт создан лично нами — без шаблонов на коленке и посредников: от нативного кода на Swift под iOS до масштабируемых веб-платформ, интернет-магазинов и сквозной рекламы.
+          </p>
+        </div>
+
+        <!-- Кнопки управления каруселью в десктопе -->
+        <div class="cases__nav" aria-label="Управление каруселью проектов">
+          <button class="cases__arrow cases__arrow--prev" id="casesPrev" type="button" aria-label="Предыдущий проект" disabled>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <div class="cases__counter">
+            <span class="cases__counter-curr" id="casesCounterCurr">01</span>
+            <span class="cases__counter-sep">/</span>
+            <span class="cases__counter-total" id="casesCounterTotal">06</span>
+          </div>
+          <button class="cases__arrow cases__arrow--next" id="casesNext" type="button" aria-label="Следующий проект">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
       </div>
-      <h2 class="h2 h2--light cases__h">Реализованные проекты: приложения на Swift, веб-сервисы и сайты</h2>
-      <p class="cases__lead">
-        Никаких картинок из фотостоков и выдуманных концептов. Показываем реальные продукты, которые мы с нуля спроектировали, запрограммировали и запустили: от нативных приложений на Swift под iOS до масштабируемых веб-платформ, интернет-магазинов и сквозных систем рекламы.
-      </p>
     </div>
 
     <div class="chips" role="tablist" aria-label="Фильтр проектов">
@@ -275,186 +294,194 @@
       <button class="chip" role="tab" aria-selected="false" data-filter="traffic">Реклама &amp; Трафик</button>
     </div>
 
-    <div class="cases stagger">
-      <!-- 1. Swift iOS App -->
-      <article class="case" data-tags="swift">
-        <div class="case__media">
-          <img class="case__img" src="img/case-swift-ios.jpg" width="800" height="450" alt="Приложение на Swift Vital Health под iOS" loading="lazy" decoding="async">
-          <div class="case__badges">
-            <span class="case__badge-stack">Swift / SwiftUI • iOS 17</span>
-            <span class="case__badge-metric">★ 4.9 в App Store</span>
-          </div>
-        </div>
-        <div class="case__body">
-          <h3 class="case__title">Vital Health — Нативное iOS-приложение на Swift</h3>
-          <p class="case__desc">
-            Разработали мобильное приложение на Swift и SwiftUI под ключ: чистая архитектура MVVM, интеграция с Apple HealthKit, биометрия FaceID, динамические виджеты iOS 17 и интерактивные графики физической активности. Стабильные 60 FPS, нулевые вылеты и плавная темная тема.
-          </p>
-          <div class="case__result">
-            <span class="case__result-icon">🚀</span>
-            <span>Результат: запуск в App Store, 85 000+ установок за первые 3 месяца</span>
-          </div>
-          <div class="case__foot">
-            <div class="case__tags">
-              <span>SwiftUI</span>
-              <span>HealthKit</span>
-              <span>CoreData</span>
-              <span>WidgetKit</span>
+    <div class="cases-carousel" id="casesCarousel">
+      <div class="cases cases--track stagger" id="casesTrack" tabindex="0" role="region" aria-label="Карусель проектов">
+        <!-- 1. Swift iOS App -->
+        <article class="case" data-tags="swift">
+          <div class="case__media">
+            <img class="case__img" src="img/case-swift-ios.jpg" width="800" height="450" alt="Приложение на Swift Vital Health под iOS" loading="lazy" decoding="async">
+            <div class="case__badges">
+              <span class="case__badge-stack">Swift / SwiftUI • iOS 17</span>
+              <span class="case__badge-metric">★ 4.9 в App Store</span>
             </div>
-            <a class="case__btn" href="#contacts">Обсудить приложение <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
-        </div>
-      </article>
+          <div class="case__body">
+            <h3 class="case__title">Vital Health — Нативное iOS-приложение на Swift</h3>
+            <p class="case__desc">
+              Разработали мобильное приложение на Swift и SwiftUI под ключ: чистая архитектура MVVM, интеграция с Apple HealthKit, биометрия FaceID, динамические виджеты iOS 17 и интерактивные графики физической активности. Стабильные 60 FPS, нулевые вылеты и плавная темная тема.
+            </p>
+            <div class="case__result">
+              <span class="case__result-icon">🚀</span>
+              <span>Результат: запуск в App Store, 85 000+ установок за первые 3 месяца</span>
+            </div>
+            <div class="case__foot">
+              <div class="case__tags">
+                <span>SwiftUI</span>
+                <span>HealthKit</span>
+                <span>CoreData</span>
+                <span>WidgetKit</span>
+              </div>
+              <a class="case__btn" href="#contacts">Обсудить приложение <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+        </article>
 
-      <!-- 2. SaaS Web Platform -->
-      <article class="case" data-tags="webapp">
-        <div class="case__media">
-          <img class="case__img" src="img/case-saas-webapp.jpg" width="800" height="450" alt="SaaS платформа LogiStream" loading="lazy" decoding="async">
-          <div class="case__badges">
-            <span class="case__badge-stack">Fullstack SaaS • React / Node</span>
-            <span class="case__badge-metric">Скорость 0.8s</span>
-          </div>
-        </div>
-        <div class="case__body">
-          <h3 class="case__title">LogiStream — SaaS-платформа логистики и личный кабинет</h3>
-          <p class="case__desc">
-            Веб-приложение для управления международными перевозками и автопарком. Интерактивный живой трекинг на карте, автоматический расчёт таможенных смет, финансовый дашборд и моментальные пуши водителям и клиентам в Telegram.
-          </p>
-          <div class="case__result">
-            <span class="case__result-icon">⚡</span>
-            <span>Результат: автоматизировали 70% рутины менеджеров, обработка заявок ускорилась в 3 раза</span>
-          </div>
-          <div class="case__foot">
-            <div class="case__tags">
-              <span>React</span>
-              <span>Node.js</span>
-              <span>PostgreSQL</span>
-              <span>WebSockets</span>
+        <!-- 2. SaaS Web Platform -->
+        <article class="case" data-tags="webapp">
+          <div class="case__media">
+            <img class="case__img" src="img/case-saas-webapp.jpg" width="800" height="450" alt="SaaS платформа LogiStream" loading="lazy" decoding="async">
+            <div class="case__badges">
+              <span class="case__badge-stack">Fullstack SaaS • React / Node</span>
+              <span class="case__badge-metric">Скорость 0.8s</span>
             </div>
-            <a class="case__btn" href="#contacts">Заказать веб-сервис <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
-        </div>
-      </article>
+          <div class="case__body">
+            <h3 class="case__title">LogiStream — SaaS-платформа логистики и личный кабинет</h3>
+            <p class="case__desc">
+              Веб-приложение для управления международными перевозками и автопарком. Интерактивный живой трекинг на карте, автоматический расчёт таможенных смет, финансовый дашборд и моментальные пуши водителям и клиентам в Telegram.
+            </p>
+            <div class="case__result">
+              <span class="case__result-icon">⚡</span>
+              <span>Результат: автоматизировали 70% рутины менеджеров, обработка заявок ускорилась в 3 раза</span>
+            </div>
+            <div class="case__foot">
+              <div class="case__tags">
+                <span>React</span>
+                <span>Node.js</span>
+                <span>PostgreSQL</span>
+                <span>WebSockets</span>
+              </div>
+              <a class="case__btn" href="#contacts">Заказать веб-сервис <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+        </article>
 
-      <!-- 3. E-Commerce Luxury -->
-      <article class="case" data-tags="ecommerce sites">
-        <div class="case__media">
-          <img class="case__img" src="img/case-ecommerce-site.jpg" width="800" height="450" alt="Интернет-магазин мебели Nordic Nest" loading="lazy" decoding="async">
-          <div class="case__badges">
-            <span class="case__badge-stack">E-Commerce • 1С / Склад / Онлайн-оплата</span>
-            <span class="case__badge-metric">+240% к заказам</span>
-          </div>
-        </div>
-        <div class="case__body">
-          <h3 class="case__title">Nordic Nest — Интернет-магазин дизайнерской мебели</h3>
-          <p class="case__desc">
-            Премиальный интернет-магазин скандинавской мебели. Мгновенная фильтрация по параметрам без перезагрузки страницы, быстрая корзина в 1 клик, двусторонняя синхронизация остатков со складом/1С и онлайн-эквайринг.
-          </p>
-          <div class="case__result">
-            <span class="case__result-icon">📈</span>
-            <span>Результат: конверсия 3.8%, средний чек вырос на 45%, загрузка страниц 1.1 сек</span>
-          </div>
-          <div class="case__foot">
-            <div class="case__tags">
-              <span>E-Commerce</span>
-              <span>1С Синхронизация</span>
-              <span>Эквайринг</span>
-              <span>UI/UX</span>
+        <!-- 3. E-Commerce Luxury -->
+        <article class="case" data-tags="ecommerce sites">
+          <div class="case__media">
+            <img class="case__img" src="img/case-ecommerce-site.jpg" width="800" height="450" alt="Интернет-магазин мебели Nordic Nest" loading="lazy" decoding="async">
+            <div class="case__badges">
+              <span class="case__badge-stack">E-Commerce • 1С / Склад / Онлайн-оплата</span>
+              <span class="case__badge-metric">+240% к заказам</span>
             </div>
-            <a class="case__btn" href="#contacts">Обсудить магазин <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
-        </div>
-      </article>
+          <div class="case__body">
+            <h3 class="case__title">Nordic Nest — Интернет-магазин дизайнерской мебели</h3>
+            <p class="case__desc">
+              Премиальный интернет-магазин скандинавской мебели. Мгновенная фильтрация по параметрам без перезагрузки страницы, быстрая корзина в 1 клик, двусторонняя синхронизация остатков со складом/1С и онлайн-эквайринг.
+            </p>
+            <div class="case__result">
+              <span class="case__result-icon">📈</span>
+              <span>Результат: конверсия 3.8%, средний чек вырос на 45%, загрузка страниц 1.1 сек</span>
+            </div>
+            <div class="case__foot">
+              <div class="case__tags">
+                <span>E-Commerce</span>
+                <span>1С Синхронизация</span>
+                <span>Эквайринг</span>
+                <span>UI/UX</span>
+              </div>
+              <a class="case__btn" href="#contacts">Обсудить магазин <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+        </article>
 
-      <!-- 4. Ads & Lead Generation -->
-      <article class="case" data-tags="traffic">
-        <div class="case__media">
-          <img class="case__img" src="img/case-ads-traffic.jpg" width="800" height="450" alt="Сквозная реклама и дашборд AetherGrowth" loading="lazy" decoding="async">
-          <div class="case__badges">
-            <span class="case__badge-stack">Яндекс.Директ • Meta • Telegram-бот</span>
-            <span class="case__badge-metric">ROAS +380%</span>
-          </div>
-        </div>
-        <div class="case__body">
-          <h3 class="case__title">AetherGrowth — Сквозная реклама и воронка лидогенерации</h3>
-          <p class="case__desc">
-            Комплексная рекламная связка под ключ: быстрый конверсионный мультилендинг, тонкая настройка контекстной и таргетированной рекламы, плюс Telegram-бот моментальной квалификации лидов с передачей в CRM за 3 секунды.
-          </p>
-          <div class="case__result">
-            <span class="case__result-icon">🎯</span>
-            <span>Результат: 380+ целевых заявок ежемесячно по фиксированной цене $4.2 за лид</span>
-          </div>
-          <div class="case__foot">
-            <div class="case__tags">
-              <span>Контекст</span>
-              <span>Таргет</span>
-              <span>Сквозная CRM</span>
-              <span>Telegram-бот</span>
+        <!-- 4. Ads & Lead Generation -->
+        <article class="case" data-tags="traffic">
+          <div class="case__media">
+            <img class="case__img" src="img/case-ads-traffic.jpg" width="800" height="450" alt="Сквозная реклама и дашборд AetherGrowth" loading="lazy" decoding="async">
+            <div class="case__badges">
+              <span class="case__badge-stack">Яндекс.Директ • Meta • Telegram-бот</span>
+              <span class="case__badge-metric">ROAS +380%</span>
             </div>
-            <a class="case__btn" href="#contacts">Настроить рекламу <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
-        </div>
-      </article>
+          <div class="case__body">
+            <h3 class="case__title">AetherGrowth — Сквозная реклама и воронка лидогенерации</h3>
+            <p class="case__desc">
+              Комплексная рекламная связка под ключ: быстрый конверсионный мультилендинг, тонкая настройка контекстной и таргетированной рекламы, плюс Telegram-бот моментальной квалификации лидов с передачей в CRM за 3 секунды.
+            </p>
+            <div class="case__result">
+              <span class="case__result-icon">🎯</span>
+              <span>Результат: 380+ целевых заявок ежемесячно по фиксированной цене $4.2 за лид</span>
+            </div>
+            <div class="case__foot">
+              <div class="case__tags">
+                <span>Контекст</span>
+                <span>Таргет</span>
+                <span>Сквозная CRM</span>
+                <span>Telegram-бот</span>
+              </div>
+              <a class="case__btn" href="#contacts">Настроить рекламу <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+        </article>
 
-      <!-- 5. Telegram Mini App -->
-      <article class="case" data-tags="webapp swift">
-        <div class="case__media">
-          <img class="case__img" src="img/case-telegram-miniapp.jpg" width="800" height="450" alt="Telegram Mini App Bean and Leaf" loading="lazy" decoding="async">
-          <div class="case__badges">
-            <span class="case__badge-stack">Telegram Mini App • Apple Pay</span>
-            <span class="case__badge-metric">42 000+ юзеров</span>
-          </div>
-        </div>
-        <div class="case__body">
-          <h3 class="case__title">Bean &amp; Leaf — Telegram Mini App для сети кофеен</h3>
-          <p class="case__desc">
-            Нативное веб-приложение прямо внутри мессенджера Telegram. Интерактивное меню напитков и десертов, предзаказ к точному времени, быстрая оплата Apple Pay / картой и цифровая карта постоянного гостя с начислением бонусов.
-          </p>
-          <div class="case__result">
-            <span class="case__result-icon">☕</span>
-            <span>Результат: повторные заказы выросли на 47%, очереди в кофейнях сократились вдвое</span>
-          </div>
-          <div class="case__foot">
-            <div class="case__tags">
-              <span>Telegram WebApp</span>
-              <span>Apple Pay</span>
-              <span>Node.js</span>
-              <span>Loyalty CRM</span>
+        <!-- 5. Telegram Mini App -->
+        <article class="case" data-tags="webapp swift">
+          <div class="case__media">
+            <img class="case__img" src="img/case-telegram-miniapp.jpg" width="800" height="450" alt="Telegram Mini App Bean and Leaf" loading="lazy" decoding="async">
+            <div class="case__badges">
+              <span class="case__badge-stack">Telegram Mini App • Apple Pay</span>
+              <span class="case__badge-metric">42 000+ юзеров</span>
             </div>
-            <a class="case__btn" href="#contacts">Заказать Mini App <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
-        </div>
-      </article>
+          <div class="case__body">
+            <h3 class="case__title">Bean &amp; Leaf — Telegram Mini App для сети кофеен</h3>
+            <p class="case__desc">
+              Нативное веб-приложение прямо внутри мессенджера Telegram. Интерактивное меню напитков и десертов, предзаказ к точному времени, быстрая оплата Apple Pay / картой и цифровая карта постоянного гостя с начислением бонусов.
+            </p>
+            <div class="case__result">
+              <span class="case__result-icon">☕</span>
+              <span>Результат: повторные заказы выросли на 47%, очереди в кофейнях сократились вдвое</span>
+            </div>
+            <div class="case__foot">
+              <div class="case__tags">
+                <span>Telegram WebApp</span>
+                <span>Apple Pay</span>
+                <span>Node.js</span>
+                <span>Loyalty CRM</span>
+              </div>
+              <a class="case__btn" href="#contacts">Заказать Mini App <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+        </article>
 
-      <!-- 6. Corporate & 3D Interactive Platform -->
-      <article class="case" data-tags="sites webapp">
-        <div class="case__media">
-          <img class="case__img" src="img/case-corporate-platform.jpg" width="800" height="450" alt="Интерактивный портал архитектурного бюро Structura" loading="lazy" decoding="async">
-          <div class="case__badges">
-            <span class="case__badge-stack">Корпоративный портал • 3D калькулятор</span>
-            <span class="case__badge-metric">ТОП-3 в Google</span>
-          </div>
-        </div>
-        <div class="case__body">
-          <h3 class="case__title">Structura — Интерактивный портал архитектурного бюро</h3>
-          <p class="case__desc">
-            Имиджевый многостраничный портал с интерактивным 3D-селектором планировок вилл, онлайн-калькулятором сметы строительства и каталогом реализованных проектов. Комплексная SEO-оптимизация под премиум-сегмент.
-          </p>
-          <div class="case__result">
-            <span class="case__result-icon">🏆</span>
-            <span>Результат: 1-я страница Google по ключевым запросам, средний чек проекта от $45 000</span>
-          </div>
-          <div class="case__foot">
-            <div class="case__tags">
-              <span>Next.js</span>
-              <span>3D Интерактив</span>
-              <span>SEO Архитектура</span>
-              <span>Калькулятор</span>
+        <!-- 6. Corporate & 3D Interactive Platform -->
+        <article class="case" data-tags="sites webapp">
+          <div class="case__media">
+            <img class="case__img" src="img/case-corporate-platform.jpg" width="800" height="450" alt="Интерактивный портал архитектурного бюро Structura" loading="lazy" decoding="async">
+            <div class="case__badges">
+              <span class="case__badge-stack">Корпоративный портал • 3D калькулятор</span>
+              <span class="case__badge-metric">ТОП-3 в Google</span>
             </div>
-            <a class="case__btn" href="#contacts">Обсудить проект <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
           </div>
-        </div>
-      </article>
+          <div class="case__body">
+            <h3 class="case__title">Structura — Интерактивный портал архитектурного бюро</h3>
+            <p class="case__desc">
+              Имиджевый многостраничный портал с интерактивным 3D-селектором планировок вилл, онлайн-калькулятором сметы строительства и каталогом реализованных проектов. Комплексная SEO-оптимизация под премиум-сегмент.
+            </p>
+            <div class="case__result">
+              <span class="case__result-icon">🏆</span>
+              <span>Результат: 1-я страница Google по ключевым запросам, средний чек проекта от $45 000</span>
+            </div>
+            <div class="case__foot">
+              <div class="case__tags">
+                <span>Next.js</span>
+                <span>3D Интерактив</span>
+                <span>SEO Архитектура</span>
+                <span>Калькулятор</span>
+              </div>
+              <a class="case__btn" href="#contacts">Обсудить проект <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Прогрессбар и точки управления -->
+      <div class="cases__progress-bar">
+        <div class="cases__progress-fill" id="casesProgress"></div>
+      </div>
+      <div class="cases__dots" id="casesDots" aria-label="Точки навигации карусели"></div>
     </div>
 
     <p class="cases__empty" hidden>По выбранному направлению кейсы скоро появятся — напишите нам, покажем свежие примеры прямо в переписке.</p>

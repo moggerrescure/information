@@ -107,26 +107,197 @@ document.addEventListener('DOMContentLoaded', () => {
     attachSubmit(quiz, 'Квиз: расчёт стоимости');
   }
 
-  /* ---------- фильтр кейсов ---------- */
+  /* ---------- карусель и фильтр кейсов ---------- */
   const chips = [...document.querySelectorAll('.chip')];
   const cases = [...document.querySelectorAll('.case')];
   const empty = document.querySelector('.cases__empty');
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      chips.forEach(c => { c.classList.remove('is-on'); c.setAttribute('aria-selected', 'false'); });
-      chip.classList.add('is-on');
-      chip.setAttribute('aria-selected', 'true');
-      const f = chip.dataset.filter;
-      let shown = 0;
-      cases.forEach(card => {
-        const ok = f === 'all' || (card.dataset.tags || '').split(' ').includes(f);
-        card.hidden = !ok;
-        card.style.display = ok ? '' : 'none';
-        if (ok) shown++;
+  const casesTrack = document.getElementById('casesTrack');
+  const prevBtn = document.getElementById('casesPrev');
+  const nextBtn = document.getElementById('casesNext');
+  const currEl = document.getElementById('casesCounterCurr');
+  const totalEl = document.getElementById('casesCounterTotal');
+  const progressFill = document.getElementById('casesProgress');
+  const dotsContainer = document.getElementById('casesDots');
+
+  if (casesTrack) {
+    const getVisibleCases = () => cases.filter(c => !c.hidden && c.style.display !== 'none');
+    const padZero = (n) => String(n).padStart(2, '0');
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeftStart = 0;
+    let hasMoved = false;
+
+    const updateCarouselUI = () => {
+      const visible = getVisibleCases();
+      const total = visible.length;
+      if (totalEl) totalEl.textContent = padZero(total);
+
+      if (total === 0) {
+        if (currEl) currEl.textContent = '00';
+        if (progressFill) progressFill.style.width = '0%';
+        if (prevBtn) prevBtn.disabled = true;
+        if (nextBtn) nextBtn.disabled = true;
+        if (dotsContainer) dotsContainer.innerHTML = '';
+        return;
+      }
+
+      // Вычисляем активную карточку по положению скролла
+      const trackLeft = casesTrack.getBoundingClientRect().left;
+      let activeIndex = 0;
+      let minDiff = Infinity;
+
+      visible.forEach((card, idx) => {
+        const rect = card.getBoundingClientRect();
+        const diff = Math.abs(rect.left - trackLeft);
+        if (diff < minDiff) {
+          minDiff = diff;
+          activeIndex = idx;
+        }
       });
-      if (empty) empty.hidden = shown !== 0;
+
+      if (currEl) currEl.textContent = padZero(activeIndex + 1);
+
+      // Прогрессбар
+      const maxScroll = casesTrack.scrollWidth - casesTrack.clientWidth;
+      if (progressFill) {
+        if (maxScroll <= 10) {
+          progressFill.style.width = '100%';
+        } else {
+          const percent = ((activeIndex + 1) / total) * 100;
+          progressFill.style.width = Math.max(16, Math.min(100, percent)) + '%';
+        }
+      }
+
+      // Стрелки навигации
+      if (prevBtn) prevBtn.disabled = activeIndex === 0 && casesTrack.scrollLeft <= 10;
+      if (nextBtn) nextBtn.disabled = activeIndex >= total - 1 || (maxScroll > 10 && casesTrack.scrollLeft >= maxScroll - 15);
+
+      // Точки
+      if (dotsContainer) {
+        const dots = [...dotsContainer.children];
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('is-active', idx === activeIndex);
+          dot.setAttribute('aria-selected', idx === activeIndex ? 'true' : 'false');
+        });
+      }
+    };
+
+    const renderDots = () => {
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      const visible = getVisibleCases();
+      visible.forEach((card, idx) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'cases__dot' + (idx === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', `Перейти к проекту ${idx + 1}`);
+        dot.addEventListener('click', () => {
+          scrollToCard(idx);
+        });
+        dotsContainer.appendChild(dot);
+      });
+    };
+
+    const scrollToCard = (index) => {
+      const visible = getVisibleCases();
+      if (!visible[index]) return;
+      const targetCard = visible[index];
+      const leftPos = targetCard.offsetLeft - casesTrack.offsetLeft;
+      casesTrack.scrollTo({ left: Math.max(0, leftPos), behavior: 'smooth' });
+    };
+
+    // Клики по кнопкам-стрелкам
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const visible = getVisibleCases();
+        const currentNum = parseInt(currEl?.textContent || '1', 10) - 1;
+        const nextIndex = Math.min(visible.length - 1, currentNum + 1);
+        scrollToCard(nextIndex);
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const currentNum = parseInt(currEl?.textContent || '1', 10) - 1;
+        const prevIndex = Math.max(0, currentNum - 1);
+        scrollToCard(prevIndex);
+      });
+    }
+
+    // Слушатель скролла с requestAnimationFrame
+    let scrollTicking = false;
+    casesTrack.addEventListener('scroll', () => {
+      if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+          updateCarouselUI();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    }, { passive: true });
+
+    // Drag-to-scroll мышью на десктопе
+    casesTrack.addEventListener('mousedown', e => {
+      if (e.target.closest('a, button')) return;
+      isDown = true;
+      hasMoved = false;
+      casesTrack.classList.add('is-dragging');
+      startX = e.pageX - casesTrack.offsetLeft;
+      scrollLeftStart = casesTrack.scrollLeft;
     });
-  });
+
+    window.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      const x = e.pageX - casesTrack.offsetLeft;
+      const walk = (x - startX) * 1.3;
+      if (Math.abs(walk) > 4) {
+        hasMoved = true;
+      }
+      casesTrack.scrollLeft = scrollLeftStart - walk;
+    });
+
+    const endDrag = () => {
+      if (!isDown) return;
+      isDown = false;
+      casesTrack.classList.remove('is-dragging');
+      if (hasMoved) {
+        const preventClick = evt => {
+          evt.stopPropagation();
+          evt.preventDefault();
+        };
+        casesTrack.addEventListener('click', preventClick, { capture: true, once: true });
+      }
+    };
+
+    window.addEventListener('mouseup', endDrag);
+
+    // Первичная инициализация
+    renderDots();
+    updateCarouselUI();
+
+    // Фильтры категорий
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => { c.classList.remove('is-on'); c.setAttribute('aria-selected', 'false'); });
+        chip.classList.add('is-on');
+        chip.setAttribute('aria-selected', 'true');
+        const f = chip.dataset.filter;
+        let shown = 0;
+        cases.forEach(card => {
+          const ok = f === 'all' || (card.dataset.tags || '').split(' ').includes(f);
+          card.hidden = !ok;
+          card.style.display = ok ? '' : 'none';
+          if (ok) shown++;
+        });
+        if (empty) empty.hidden = shown !== 0;
+
+        casesTrack.scrollTo({ left: 0, behavior: 'auto' });
+        renderDots();
+        setTimeout(updateCarouselUI, 60);
+      });
+    });
+  }
 
   /* ---------- табы тарифов ---------- */
   const ptabs = [...document.querySelectorAll('.ptab')];
