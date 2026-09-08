@@ -807,48 +807,70 @@ document.addEventListener('DOMContentLoaded', () => {
       };
     });
 
-    // 2. Создание физических натянутых нитей (стиль «булавки и нити на глобусе»)
+    // Функция построения точной геодезической дуги (Great Circle SLERP) строго между головками булавок
+    const createGreatCircleArc = (p1, p2, numPoints = 28, maxLift = 0.15) => {
+      const u = p1.clone().normalize();
+      const v = p2.clone().normalize();
+      const r1 = p1.length();
+      const r2 = p2.length();
+
+      const dot = Math.max(-1.0, Math.min(1.0, u.dot(v)));
+      const theta = Math.acos(dot);
+      const sinTheta = Math.sin(theta);
+
+      // Высота натяжения нити над сферой Земли (зависит от расстояния)
+      const lift = Math.min(maxLift, Math.max(0.04, theta * 0.095));
+
+      const points = [];
+      for (let i = 0; i <= numPoints; i++) {
+        const t = i / numPoints;
+        let w;
+        if (sinTheta < 0.0001) {
+          w = u.clone().lerp(v, t).normalize();
+        } else {
+          const c1 = Math.sin((1 - t) * theta) / sinTheta;
+          const c2 = Math.sin(t * theta) / sinTheta;
+          w = u.clone().multiplyScalar(c1).add(v.clone().multiplyScalar(c2)).normalize();
+        }
+        // Строгое совпадение с p1 на t=0 и с p2 на t=1
+        const currentR = (r1 * (1 - t) + r2 * t) + lift * Math.sin(Math.PI * t);
+        points.push(w.multiplyScalar(currentR));
+      }
+      return points;
+    };
+
+    // 2. Создание физических натянутых нитей ко ВСЕМ городам сети KV-web строго в булавки
     const minskHub = hubObjects['minsk'];
-    const minskNeck = minskHub.neckPos;
+    const minskHead = minskHub.headPos;
 
     Object.keys(HUBS).forEach(key => {
       if (key === 'minsk') return;
       const targetHub = hubObjects[key];
-      const target = targetHub.data;
+      const targetHead = targetHub.headPos;
 
-      // Источник нити: Минск HQ или региональный центр
-      const parentKey = target.parentHub || 'minsk';
-      const sourceHub = hubObjects[parentKey] || minskHub;
-      const sourceNeck = sourceHub.neckPos;
-      const targetNeck = targetHub.neckPos;
+      // Строим точную геодезическую траекторию: нить выходит из центра шапочки Минска и входит ровно в центр шапочки города
+      const arcPoints = createGreatCircleArc(minskHead, targetHead, 28, 0.14);
+      const curve = new THREE.CatmullRomCurve3(arcPoints);
 
-      const dist = sourceNeck.distanceTo(targetNeck);
-      const mid = sourceNeck.clone().add(targetNeck).multiplyScalar(0.5);
-      mid.normalize();
-
-      // Физическая нить натянута по сфере и слегка приподнимается над поверхностью
-      const isTrunk = target.isPrimary;
-      const threadLift = GLOBE_RADIUS + PIN_HEIGHT * 0.72 + Math.min(0.14, dist * 0.085);
-      mid.multiplyScalar(threadLift);
-
-      const curve = new THREE.QuadraticBezierCurve3(sourceNeck, mid, targetNeck);
-
-      // Настоящая 3D трубка-нить с матовой текстильной фактурой
-      const tubeRadius = isTrunk ? 0.0040 : 0.0030;
+      // Настоящая 3D текстильная нить
+      const isTrunk = targetHub.data.isPrimary;
+      const tubeRadius = isTrunk ? 0.0036 : 0.0028;
       const tubeGeo = new THREE.TubeGeometry(curve, 32, tubeRadius, 6, false);
+      const baseOpacity = isTrunk ? 0.65 : 0.42;
+
       const threadMat = new THREE.MeshStandardMaterial({
-        color: 0xFF6915, // Фирменная тёплая оранжевая нить
-        roughness: 0.78, // Матовая шерстяная / шёлковая нить
-        metalness: 0.05,
+        color: 0xFF6915, // Фирменная тёплая оранжевая нить KV-web
+        roughness: 0.75, // Матовая текстильная фактура
+        metalness: 0.08,
         transparent: true,
-        opacity: isTrunk ? 0.45 : 0.22
+        opacity: baseOpacity
       });
       const threadMesh = new THREE.Mesh(tubeGeo, threadMat);
       threadMesh.userData = {
         hubKey: key,
-        region: target.region,
+        region: targetHub.data.region,
         baseColor: 0xFF6915,
-        baseOpacity: isTrunk ? 0.45 : 0.22,
+        baseOpacity,
         isTrunk
       };
       globeGroup.add(threadMesh);
@@ -888,16 +910,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Подсветка активного города и натянутой к нему физической нити
     const highlightActiveCityNetwork = (hubKey) => {
       if (hubKey) {
-        const hub = HUBS[hubKey];
         arcObjects.forEach(thread => {
-          if (thread.userData.hubKey === hubKey || (hub.parentHub && thread.userData.hubKey === hub.parentHub)) {
-            // Натянутая активная нить ярко подсвечивается
-            thread.material.color.setHex(0xFF7A1A);
+          if (thread.userData.hubKey === hubKey) {
+            // Натянутая активная нить ярко подсвечивается и натягивается
+            thread.material.color.setHex(0xFF9429);
             thread.material.opacity = 1.0;
             thread.scale.set(1.25, 1.25, 1.25);
           } else {
             thread.material.color.setHex(thread.userData.baseColor);
-            thread.material.opacity = (hubKey === 'minsk' || thread.userData.hubKey === activeHubKey) ? 0.65 : 0.16;
+            thread.material.opacity = (hubKey === 'minsk' || thread.userData.hubKey === activeHubKey) ? 0.70 : 0.22;
             thread.scale.set(1.0, 1.0, 1.0);
           }
         });
@@ -906,8 +927,8 @@ document.addEventListener('DOMContentLoaded', () => {
         Object.keys(hubObjects).forEach(k => {
           const h = hubObjects[k];
           if (k === hubKey) {
-            h.headMesh.scale.set(1.25, 1.25, 1.25);
-            h.haloMesh.material.opacity = 0.50;
+            h.headMesh.scale.set(1.30, 1.30, 1.30);
+            h.haloMesh.material.opacity = 0.55;
           } else {
             h.headMesh.scale.set(1.0, 1.0, 1.0);
             h.haloMesh.material.opacity = 0.22;
