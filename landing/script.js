@@ -808,20 +808,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Функция построения точной геодезической дуги (Great Circle SLERP) строго между головками булавок
-    const createGreatCircleArc = (p1, p2, numPoints = 28, maxLift = 0.15) => {
+    // 2. Создание градиентных световых вуалей (Style 6: Curtain Arc / Aurora Ribbon)
+    // Построение вертикальной шторки от поверхности Земли до высшей точки геодезической траектории
+    const createCurtainGeometry = (p1, p2, baseP1, baseP2, numPoints = 32, maxLift = 0.14) => {
       const u = p1.clone().normalize();
       const v = p2.clone().normalize();
       const r1 = p1.length();
       const r2 = p2.length();
+      const rBase1 = baseP1.length();
+      const rBase2 = baseP2.length();
 
       const dot = Math.max(-1.0, Math.min(1.0, u.dot(v)));
       const theta = Math.acos(dot);
       const sinTheta = Math.sin(theta);
 
-      // Высота натяжения нити над сферой Земли (зависит от расстояния)
-      const lift = Math.min(maxLift, Math.max(0.04, theta * 0.095));
+      // Высота подъема дуги в зените (зависит от расстояния)
+      const lift = Math.min(maxLift, Math.max(0.045, theta * 0.095));
 
-      const points = [];
+      const topPoints = [];
+      const vertices = [];
+      const uvs = [];
+      const indices = [];
+
       for (let i = 0; i <= numPoints; i++) {
         const t = i / numPoints;
         let w;
@@ -832,52 +840,128 @@ document.addEventListener('DOMContentLoaded', () => {
           const c2 = Math.sin(t * theta) / sinTheta;
           w = u.clone().multiplyScalar(c1).add(v.clone().multiplyScalar(c2)).normalize();
         }
-        // Строгое совпадение с p1 на t=0 и с p2 на t=1
-        const currentR = (r1 * (1 - t) + r2 * t) + lift * Math.sin(Math.PI * t);
-        points.push(w.multiplyScalar(currentR));
+
+        const topR = (r1 * (1 - t) + r2 * t) + lift * Math.sin(Math.PI * t);
+        const botR = (rBase1 * (1 - t) + rBase2 * t);
+
+        const topPt = w.clone().multiplyScalar(topR);
+        const botPt = w.clone().multiplyScalar(botR);
+        topPoints.push(topPt);
+
+        // vertex 2*i: основание у поверхности планеты
+        vertices.push(botPt.x, botPt.y, botPt.z);
+        uvs.push(t, 0.0);
+
+        // vertex 2*i + 1: верхний гребень дуги
+        vertices.push(topPt.x, topPt.y, topPt.z);
+        uvs.push(t, 1.0);
       }
-      return points;
+
+      for (let i = 0; i < numPoints; i++) {
+        const b1 = 2 * i;
+        const t1 = 2 * i + 1;
+        const b2 = 2 * (i + 1);
+        const t2 = 2 * (i + 1) + 1;
+
+        indices.push(b1, t1, b2);
+        indices.push(t1, t2, b2);
+      }
+
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+      geo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+      geo.setIndex(indices);
+      geo.computeVertexNormals();
+
+      return { geo, topPoints };
     };
 
-    // 2. Создание физических натянутых нитей ко ВСЕМ городам сети KV-web строго в булавки
+    const curtainVertexShader = `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `;
+
+    const curtainFragmentShader = `
+      uniform vec3 uColorBottom;
+      uniform vec3 uColorTop;
+      uniform float uOpacity;
+      uniform float uTime;
+      varying vec2 vUv;
+
+      void main() {
+        // Деликатный градиент высоты: нижние 70% прозрачны, чтобы не заслонять материки и океаны,
+        // а к верхнему гребню плавно формируется мягкая золотая световая аура
+        float vFade = pow(vUv.y, 3.0);
+        // Мягкое угасание у оснований булавок
+        float edgeFade = sin(vUv.x * 3.14159265);
+        // Медленное органическое дыхание световой волны
+        float wave = 0.88 + 0.12 * sin(vUv.x * 10.0 - uTime * 2.2);
+
+        float alpha = vFade * edgeFade * uOpacity * wave;
+
+        // Переход от теплого янтаря к сияющему золоту
+        vec3 col = mix(uColorBottom, uColorTop, pow(vUv.y, 1.8));
+        gl_FragColor = vec4(col, alpha);
+      }
+    `;
+
     const minskHub = hubObjects['minsk'];
     const minskHead = minskHub.headPos;
+    const minskBase = minskHub.basePos;
 
     Object.keys(HUBS).forEach(key => {
       if (key === 'minsk') return;
       const targetHub = hubObjects[key];
       const targetHead = targetHub.headPos;
+      const targetBase = targetHub.basePos;
 
-      // Строим точную геодезическую траекторию: нить выходит из центра шапочки Минска и входит ровно в центр шапочки города
-      const arcPoints = createGreatCircleArc(minskHead, targetHead, 28, 0.14);
-      const curve = new THREE.CatmullRomCurve3(arcPoints);
+      const { geo: curtainGeo, topPoints } = createCurtainGeometry(minskHead, targetHead, minskBase, targetBase, 32, 0.14);
 
-      // Настоящая 3D шелковая золотая нить (Style 1: Refined Gold Silk Cord)
       const isTrunk = targetHub.data.isPrimary;
-      const tubeRadius = isTrunk ? 0.0026 : 0.0018;
-      const tubeGeo = new THREE.TubeGeometry(curve, 36, tubeRadius, 6, false);
-      const baseOpacity = isTrunk ? 0.82 : 0.62;
-      const silkGoldColor = isTrunk ? 0xDCB35C : 0xCE9E42;
+      const baseCurtainOpacity = isTrunk ? 0.40 : 0.22;
+      const baseCrestOpacity = isTrunk ? 0.75 : 0.50;
 
-      const threadMat = new THREE.MeshStandardMaterial({
-        color: silkGoldColor,
-        roughness: 0.42, // Сатиновый блеск шелковой нити на свету
-        metalness: 0.28, // Деликатный золотой отблеск
-        emissive: 0x3d2806, // Теплое золотое свечение волокон
-        emissiveIntensity: 0.35,
+      // 1. Полупрозрачная градиентная световая вуаль (Curtain)
+      const curtainMat = new THREE.ShaderMaterial({
+        vertexShader: curtainVertexShader,
+        fragmentShader: curtainFragmentShader,
+        uniforms: {
+          uColorBottom: { value: new THREE.Color(0xFF8F00) }, // Глубокий тёплый янтарь
+          uColorTop: { value: new THREE.Color(0xFFE082) },    // Сияющее светлое золото
+          uOpacity: { value: baseCurtainOpacity },
+          uTime: { value: 0 }
+        },
         transparent: true,
-        opacity: baseOpacity
+        side: THREE.DoubleSide,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending
       });
-      const threadMesh = new THREE.Mesh(tubeGeo, threadMat);
-      threadMesh.userData = {
+      const curtainMesh = new THREE.Mesh(curtainGeo, curtainMat);
+      globeGroup.add(curtainMesh);
+
+      // 2. Тончайший сияющий гребень вдоль верхней кромки вуали (Crest Filament)
+      const crestCurve = new THREE.CatmullRomCurve3(topPoints);
+      const crestGeo = new THREE.TubeGeometry(crestCurve, 32, 0.0016, 5, false);
+      const crestMat = new THREE.MeshBasicMaterial({
+        color: 0xFFD56B,
+        transparent: true,
+        opacity: baseCrestOpacity,
+        blending: THREE.AdditiveBlending
+      });
+      const crestMesh = new THREE.Mesh(crestGeo, crestMat);
+      globeGroup.add(crestMesh);
+
+      arcObjects.push({
         hubKey: key,
-        region: targetHub.data.region,
-        baseColor: silkGoldColor,
-        baseOpacity,
+        curtainMesh,
+        crestMesh,
+        baseCurtainOpacity,
+        baseCrestOpacity,
         isTrunk
-      };
-      globeGroup.add(threadMesh);
-      arcObjects.push(threadMesh);
+      });
     });
 
     // UI Элементы управления и карточка
@@ -910,23 +994,20 @@ document.addEventListener('DOMContentLoaded', () => {
     globeGroup.rotation.x = targetRotX;
     globeGroup.rotation.y = targetRotY;
 
-    // Подсветка активного города и натянутой к нему шелковой золотой нити (без изменения высоты/масштаба)
+    // Подсветка активного города и натянутой к нему световой вуали (без изменения высоты/масштаба)
     const highlightActiveCityNetwork = (hubKey) => {
       if (hubKey && hubKey !== 'minsk') {
-        arcObjects.forEach(thread => {
-          thread.scale.set(1.0, 1.0, 1.0); // Геометрия всегда строго на месте, без подъема
-          if (thread.userData.hubKey === hubKey) {
-            // Выбранная нить загорается чистым, приятным тёплым золотистым светом
-            thread.material.color.setHex(0xFFD56B);
-            thread.material.emissive.setHex(0x9E6D10);
-            thread.material.emissiveIntensity = 0.65;
-            thread.material.opacity = 1.0;
+        arcObjects.forEach(arc => {
+          if (arc.hubKey === hubKey) {
+            // Выбранная траектория озаряется яркой золотой вуалью
+            arc.curtainMesh.material.uniforms.uOpacity.value = 0.95;
+            arc.crestMesh.material.opacity = 1.0;
+            arc.crestMesh.material.color.setHex(0xFFF2A8);
           } else {
-            // Остальные нити слегка приглушаются, чтобы выделить выбранный путь
-            thread.material.color.setHex(thread.userData.baseColor);
-            thread.material.emissive.setHex(0x3d2806);
-            thread.material.emissiveIntensity = 0.35;
-            thread.material.opacity = 0.22;
+            // Остальные траектории деликатно смягчаются
+            arc.curtainMesh.material.uniforms.uOpacity.value = 0.10;
+            arc.crestMesh.material.opacity = 0.16;
+            arc.crestMesh.material.color.setHex(0xD4AF37);
           }
         });
 
@@ -942,13 +1023,11 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       } else {
-        // Режим по умолчанию (все нити как обычно)
-        arcObjects.forEach(thread => {
-          thread.scale.set(1.0, 1.0, 1.0);
-          thread.material.color.setHex(thread.userData.baseColor);
-          thread.material.emissive.setHex(0x3d2806);
-          thread.material.emissiveIntensity = 0.35;
-          thread.material.opacity = thread.userData.baseOpacity;
+        // Режим по умолчанию (все световые вуали в мягком фоновом свечении)
+        arcObjects.forEach(arc => {
+          arc.curtainMesh.material.uniforms.uOpacity.value = arc.baseCurtainOpacity;
+          arc.crestMesh.material.opacity = arc.baseCrestOpacity;
+          arc.crestMesh.material.color.setHex(0xFFE082);
         });
         Object.keys(hubObjects).forEach(k => {
           const h = hubObjects[k];
@@ -1239,6 +1318,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Мягкое свечение ореола микро-точки в такт рождению волн
         const pulse = Math.sin(elapsed * 2.8 + b.offset) * 0.12;
         b.haloMesh.scale.set(1 + pulse, 1 + pulse, 1 + pulse);
+      });
+
+      // Анимация живого светового мерцания вуалей
+      arcObjects.forEach(arc => {
+        arc.curtainMesh.material.uniforms.uTime.value = elapsed;
       });
 
 
