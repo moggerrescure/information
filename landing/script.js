@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cases.forEach(card => {
         const ok = f === 'all' || (card.dataset.tags || '').split(' ').includes(f);
         card.hidden = !ok;
+        card.style.display = ok ? '' : 'none';
         if (ok) shown++;
       });
       if (empty) empty.hidden = shown !== 0;
