@@ -81,7 +81,105 @@
         <a class="btn btn--orange btn--lg" href="#quiz" data-hero-el>Рассчитать стоимость сайта</a>
       </div>
       <div class="hero__pic" data-hero-el>
-        <img src="img/5a64a498352c.webp" width="697" height="614" alt="Иллюстрация: разработчик собирает сайт из блоков" fetchpriority="high" decoding="async">
+        <div class="hero-stage" id="heroStage">
+          <div class="hero-stage__hint" aria-hidden="true">
+            <span class="hero-stage__hint-dot"></span>
+            <span class="hero-stage__hint-txt">Нажмите или наведите на предмет</span>
+          </div>
+
+          <img class="hero-stage__img" src="img/5a64a498352c.webp" width="697" height="614" alt="Интерактивная 3D-сцена: разработка сайтов и приложений нашей командой" fetchpriority="high" decoding="async">
+
+          <!-- 1. Лампочка: Концепция и логика -->
+          <div class="hero-spot hero-spot--bulb" style="--spot-x: 53%; --spot-y: 11%;" tabindex="0" role="button" aria-label="Концепция и бизнес-логика">
+            <span class="hero-spot__pulse"></span>
+            <span class="hero-spot__pin">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-7 7c0 2.5 1.5 4.5 3 5.5.8.5 1 1.5 1 2.5h6c0-1 .2-2 1-2.5 1.5-1 3-3 3-5.5a7 7 0 0 0-7-7z"/></svg>
+            </span>
+            <div class="hero-spot__pop hero-spot__pop--bottom">
+              <div class="hero-spot__tag">Концепция</div>
+              <div class="hero-spot__title">Думаем головой, а не шаблонами</div>
+              <p class="hero-spot__desc">Вникаем в ваш бизнес до строчки кода. Продумываем логику и структуру так, чтобы сайт реально приносил заявки, а не просто висел в интернете.</p>
+            </div>
+          </div>
+
+          <!-- 2. IDE / Окна с кодом: Нативный код и скорость -->
+          <div class="hero-spot hero-spot--code" style="--spot-x: 31.5%; --spot-y: 27%;" tabindex="0" role="button" aria-label="Честный нативный код">
+            <span class="hero-spot__pulse"></span>
+            <span class="hero-spot__pin">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </span>
+            <div class="hero-spot__pop hero-spot__pop--right">
+              <div class="hero-spot__tag">Разработка</div>
+              <div class="hero-spot__title">Честный нативный код</div>
+              <p class="hero-spot__desc">Пишем быстрый веб и нативные приложения под iOS на Swift. Без тормозных конструкторов и раздутых библиотек — страницы открываются мгновенно (от 0.8 сек).</p>
+            </div>
+          </div>
+
+          <!-- 3. Зеленый бабл: Сроки и гарантия -->
+          <div class="hero-spot hero-spot--speed" style="--spot-x: 88.5%; --spot-y: 23%;" tabindex="0" role="button" aria-label="Запуск от 3 дней без задержек">
+            <span class="hero-spot__pulse"></span>
+            <span class="hero-spot__pin">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <div class="hero-spot__pop hero-spot__pop--left">
+              <div class="hero-spot__tag">Скорость</div>
+              <div class="hero-spot__title">Запуск от 3 дней без задержек</div>
+              <p class="hero-spot__desc">Сроки и этапы жестко фиксируем в договоре. Не кормим завтраками: если обещали релиз к дате — значит сайт готов и протестирован вовремя.</p>
+            </div>
+          </div>
+
+          <!-- 4. Шестерёнка: Автоматизация и интеграции -->
+          <div class="hero-spot hero-spot--gear" style="--spot-x: 84%; --spot-y: 56%;" tabindex="0" role="button" aria-label="Автоматизация и интеграции">
+            <span class="hero-spot__pulse"></span>
+            <span class="hero-spot__pin">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </span>
+            <div class="hero-spot__pop hero-spot__pop--left">
+              <div class="hero-spot__tag">Интеграции</div>
+              <div class="hero-spot__title">Подключаем всё под ключ</div>
+              <p class="hero-spot__desc">Связываем проект с Telegram-ботами, CRM, 1С и онлайн-оплатой за 1–2 дня. Заявки сразу летят вам в карман, рутина менеджеров сокращается до минимума.</p>
+            </div>
+          </div>
+
+          <!-- 5. Рейтинг 5 звёзд: Опыт с 2018 и честная цена -->
+          <div class="hero-spot hero-spot--rating" style="--spot-x: 81%; --spot-y: 74%;" tabindex="0" role="button" aria-label="Опыт с 2018 года и честные цены">
+            <span class="hero-spot__pulse"></span>
+            <span class="hero-spot__pin">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+            <div class="hero-spot__pop hero-spot__pop--left">
+              <div class="hero-spot__tag">Репутация</div>
+              <div class="hero-spot__title">Опыт с 2018 года и честные цены</div>
+              <p class="hero-spot__desc">Мы — сработанная команда инженеров без офисного пафоса и раздутого штата. Поэтому отдаем премиальное качество по честной цене без агентских наценок.</p>
+            </div>
+          </div>
+
+          <!-- 6. Дизайн-карточка (горы слева): Индивидуальный UI -->
+          <div class="hero-spot hero-spot--design" style="--spot-x: 27%; --spot-y: 67.5%;" tabindex="0" role="button" aria-label="Интерфейсы, за которые не стыдно">
+            <span class="hero-spot__pulse"></span>
+            <span class="hero-spot__pin">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            </span>
+            <div class="hero-spot__pop hero-spot__pop--right">
+              <div class="hero-spot__tag">Дизайн</div>
+              <div class="hero-spot__title">Интерфейсы, за которые не стыдно</div>
+              <p class="hero-spot__desc">Никаких заезженных темплейтов из сети. Создаем сочный, выверенный визуальный стиль под вашу аудиторию — сайт запоминается и вызывает доверие с первой секунды.</p>
+            </div>
+          </div>
+
+          <!-- 7. Разработчик по центру: Прямой контакт с нами -->
+          <div class="hero-spot hero-spot--team" style="--spot-x: 54%; --spot-y: 52%;" tabindex="0" role="button" aria-label="Прямая связь с нашей командой">
+            <span class="hero-spot__pulse"></span>
+            <span class="hero-spot__pin">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </span>
+            <div class="hero-spot__pop hero-spot__pop--bottom">
+              <div class="hero-spot__tag">Команда</div>
+              <div class="hero-spot__title">Прямая связь с разработчиками</div>
+              <p class="hero-spot__desc">Вы обсуждаете задачи напрямую с теми, кто делает проект. Никакого испорченного телефона через стажеров: любые правки и идеи решаем сразу в рабочем чате.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

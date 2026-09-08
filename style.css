@@ -215,7 +215,294 @@ main>section{padding-block:0 var(--sec)}
 .hero h1{font-size:clamp(28px,3.6vw,40px);line-height:1.42;letter-spacing:.02em;text-transform:uppercase;color:#ED5A15}
 .hero__lead{margin:26px 0 34px;font-size:clamp(17px,1.9vw,24px);line-height:1.42;font-weight:600;max-width:432px}
 .hero .btn--lg{width:min(555px,100%)}
-.hero__pic img{width:100%;height:auto}
+.hero__pic {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.hero-stage {
+  position: relative;
+  width: 100%;
+  max-width: 697px;
+  margin: 0 auto;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease-out;
+}
+.hero-stage__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+/* Подсказка в углу иллюстрации */
+.hero-stage__hint {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 15;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(18, 19, 26, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.hero-stage__hint-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--lime, #c4f449);
+  box-shadow: 0 0 10px var(--lime, #c4f449);
+  animation: heroHintPulse 2s ease-in-out infinite;
+}
+@keyframes heroHintPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+}
+
+/* Интерактивные хотспоты */
+.hero-spot {
+  position: absolute;
+  left: var(--spot-x);
+  top: var(--spot-y);
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.hero-spot:focus-visible {
+  outline: 2px solid var(--lime, #c4f449);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+/* Разные фазы парения для эффекта живой сцены */
+.hero-spot--bulb   { animation: heroFloat1 4.4s ease-in-out infinite; }
+.hero-spot--code   { animation: heroFloat2 5.0s ease-in-out 0.4s infinite; }
+.hero-spot--speed  { animation: heroFloat1 4.6s ease-in-out 0.8s infinite; }
+.hero-spot--gear   { animation: heroFloat2 5.3s ease-in-out 1.2s infinite; }
+.hero-spot--rating { animation: heroFloat1 4.8s ease-in-out 0.6s infinite; }
+.hero-spot--design { animation: heroFloat2 5.1s ease-in-out 1.5s infinite; }
+.hero-spot--team   { animation: heroFloat1 5.8s ease-in-out 0.2s infinite; }
+
+@keyframes heroFloat1 {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(-5px); }
+}
+@keyframes heroFloat2 {
+  0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+  50% { transform: translate(-50%, -50%) translateY(4px); }
+}
+
+/* Кнопка-пин хотспота */
+.hero-spot__pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(18, 19, 26, 0.88);
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 16px rgba(196, 244, 73, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+  position: relative;
+  z-index: 2;
+}
+.hero-spot__pin svg {
+  display: block;
+  transition: transform 0.25s ease;
+}
+.hero-spot:hover .hero-spot__pin,
+.hero-spot.is-open .hero-spot__pin,
+.hero-spot:focus-visible .hero-spot__pin {
+  transform: scale(1.16);
+  background: #101117;
+  color: var(--lime, #c4f449);
+  border-color: var(--lime, #c4f449);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 24px rgba(196, 244, 73, 0.65);
+}
+.hero-spot:hover .hero-spot__pin svg,
+.hero-spot.is-open .hero-spot__pin svg {
+  transform: scale(1.1);
+}
+
+/* Пульсирующее неоновое кольцо */
+.hero-spot__pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  border-radius: 50%;
+  border: 2px solid var(--lime, #c4f449);
+  opacity: 0;
+  pointer-events: none;
+  animation: heroSpotPulse 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+.hero-spot--code .hero-spot__pulse   { animation-delay: 0.5s; }
+.hero-spot--speed .hero-spot__pulse  { animation-delay: 1.0s; }
+.hero-spot--gear .hero-spot__pulse   { animation-delay: 1.5s; }
+.hero-spot--rating .hero-spot__pulse { animation-delay: 2.0s; }
+.hero-spot--design .hero-spot__pulse { animation-delay: 2.5s; }
+.hero-spot--team .hero-spot__pulse   { animation-delay: 0.8s; }
+
+@keyframes heroSpotPulse {
+  0% { transform: scale(0.9); opacity: 0.85; }
+  60% { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Всплывающая карточка с преимуществом команды */
+.hero-spot__pop {
+  position: absolute;
+  width: 280px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(17, 18, 24, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(196, 244, 73, 0.15);
+  color: #fff;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.25s cubic-bezier(0.34, 1.4, 0.64, 1), visibility 0.25s;
+  z-index: 50;
+}
+.hero-spot:hover,
+.hero-spot.is-open,
+.hero-spot:focus-visible {
+  z-index: 60;
+}
+.hero-spot:hover .hero-spot__pop,
+.hero-spot.is-open .hero-spot__pop,
+.hero-spot:focus-visible .hero-spot__pop {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Позиционирование всплывашек по сторонам */
+.hero-spot__pop--left {
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%) translateX(12px) scale(0.94);
+  transform-origin: right center;
+}
+.hero-spot:hover .hero-spot__pop--left,
+.hero-spot.is-open .hero-spot__pop--left,
+.hero-spot:focus-visible .hero-spot__pop--left {
+  transform: translateY(-50%) translateX(0) scale(1);
+}
+
+.hero-spot__pop--right {
+  left: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-12px) scale(0.94);
+  transform-origin: left center;
+}
+.hero-spot:hover .hero-spot__pop--right,
+.hero-spot.is-open .hero-spot__pop--right,
+.hero-spot:focus-visible .hero-spot__pop--right {
+  transform: translateY(-50%) translateX(0) scale(1);
+}
+
+.hero-spot__pop--bottom {
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-12px) scale(0.94);
+  transform-origin: top center;
+}
+.hero-spot:hover .hero-spot__pop--bottom,
+.hero-spot.is-open .hero-spot__pop--bottom,
+.hero-spot:focus-visible .hero-spot__pop--bottom {
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.hero-spot__tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--lime, #c4f449);
+  margin-bottom: 6px;
+}
+.hero-spot__title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+.hero-spot__desc {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  font-weight: 400;
+}
+
+@media (max-width: 900px) {
+  .hero-spot__pop {
+    width: 250px;
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero-spot__pin {
+    width: 32px;
+    height: 32px;
+  }
+  .hero-spot__pulse {
+    width: 32px;
+    height: 32px;
+    margin: -16px 0 0 -16px;
+  }
+  .hero-spot__pop {
+    width: 220px;
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+  .hero-spot__title {
+    font-size: 13.5px;
+  }
+  .hero-spot__desc {
+    font-size: 11.5px;
+  }
+  .hero-stage__hint {
+    top: 8px;
+    right: 8px;
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+}
 .hero__s1{width:77px;height:77px;border-radius:16px;left:49%;top:60px}
 .hero__s2{width:55px;height:55px;right:-10px;bottom:110px}
 .hero__s3{width:120px;height:115px;border-radius:5px;left:2%;top:20px}
