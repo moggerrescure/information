@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Создание сайтов в Беларуси от 3 дней — KV-web</title>
+<meta name="description" content="Маркетинговое агентство полного цикла KV-web: создание и продвижение сайтов в Беларуси под ключ. Лендинги, интернет-магазины, корпоративные сайты. Разработка от 3 дней.">
+<meta name="theme-color" content="#396CEB">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_BY">
+<meta property="og:site_name" content="KV-web">
+<meta property="og:title" content="Создание сайтов в Беларуси от 3 дней">
+<meta property="og:description" content="Уже более 4 лет помогаем компаниям увеличить прибыль с помощью индивидуальных сайтов под ключ.">
+<meta property="og:image" content="img/5a64a498352c.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Montserrat:wght@400..800&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Перейти к содержимому</a>
+<div class="progress" aria-hidden="true"><span class="progress__bar"></span></div>
+
+<!-- ============ ШАПКА ============ -->
+<header class="site-header" id="top">
+  <div class="wrap">
+    <div class="navbar">
+      <a class="brand" href="#top" aria-label="KV-web — на главную">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 40 32" fill="none" role="img"><path d="M2 2h6.4v11.3L18.2 2h7.9L15.9 14.1 26.6 30h-7.7l-7.2-11-3.3 3.8V30H2V2Z" fill="currentColor"/><rect x="29" y="19" width="11" height="11" rx="3.5" fill="#396CEB"/></svg>
+        </span>
+        <span class="brand__txt">
+          <b>KV<i>WEB</i></b>
+          <small>Маркетинговое агентство<br>полного цикла</small>
+        </span>
+      </a>
+
+      <button class="burger" type="button" aria-expanded="false" aria-controls="mainnav" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="mainnav" id="mainnav" aria-label="Основная навигация">
+        <ul class="mainnav__list">
+          <li><a href="#cases">Кейсы</a></li>
+          <li class="has-sub">
+            <button type="button" class="subtoggle" aria-expanded="false" aria-controls="sub-services">Услуги<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg></button>
+            <ul class="submenu" id="sub-services">
+              <li><a href="#pricing">Создание лендинга</a></li>
+              <li><a href="#types">Интернет-магазин</a></li>
+              <li><a href="#types">Корпоративный сайт</a></li>
+              <li><a href="#promo">SEO продвижение</a></li>
+              <li><a href="#promo">Контекстная реклама</a></li>
+            </ul>
+          </li>
+          <li><a href="#about">О нас</a></li>
+          <li><a href="#blog">Блог</a></li>
+          <li><a href="#contacts">Контакты</a></li>
+        </ul>
+        <a class="btn btn--orange btn--sm mainnav__cta" href="#offer">Получить предложение</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ ПЕРВЫЙ ЭКРАН ============ -->
+<section class="hero">
+  <span class="star star--o hero__s1" aria-hidden="true"></span>
+  <span class="star star--w hero__s2" aria-hidden="true"></span>
+  <span class="star star--g hero__s3" aria-hidden="true"></span>
+
+  <div class="wrap">
+    <div class="hero__card" data-hero>
+      <div class="hero__text">
+        <h1 class="hero__h1"><span class="line"><span>Создание сайтов</span></span><span class="line"><span>в Беларуси</span></span><span class="line"><span>от 3 дней</span></span></h1>
+        <p class="hero__lead" data-hero-el>Уже более 4 лет мы помогаем компаниям увеличить прибыль и быть более узнаваемыми на рынке с помощью разработки индивидуальных сайтов под ключ</p>
+        <a class="btn btn--orange btn--lg" href="#quiz" data-hero-el>Рассчитать стоимость сайта</a>
+      </div>
+      <div class="hero__pic" data-hero-el>
+        <img src="img/5a64a498352c.webp" width="697" height="614" alt="Иллюстрация: разработчик собирает сайт из блоков" fetchpriority="high" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ КВИЗ ============ -->
+<section class="quiz-sec" id="quiz">
+  <div class="wrap">
+    <h2 class="h2">Получите расчёт стоимости вашего сайта ответив на 6 вопросов</h2>
+    <span class="star star--b quiz-sec__s1" aria-hidden="true"></span>
+
+    <form class="quiz reveal" id="quizForm" novalidate>
+      <div class="quiz__bar">
+        <div class="quiz__track"><div class="quiz__fill" id="quizFill"></div></div>
+        <span class="quiz__count" id="quizCount">1 из 5</span>
+      </div>
+
+      <div class="quiz__body">
+        <fieldset class="quiz__step is-active" data-step="1">
+          <div class="quiz__cols">
+            <div class="quiz__col">
+              <legend class="quiz__q">Ваша ниша. Тематика бизнеса</legend>
+              <input class="quiz__input" type="text" name="Ниша" placeholder="Строительство домов и квартир" autocomplete="off">
+              <p class="quiz__q quiz__q--mt">У вас есть прототип сайта и копирайт?
+                <button class="hint" type="button" aria-label="Что такое прототип и копирайт" data-hint="Прототип — схема страницы. Копирайт — готовые тексты. Если ничего нет, мы сделаем сами.">?</button>
+              </p>
+              <label class="opt opt--radio"><input type="radio" name="Прототип" value="Да, всё есть"><span class="opt__mark"></span><span class="opt__txt">Да, всё есть</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Прототип" value="Есть только тексты"><span class="opt__mark"></span><span class="opt__txt">Есть только тексты</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Прототип" value="Ничего нет"><span class="opt__mark"></span><span class="opt__txt">Ничего нет</span></label>
+            </div>
+            <div class="quiz__col">
+              <p class="quiz__q">Какой функционал вам необходим?</p>
+              <label class="opt"><input type="checkbox" name="Функционал" value="Формы заявки"><span class="opt__box"></span><span class="opt__txt">Формы заявки</span></label>
+              <label class="opt"><input type="checkbox" name="Функционал" value="Корзина"><span class="opt__box"></span><span class="opt__txt">Корзина</span></label>
+              <label class="opt"><input type="checkbox" name="Функционал" value="Анимационные эффекты"><span class="opt__box"></span><span class="opt__txt">Анимационные эффекты</span></label>
+              <label class="opt"><input type="checkbox" name="Функционал" value="Калькулятор расчёта стоимости"><span class="opt__box"></span><span class="opt__txt">Калькулятор расчёта стоимости</span></label>
+              <label class="opt"><input type="checkbox" name="Функционал" value="Другое"><span class="opt__box"></span><span class="opt__txt">Другое</span></label>
+              <label class="opt"><input type="checkbox" name="Функционал" value="Не разбираюсь в этом, подскажите вы"><span class="opt__box"></span><span class="opt__txt">Не разбираюсь в этом, подскажите вы</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="quiz__step" data-step="2">
+          <div class="quiz__cols">
+            <div class="quiz__col">
+              <legend class="quiz__q">Какой тип сайта вам нужен?</legend>
+              <label class="opt opt--radio"><input type="radio" name="Тип сайта" value="Лендинг"><span class="opt__mark"></span><span class="opt__txt">Лендинг</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Тип сайта" value="Сайт-визитка"><span class="opt__mark"></span><span class="opt__txt">Сайт-визитка</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Тип сайта" value="Интернет-магазин"><span class="opt__mark"></span><span class="opt__txt">Интернет-магазин</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Тип сайта" value="Корпоративный сайт"><span class="opt__mark"></span><span class="opt__txt">Корпоративный сайт</span></label>
+            </div>
+            <div class="quiz__col">
+              <p class="quiz__q">На какой платформе?</p>
+              <label class="opt opt--radio"><input type="radio" name="Платформа" value="Tilda"><span class="opt__mark"></span><span class="opt__txt">Tilda</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Платформа" value="WordPress"><span class="opt__mark"></span><span class="opt__txt">WordPress</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Платформа" value="Не знаю, подскажите вы"><span class="opt__mark"></span><span class="opt__txt">Не знаю, подскажите вы</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="quiz__step" data-step="3">
+          <div class="quiz__cols">
+            <div class="quiz__col">
+              <legend class="quiz__q">Бюджет на разработку</legend>
+              <label class="opt opt--radio"><input type="radio" name="Бюджет" value="до 2 300 BYN"><span class="opt__mark"></span><span class="opt__txt">до 2 300 BYN</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Бюджет" value="2 300 – 4 300 BYN"><span class="opt__mark"></span><span class="opt__txt">2 300 – 4 300 BYN</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Бюджет" value="4 300 – 6 000 BYN"><span class="opt__mark"></span><span class="opt__txt">4 300 – 6 000 BYN</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Бюджет" value="более 6 000 BYN"><span class="opt__mark"></span><span class="opt__txt">более 6 000 BYN</span></label>
+            </div>
+            <div class="quiz__col">
+              <p class="quiz__q">Сроки создания сайта</p>
+              <label class="opt opt--radio"><input type="radio" name="Сроки" value="6-20 дней"><span class="opt__mark"></span><span class="opt__txt">6–20 дней</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Сроки" value="10-25 дней"><span class="opt__mark"></span><span class="opt__txt">10–25 дней</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Сроки" value="15-30 дней"><span class="opt__mark"></span><span class="opt__txt">15–30 дней</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Сроки" value="Не горит"><span class="opt__mark"></span><span class="opt__txt">Не горит</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="quiz__step" data-step="4">
+          <div class="quiz__cols">
+            <div class="quiz__col">
+              <legend class="quiz__q">Нужно ли продвижение после запуска?</legend>
+              <label class="opt"><input type="checkbox" name="Продвижение" value="SEO продвижение"><span class="opt__box"></span><span class="opt__txt">SEO продвижение</span></label>
+              <label class="opt"><input type="checkbox" name="Продвижение" value="Контекстная реклама"><span class="opt__box"></span><span class="opt__txt">Контекстная реклама</span></label>
+              <label class="opt"><input type="checkbox" name="Продвижение" value="Таргетированная реклама"><span class="opt__box"></span><span class="opt__txt">Таргетированная реклама</span></label>
+              <label class="opt"><input type="checkbox" name="Продвижение" value="Пока не нужно"><span class="opt__box"></span><span class="opt__txt">Пока не нужно</span></label>
+            </div>
+            <div class="quiz__col">
+              <p class="quiz__q">Есть ли действующий сайт?</p>
+              <label class="opt opt--radio"><input type="radio" name="Текущий сайт" value="Да, нужен редизайн"><span class="opt__mark"></span><span class="opt__txt">Да, нужен редизайн</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Текущий сайт" value="Да, но делаем новый"><span class="opt__mark"></span><span class="opt__txt">Да, но делаем новый</span></label>
+              <label class="opt opt--radio"><input type="radio" name="Текущий сайт" value="Нет, с нуля"><span class="opt__mark"></span><span class="opt__txt">Нет, с нуля</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="quiz__step" data-step="5">
+          <div class="quiz__cols">
+            <div class="quiz__col">
+              <legend class="quiz__q">Куда отправить расчёт?</legend>
+              <input class="quiz__input" type="text" name="Имя" placeholder="Ваше имя" autocomplete="name" required>
+              <input class="quiz__input" type="tel" name="Телефон" placeholder="Номер телефона" autocomplete="tel" required>
+            </div>
+            <div class="quiz__col">
+              <p class="quiz__q">Удобный мессенджер для связи</p>
+              <label class="opt"><input type="checkbox" name="Мессенджер" value="Telegram"><span class="opt__box"></span><span class="opt__txt">Telegram</span></label>
+              <label class="opt"><input type="checkbox" name="Мессенджер" value="WhatsApp"><span class="opt__box"></span><span class="opt__txt">WhatsApp</span></label>
+              <p class="consent consent--dark">Отправляя форму вы соглашаетесь на <a href="#contacts">обработку персональных данных</a></p>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="quiz__nav">
+        <button class="btn btn--ghost-lime" type="button" id="quizBack" hidden>Назад</button>
+        <button class="btn btn--lime" type="button" id="quizNext">Далее</button>
+        <button class="btn btn--lime" type="submit" id="quizSend" hidden>Получить расчёт</button>
+      </div>
+      <p class="formmsg" role="status" aria-live="polite"></p>
+    </form>
+    <span class="star star--w quiz-sec__s2" aria-hidden="true"></span>
+  </div>
+</section>
+
+<!-- ============ ПОЧЕМУ МЫ ============ -->
+<section class="why">
+  <div class="wrap">
+    <div class="why__card reveal">
+      <h2 class="h2">Почему мы?</h2>
+      <div class="why__grid stagger">
+        <figure class="why__pic"><img src="img/84d45ab1aa05.webp" width="300" height="190" alt="Команда обсуждает структуру будущего сайта" loading="lazy" decoding="async"></figure>
+        <div class="why__item">
+          <h3>Создаём сайт в комплексе</h3>
+          <p>Мы берём на себя весь маркетинг, создаём индивидуальный дизайн вашего сайта, вёрстаем и продвигаем в интернете</p>
+        </div>
+        <figure class="why__pic"><img src="img/e9f818deea27.webp" width="300" height="190" alt="Дизайнер работает над интерфейсом" loading="lazy" decoding="async"></figure>
+        <div class="why__item">
+          <h3>Крутое качество всем</h3>
+          <p>Занимаемся разработкой индивидуального сайта для всех — от стартапов до крупных корпораций на рынке</p>
+        </div>
+        <figure class="why__pic"><img src="img/f4f79d60dd78.webp" width="300" height="190" alt="График роста прибыли компании" loading="lazy" decoding="async"></figure>
+        <div class="why__item">
+          <h3>Мы работаем ради денег</h3>
+          <p>Понимаем для чего вы здесь — вы хотите зарабатывать больше, замечательно. Мы вам в этом поможем</p>
+        </div>
+        <figure class="why__pic"><img src="img/e3a677203633.webp" width="300" height="190" alt="Бонусы для клиентов агентства" loading="lazy" decoding="async"></figure>
+        <div class="why__item">
+          <h3>Для каждого <span class="accent">БОНУСЫ</span></h3>
+          <p>Мы всегда стараемся дать больше, т.к понимаем, что сарафанка приводит больше всего клиентов</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ТИПЫ САЙТОВ + КЕЙСЫ ============ -->
+<section class="dark-block" id="types">
+  <div class="wrap">
+    <h2 class="h2 h2--light">Сайты, которые мы создаём</h2>
+    <span class="star star--o types__s1" aria-hidden="true"></span>
+
+    <ul class="types stagger">
+      <li class="type" style="--tile:57,108,235"><span class="type__ico" aria-hidden="true"><img class="type__ico-b" src="img/47549c0b1de8.webp" width="120" height="120" alt="" loading="lazy" decoding="async"><img class="type__ico-t" src="img/7371eb2b2267.webp" width="120" height="120" alt="" loading="lazy" decoding="async"></span><span>Создание лендинга</span></li>
+      <li class="type" style="--tile:213,28,127"><span class="type__ico" aria-hidden="true"><img class="type__ico-b" src="img/11d4be5b8868.webp" width="120" height="120" alt="" loading="lazy" decoding="async"><img class="type__ico-t" src="img/e3c90b1a0425.webp" width="120" height="120" alt="" loading="lazy" decoding="async"></span><span>Сайты на Tilda</span></li>
+      <li class="type" style="--tile:135,134,255"><span class="type__ico" aria-hidden="true"><img class="type__ico-b" src="img/32ed02815300.webp" width="120" height="120" alt="" loading="lazy" decoding="async"><img class="type__ico-t" src="img/1029248775af.webp" width="120" height="120" alt="" loading="lazy" decoding="async"></span><span>Экспресс-лендинг</span></li>
+      <li class="type" style="--tile:55,186,170"><span class="type__ico" aria-hidden="true"><img class="type__ico-b" src="img/b5cead89f389.webp" width="120" height="120" alt="" loading="lazy" decoding="async"><img class="type__ico-t" src="img/60d59f90d20d.webp" width="120" height="120" alt="" loading="lazy" decoding="async"></span><span>Сайт-визитка</span></li>
+      <li class="type" style="--tile:237,89,19"><span class="type__ico" aria-hidden="true"><img class="type__ico-b" src="img/dfcda74abd84.webp" width="120" height="120" alt="" loading="lazy" decoding="async"><img class="type__ico-t" src="img/84d99e954739.webp" width="120" height="120" alt="" loading="lazy" decoding="async"></span><span>Интернет-магазин</span></li>
+      <li class="type" style="--tile:200,38,50"><span class="type__ico" aria-hidden="true"><img class="type__ico-b" src="img/0623945086af.webp" width="120" height="120" alt="" loading="lazy" decoding="async"><img class="type__ico-t" src="img/a85980da4005.webp" width="120" height="120" alt="" loading="lazy" decoding="async"></span><span>Сайт на WordPress</span></li>
+      <li class="type" style="--tile:135,57,235"><span class="type__ico" aria-hidden="true"><img class="type__ico-b" src="img/1c84c64f869a.webp" width="120" height="120" alt="" loading="lazy" decoding="async"><img class="type__ico-t" src="img/e28080144fcc.webp" width="120" height="120" alt="" loading="lazy" decoding="async"></span><span>Корпоративный сайт</span></li>
+      <li class="type" style="--tile:35,150,237"><span class="type__ico" aria-hidden="true"><img class="type__ico-b" src="img/1edd8ef9ee8d.webp" width="120" height="120" alt="" loading="lazy" decoding="async"><img class="type__ico-t" src="img/1e832fa8e5b9.webp" width="120" height="120" alt="" loading="lazy" decoding="async"></span><span>Дизайн / редизайн сайта</span></li>
+    </ul>
+
+    <h2 class="h2 h2--light cases__h" id="cases">Наши кейсы</h2>
+
+    <div class="chips" role="tablist" aria-label="Фильтр проектов">
+      <button class="chip is-on" role="tab" aria-selected="true" data-filter="all">Все проекты</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="design">Дизайн сайтов</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="tilda">Сайты на Тильде</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="wp">Вёрстка на WordPress</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="landing">Лендинг</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="multi">Многостраничные сайты</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="seo">SEO продвижение</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="target">Таргетированная реклама</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="context">Контекстная реклама</button>
+    </div>
+
+    <h3 class="cases stagger__sub">Все проекты</h3>
+
+    <div class="cases">
+      <article class="case case--sm" data-tags="design landing" style="--case:#DB1C62">
+        <h4>Дизайн сайта агрегатора</h4>
+        <p class="case__tag">#Лендинги</p>
+        <div class="case__shots"><img class="case__shot case__shot--a" src="img/f7aaac3cd896.webp" width="262" height="334" alt="Кейс: дизайн сайта агрегатора, десктопная версия" loading="lazy" decoding="async"></div>
+      </article>
+
+      <article class="case case--lg" data-tags="design tilda" style="--case:#3CBE6C">
+        <h4>Дизайн сайта агрегатора</h4>
+        <p class="case__tag">#Лендинги</p>
+        <div class="case__shots">
+          <img class="case__shot case__shot--b" src="img/e3041e5f061d.webp" width="357" height="455" alt="Кейс: главная страница сайта" loading="lazy" decoding="async">
+          <img class="case__shot case__shot--m" src="img/1c49057e3b30.webp" width="171" height="352" alt="Кейс: адаптивная мобильная версия" loading="lazy" decoding="async">
+        </div>
+      </article>
+
+      <article class="case case--lg" data-tags="wp multi" style="--case:#FFC632">
+        <h4>Дизайн сайта агрегатора</h4>
+        <p class="case__tag">#Лендинги</p>
+        <div class="case__shots">
+          <img class="case__shot case__shot--b" src="img/375cc845e766.webp" width="357" height="455" alt="Кейс: десктопная версия сайта" loading="lazy" decoding="async">
+          <img class="case__shot case__shot--m" src="img/8730d3415d50.webp" width="170" height="331" alt="Кейс: версия для телефонов" loading="lazy" decoding="async">
+        </div>
+      </article>
+
+      <article class="case case--sm" data-tags="landing seo" style="--case:#ED5A15">
+        <h4>Дизайн сайта агрегатора</h4>
+        <p class="case__tag">#Лендинги</p>
+        <div class="case__shots"><img class="case__shot case__shot--w" src="img/d9aa52207889.webp" width="423" height="174" alt="Кейс: экраны лендинга" loading="lazy" decoding="async"></div>
+      </article>
+    </div>
+
+    <p class="cases__empty" hidden>По этому направлению кейсы скоро появятся — напишите нам, покажем в личной переписке.</p>
+
+    <div class="center"><a class="btn btn--orange btn--lg" href="#offer">Смотреть все кейсы</a></div>
+    <span class="star star--o types__s2" aria-hidden="true"></span>
+  </div>
+</section>
+
+<!-- ============ АУДИТ САЙТА ============ -->
+<section class="audit">
+  <div class="wrap">
+    <div class="audit__card reveal">
+      <div class="audit__pic">
+        <img src="img/audit-illustration.webp" width="664" height="681" alt="Иллюстрация: чек-лист аудита сайта под увеличительным стеклом" loading="lazy" decoding="async">
+      </div>
+      <div class="audit__form">
+        <h2 class="h2 h2--light"><span class="selbox">Проведём аудит<i aria-hidden="true"></i></span><br>вашего сайта</h2>
+        <span class="fcursor fcursor--lime"><span class="tag tag--lime">Прокачаем юзабилити</span></span>
+        <p class="audit__lead">Заполните форму, а мы напишем вам и предложим возможный формат работы</p>
+        <form class="form" data-form="Аудит сайта" novalidate>
+          <div class="form__row">
+            <input class="fld" type="url" name="Ссылка на сайт" placeholder="Ссылка на сайт" inputmode="url">
+            <input class="fld" type="tel" name="Телефон" placeholder="Номер телефона для связи" autocomplete="tel" required>
+          </div>
+          <p class="form__label">Удобный мессенджер для связи*</p>
+          <div class="form__msgrs">
+            <label class="opt"><input type="checkbox" name="Мессенджер" value="Telegram"><span class="opt__box"></span><span class="opt__txt">Telegram</span></label>
+            <label class="opt"><input type="checkbox" name="Мессенджер" value="WhatsApp"><span class="opt__box"></span><span class="opt__txt">WhatsApp</span></label>
+          </div>
+          <p class="consent">Отправляя форму вы соглашаетесь на <a href="#contacts">обработку персональных данных</a></p>
+          <button class="btn btn--lime btn--lg" type="submit">Получить аудит сайта</button>
+          <p class="formmsg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+    <span class="star star--lime audit__s1" aria-hidden="true"></span>
+  </div>
+</section>
+
+<!-- ============ ПРОДВИЖЕНИЕ ============ -->
+<section class="promo" id="promo">
+  <div class="wrap">
+    <div class="promo__grid stagger">
+      <div class="promo__intro">
+        <h2 class="h2">Берём <span class="accent">продвижение сайта</span> на себя</h2>
+        <p>Наша главная цель — это долгосрочное сотрудничество с вами, но мы понимаем, что для этого нужно <b>в первую очередь обеспечить вас продажами</b>, поэтому мы не только создаём продающие сайты в Беларуси, но и продвигаем их в интернете</p>
+      </div>
+
+      <article class="scard">
+        <img class="scard__ico" src="img/e9f0179d5488.webp" width="71" height="71" alt="" loading="lazy" decoding="async">
+        <h3>Продвижение сайта на Яндекс</h3>
+        <p>Увеличиваем количество посетителей вашего сайта из поисковых систем Яндекс</p>
+        <a class="btn btn--lime btn--xs" href="#offer">Подробнее</a>
+      </article>
+
+      <article class="scard">
+        <img class="scard__ico" src="img/443ac8e852b2.webp" width="71" height="71" alt="" loading="lazy" decoding="async">
+        <h3>Продвижение сайта на Google</h3>
+        <p>Выводим ваши запросы в топ-10, с помощью проверенных инструментов SEO оптимизации</p>
+        <a class="btn btn--lime btn--xs" href="#offer">Подробнее</a>
+      </article>
+
+      <article class="scard">
+        <img class="scard__ico" src="img/f7fa62946246.webp" width="71" height="71" alt="" loading="lazy" decoding="async">
+        <h3>Контекстная реклама</h3>
+        <p>Не только повысим узнаваемость бренда, но и покажем предложение вашему целевому покупателю</p>
+        <a class="btn btn--lime btn--xs" href="#offer">Подробнее</a>
+      </article>
+
+      <article class="scard">
+        <img class="scard__ico" src="img/7186ad084cd9.webp" width="71" height="71" alt="" loading="lazy" decoding="async">
+        <h3>Таргетированная реклама</h3>
+        <p>Самый быстрый способ привлечения трафика на сайт, начните получать первые заявки</p>
+        <a class="btn btn--lime btn--xs" href="#offer">Подробнее</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ТАРИФЫ ============ -->
+<section class="dark-block pricing-sec" id="pricing">
+  <div class="wrap">
+    <h2 class="h2 h2--light">Сколько стоит создать сайт в Беларуси</h2>
+    <p class="pricing__sub">Стоимость создания одностраничного сайта / лендинга в Беларуси</p>
+
+    <div class="ptabs" role="tablist" aria-label="Тип сайта">
+      <button class="ptab is-on" role="tab" aria-selected="true">Создание лендинга</button>
+      <button class="ptab" role="tab" aria-selected="false">Сайты на Tilda</button>
+      <button class="ptab" role="tab" aria-selected="false">Экспресс-лендинг</button>
+      <button class="ptab" role="tab" aria-selected="false">Сайт-визитка</button>
+      <button class="ptab" role="tab" aria-selected="false">Корпоративный сайт</button>
+      <button class="ptab" role="tab" aria-selected="false">Интернет-магазин</button>
+      <button class="ptab" role="tab" aria-selected="false">Сайт на WordPress</button>
+      <button class="ptab" role="tab" aria-selected="false">Дизайн / редизайн сайта</button>
+    </div>
+
+    <div class="plans stagger">
+      <article class="plan">
+        <h3 class="plan__name">Для старта</h3>
+        <p class="plan__term">Сроки разработки: 6-20 дней</p>
+        <p class="plan__desc">Продающий, лендинг со стандартным дизайном до 5 блоков, подходит для тестирования новой идеи</p>
+        <ul class="plan__list">
+          <li class="on">Анализ вашего бизнеса</li>
+          <li class="on">Первичное исследование вашей целевой аудитории и конкурентов</li>
+          <li class="on">Копирайт/рерайт текста с заголовками по технологии 4U</li>
+          <li class="on">Создание стандартного дизайна</li>
+          <li class="on">Верстаем на Tilda, либо WordPress</li>
+          <li class="on">Адаптируем сайт под мобильные версии</li>
+          <li class="on">Подключение всех форм, системы аналитики, интеграция с CRM системой, тестирование сайта</li>
+          <li class="on">Создание доп.страниц: страница 404 ошибка, страница спасибо, политика конфиденциальности.</li>
+          <li class="on">Без анимации</li>
+        </ul>
+        <p class="plan__price"><b data-count="2270">от 2 270 BYN</b></p>
+        <a class="btn btn--orange" href="#offer">Обсудить задачу</a>
+      </article>
+
+      <article class="plan plan--mid">
+        <h3 class="plan__name">Для бизнеса</h3>
+        <p class="plan__term">Сроки разработки: 10-25 дней</p>
+        <p class="plan__desc">Красивый, конверсионный лендинг, подходит для товарной ниши и бизнеса в сфере услуг</p>
+        <ul class="plan__list">
+          <li class="off">Анализ вашего бизнеса</li>
+          <li class="on">Расширенное исследование вашей целевой аудитории и конкурентов</li>
+          <li class="off">Копирайт/рерайт текста с заголовками по технологии 4U</li>
+          <li class="on">Создание прототипа. Проработка структуры и юзабилити</li>
+          <li class="on">Создание индивидуального дизайна</li>
+          <li class="off">Верстаем на Tilda, либо WordPress</li>
+          <li class="off">Адаптируем сайт под мобильные версии</li>
+          <li class="off">Подключение всех форм, системы аналитики, интеграция с CRM системой, тестирование сайта</li>
+          <li class="off">Создание доп.страниц: страница 404 ошибка, страница спасибо, политика конфиденциальности.</li>
+          <li class="on">Базовая SEO оптимизация, заголовки H1, Н2, Н3, описание, alt теги</li>
+          <li class="on">Базовая анимация</li>
+          <li class="on">Техническая поддержка на протяжении 1 месяца</li>
+        </ul>
+        <p class="plan__price"><b data-count="4260">от 4 260 BYN</b></p>
+        <a class="btn btn--orange" href="#offer">Выбрать пакет</a>
+      </article>
+
+      <article class="plan">
+        <h3 class="plan__name">PRO бизнес</h3>
+        <p class="plan__term">Сроки разработки: 15-30 дней</p>
+        <p class="plan__desc">Уникальный, запоминающийся лендинг, с высокими показателями конверсии</p>
+        <ul class="plan__list">
+          <li class="off">Анализ вашего бизнеса</li>
+          <li class="on">Расширенное исследование вашей целевой аудитории и конкурентов</li>
+          <li class="on">Портрет пользователя</li>
+          <li class="off">Копирайт/рерайт текста с заголовками по технологии 4U</li>
+          <li class="on">Создание прототипа. Проработка структуры и юзабилити</li>
+          <li class="on">Создание уникального и запоминающегося дизайна сайта от Арт-директора и основателя агентства KV-web</li>
+          <li class="off">Верстаем на Tilda, либо WordPress</li>
+          <li class="off">Адаптируем сайт под мобильные версии</li>
+          <li class="off">Подключение всех форм, системы аналитики, интеграция с CRM системой, тестирование сайта</li>
+          <li class="off">Создание доп.страниц: страница 404 ошибка, страница спасибо, политика конфиденциальности.</li>
+          <li class="on">Базовая SEO оптимизация, заголовки H1, Н2, Н3, описание, alt теги</li>
+          <li class="on">Сложная/базовая анимация</li>
+          <li class="on">Техническая поддержка на протяжении 1 месяца</li>
+          <li class="on">A/B тестирование и улучшение юзабилити сайта на основе данных аналитики</li>
+        </ul>
+        <p class="plan__price"><b data-count="5930">от 5 930 BYN</b></p>
+        <a class="btn btn--orange" href="#offer">Выбрать пакет</a>
+      </article>
+    </div>
+    <p class="rate-note">Цены указаны в белорусских рублях. Точная стоимость фиксируется в договоре после брифа.</p>
+
+      <!-- «на своих условиях» — в макете лежит на тёмной полосе с тарифами -->
+<div class="offer" id="offer">
+  <div class="offer__inner">
+    <div class="offer__card reveal">
+      <div class="offer__pic">
+        <img src="img/8f1091a8c471.webp" width="662" height="659" alt="Иллюстрация: клиент выбирает условия работы" loading="lazy" decoding="async">
+      </div>
+      <div class="offer__form">
+        <h2 class="h2 h2--light">Создайте сайт<br><span class="selbox">на своих условиях<i aria-hidden="true"></i></span></h2>
+        <span class="fcursor fcursor--orange"><span class="tag tag--orange">WOOW!</span></span>
+        <p class="offer__lead">Заполните форму, а мы напишем вам и предложим возможный формат работы</p>
+        <form class="form" data-form="Своё предложение" novalidate>
+          <div class="form__row">
+            <input class="fld" type="text" name="Бюджет на разработку" placeholder="Бюджет на разработку">
+            <input class="fld" type="text" name="Сроки создания сайта" placeholder="Сроки создания сайта">
+          </div>
+          <div class="form__row">
+            <input class="fld" type="tel" name="Телефон" placeholder="Номер телефона" autocomplete="tel" required>
+            <input class="fld" type="text" name="Имя" placeholder="Ваше имя" autocomplete="name" required>
+          </div>
+          <p class="consent">Отправляя форму вы соглашаетесь на <a href="#contacts">обработку персональных данных</a></p>
+          <button class="btn btn--orange btn--lg" type="submit">Отправить предложение</button>
+          <p class="formmsg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+    <span class="star star--o offer__s1" aria-hidden="true"></span>
+  </div>
+</div>
+  </div>
+</section>
+
+
+<!-- ============ ЭТАПЫ ============ -->
+<section class="steps">
+  <div class="wrap">
+    <h2 class="h2 h2--orange">Из каких этапов состоит создание лендинга в Беларуси</h2>
+    <ol class="steps__grid stagger">
+      <li class="step">
+        <span class="step__n">1</span>
+        <h3 class="step__t step__t--blue">Спроектируем ваш лендинг</h3>
+        <p>Анализируем вашу задачу, бизнес и целевую аудиторию. Создаем прототип сайта, пишем продающие тексты по технологиям AIDA и PMPHS, чтобы максимально зацепить пользователя сайта.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">2</span>
+        <h3 class="step__t">Кручу верчу, задизайнить хочу</h3>
+        <p>Отрисовываем 1 или 2 варианта стилистики сайта, согласовываем. Полностью рисуем стандартный или уникальный дизайн для вашего лендинга, согласуем с вами и адаптировем под телефоны.</p>
+      </li>
+      <li class="step">
+        <span class="step__n">3</span>
+        <h3 class="step__t">Перенос и запуск лендинга</h3>
+        <p>В основном, для посадочных страниц мы используем Tilda, но если у вас будет дополнительный, но при необходимости, мы всегда готовы верстать на WordPress. Отличия лишь в сроках и цене.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ О КОМАНДЕ ============ -->
+<section class="team" id="about">
+  <div class="wrap">
+    <h2 class="h2">Мы — команда kv-web эксперты по созданию и продвижению сайтов</h2>
+    <div class="team__text is-clamped" id="teamText">
+      <p>Мы — маркетинговое агентство полного цикла KV-web — эксперты по таким услугам как: Создание и продвижение сайтов в Беларуси (И не только). Создаём сайты под ключ и готовы предложить вам комплексный подход, целью которого — принести вам больше денег (Всё просто, наша цель — ваша прибыль)</p>
+      <p>Создание сайтов — это наш главный приоритет. Мы создаём уникальные веб-сайты, которые помогут вам выделиться среди конкурентов и установить качественную связь с вашим покупателем. Наша команда осуществит все этапы разработки сайта с учетом ваших требований и пожеланий.</p>
+    </div>
+    <div class="center"><button class="linkbtn" type="button" id="teamMore" aria-expanded="false" aria-controls="teamText">Показать всё</button></div>
+  </div>
+</section>
+
+<!-- ============ ОСНОВАТЕЛЬ ============ -->
+<section class="dark-block founder-sec">
+  <div class="wrap">
+    <h2 class="h2 h2--light">Познакомьтесь с основателем веб-студии</h2>
+    <div class="founder reveal">
+      <div class="founder__pic">
+        <img src="img/1461bbbe5f90.webp" width="557" height="749" alt="Кристина Васильева, основатель агентства KV-web" loading="lazy" decoding="async">
+      </div>
+      <div class="founder__body">
+        <div class="founder__tags">
+          <span class="tag tag--blue">Основатель маркетингового digital агентства KV-web</span>
+          <span class="tag tag--blue">Арт директор</span>
+        </div>
+        <h3 class="founder__name">Кристина Васильева</h3>
+        <ul class="founder__list">
+          <li>Главной заслугой считает идеально подобранную команду, вместе с которой создаёт маркетинговое агентство, целью которого является принести прибыль клиентам и избавить их от головной боли, при помощи создания сайта в комплексе с продвижением и маркетингом.</li>
+          <li>В 2021 году дизайн презентаций был на тачэкранах в Совете Федерации Камчатского края, а так же Курганской, Курской и Астраханской областях.</li>
+          <li>Работала над федеральными медицинскими проектами в рамках экосистемы «Медицина Города»</li>
+        </ul>
+        <a class="btn btn--lime" href="#contacts">Связаться и обсудить проект</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ОТЗЫВЫ ============ -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <div class="reviews__card">
+      <div class="reviews__head">
+        <h2 class="h2">Отзывы о команде</h2>
+        <div class="rtabs" role="tablist" aria-label="Тип отзывов">
+          <button class="rtab is-on" role="tab" aria-selected="true" data-rt="video">Видео-отзывы</button>
+          <button class="rtab" role="tab" aria-selected="false" data-rt="text">Текстовые отзывы</button>
+        </div>
+      </div>
+      <p class="reviews__lead">В нашем маркетинговом агентстве KV-web ценят честность и открытость, поэтому ко всем отзывам мы даём ссылки на наших клиентов</p>
+
+      <div class="reviews__hint"><span>Skroll</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <div class="reviews__scroller" tabindex="0" role="group" aria-label="Отзывы клиентов, прокрутка по горизонтали">
+        <article class="rev" data-kind="video">
+          <div class="rev__media rev__media--ph"><button class="rev__play" type="button" aria-label="Смотреть видео-отзыв: Рома Риндыч"></button></div>
+          <div class="rev__foot"><h3>Рома Риндыч <a href="#contacts" class="rev__tg" aria-label="Telegram Ромы Риндыча"></a></h3><p>Эксперт по продвижению и запускам</p></div>
+        </article>
+        <article class="rev" data-kind="video">
+          <div class="rev__media"><img src="img/ef2f183c64c4.webp" width="275" height="391" alt="Сергей Бочкарёв, клиент KV-web" loading="lazy" decoding="async"><button class="rev__play" type="button" aria-label="Смотреть видео-отзыв: Сергей Бочкарёв"></button></div>
+          <div class="rev__foot"><h3>Сергей Бочкарёв <a href="#contacts" class="rev__tg" aria-label="Telegram Сергея Бочкарёва"></a></h3><p>Предприниматель, Founder&amp;CEO @maklerlab</p></div>
+        </article>
+        <article class="rev" data-kind="video">
+          <div class="rev__media"><img src="img/cd39da0a1d2d.webp" width="275" height="391" alt="Анна Ясницкая, клиент KV-web" loading="lazy" decoding="async"><button class="rev__play" type="button" aria-label="Смотреть видео-отзыв: Анна Ясницкая"></button></div>
+          <div class="rev__foot"><h3>Анна Ясницкая <a href="#contacts" class="rev__tg" aria-label="Telegram Анны Ясницкой"></a></h3><p>Блогер 75к аудитории, психолог, сексолог</p></div>
+        </article>
+        <article class="rev" data-kind="video">
+          <div class="rev__media"><img src="img/0f6ec29e85e0.webp" width="275" height="391" alt="Юрий Гаврилов, клиент KV-web" loading="lazy" decoding="async"><button class="rev__play" type="button" aria-label="Смотреть видео-отзыв: Юрий Гаврилов"></button></div>
+          <div class="rev__foot"><h3>Юрий Гаврилов <a href="#contacts" class="rev__tg" aria-label="Telegram Юрия Гаврилова"></a></h3><p>Продвижение сайтов в интернете</p></div>
+        </article>
+
+        <article class="rev rev--text" data-kind="text" hidden>
+          <blockquote>Сделали лендинг за 12 дней, заявки пошли с первой недели. Отдельно порадовало, что не пришлось ничего допинывать — сами написали тексты и собрали аналитику.</blockquote>
+          <div class="rev__foot"><h3>Рома Риндыч</h3><p>Эксперт по продвижению и запускам</p></div>
+        </article>
+        <article class="rev rev--text" data-kind="text" hidden>
+          <blockquote>Работали над сайтом для сервиса недвижимости. Ребята въехали в задачу быстрее, чем предыдущая студия за месяц. Дизайн согласовали со второго захода.</blockquote>
+          <div class="rev__foot"><h3>Сергей Бочкарёв</h3><p>Предприниматель, Founder&amp;CEO @maklerlab</p></div>
+        </article>
+        <article class="rev rev--text" data-kind="text" hidden>
+          <blockquote>Нужна была страница под запуск курса. Всё сделали в срок, адаптив на телефоне идеальный — а это половина моей аудитории.</blockquote>
+          <div class="rev__foot"><h3>Анна Ясницкая</h3><p>Блогер 75к аудитории, психолог, сексолог</p></div>
+        </article>
+        <article class="rev rev--text" data-kind="text" hidden>
+          <blockquote>Заказывал сайт и SEO в комплексе. Через полгода запросы в топ-10, трафик вырос примерно втрое. Продолжаем работать.</blockquote>
+          <div class="rev__foot"><h3>Юрий Гаврилов</h3><p>Продвижение сайтов в интернете</p></div>
+        </article>
+      </div>
+
+      <div class="center"><a class="btn btn--orange btn--lg" href="#contacts">Все отзывы</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq">
+  <div class="wrap">
+    <h2 class="h2">Ответы на ваши вопросы</h2>
+    <div class="faq__grid">
+      <div class="faq__list reveal">
+        <details class="acc" open>
+          <summary>Почему ваши сайты стоят так дорого?<span class="acc__ico" aria-hidden="true"></span></summary>
+          <div class="acc__body"><p>В цену входит не только вёрстка, а весь цикл: анализ ниши и конкурентов, прототип, копирайт по 4U, индивидуальный дизайн, адаптив, подключение форм и аналитики, базовое SEO. Вы платите за сайт, который приносит заявки, а не за набор красивых экранов.</p></div>
+        </details>
+        <details class="acc">
+          <summary>Что входит в полный комплекс услуг?<span class="acc__ico" aria-hidden="true"></span></summary>
+          <div class="acc__body"><p>Маркетинговый анализ, прототип и структура, тексты, дизайн, вёрстка на Tilda или WordPress, адаптация под мобильные, интеграция с CRM, аналитика, доп.страницы (404, спасибо, политика), базовая SEO-оптимизация и техподдержка первый месяц.</p></div>
+        </details>
+        <details class="acc">
+          <summary>Сколько будет стоить мой сайт?<span class="acc__ico" aria-hidden="true"></span></summary>
+          <div class="acc__body"><p>Лендинг — от 2 270 BYN, конверсионный сайт для бизнеса — от 4 260 BYN, PRO-пакет — от 5 930 BYN. Точную сумму назовём после квиза выше: она зависит от количества блоков, сложности дизайна и нужного функционала.</p></div>
+        </details>
+        <details class="acc">
+          <summary>А если мне не понравится дизайн сайта который вы сделаете?<span class="acc__ico" aria-hidden="true"></span></summary>
+          <div class="acc__body"><p>До отрисовки мы согласуем 1–2 варианта стилистики, поэтому направление вы утверждаете до основной работы. Правки внутри согласованной концепции входят в стоимость.</p></div>
+        </details>
+        <details class="acc">
+          <summary>В каком формате происходит оплата услуг?<span class="acc__ico" aria-hidden="true"></span></summary>
+          <div class="acc__body"><p>По договору, двумя частями: предоплата на старте и остаток после сдачи проекта. Работаем с физлицами, ИП и юрлицами, закрывающие документы предоставляем.</p></div>
+        </details>
+      </div>
+      <div class="faq__pic">
+        <img src="img/94174dbc797b.webp" width="345" height="598" alt="Иллюстрация: консультант отвечает на вопросы" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ БЛОГ ============ -->
+<section class="blog" id="blog">
+  <div class="wrap">
+    <div class="blog__card reveal">
+      <h2 class="h2">Полезные статьи</h2>
+      <div class="blog__grid stagger">
+        <article class="post">
+          <img src="img/fe6021d1c388.webp" width="374" height="218" alt="Финансовые графики на тёмном фоне" loading="lazy" decoding="async">
+          <h3>Сколько на самом деле стоит сайт и из чего складывается цена</h3>
+          <p>Разбираем смету по частям: что входит в аналитику, прототип, дизайн и вёрстку, за что берут отдельно и почему две студии на один бриф называют суммы, отличающиеся втрое.</p>
+          <a class="btn btn--outline" href="#blog">Читать статью</a>
+        </article>
+        <article class="post">
+          <img src="img/2375d927439f.webp" width="372" height="218" alt="Обложка статьи блога" loading="lazy" decoding="async">
+          <h3>Tilda или WordPress: на чём собирать сайт</h3>
+          <p>Обе платформы делают своё дело хорошо, но задачи у них разные. Сравниваем по срокам, стоимости поддержки, SEO и по тому, что будет, когда сайту понадобится расти.</p>
+          <a class="btn btn--outline" href="#blog">Читать статью</a>
+        </article>
+        <article class="post">
+          <img src="img/7b315076ee59.webp" width="374" height="218" alt="Обложка статьи блога" loading="lazy" decoding="async">
+          <h3>Что подготовить до старта, чтобы не сорвать сроки</h3>
+          <p>Половина задержек в разработке — не про подрядчика, а про то, что тексты, фото и доступы приходят частями. Короткий чек-лист, который стоит закрыть до первой встречи.</p>
+          <a class="btn btn--outline" href="#blog">Читать статью</a>
+        </article>
+      </div>
+      <div class="center"><a class="btn btn--orange btn--lg" href="#blog">Показать все статьи</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ГЕОГРАФИЯ ============ -->
+<section class="world">
+  <div class="wrap">
+    <h2 class="h2">Мы создаём сайты по всему миру</h2>
+    <div class="world__map reveal">
+      <img src="img/world-map.webp" width="1214" height="663" alt="Карта мира с отметками городов, где KV-web делали сайты" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
+<!-- ============ КЛИЕНТЫ ============ -->
+<section class="clients">
+  <div class="wrap">
+    <div class="clients__card reveal">
+      <h2 class="h2 h2--light">Наши клиенты</h2>
+      <ul class="clients__grid stagger" aria-label="Логотипы клиентов агентства">
+        <li class="clogo"><img src="img/client-r1c1.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r1c2.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r1c3.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r1c4.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r1c5.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r1c6.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r2c1.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r2c2.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r2c3.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r2c4.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r2c5.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r2c6.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r3c1.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r3c2.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r3c3.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r3c4.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r3c5.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-r3c6.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+      </ul>
+    </div>
+    <span class="star star--o clients__s1" aria-hidden="true"></span>
+  </div>
+</section>
+
+<!-- ============ НИЖНИЙ CTA ============ -->
+<section class="cta">
+  <div class="wrap">
+    <div class="cta__card reveal">
+      <p class="cta__txt">Оставьте заявку, а мы свяжемся с вами в ближайшее время</p>
+      <form class="cta__form form" data-form="Быстрая заявка" novalidate>
+        <input class="fld fld--light" type="text" name="Имя" placeholder="Ваше имя" autocomplete="name" required>
+        <input class="fld fld--light" type="tel" name="Телефон" placeholder="Номер телефона" autocomplete="tel" required>
+        <button class="btn btn--orange" type="submit">Свяжитесь со мной</button>
+        <p class="consent consent--muted">Отправляя форму вы соглашаетесь на <a href="#contacts">обработку персональных данных</a></p>
+        <p class="formmsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- панель действий для телефона: на длинной странице действие не должно уезжать -->
+<div class="actionbar" hidden>
+  <a class="actionbar__btn actionbar__btn--ghost" href="tel:+375290000000" aria-label="Позвонить в KV-web">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.2.4 2.4.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1l-2.3 2.2Z"/></svg>
+  </a>
+  <a class="actionbar__btn actionbar__btn--main" href="#quiz">Рассчитать стоимость</a>
+</div>
+
+<!-- ============ ПОДВАЛ ============ -->
+<footer class="footer" id="contacts">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div class="footer__col footer__col--brand">
+        <a class="brand brand--light" href="#top" aria-label="KV-web — на главную">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 40 32" fill="none" role="img"><path d="M2 2h6.4v11.3L18.2 2h7.9L15.9 14.1 26.6 30h-7.7l-7.2-11-3.3 3.8V30H2V2Z" fill="currentColor"/><rect x="29" y="19" width="11" height="11" rx="3.5" fill="#396CEB"/></svg>
+          </span>
+          <span class="brand__txt"><b>KV<i>WEB</i></b><small>Маркетинговое агентство<br>полного цикла</small></span>
+        </a>
+
+        <div class="fcontact"><span>Адрес</span><p>Беларусь</p></div>
+        <div class="fcontact"><span>Телефон</span><p><a href="tel:+375290000000">+375 (29) 000-00-00</a></p></div>
+        <div class="fcontact"><span>Email</span><p><a href="mailto:info@kv-web.ru">info@kv-web.ru</a></p></div>
+        <div class="fcontact">
+          <span>Наши соц. сети</span>
+          <ul class="socials">
+            <li><a href="#contacts" aria-label="ВКонтакте"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.8 16.9c-5.3 0-8.6-3.7-8.7-9.8h2.7c.1 4.5 2.1 6.4 3.6 6.8V7.1h2.5v3.8c1.5-.2 3-1.9 3.5-3.8h2.5c-.4 2.3-2 4-3.2 4.7 1.2.6 3 2.1 3.7 4.9h-2.8c-.5-1.7-1.9-3-3.7-3.2v3.4h-.1Z"/></svg></a></li>
+            <li><a href="#contacts" aria-label="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.7 4.3 3.6 10.9c-.9.3-.9 1.5 0 1.8l4.3 1.4 1.6 5c.2.7 1.1.9 1.6.3l2.3-2.5 4.4 3.2c.6.4 1.4.1 1.6-.6l3-14c.2-.8-.6-1.5-1.7-1.2ZM9.6 14.1l8.1-5-6.6 6.2-.3 3-1.2-4.2Z"/></svg></a></li>
+            <li><a href="#contacts" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.2A9 9 0 1 0 12 3Zm5.1 12.7c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .1-3.2-.8-2.7-1.1-4.4-3.9-4.5-4-.1-.2-1-1.4-1-2.6s.6-1.8.9-2.1c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2 0 .4-.1.5l-.3.4c-.1.1-.3.3-.1.6.1.3.7 1.2 1.5 1.9 1 .9 1.8 1.2 2.1 1.3.2.1.4.1.5-.1l.7-.9c.2-.2.3-.2.6-.1l2 .9c.2.1.4.2.4.3.1.1.1.6-.1 1.2Z"/></svg></a></li>
+            <li><a href="#contacts" aria-label="Behance"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 6H3v12h6.3c2.4 0 4-1.2 4-3.4 0-1.5-.8-2.5-2-2.9 1-.4 1.6-1.3 1.6-2.5C12.9 7.1 11.4 6 9 6Zm-3.4 2.2h3c.9 0 1.5.4 1.5 1.2s-.6 1.3-1.5 1.3h-3V8.2Zm0 4.3h3.2c1.1 0 1.7.5 1.7 1.4s-.6 1.5-1.7 1.5H5.6v-2.9ZM21 13.4c0-2.5-1.5-4.4-4-4.4s-4.1 1.9-4.1 4.5c0 2.6 1.6 4.4 4.2 4.4 2 0 3.4-1 3.8-2.6h-2.1c-.2.6-.8.9-1.6.9-1.1 0-1.8-.7-1.9-1.9H21v-.9Zm-5.7-.8c.2-1 .8-1.7 1.8-1.7s1.6.6 1.7 1.7h-3.5ZM15 6.6h5v1.6h-5V6.6Z"/></svg></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <nav class="footer__col" aria-labelledby="fnav1">
+        <h3 id="fnav1">Навигация</h3>
+        <ul class="fnav">
+          <li><a href="#top">Главная</a></li>
+          <li><a href="#cases">Кейсы</a></li>
+          <li><a href="#blog">Блог</a></li>
+          <li><a href="#reviews">Отзывы</a></li>
+          <li><a href="#offer">Сайт на своих условиях</a></li>
+          <li><a href="#contacts">Наши контакты</a></li>
+          <li><a href="#about">О компании KV-web</a></li>
+          <li><a href="#quiz">Рассчитать стоимость</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__col" aria-labelledby="fnav2">
+        <h3 id="fnav2">Направления услуг</h3>
+        <p class="fnav__sub">Создание сайтов</p>
+        <ul class="fnav">
+          <li><a href="#pricing">Лендинг</a></li>
+          <li><a href="#types">Сайт на Tilda</a></li>
+          <li><a href="#types">Экспресс-лендинг</a></li>
+          <li><a href="#types">Сайт визитка</a></li>
+          <li><a href="#types">Интернет-магазин</a></li>
+          <li><a href="#types">Сайт на WordPress</a></li>
+          <li><a href="#types">Корпоративный сайт</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__col" aria-labelledby="fnav3">
+        <h3 id="fnav3" class="visually-hidden">Продвижение, реклама и аудит</h3>
+        <p class="fnav__sub">SEO продвижение сайтов:</p>
+        <ul class="fnav">
+          <li><a href="#promo">Продвижение на Яндекс</a></li>
+          <li><a href="#promo">Продвижение на Google</a></li>
+          <li><a href="#promo">Продвижение интернет-магазинов</a></li>
+        </ul>
+        <p class="fnav__sub">Интернет реклама</p>
+        <ul class="fnav">
+          <li><a href="#promo">Контекстная реклама</a></li>
+          <li><a href="#promo">Таргетированная реклама</a></li>
+        </ul>
+        <p class="fnav__sub">Аудит сайта</p>
+        <ul class="fnav">
+          <li><a href="#promo">Аудит юзабилити сайта</a></li>
+          <li><a href="#promo">Seo аудит сайта</a></li>
+          <li><a href="#promo">Технический аудит сайта</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <a href="#contacts">Сайт не является публичной офертой</a>
+      <a href="#contacts">Политика конфиденциальности</a>
+      <a href="#contacts">Карта сайта</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
