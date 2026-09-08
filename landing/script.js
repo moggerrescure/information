@@ -852,16 +852,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const arcPoints = createGreatCircleArc(minskHead, targetHead, 28, 0.14);
       const curve = new THREE.CatmullRomCurve3(arcPoints);
 
-      // Настоящая 3D текстильная нить
+      // Настоящая 3D шелковая золотая нить (Style 1: Refined Gold Silk Cord)
       const isTrunk = targetHub.data.isPrimary;
-      const tubeRadius = isTrunk ? 0.0036 : 0.0028;
-      const tubeGeo = new THREE.TubeGeometry(curve, 32, tubeRadius, 6, false);
-      const baseOpacity = isTrunk ? 0.65 : 0.42;
+      const tubeRadius = isTrunk ? 0.0026 : 0.0018;
+      const tubeGeo = new THREE.TubeGeometry(curve, 36, tubeRadius, 6, false);
+      const baseOpacity = isTrunk ? 0.82 : 0.62;
+      const silkGoldColor = isTrunk ? 0xDCB35C : 0xCE9E42;
 
       const threadMat = new THREE.MeshStandardMaterial({
-        color: 0xFF6915, // Фирменная тёплая оранжевая нить KV-web
-        roughness: 0.75, // Матовая текстильная фактура
-        metalness: 0.08,
+        color: silkGoldColor,
+        roughness: 0.42, // Сатиновый блеск шелковой нити на свету
+        metalness: 0.28, // Деликатный золотой отблеск
+        emissive: 0x3d2806, // Теплое золотое свечение волокон
+        emissiveIntensity: 0.35,
         transparent: true,
         opacity: baseOpacity
       });
@@ -869,7 +872,7 @@ document.addEventListener('DOMContentLoaded', () => {
       threadMesh.userData = {
         hubKey: key,
         region: targetHub.data.region,
-        baseColor: 0xFF6915,
+        baseColor: silkGoldColor,
         baseOpacity,
         isTrunk
       };
@@ -907,18 +910,22 @@ document.addEventListener('DOMContentLoaded', () => {
     globeGroup.rotation.x = targetRotX;
     globeGroup.rotation.y = targetRotY;
 
-    // Подсветка активного города и натянутой к нему физической нити
+    // Подсветка активного города и натянутой к нему шелковой золотой нити
     const highlightActiveCityNetwork = (hubKey) => {
       if (hubKey) {
         arcObjects.forEach(thread => {
           if (thread.userData.hubKey === hubKey) {
-            // Натянутая активная нить ярко подсвечивается и натягивается
-            thread.material.color.setHex(0xFF9429);
+            // Выбранная золотая нить мягко сияет цветом светлого золота / шампанского
+            thread.material.color.setHex(0xFFE599);
+            thread.material.emissive.setHex(0x8B5A0C);
+            thread.material.emissiveIntensity = 0.55;
             thread.material.opacity = 1.0;
-            thread.scale.set(1.25, 1.25, 1.25);
+            thread.scale.set(1.22, 1.22, 1.22);
           } else {
             thread.material.color.setHex(thread.userData.baseColor);
-            thread.material.opacity = (hubKey === 'minsk' || thread.userData.hubKey === activeHubKey) ? 0.70 : 0.22;
+            thread.material.emissive.setHex(0x3d2806);
+            thread.material.emissiveIntensity = 0.35;
+            thread.material.opacity = (hubKey === 'minsk' || thread.userData.hubKey === activeHubKey) ? thread.userData.baseOpacity : 0.28;
             thread.scale.set(1.0, 1.0, 1.0);
           }
         });
@@ -937,6 +944,8 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         arcObjects.forEach(thread => {
           thread.material.color.setHex(thread.userData.baseColor);
+          thread.material.emissive.setHex(0x3d2806);
+          thread.material.emissiveIntensity = 0.35;
           thread.material.opacity = thread.userData.baseOpacity;
           thread.scale.set(1.0, 1.0, 1.0);
         });
@@ -1086,14 +1095,14 @@ document.addEventListener('DOMContentLoaded', () => {
           if (gtipBadge) gtipBadge.textContent = hub.badge;
           if (gtipText) gtipText.textContent = hub.caseStudy;
 
-          // Подсвечиваем золотые контуры
-          highlightGoldenRegion(hitKey);
+          // Подсвечиваем активную связь
+          highlightActiveCityNetwork(hitKey);
           globeCanvas.style.cursor = 'pointer';
         }
       } else {
         if (hoveredHubKey !== null) {
           hoveredHubKey = null;
-          highlightGoldenRegion(activeHubKey);
+          highlightActiveCityNetwork(activeHubKey);
           globeCanvas.style.cursor = isDragging ? 'grabbing' : 'grab';
           if (globeTooltip) globeTooltip.classList.remove('is-visible');
         }
@@ -1145,7 +1154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     globeViewport.addEventListener('mouseleave', () => {
       if (globeTooltip) globeTooltip.classList.remove('is-visible');
       hoveredHubKey = null;
-      highlightGoldenRegion(activeHubKey);
+      highlightActiveCityNetwork(activeHubKey);
     });
 
     // Тач события
