@@ -584,17 +584,6 @@ document.addEventListener('DOMContentLoaded', () => {
       warsaw: [
         [49.1, 19.0], [49.4, 22.8], [51.5, 23.9], [54.2, 22.9], [54.5, 18.6],
         [54.0, 14.3], [51.0, 15.0], [49.1, 19.0]
-      ],
-      europe: [
-        [36.0, -9.5], [43.5, -9.3], [48.0, -4.8], [54.0, 8.5], [58.0, 5.0],
-        [62.0, 5.0], [70.5, 28.0], [67.0, 42.0], [58.0, 55.0], [45.0, 48.0],
-        [42.0, 28.0], [36.0, 28.0], [36.0, -5.5], [36.0, -9.5]
-      ],
-      north_america: [
-        [25.0, -80.5], [30.0, -81.0], [35.0, -75.5], [44.0, -64.0], [52.0, -55.0],
-        [58.0, -64.0], [68.0, -125.0], [58.0, -135.0], [48.0, -124.0], [32.0, -117.0],
-        [23.0, -110.0], [20.0, -105.0], [18.0, -95.0], [25.0, -97.0], [29.0, -89.0],
-        [25.0, -80.5]
       ]
     };
 
@@ -687,7 +676,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const gridMesh = new THREE.Mesh(gridGeo, gridMat);
     globeGroup.add(gridMesh);
 
-    // Золотые контуры стран и континентов
+    // Золотые контуры ключевых стран присутствия (скрыты по умолчанию, не висят в воздухе)
     const goldenLines = {};
     const BORDER_RADIUS = GLOBE_RADIUS * 1.005;
 
@@ -698,9 +687,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const densePts = curve.getPoints(rawCoords.length * 6);
       const borderGeo = new THREE.BufferGeometry().setFromPoints(densePts);
       const borderMat = new THREE.LineBasicMaterial({
-        color: 0xF5BA42,
+        color: 0xFFD700,
         transparent: true,
-        opacity: 0.16,
+        opacity: 0, // Невидима по умолчанию!
         blending: THREE.AdditiveBlending
       });
       const borderLine = new THREE.LineLoop(borderGeo, borderMat);
@@ -758,26 +747,30 @@ document.addEventListener('DOMContentLoaded', () => {
       haloMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.003)));
       globeGroup.add(haloMesh);
 
-      // 4. Зеленые расширяющиеся кружки волны (.wpin__ripple как в первой версии: scale 0.55 -> 2.8, opacity 0.85 -> 0)
-      const ringGeo = new THREE.RingGeometry(dotRadius * 1.05, dotRadius * 1.28, 32);
-      const ringMat = new THREE.MeshBasicMaterial({
-        color: rippleColor,
-        transparent: true,
-        opacity: 0.85,
-        side: THREE.DoubleSide,
-        blending: THREE.AdditiveBlending
-      });
-      const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-      ringMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.004)));
-      ringMesh.lookAt(basePos.clone().add(normal.clone().multiplyScalar(2)));
-      globeGroup.add(ringMesh);
+      // 4. Зеленые расходящиеся импульсы (двойные концентрические волны .wpin__ripple)
+      const ringGeo = new THREE.RingGeometry(dotRadius * 0.95, dotRadius * 1.30, 32);
+      const rings = [];
+      for (let i = 0; i < 2; i++) {
+        const ringMat = new THREE.MeshBasicMaterial({
+          color: rippleColor,
+          transparent: true,
+          opacity: 0,
+          side: THREE.DoubleSide,
+          blending: THREE.AdditiveBlending
+        });
+        const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+        ringMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.005)));
+        ringMesh.lookAt(basePos.clone().add(normal.clone().multiplyScalar(2)));
+        globeGroup.add(ringMesh);
+        rings.push(ringMesh);
+      }
 
       beaconRings.push({
-        ring: ringMesh,
+        rings,
         coreMesh,
         haloMesh,
-        duration: hub.isHQ ? 2.0 : 2.8,
-        offset: Math.random() * 2.8,
+        duration: hub.isHQ ? 2.2 : 3.0,
+        offset: Math.random() * 3.0,
         isHQ: hub.isHQ
       });
 
@@ -796,7 +789,7 @@ document.addEventListener('DOMContentLoaded', () => {
         normal,
         coreMesh,
         haloMesh,
-        ringMesh
+        rings
       };
     });
 
@@ -886,33 +879,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Подсветка золотых контуров региона
     const highlightGoldenRegion = (hubKey) => {
-      // Сброс золотых линий
+      // Сброс золотых линий (скрыты, чтобы не казались странной нитью)
       Object.keys(goldenLines).forEach(k => {
-        goldenLines[k].material.opacity = 0.18;
-        goldenLines[k].material.color.setHex(0xF5BA42);
+        goldenLines[k].material.opacity = 0;
       });
 
-      // Подсветка линии связанной страны / континента
+      // Подсветка линии связанной страны при выборе хаба
       if (hubKey) {
         const hub = HUBS[hubKey];
         const matchKeys = [];
         if (hub.region === 'by') {
-          matchKeys.push('by', 'europe');
+          matchKeys.push('by');
         } else if (hub.region === 'mena') {
           matchKeys.push('mena');
         } else if (hub.region === 'eu') {
-          if (hubKey === 'london') matchKeys.push('london', 'europe');
-          else if (hubKey === 'warsaw') matchKeys.push('warsaw', 'europe');
-          else matchKeys.push('europe');
+          if (hubKey === 'london') matchKeys.push('london');
+          else if (hubKey === 'warsaw') matchKeys.push('warsaw');
         } else if (hub.region === 'us') {
-          matchKeys.push('us', 'north_america');
+          matchKeys.push('us');
         } else if (hub.region === 'cis') {
           matchKeys.push('cis');
         }
 
         matchKeys.forEach(mk => {
           if (goldenLines[mk]) {
-            goldenLines[mk].material.opacity = 0.95;
+            goldenLines[mk].material.opacity = 0.90;
             goldenLines[mk].material.color.setHex(0xFFD700); // Яркое чистое золото
           }
         });
@@ -1201,16 +1192,19 @@ document.addEventListener('DOMContentLoaded', () => {
       // Плавный зум камеры
       camera.position.z += (targetZoomZ - camera.position.z) * 0.1;
 
-      // Анимация пульсирующих зеленых кружков волны (.wpin__ripple: scale 0.55 -> 2.8, opacity 0.85 -> 0)
+      // Анимация расходящихся импульсов от точек (концентрические расширяющиеся волны)
       beaconRings.forEach((b) => {
-        const phase = ((elapsed + b.offset) % b.duration) / b.duration;
-        // Плавное кубическое ускорение волны как cubic-bezier(.2,.8,.2,1)
-        const easedPhase = Math.pow(phase, 0.75);
-        const scale = 0.55 + easedPhase * 2.25;
-        b.ring.scale.set(scale, scale, scale);
-        b.ring.material.opacity = Math.max(0, (1 - easedPhase) * 0.85);
+        b.rings.forEach((ring, idx) => {
+          // Вторая волна смещена по фазе на 50%
+          const phase = (((elapsed + b.offset + idx * (b.duration * 0.5)) % b.duration) / b.duration);
+          // Плавное кубическое расширение волны
+          const easedPhase = Math.pow(phase, 0.70);
+          const scale = 0.5 + easedPhase * 3.4; // Расходится заметно шире от точки
+          ring.scale.set(scale, scale, scale);
+          ring.material.opacity = Math.max(0, (1 - easedPhase) * 0.85);
+        });
 
-        // Мягкое свечение ореола микро-точки
+        // Мягкое свечение ореола микро-точки в такт рождению волн
         const pulse = Math.sin(elapsed * 2.8 + b.offset) * 0.12;
         b.haloMesh.scale.set(1 + pulse, 1 + pulse, 1 + pulse);
       });
