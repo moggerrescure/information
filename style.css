@@ -239,6 +239,39 @@ main>section{padding-block:0 var(--sec)}
   pointer-events: none;
 }
 
+/* Подсказка над лампочкой: «наведи на нас» */
+.hero-cue {
+  position: absolute;
+  left: 53.5%;
+  top: -18px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 13px;
+  border-radius: 999px;
+  background: #14151e;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  animation: heroCueBounce 2.4s ease-in-out infinite;
+  z-index: 25;
+}
+.hero-cue svg {
+  color: var(--lime, #c4f449);
+  display: block;
+}
+@keyframes heroCueBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-4px); }
+}
+
 /* Интерактивные невидимые зоны ховера на объектах рисунка */
 .hero-spot {
   position: absolute;
