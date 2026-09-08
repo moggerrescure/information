@@ -399,17 +399,20 @@ main>section{padding-block:0 var(--sec)}
 
 .cases{display:grid;grid-template-columns:repeat(2,1fr);gap:32px}
 .cases.cases--track{
-  display:flex!important;grid-template-columns:none!important;gap:28px;
+  display:flex!important;grid-template-columns:none!important;gap:24px;
   overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;
   -webkit-overflow-scrolling:touch;scroll-behavior:smooth;
-  padding:12px 6px 30px;margin:-12px -6px 0;
+  padding:12px 0 30px;margin:-12px 0 0;
   scrollbar-width:none;-ms-overflow-style:none;cursor:grab;
 }
 .cases.cases--track::-webkit-scrollbar{display:none}
 .cases.cases--track.is-dragging{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto;user-select:none}
 
 .cases.cases--track .case{
-  flex:0 0 min(540px,84vw);max-width:540px;scroll-snap-align:start;scroll-snap-stop:normal;
+  flex:0 0 calc((100% - 24px) / 2);
+  max-width:calc((100% - 24px) / 2);
+  scroll-snap-align:start;
+  scroll-snap-stop:normal;
 }
 
 .cases__progress-bar{
@@ -1343,7 +1346,7 @@ main>section{padding-block:0 var(--sec)}
   .chip{padding:13px 20px;min-height:48px;font-size:14px}
   .ptab{min-height:56px;padding:10px 18px;font-size:14px;border-radius:16px}
 
-  .cases.cases--track .case{flex:0 0 86vw;max-width:86vw}
+  .cases.cases--track .case{flex:0 0 100%;max-width:100%}
   .cases__arrow{width:40px;height:40px}
   .cases-carousel__row{gap:10px}
   .cases-btn{width:44px;height:44px;flex:0 0 44px;border-radius:14px}

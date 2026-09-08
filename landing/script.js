@@ -124,59 +124,67 @@ document.addEventListener('DOMContentLoaded', () => {
   if (casesTrack) {
     const getVisibleCases = () => cases.filter(c => !c.hidden && c.style.display !== 'none');
     const padZero = (n) => String(n).padStart(2, '0');
+    const getStep = () => (window.innerWidth > 760 ? 2 : 1);
+    const getTotalSlides = () => {
+      const visible = getVisibleCases();
+      const step = getStep();
+      return Math.max(1, Math.ceil(visible.length / step));
+    };
 
     let isDown = false;
     let startX = 0;
     let scrollLeftStart = 0;
     let hasMoved = false;
     let animId = null;
+    let currentSlide = 0;
 
     const updateCarouselUI = () => {
       const visible = getVisibleCases();
-      const total = visible.length;
-      if (totalEl) totalEl.textContent = padZero(total);
+      const totalSlides = getTotalSlides();
+      const step = getStep();
 
-      if (total === 0) {
+      if (totalEl) totalEl.textContent = padZero(totalSlides);
+
+      if (visible.length === 0) {
         if (currEl) currEl.textContent = '00';
         if (progressFill) progressFill.style.width = '0%';
-        if (prevBtn) prevBtn.disabled = true;
-        if (nextBtn) nextBtn.disabled = true;
-        if (sidePrevBtn) sidePrevBtn.disabled = true;
-        if (sideNextBtn) sideNextBtn.disabled = true;
+        document.querySelectorAll('.js-cases-prev, .js-cases-next').forEach(btn => { btn.disabled = true; });
         if (dotsContainer) dotsContainer.innerHTML = '';
         return;
       }
 
-      // Вычисляем активную карточку по положению скролла
-      const trackLeft = casesTrack.getBoundingClientRect().left;
-      let activeIndex = 0;
+      // Вычисляем активный слайд по положению скролла
+      let activeSlide = 0;
       let minDiff = Infinity;
-
-      visible.forEach((card, idx) => {
-        const rect = card.getBoundingClientRect();
-        const diff = Math.abs(rect.left - trackLeft);
+      for (let s = 0; s < totalSlides; s++) {
+        const cardIndex = Math.min(visible.length - 1, s * step);
+        const card = visible[cardIndex];
+        if (!card) continue;
+        const targetPos = card.offsetLeft - casesTrack.offsetLeft;
+        const diff = Math.abs(casesTrack.scrollLeft - targetPos);
         if (diff < minDiff) {
           minDiff = diff;
-          activeIndex = idx;
+          activeSlide = s;
         }
-      });
+      }
 
-      if (currEl) currEl.textContent = padZero(activeIndex + 1);
+      currentSlide = activeSlide;
+      if (currEl) currEl.textContent = padZero(activeSlide + 1);
 
       // Прогрессбар
       const maxScroll = casesTrack.scrollWidth - casesTrack.clientWidth;
       if (progressFill) {
-        if (maxScroll <= 10) {
+        if (maxScroll <= 10 || totalSlides <= 1) {
           progressFill.style.width = '100%';
         } else {
-          const percent = ((activeIndex + 1) / total) * 100;
-          progressFill.style.width = Math.max(16, Math.min(100, percent)) + '%';
+          const percent = ((activeSlide + 1) / totalSlides) * 100;
+          progressFill.style.width = Math.max(20, Math.min(100, percent)) + '%';
         }
       }
 
       // Стрелки навигации: синхронно обновляем все кнопки влево и вправо
-      const isStart = activeIndex === 0 && casesTrack.scrollLeft <= 12;
-      const isEnd = activeIndex >= total - 1 || (maxScroll > 10 && casesTrack.scrollLeft >= maxScroll - 16);
+      const isStart = activeSlide === 0 && casesTrack.scrollLeft <= 12;
+      const isEnd = activeSlide >= totalSlides - 1 || (maxScroll > 10 && casesTrack.scrollLeft >= maxScroll - 16);
 
       document.querySelectorAll('.js-cases-prev').forEach(btn => { btn.disabled = isStart; });
       document.querySelectorAll('.js-cases-next').forEach(btn => { btn.disabled = isEnd; });
@@ -185,8 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (dotsContainer) {
         const dots = [...dotsContainer.children];
         dots.forEach((dot, idx) => {
-          dot.classList.toggle('is-active', idx === activeIndex);
-          dot.setAttribute('aria-selected', idx === activeIndex ? 'true' : 'false');
+          dot.classList.toggle('is-active', idx === activeSlide);
+          dot.setAttribute('aria-selected', idx === activeSlide ? 'true' : 'false');
         });
       }
     };
@@ -207,10 +215,9 @@ document.addEventListener('DOMContentLoaded', () => {
       casesTrack.style.scrollBehavior = 'auto';
 
       // Кубическая функция замедления: мягкий старт и очень плавное торможение
-      const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
       const easeInOutCubic = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-      const step = (now) => {
+      const stepFn = (now) => {
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / duration, 1);
         const ease = easeInOutCubic(progress);
@@ -218,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
         casesTrack.scrollLeft = start + dist * ease;
 
         if (progress < 1) {
-          animId = requestAnimationFrame(step);
+          animId = requestAnimationFrame(stepFn);
         } else {
           casesTrack.scrollLeft = clampedTarget;
           casesTrack.style.scrollSnapType = '';
@@ -228,44 +235,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       };
 
-      animId = requestAnimationFrame(step);
+      animId = requestAnimationFrame(stepFn);
+    };
+
+    const scrollToSlide = (slideIndex) => {
+      const visible = getVisibleCases();
+      const step = getStep();
+      const targetCardIndex = Math.min(visible.length - 1, slideIndex * step);
+      const targetCard = visible[targetCardIndex];
+      if (!targetCard) return;
+      const leftPos = targetCard.offsetLeft - casesTrack.offsetLeft;
+      smoothScrollTo(leftPos, 620);
     };
 
     const renderDots = () => {
       if (!dotsContainer) return;
       dotsContainer.innerHTML = '';
-      const visible = getVisibleCases();
-      visible.forEach((card, idx) => {
+      const totalSlides = getTotalSlides();
+      for (let s = 0; s < totalSlides; s++) {
         const dot = document.createElement('button');
         dot.type = 'button';
-        dot.className = 'cases__dot' + (idx === 0 ? ' is-active' : '');
-        dot.setAttribute('aria-label', `Перейти к проекту ${idx + 1}`);
+        dot.className = 'cases__dot' + (s === 0 ? ' is-active' : '');
+        dot.setAttribute('aria-label', `Перейти к слайду ${s + 1}`);
         dot.addEventListener('click', () => {
-          scrollToCard(idx);
+          scrollToSlide(s);
         });
         dotsContainer.appendChild(dot);
-      });
-    };
-
-    const scrollToCard = (index) => {
-      const visible = getVisibleCases();
-      if (!visible[index]) return;
-      const targetCard = visible[index];
-      const leftPos = targetCard.offsetLeft - casesTrack.offsetLeft;
-      smoothScrollTo(leftPos, 620);
+      }
     };
 
     const goNext = () => {
-      const visible = getVisibleCases();
-      const currentNum = parseInt(currEl?.textContent || '1', 10) - 1;
-      const nextIndex = Math.min(visible.length - 1, currentNum + 1);
-      scrollToCard(nextIndex);
+      const totalSlides = getTotalSlides();
+      const nextSlide = Math.min(totalSlides - 1, currentSlide + 1);
+      scrollToSlide(nextSlide);
     };
 
     const goPrev = () => {
-      const currentNum = parseInt(currEl?.textContent || '1', 10) - 1;
-      const prevIndex = Math.max(0, currentNum - 1);
-      scrollToCard(prevIndex);
+      const prevSlide = Math.max(0, currentSlide - 1);
+      scrollToSlide(prevSlide);
     };
 
     // Клики по кнопкам-стрелкам в шапке
@@ -326,6 +333,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Первичная инициализация
     renderDots();
     updateCarouselUI();
+    window.addEventListener('resize', () => {
+      renderDots();
+      updateCarouselUI();
+    }, { passive: true });
 
     // Фильтры категорий
     chips.forEach(chip => {
