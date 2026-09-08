@@ -910,23 +910,23 @@ document.addEventListener('DOMContentLoaded', () => {
     globeGroup.rotation.x = targetRotX;
     globeGroup.rotation.y = targetRotY;
 
-    // Подсветка активного города и натянутой к нему шелковой золотой нити
+    // Подсветка активного города и натянутой к нему шелковой золотой нити (без изменения высоты/масштаба)
     const highlightActiveCityNetwork = (hubKey) => {
-      if (hubKey) {
+      if (hubKey && hubKey !== 'minsk') {
         arcObjects.forEach(thread => {
+          thread.scale.set(1.0, 1.0, 1.0); // Геометрия всегда строго на месте, без подъема
           if (thread.userData.hubKey === hubKey) {
-            // Выбранная золотая нить мягко сияет цветом светлого золота / шампанского
-            thread.material.color.setHex(0xFFE599);
-            thread.material.emissive.setHex(0x8B5A0C);
-            thread.material.emissiveIntensity = 0.55;
+            // Выбранная нить загорается чистым, приятным тёплым золотистым светом
+            thread.material.color.setHex(0xFFD56B);
+            thread.material.emissive.setHex(0x9E6D10);
+            thread.material.emissiveIntensity = 0.65;
             thread.material.opacity = 1.0;
-            thread.scale.set(1.22, 1.22, 1.22);
           } else {
+            // Остальные нити слегка приглушаются, чтобы выделить выбранный путь
             thread.material.color.setHex(thread.userData.baseColor);
             thread.material.emissive.setHex(0x3d2806);
             thread.material.emissiveIntensity = 0.35;
-            thread.material.opacity = (hubKey === 'minsk' || thread.userData.hubKey === activeHubKey) ? thread.userData.baseOpacity : 0.28;
-            thread.scale.set(1.0, 1.0, 1.0);
+            thread.material.opacity = 0.22;
           }
         });
 
@@ -934,7 +934,7 @@ document.addEventListener('DOMContentLoaded', () => {
         Object.keys(hubObjects).forEach(k => {
           const h = hubObjects[k];
           if (k === hubKey) {
-            h.headMesh.scale.set(1.30, 1.30, 1.30);
+            h.headMesh.scale.set(1.25, 1.25, 1.25);
             h.haloMesh.material.opacity = 0.55;
           } else {
             h.headMesh.scale.set(1.0, 1.0, 1.0);
@@ -942,12 +942,13 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       } else {
+        // Режим по умолчанию (все нити как обычно)
         arcObjects.forEach(thread => {
+          thread.scale.set(1.0, 1.0, 1.0);
           thread.material.color.setHex(thread.userData.baseColor);
           thread.material.emissive.setHex(0x3d2806);
           thread.material.emissiveIntensity = 0.35;
           thread.material.opacity = thread.userData.baseOpacity;
-          thread.scale.set(1.0, 1.0, 1.0);
         });
         Object.keys(hubObjects).forEach(k => {
           const h = hubObjects[k];
