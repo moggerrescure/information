@@ -468,9 +468,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const haloMesh = new THREE.Mesh(haloGeo, haloMat);
     globeGroup.add(haloMesh);
 
+    // Тонкая сферическая координатная 3D-сетка (параллели и меридианы)
+    const gridGeo = new THREE.SphereGeometry(GLOBE_RADIUS * 1.002, 36, 18);
+    const gridMat = new THREE.MeshBasicMaterial({
+      color: 0x396ceb,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.055
+    });
+    const gridMesh = new THREE.Mesh(gridGeo, gridMat);
+    globeGroup.add(gridMesh);
+
     // Золотые контуры стран и континентов
     const goldenLines = {};
-    const BORDER_RADIUS = GLOBE_RADIUS * 1.008;
+    const BORDER_RADIUS = GLOBE_RADIUS * 1.005;
 
     Object.keys(REGION_BOUNDARIES).forEach(regKey => {
       const rawCoords = REGION_BOUNDARIES[regKey];
@@ -481,7 +492,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const borderMat = new THREE.LineBasicMaterial({
         color: 0xF5BA42,
         transparent: true,
-        opacity: 0.2,
+        opacity: 0.18,
         blending: THREE.AdditiveBlending
       });
       const borderLine = new THREE.LineLoop(borderGeo, borderMat);
@@ -497,115 +508,102 @@ document.addEventListener('DOMContentLoaded', () => {
     const arcObjects = [];
     const pulseParticles = [];
 
-    // Создание выраженных 3D точек-маяков хабов
+    // Создание утонченных МИКРО-МАЯКОВ хабов (вместо тяжеловесных столбиков)
     Object.keys(HUBS).forEach(key => {
       const hub = HUBS[key];
-      const basePos = latLonToVec3(hub.lat, hub.lon, GLOBE_RADIUS);
+      const basePos = latLonToVec3(hub.lat, hub.lon, GLOBE_RADIUS * 1.002);
       const normal = basePos.clone().normalize();
 
-      const stalkHeight = hub.isHQ ? 0.22 : 0.16;
-      const headRadius = hub.isHQ ? 0.075 : 0.055;
-      const headPos = basePos.clone().add(normal.clone().multiplyScalar(stalkHeight));
+      const coreRadius = hub.isHQ ? 0.028 : 0.021;
+      const haloRadius = coreRadius * 2.2;
 
-      // 1. Световой вертикальный стержень (Stalk)
-      const stalkGeo = new THREE.CylinderGeometry(0.008, 0.008, stalkHeight, 8);
-      const stalkMat = new THREE.MeshBasicMaterial({
-        color: hub.isHQ ? 0xFFD700 : hub.color,
-        transparent: true,
-        opacity: 0.85
+      // 1. Центральное яркое ядро микро-маяка
+      const coreGeo = new THREE.SphereGeometry(coreRadius, 16, 16);
+      const coreMat = new THREE.MeshBasicMaterial({
+        color: hub.isHQ ? 0xFF9F1C : hub.color
       });
-      const stalkMesh = new THREE.Mesh(stalkGeo, stalkMat);
-      // Ориентация цилиндра по нормали
-      const midStalkPos = basePos.clone().add(normal.clone().multiplyScalar(stalkHeight * 0.5));
-      stalkMesh.position.copy(midStalkPos);
-      stalkMesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), normal);
-      globeGroup.add(stalkMesh);
+      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      coreMesh.position.copy(basePos);
+      globeGroup.add(coreMesh);
 
-      // 2. Выраженная светящаяся вершина маркера (Beacon Head)
-      const headGeo = new THREE.SphereGeometry(headRadius, 18, 18);
-      const headMat = new THREE.MeshStandardMaterial({
+      // 2. Мягкая полупрозрачная световая аура (Glow Halo)
+      const auraGeo = new THREE.SphereGeometry(haloRadius, 16, 16);
+      const auraMat = new THREE.MeshBasicMaterial({
         color: hub.color,
-        emissive: hub.color,
-        emissiveIntensity: 0.95,
-        roughness: 0.15,
-        metalness: 0.3
+        transparent: true,
+        opacity: 0.36,
+        blending: THREE.AdditiveBlending
       });
-      const headMesh = new THREE.Mesh(headGeo, headMat);
-      headMesh.position.copy(headPos);
-      globeGroup.add(headMesh);
+      const auraMesh = new THREE.Mesh(auraGeo, auraMat);
+      auraMesh.position.copy(basePos);
+      globeGroup.add(auraMesh);
 
-      // 3. Базовый световой диск на поверхности земли
-      const baseGeo = new THREE.SphereGeometry(headRadius * 0.7, 12, 12);
-      const baseMat = new THREE.MeshBasicMaterial({ color: hub.color });
-      const baseMesh = new THREE.Mesh(baseGeo, baseMat);
-      baseMesh.position.copy(basePos);
-      globeGroup.add(baseMesh);
-
-      // 4. Двойное пульсирующее кольцо маяка на поверхности
-      const ringGeo = new THREE.RingGeometry(headRadius * 1.1, headRadius * 1.7, 32);
+      // 3. Тонкие концентрические кольца радара на поверхности сферы
+      const ringGeo = new THREE.RingGeometry(coreRadius * 1.3, coreRadius * 1.5, 32);
       const ringMat = new THREE.MeshBasicMaterial({
         color: hub.isHQ ? 0xFFD700 : hub.color,
         transparent: true,
-        opacity: 0.8,
+        opacity: 0.75,
         side: THREE.DoubleSide,
         blending: THREE.AdditiveBlending
       });
       const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-      ringMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.015)));
+      ringMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.003)));
       ringMesh.lookAt(basePos.clone().add(normal.clone().multiplyScalar(2)));
       globeGroup.add(ringMesh);
 
       beaconRings.push({
         ring: ringMesh,
-        headMesh,
+        coreMesh,
+        auraMesh,
         baseScale: 1,
         offset: Math.random() * Math.PI,
         isHQ: hub.isHQ
       });
 
-      // 5. Невидимый увеличенный хитбокс для быстрого и удобного наведения мыши
-      const hitGeo = new THREE.SphereGeometry(0.15, 12, 12);
+      // 4. Невидимый увеличенный хитбокс (радиус 0.09) для комфортного попадания курсором
+      const hitGeo = new THREE.SphereGeometry(0.095, 8, 8);
       const hitMat = new THREE.MeshBasicMaterial({ visible: false });
       const hitMesh = new THREE.Mesh(hitGeo, hitMat);
-      hitMesh.position.copy(headPos);
-      hitMesh.userData = { hubKey: key, hubData: hub, headPos, normal };
+      hitMesh.position.copy(basePos);
+      hitMesh.userData = { hubKey: key, hubData: hub, basePos, normal };
       globeGroup.add(hitMesh);
       interactiveHitMeshes.push(hitMesh);
 
       hubObjects[key] = {
         data: hub,
         basePos,
-        headPos,
         normal,
-        headMesh,
-        stalkMesh,
+        coreMesh,
+        auraMesh,
         ringMesh
       };
     });
 
     // Создание 3D дуг сети (от Минска HQ ко всем остальным хабам)
     const minskHub = hubObjects['minsk'];
-    const minskPos = minskHub.headPos;
+    const minskPos = minskHub.basePos;
 
     Object.keys(HUBS).forEach(key => {
       if (key === 'minsk') return;
       const targetHub = hubObjects[key];
       const target = targetHub.data;
-      const targetPos = targetHub.headPos;
+      const targetPos = targetHub.basePos;
 
       const dist = minskPos.distanceTo(targetPos);
       const mid = minskPos.clone().add(targetPos).multiplyScalar(0.5);
       mid.normalize();
-      const arcHeight = GLOBE_RADIUS + Math.max(0.32, dist * 0.32);
+      // Элегантные низкопрофильные дуги, аккуратно огибающие сферу
+      const arcHeight = GLOBE_RADIUS + Math.max(0.18, dist * 0.22);
       mid.multiplyScalar(arcHeight);
 
       const curve = new THREE.QuadraticBezierCurve3(minskPos, mid, targetPos);
-      const points = curve.getPoints(54);
+      const points = curve.getPoints(50);
       const curveGeo = new THREE.BufferGeometry().setFromPoints(points);
       const curveMat = new THREE.LineBasicMaterial({
         color: target.color,
         transparent: true,
-        opacity: 0.65,
+        opacity: 0.5,
         blending: THREE.AdditiveBlending
       });
       const curveLine = new THREE.Line(curveGeo, curveMat);
@@ -613,8 +611,8 @@ document.addEventListener('DOMContentLoaded', () => {
       globeGroup.add(curveLine);
       arcObjects.push(curveLine);
 
-      // Летящий световой импульс по дуге
-      const particleGeo = new THREE.SphereGeometry(0.028, 8, 8);
+      // Аккуратный микро-импульс данных по дуге
+      const particleGeo = new THREE.SphereGeometry(0.016, 8, 8);
       const particleMat = new THREE.MeshBasicMaterial({
         color: target.color,
         blending: THREE.AdditiveBlending
@@ -624,7 +622,7 @@ document.addEventListener('DOMContentLoaded', () => {
       pulseParticles.push({
         mesh: particleMesh,
         curve,
-        speed: 0.0035 + (1 / dist) * 0.003,
+        speed: 0.0035 + (1 / dist) * 0.0028,
         progress: Math.random(),
         hubKey: key,
         baseColor: target.color
@@ -970,17 +968,18 @@ document.addEventListener('DOMContentLoaded', () => {
       // Плавный зум камеры
       camera.position.z += (targetZoomZ - camera.position.z) * 0.1;
 
-      // Анимация выраженных маяков хабов
+      // Анимация утонченных микро-маяков хабов
       beaconRings.forEach((b) => {
-        const speed = b.isHQ ? 4.2 : 3.5;
+        const speed = b.isHQ ? 3.8 : 3.0;
         const pulse = (Math.sin(elapsed * speed + b.offset) + 1) * 0.5;
-        const scale = 1 + pulse * (b.isHQ ? 1.6 : 1.3);
+        // Тонкие волны радара на поверхности
+        const scale = 1 + pulse * (b.isHQ ? 1.8 : 1.5);
         b.ring.scale.set(scale, scale, scale);
-        b.ring.material.opacity = (1 - pulse) * (b.isHQ ? 0.95 : 0.75);
+        b.ring.material.opacity = (1 - pulse) * (b.isHQ ? 0.85 : 0.65);
 
-        // Легкое покачивание и свечение головки маркера
-        const bob = Math.sin(elapsed * 2.5 + b.offset) * 0.08;
-        b.headMesh.scale.set(1 + bob, 1 + bob, 1 + bob);
+        // Мягкое пульсирующее дыхание световой ауры микро-точки
+        const auraBreath = 1 + Math.sin(elapsed * 2.2 + b.offset) * 0.18;
+        b.auraMesh.scale.set(auraBreath, auraBreath, auraBreath);
       });
 
       // Анимация летящих световых импульсов по дугам
@@ -989,27 +988,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const pt = p.curve.getPoint(p.progress);
         p.mesh.position.copy(pt);
 
-        // Если дуга подсвечена золотом, частица тоже золотая и крупнее
+        // Если дуга подсвечена золотом, частица тоже золотая
         if (hoveredHubKey === p.hubKey || activeHubKey === p.hubKey) {
           p.mesh.material.color.setHex(0xFFD700);
-          p.mesh.scale.set(1.4, 1.4, 1.4);
+          p.mesh.scale.set(1.3, 1.3, 1.3);
         } else {
           p.mesh.material.color.setHex(p.baseColor);
           p.mesh.scale.set(1, 1, 1);
         }
       });
 
-      // Позиционирование 3D попапа при наведении
+      // Позиционирование 3D попапа при наведении на микро-маяк
       if (hoveredHubKey && globeTooltip && hubObjects[hoveredHubKey]) {
         const hub = hubObjects[hoveredHubKey];
-        const worldPos = hub.headPos.clone().applyMatrix4(globeGroup.matrixWorld);
+        const worldPos = hub.basePos.clone().applyMatrix4(globeGroup.matrixWorld);
 
         // Проверка: точка на видимой передней полусфере относительно камеры
         const normalWorld = hub.normal.clone().applyEuler(globeGroup.rotation);
         const toCamera = camera.position.clone().sub(worldPos).normalize();
         const dot = normalWorld.dot(toCamera);
 
-        if (dot > 0.08) {
+        if (dot > 0.05) {
           const proj = worldPos.clone().project(camera);
           const sx = (proj.x * 0.5 + 0.5) * globeViewport.clientWidth;
           const sy = (-proj.y * 0.5 + 0.5) * globeViewport.clientHeight;
