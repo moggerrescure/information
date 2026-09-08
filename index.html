@@ -82,10 +82,16 @@
       </div>
       <div class="hero__pic" data-hero-el>
         <div class="hero-stage" id="heroStage">
-          <!-- Подсказка над лампочкой -->
+          <!-- Дизайнерская плашка-подсказка над лампочкой -->
           <div class="hero-cue" aria-hidden="true">
-            <span>наведи на нас</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+            <span class="hero-cue__ping" aria-hidden="true">
+              <span class="hero-cue__ping-ring"></span>
+              <span class="hero-cue__ping-dot"></span>
+            </span>
+            <span class="hero-cue__txt">Наведи на нас</span>
+            <span class="hero-cue__chip">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+            </span>
           </div>
 
           <img class="hero-stage__img" src="img/5a64a498352c.webp" width="697" height="614" alt="Разработка сайтов и приложений нашей командой" fetchpriority="high" decoding="async">

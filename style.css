@@ -239,37 +239,110 @@ main>section{padding-block:0 var(--sec)}
   pointer-events: none;
 }
 
-/* Подсказка над лампочкой: «наведи на нас» */
+/* Подсказка над лампочкой: «Наведи на нас» */
 .hero-cue {
   position: absolute;
   left: 53.5%;
-  top: -18px;
+  top: -62px;
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 13px;
+  gap: 9px;
+  padding: 7px 11px 7px 14px;
   border-radius: 999px;
-  background: #14151e;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(180deg, #181a24 0%, #0c0d14 100%);
+  border: 1px solid rgba(196, 244, 73, 0.38);
+  box-shadow: 
+    0 16px 36px rgba(0, 0, 0, 0.28),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    0 0 22px rgba(196, 244, 73, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
   color: #ffffff;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
   line-height: 1;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   white-space: nowrap;
   pointer-events: none;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-  animation: heroCueBounce 2.4s ease-in-out infinite;
-  z-index: 25;
+  animation: heroCueFloat 2.8s ease-in-out infinite;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 30;
 }
-.hero-cue svg {
+/* Скрываем подсказку при наведении на сцену/элементы, чтобы не перекрывать карточки */
+.hero-stage:hover .hero-cue {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-6px) scale(0.96);
+  animation-play-state: paused;
+}
+.hero-cue::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid #0c0d14;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.25));
+}
+.hero-cue__ping {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-cue__ping-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid var(--lime, #c4f449);
+  opacity: 0.8;
+  animation: heroCueRing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.hero-cue__ping-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--lime, #c4f449);
+  box-shadow: 0 0 8px var(--lime, #c4f449);
+}
+.hero-cue__txt {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.01em;
+}
+.hero-cue__chip {
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background: rgba(196, 244, 73, 0.14);
+  border: 1px solid rgba(196, 244, 73, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--lime, #c4f449);
-  display: block;
+  margin-left: -1px;
 }
-@keyframes heroCueBounce {
+.hero-cue__chip svg {
+  display: block;
+  animation: heroCueArrow 1.6s ease-in-out infinite;
+}
+@keyframes heroCueFloat {
   0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(-4px); }
+  50% { transform: translateX(-50%) translateY(-6px); }
+}
+@keyframes heroCueRing {
+  0% { transform: scale(0.8); opacity: 0.9; }
+  70%, 100% { transform: scale(2.2); opacity: 0; }
+}
+@keyframes heroCueArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
 }
 
 /* Интерактивные невидимые зоны ховера на объектах рисунка */
