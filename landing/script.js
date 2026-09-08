@@ -242,15 +242,24 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================================== */
   const globeCanvas = document.getElementById('globeCanvas');
   const globeViewport = document.getElementById('globeViewport');
+  const globeTooltip = document.getElementById('globeTooltip');
+  const gtipFlag = document.getElementById('gtipFlag');
+  const gtipCountry = document.getElementById('gtipCountry');
+  const gtipCity = document.getElementById('gtipCity');
+  const gtipBadge = document.getElementById('gtipBadge');
+  const gtipText = document.getElementById('gtipText');
 
   if (globeCanvas && globeViewport && typeof THREE !== 'undefined') {
     const HUBS = {
       minsk: {
         id: 'minsk',
         name: 'Минск (HQ)',
+        country: 'Беларусь',
         flag: '🇧🇾',
+        badge: 'Штаб-квартира',
         tag: '⭐ Главный офис',
         desc: 'Штаб-квартира KV-web. Центр заказной веб-разработки, UI/UX дизайна и сквозной аналитики. 50+ реализованных проектов.',
+        caseStudy: 'Разработка 40+ корпоративных сайтов, B2B-порталов и интернет-магазинов. Сквозная аналитика и SEO в топ-3.',
         lat: 53.9045,
         lon: 27.5615,
         color: 0xff6915,
@@ -261,9 +270,12 @@ document.addEventListener('DOMContentLoaded', () => {
       dubai: {
         id: 'dubai',
         name: 'Дубай',
+        country: 'ОАЭ',
         flag: '🇦🇪',
+        badge: 'E-Commerce & Luxury',
         tag: '🌍 Middle East • E-com',
         desc: 'Разработка мультиязычных интернет-магазинов, интеграция платежных шлюзов MENA и презентационные порталы недвижимости.',
+        caseStudy: 'Премиальный интернет-магазин с шлюзами Stripe/Tap, а также интерактивный каталог элитной недвижимости с 3D-турами.',
         lat: 25.2048,
         lon: 55.2708,
         color: 0xc4f449,
@@ -273,9 +285,12 @@ document.addEventListener('DOMContentLoaded', () => {
       london: {
         id: 'london',
         name: 'Лондон',
+        country: 'Великобритания',
         flag: '🇬🇧',
+        badge: 'Fintech & SaaS',
         tag: '🚀 Western Europe • Fintech',
         desc: 'Веб-сервисы, личные кабинеты для финтех-стартапов и B2B SaaS платформ по строгим европейским стандартам.',
+        caseStudy: 'Личный кабинет финтех-платформы, калькулятор доходности в реальном времени и интеграция Open Banking API.',
         lat: 51.5074,
         lon: -0.1278,
         color: 0x396ceb,
@@ -285,9 +300,12 @@ document.addEventListener('DOMContentLoaded', () => {
       newyork: {
         id: 'newyork',
         name: 'Нью-Йорк',
+        country: 'США',
         flag: '🇺🇸',
+        badge: 'B2B Платформы',
         tag: '⚡ USA • B2B Platforms',
         desc: 'Корпоративные порталы, высоконагруженные лендинги и маркетинговые воронки для клиентов на рынке США и Канады.',
+        caseStudy: 'Высоконагруженный B2B маркетплейс оптовых поставок, оптимизация конверсии воронки и интеграция с CRM (HubSpot, Salesforce).',
         lat: 40.7128,
         lon: -74.0060,
         color: 0x7574ff,
@@ -297,9 +315,12 @@ document.addEventListener('DOMContentLoaded', () => {
       astana: {
         id: 'astana',
         name: 'Астана',
+        country: 'Казахстан',
         flag: '🇰🇿',
+        badge: 'Корп. порталы & 1С',
         tag: '🤝 Центральная Азия',
         desc: 'Казахстан и рынки Центральной Азии: корпоративные сайты производственных компаний, каталоги и автоматизация продаж.',
+        caseStudy: 'Официальный портал холдинга, B2B каталог на 15 000 товаров с двусторонней интеграцией 1С и кабинетом дилера.',
         lat: 51.1694,
         lon: 71.4491,
         color: 0x00b1c9,
@@ -309,15 +330,59 @@ document.addEventListener('DOMContentLoaded', () => {
       warsaw: {
         id: 'warsaw',
         name: 'Варшава',
+        country: 'Польша',
         flag: '🇵🇱',
+        badge: 'EU Решения & GDPR',
         tag: '🇪🇺 Central Europe • GDPR',
         desc: 'Разработка веб-решений для европейского рынка: соответствие GDPR, мультиязычность и интеграции с CRM системами ЕС.',
+        caseStudy: 'Сервис аренды спецтехники с автоматическим расчетом стоимости, мультиязычностью и полным соответствием GDPR.',
         lat: 52.2297,
         lon: 21.0122,
         color: 0x396ceb,
         colorHex: '#396CEB',
         region: 'eu'
       }
+    };
+
+    // Золотые границы стран и регионов присутствия
+    const REGION_BOUNDARIES = {
+      by: [
+        [51.2, 23.5], [52.1, 23.2], [53.6, 23.8], [55.8, 26.5], [56.2, 28.2],
+        [55.9, 30.9], [54.5, 31.8], [53.4, 32.2], [52.1, 31.6], [51.3, 30.4],
+        [51.2, 27.5], [51.2, 23.5]
+      ],
+      mena: [
+        [21.5, 51.5], [24.0, 51.2], [26.2, 56.1], [25.5, 56.8], [24.2, 56.0],
+        [23.0, 55.4], [22.0, 54.8], [21.5, 51.5]
+      ],
+      london: [
+        [49.8, -5.5], [50.8, 1.6], [53.2, 0.4], [55.8, -1.8], [58.6, -3.2],
+        [58.6, -5.2], [56.2, -5.8], [54.5, -3.2], [51.5, -4.8], [49.8, -5.5]
+      ],
+      us: [
+        [36.5, -76.2], [39.0, -74.8], [40.8, -73.6], [42.4, -70.8], [44.8, -66.9],
+        [45.1, -73.5], [43.0, -78.9], [39.8, -79.6], [37.2, -78.8], [36.5, -76.2]
+      ],
+      cis: [
+        [45.2, 50.4], [51.1, 50.8], [54.8, 69.1], [54.2, 76.8], [50.1, 83.2],
+        [43.2, 80.2], [42.1, 70.3], [44.8, 55.2], [45.2, 50.4]
+      ],
+      warsaw: [
+        [49.1, 19.0], [49.4, 22.8], [51.5, 23.9], [54.2, 22.9], [54.5, 18.6],
+        [54.0, 14.3], [51.0, 15.0], [49.1, 19.0]
+      ],
+      // Контуры континентов для подсветки при наведении
+      europe: [
+        [36.0, -9.5], [43.5, -9.3], [48.0, -4.8], [54.0, 8.5], [58.0, 5.0],
+        [62.0, 5.0], [70.5, 28.0], [67.0, 42.0], [58.0, 55.0], [45.0, 48.0],
+        [42.0, 28.0], [36.0, 28.0], [36.0, -5.5], [36.0, -9.5]
+      ],
+      north_america: [
+        [25.0, -80.5], [30.0, -81.0], [35.0, -75.5], [44.0, -64.0], [52.0, -55.0],
+        [58.0, -64.0], [68.0, -125.0], [58.0, -135.0], [48.0, -124.0], [32.0, -117.0],
+        [23.0, -110.0], [20.0, -105.0], [18.0, -95.0], [25.0, -97.0], [29.0, -89.0],
+        [25.0, -80.5]
+      ]
     };
 
     // Конвертер географических координат в координаты сферы Three.js
@@ -351,15 +416,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const globeGroup = new THREE.Group();
     scene.add(globeGroup);
 
-    // Освещение: мягкий студийный свет со световым контуром
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.82);
+    // Освещение: студийный свет со световым контуром
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.88);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xbdd6ff, 1.35);
+    const sunLight = new THREE.DirectionalLight(0xbdd6ff, 1.45);
     sunLight.position.set(5, 4, 6);
     scene.add(sunLight);
 
-    const rimLight = new THREE.DirectionalLight(0x396ceb, 0.8);
+    const rimLight = new THREE.DirectionalLight(0x396ceb, 0.85);
     rimLight.position.set(-6, -2, -5);
     scene.add(rimLight);
 
@@ -370,7 +435,6 @@ document.addEventListener('DOMContentLoaded', () => {
       t.minFilter = THREE.LinearFilter;
       t.generateMipmaps = true;
     }, undefined, () => {
-      // Запасной процедурный градиент, если текстура не найдена
       const canvas = document.createElement('canvas');
       canvas.width = 512; canvas.height = 256;
       const ctx = canvas.getContext('2d');
@@ -404,78 +468,153 @@ document.addEventListener('DOMContentLoaded', () => {
     const haloMesh = new THREE.Mesh(haloGeo, haloMat);
     globeGroup.add(haloMesh);
 
+    // Золотые контуры стран и континентов
+    const goldenLines = {};
+    const BORDER_RADIUS = GLOBE_RADIUS * 1.008;
+
+    Object.keys(REGION_BOUNDARIES).forEach(regKey => {
+      const rawCoords = REGION_BOUNDARIES[regKey];
+      const pts = rawCoords.map(([lat, lon]) => latLonToVec3(lat, lon, BORDER_RADIUS));
+      const curve = new THREE.CatmullRomCurve3(pts, true, 'centripetal', 0.25);
+      const densePts = curve.getPoints(rawCoords.length * 6);
+      const borderGeo = new THREE.BufferGeometry().setFromPoints(densePts);
+      const borderMat = new THREE.LineBasicMaterial({
+        color: 0xF5BA42,
+        transparent: true,
+        opacity: 0.2,
+        blending: THREE.AdditiveBlending
+      });
+      const borderLine = new THREE.LineLoop(borderGeo, borderMat);
+      borderLine.userData = { regionKey: regKey };
+      globeGroup.add(borderLine);
+      goldenLines[regKey] = borderLine;
+    });
+
     // Коллекции интерактивных 3D объектов
-    const pinMeshes = [];
+    const hubObjects = {};
+    const interactiveHitMeshes = [];
     const beaconRings = [];
     const arcObjects = [];
     const pulseParticles = [];
 
-    // Создание 3D пинов хабов
+    // Создание выраженных 3D точек-маяков хабов
     Object.keys(HUBS).forEach(key => {
       const hub = HUBS[key];
-      const pos = latLonToVec3(hub.lat, hub.lon, GLOBE_RADIUS);
-      const normal = pos.clone().normalize();
+      const basePos = latLonToVec3(hub.lat, hub.lon, GLOBE_RADIUS);
+      const normal = basePos.clone().normalize();
 
-      // Центр маркера
-      const pinRadius = hub.isHQ ? 0.052 : 0.038;
-      const pinGeo = new THREE.SphereGeometry(pinRadius, 16, 16);
-      const pinMat = new THREE.MeshBasicMaterial({
-        color: hub.color,
+      const stalkHeight = hub.isHQ ? 0.22 : 0.16;
+      const headRadius = hub.isHQ ? 0.075 : 0.055;
+      const headPos = basePos.clone().add(normal.clone().multiplyScalar(stalkHeight));
+
+      // 1. Световой вертикальный стержень (Stalk)
+      const stalkGeo = new THREE.CylinderGeometry(0.008, 0.008, stalkHeight, 8);
+      const stalkMat = new THREE.MeshBasicMaterial({
+        color: hub.isHQ ? 0xFFD700 : hub.color,
         transparent: true,
-        opacity: 0.95
+        opacity: 0.85
       });
-      const pinMesh = new THREE.Mesh(pinGeo, pinMat);
-      pinMesh.position.copy(pos.clone().add(normal.clone().multiplyScalar(0.02)));
-      pinMesh.userData = { hubKey: key, hubData: hub };
-      globeGroup.add(pinMesh);
-      pinMeshes.push(pinMesh);
+      const stalkMesh = new THREE.Mesh(stalkGeo, stalkMat);
+      // Ориентация цилиндра по нормали
+      const midStalkPos = basePos.clone().add(normal.clone().multiplyScalar(stalkHeight * 0.5));
+      stalkMesh.position.copy(midStalkPos);
+      stalkMesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), normal);
+      globeGroup.add(stalkMesh);
 
-      // Пульсирующее кольцо маяка
-      const ringGeo = new THREE.RingGeometry(pinRadius * 1.15, pinRadius * 1.7, 32);
-      const ringMat = new THREE.MeshBasicMaterial({
+      // 2. Выраженная светящаяся вершина маркера (Beacon Head)
+      const headGeo = new THREE.SphereGeometry(headRadius, 18, 18);
+      const headMat = new THREE.MeshStandardMaterial({
         color: hub.color,
+        emissive: hub.color,
+        emissiveIntensity: 0.95,
+        roughness: 0.15,
+        metalness: 0.3
+      });
+      const headMesh = new THREE.Mesh(headGeo, headMat);
+      headMesh.position.copy(headPos);
+      globeGroup.add(headMesh);
+
+      // 3. Базовый световой диск на поверхности земли
+      const baseGeo = new THREE.SphereGeometry(headRadius * 0.7, 12, 12);
+      const baseMat = new THREE.MeshBasicMaterial({ color: hub.color });
+      const baseMesh = new THREE.Mesh(baseGeo, baseMat);
+      baseMesh.position.copy(basePos);
+      globeGroup.add(baseMesh);
+
+      // 4. Двойное пульсирующее кольцо маяка на поверхности
+      const ringGeo = new THREE.RingGeometry(headRadius * 1.1, headRadius * 1.7, 32);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: hub.isHQ ? 0xFFD700 : hub.color,
         transparent: true,
-        opacity: 0.7,
+        opacity: 0.8,
         side: THREE.DoubleSide,
         blending: THREE.AdditiveBlending
       });
       const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-      ringMesh.position.copy(pos.clone().add(normal.clone().multiplyScalar(0.015)));
-      ringMesh.lookAt(pos.clone().add(normal.clone().multiplyScalar(2)));
+      ringMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.015)));
+      ringMesh.lookAt(basePos.clone().add(normal.clone().multiplyScalar(2)));
       globeGroup.add(ringMesh);
-      beaconRings.push({ ring: ringMesh, baseScale: 1, baseOpacity: 0.75, offset: Math.random() * Math.PI });
+
+      beaconRings.push({
+        ring: ringMesh,
+        headMesh,
+        baseScale: 1,
+        offset: Math.random() * Math.PI,
+        isHQ: hub.isHQ
+      });
+
+      // 5. Невидимый увеличенный хитбокс для быстрого и удобного наведения мыши
+      const hitGeo = new THREE.SphereGeometry(0.15, 12, 12);
+      const hitMat = new THREE.MeshBasicMaterial({ visible: false });
+      const hitMesh = new THREE.Mesh(hitGeo, hitMat);
+      hitMesh.position.copy(headPos);
+      hitMesh.userData = { hubKey: key, hubData: hub, headPos, normal };
+      globeGroup.add(hitMesh);
+      interactiveHitMeshes.push(hitMesh);
+
+      hubObjects[key] = {
+        data: hub,
+        basePos,
+        headPos,
+        normal,
+        headMesh,
+        stalkMesh,
+        ringMesh
+      };
     });
 
     // Создание 3D дуг сети (от Минска HQ ко всем остальным хабам)
-    const minskPos = latLonToVec3(HUBS.minsk.lat, HUBS.minsk.lon, GLOBE_RADIUS);
+    const minskHub = hubObjects['minsk'];
+    const minskPos = minskHub.headPos;
 
     Object.keys(HUBS).forEach(key => {
       if (key === 'minsk') return;
-      const target = HUBS[key];
-      const targetPos = latLonToVec3(target.lat, target.lon, GLOBE_RADIUS);
+      const targetHub = hubObjects[key];
+      const target = targetHub.data;
+      const targetPos = targetHub.headPos;
 
       const dist = minskPos.distanceTo(targetPos);
       const mid = minskPos.clone().add(targetPos).multiplyScalar(0.5);
       mid.normalize();
-      const arcHeight = GLOBE_RADIUS + Math.max(0.24, dist * 0.28);
+      const arcHeight = GLOBE_RADIUS + Math.max(0.32, dist * 0.32);
       mid.multiplyScalar(arcHeight);
 
       const curve = new THREE.QuadraticBezierCurve3(minskPos, mid, targetPos);
-      const points = curve.getPoints(50);
+      const points = curve.getPoints(54);
       const curveGeo = new THREE.BufferGeometry().setFromPoints(points);
       const curveMat = new THREE.LineBasicMaterial({
         color: target.color,
         transparent: true,
-        opacity: 0.55,
+        opacity: 0.65,
         blending: THREE.AdditiveBlending
       });
       const curveLine = new THREE.Line(curveGeo, curveMat);
-      curveLine.userData = { hubKey: key, region: target.region };
+      curveLine.userData = { hubKey: key, region: target.region, baseColor: target.color };
       globeGroup.add(curveLine);
       arcObjects.push(curveLine);
 
       // Летящий световой импульс по дуге
-      const particleGeo = new THREE.SphereGeometry(0.024, 8, 8);
+      const particleGeo = new THREE.SphereGeometry(0.028, 8, 8);
       const particleMat = new THREE.MeshBasicMaterial({
         color: target.color,
         blending: THREE.AdditiveBlending
@@ -487,7 +626,8 @@ document.addEventListener('DOMContentLoaded', () => {
         curve,
         speed: 0.0035 + (1 / dist) * 0.003,
         progress: Math.random(),
-        hubKey: key
+        hubKey: key,
+        baseColor: target.color
       });
     });
 
@@ -514,11 +654,56 @@ document.addEventListener('DOMContentLoaded', () => {
     let targetRotX = (HUBS.minsk.lat * Math.PI / 180) * 0.65;
     let targetRotY = -(HUBS.minsk.lon * Math.PI / 180) - Math.PI / 2;
     let activeHubKey = 'minsk';
+    let hoveredHubKey = null;
     let isTransitioning = true;
     let lastUserActionTime = Date.now();
 
     globeGroup.rotation.x = targetRotX;
     globeGroup.rotation.y = targetRotY;
+
+    // Подсветка золотых контуров региона
+    const highlightGoldenRegion = (hubKey) => {
+      // Сброс золотых линий
+      Object.keys(goldenLines).forEach(k => {
+        goldenLines[k].material.opacity = 0.18;
+        goldenLines[k].material.color.setHex(0xF5BA42);
+      });
+
+      // Подсветка линии связанной страны / континента
+      if (hubKey) {
+        const hub = HUBS[hubKey];
+        const matchKeys = [];
+        if (hubKey === 'minsk') matchKeys.push('by', 'europe');
+        else if (hubKey === 'dubai') matchKeys.push('mena');
+        else if (hubKey === 'london') matchKeys.push('london', 'europe');
+        else if (hubKey === 'newyork') matchKeys.push('us', 'north_america');
+        else if (hubKey === 'astana') matchKeys.push('cis');
+        else if (hubKey === 'warsaw') matchKeys.push('warsaw', 'europe');
+
+        matchKeys.forEach(mk => {
+          if (goldenLines[mk]) {
+            goldenLines[mk].material.opacity = 0.95;
+            goldenLines[mk].material.color.setHex(0xFFD700); // Яркое чистое золото
+          }
+        });
+
+        // Подсветка дуги к этому хабу золотым
+        arcObjects.forEach(arc => {
+          if (arc.userData.hubKey === hubKey) {
+            arc.material.color.setHex(0xFFD700);
+            arc.material.opacity = 1.0;
+          } else {
+            arc.material.color.setHex(arc.userData.baseColor);
+            arc.material.opacity = (hubKey === 'minsk' || arc.userData.hubKey === activeHubKey) ? 0.8 : 0.15;
+          }
+        });
+      } else {
+        arcObjects.forEach(arc => {
+          arc.material.color.setHex(arc.userData.baseColor);
+          arc.material.opacity = 0.6;
+        });
+      }
+    };
 
     // Обновление карточки и активных пунктов
     const selectHub = (hubKey, smoothFly = true) => {
@@ -546,11 +731,7 @@ document.addEventListener('DOMContentLoaded', () => {
         t.setAttribute('aria-selected', String(on));
       });
 
-      // Подсветка соответствующих дуг
-      arcObjects.forEach(arc => {
-        const isRelated = arc.userData.hubKey === hubKey || hubKey === 'minsk';
-        arc.material.opacity = isRelated ? 0.9 : 0.15;
-      });
+      highlightGoldenRegion(hubKey);
 
       // Плавный поворот глобуса к выбранной точке
       if (smoothFly) {
@@ -638,36 +819,74 @@ document.addEventListener('DOMContentLoaded', () => {
       lastUserActionTime = Date.now();
     };
 
-    const onPointerMove = (clientX, clientY) => {
-      if (!isDragging) return;
-      const dx = clientX - lastMouseX;
-      const dy = clientY - lastMouseY;
-      lastMouseX = clientX;
-      lastMouseY = clientY;
-
-      velY = dx * 0.006;
-      velX = dy * 0.006;
-
-      globeGroup.rotation.y += velY;
-      globeGroup.rotation.x = Math.max(-0.85, Math.min(0.85, globeGroup.rotation.x + velX));
-      lastUserActionTime = Date.now();
-    };
-
     const raycaster = new THREE.Raycaster();
     const mouseVec = new THREE.Vector2();
+
+    const checkHubHover = (clientX, clientY) => {
+      const rect = globeCanvas.getBoundingClientRect();
+      mouseVec.x = ((clientX - rect.left) / rect.width) * 2 - 1;
+      mouseVec.y = -((clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(mouseVec, camera);
+
+      const hits = raycaster.intersectObjects(interactiveHitMeshes, false);
+      if (hits.length > 0 && hits[0].object.userData.hubKey) {
+        const hitKey = hits[0].object.userData.hubKey;
+        if (hoveredHubKey !== hitKey) {
+          hoveredHubKey = hitKey;
+          const hub = HUBS[hitKey];
+
+          // Заполняем попап
+          if (gtipFlag) gtipFlag.textContent = hub.flag;
+          if (gtipCountry) gtipCountry.textContent = hub.country;
+          if (gtipCity) gtipCity.textContent = hub.name;
+          if (gtipBadge) gtipBadge.textContent = hub.badge;
+          if (gtipText) gtipText.textContent = hub.caseStudy;
+
+          // Подсвечиваем золотые контуры
+          highlightGoldenRegion(hitKey);
+          globeCanvas.style.cursor = 'pointer';
+        }
+      } else {
+        if (hoveredHubKey !== null) {
+          hoveredHubKey = null;
+          highlightGoldenRegion(activeHubKey);
+          globeCanvas.style.cursor = isDragging ? 'grabbing' : 'grab';
+          if (globeTooltip) globeTooltip.classList.remove('is-visible');
+        }
+      }
+    };
+
+    const onPointerMove = (clientX, clientY) => {
+      if (isDragging) {
+        const dx = clientX - lastMouseX;
+        const dy = clientY - lastMouseY;
+        lastMouseX = clientX;
+        lastMouseY = clientY;
+
+        velY = dx * 0.006;
+        velX = dy * 0.006;
+
+        globeGroup.rotation.y += velY;
+        globeGroup.rotation.x = Math.max(-0.85, Math.min(0.85, globeGroup.rotation.x + velX));
+        lastUserActionTime = Date.now();
+        if (globeTooltip) globeTooltip.classList.remove('is-visible');
+      } else {
+        checkHubHover(clientX, clientY);
+      }
+    };
 
     const onPointerUp = (clientX, clientY) => {
       if (!isDragging) return;
       isDragging = false;
 
-      // Если перемещение было меньше 5px — это клик по пину
+      // Если перемещение было меньше 6px — это клик по пину
       const dist = Math.hypot(clientX - dragStartX, clientY - dragStartY);
-      if (dist < 5) {
+      if (dist < 6) {
         const rect = globeCanvas.getBoundingClientRect();
         mouseVec.x = ((clientX - rect.left) / rect.width) * 2 - 1;
         mouseVec.y = -((clientY - rect.top) / rect.height) * 2 + 1;
         raycaster.setFromCamera(mouseVec, camera);
-        const hits = raycaster.intersectObjects(pinMeshes, false);
+        const hits = raycaster.intersectObjects(interactiveHitMeshes, false);
         if (hits.length > 0 && hits[0].object.userData.hubKey) {
           selectHub(hits[0].object.userData.hubKey, true);
         }
@@ -679,6 +898,11 @@ document.addEventListener('DOMContentLoaded', () => {
     globeCanvas.addEventListener('mousedown', (e) => onPointerDown(e.clientX, e.clientY));
     window.addEventListener('mousemove', (e) => onPointerMove(e.clientX, e.clientY));
     window.addEventListener('mouseup', (e) => onPointerUp(e.clientX, e.clientY));
+    globeViewport.addEventListener('mouseleave', () => {
+      if (globeTooltip) globeTooltip.classList.remove('is-visible');
+      hoveredHubKey = null;
+      highlightGoldenRegion(activeHubKey);
+    });
 
     // Тач события
     globeCanvas.addEventListener('touchstart', (e) => {
@@ -721,7 +945,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Плавный переход к выбранному хабу (Lerp)
       if (isTransitioning) {
-        // Минимизация разницы углов для кратчайшего пути вращения
         let diffY = (targetRotY - globeGroup.rotation.y) % (Math.PI * 2);
         if (diffY < -Math.PI) diffY += Math.PI * 2;
         if (diffY > Math.PI) diffY -= Math.PI * 2;
@@ -733,14 +956,13 @@ document.addEventListener('DOMContentLoaded', () => {
           isTransitioning = false;
         }
       } else if (!isDragging) {
-        // Инерция после броска мышью
         velX *= 0.92;
         velY *= 0.92;
         globeGroup.rotation.y += velY;
         globeGroup.rotation.x = Math.max(-0.85, Math.min(0.85, globeGroup.rotation.x + velX));
 
-        // Фоновое автовращение, если включено и пользователь не трогает 4 сек
-        if (autoSpin && (Date.now() - lastUserActionTime > 3500)) {
+        // Фоновое автовращение (если пользователь не трогает и не наводит на хаб)
+        if (autoSpin && !hoveredHubKey && (Date.now() - lastUserActionTime > 3500)) {
           globeGroup.rotation.y += 0.0025;
         }
       }
@@ -748,12 +970,17 @@ document.addEventListener('DOMContentLoaded', () => {
       // Плавный зум камеры
       camera.position.z += (targetZoomZ - camera.position.z) * 0.1;
 
-      // Анимация маяков хабов
-      beaconRings.forEach((b, i) => {
-        const pulse = (Math.sin(elapsed * 3.5 + b.offset) + 1) * 0.5;
-        const scale = 1 + pulse * 1.3;
+      // Анимация выраженных маяков хабов
+      beaconRings.forEach((b) => {
+        const speed = b.isHQ ? 4.2 : 3.5;
+        const pulse = (Math.sin(elapsed * speed + b.offset) + 1) * 0.5;
+        const scale = 1 + pulse * (b.isHQ ? 1.6 : 1.3);
         b.ring.scale.set(scale, scale, scale);
-        b.ring.material.opacity = (1 - pulse) * 0.8;
+        b.ring.material.opacity = (1 - pulse) * (b.isHQ ? 0.95 : 0.75);
+
+        // Легкое покачивание и свечение головки маркера
+        const bob = Math.sin(elapsed * 2.5 + b.offset) * 0.08;
+        b.headMesh.scale.set(1 + bob, 1 + bob, 1 + bob);
       });
 
       // Анимация летящих световых импульсов по дугам
@@ -761,7 +988,39 @@ document.addEventListener('DOMContentLoaded', () => {
         p.progress = (p.progress + p.speed) % 1;
         const pt = p.curve.getPoint(p.progress);
         p.mesh.position.copy(pt);
+
+        // Если дуга подсвечена золотом, частица тоже золотая и крупнее
+        if (hoveredHubKey === p.hubKey || activeHubKey === p.hubKey) {
+          p.mesh.material.color.setHex(0xFFD700);
+          p.mesh.scale.set(1.4, 1.4, 1.4);
+        } else {
+          p.mesh.material.color.setHex(p.baseColor);
+          p.mesh.scale.set(1, 1, 1);
+        }
       });
+
+      // Позиционирование 3D попапа при наведении
+      if (hoveredHubKey && globeTooltip && hubObjects[hoveredHubKey]) {
+        const hub = hubObjects[hoveredHubKey];
+        const worldPos = hub.headPos.clone().applyMatrix4(globeGroup.matrixWorld);
+
+        // Проверка: точка на видимой передней полусфере относительно камеры
+        const normalWorld = hub.normal.clone().applyEuler(globeGroup.rotation);
+        const toCamera = camera.position.clone().sub(worldPos).normalize();
+        const dot = normalWorld.dot(toCamera);
+
+        if (dot > 0.08) {
+          const proj = worldPos.clone().project(camera);
+          const sx = (proj.x * 0.5 + 0.5) * globeViewport.clientWidth;
+          const sy = (-proj.y * 0.5 + 0.5) * globeViewport.clientHeight;
+
+          globeTooltip.style.left = `${Math.round(sx)}px`;
+          globeTooltip.style.top = `${Math.round(sy)}px`;
+          globeTooltip.classList.add('is-visible');
+        } else {
+          globeTooltip.classList.remove('is-visible');
+        }
+      }
 
       renderer.render(scene, camera);
     };

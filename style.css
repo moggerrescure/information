@@ -696,6 +696,50 @@ main>section{padding-block:0 var(--sec)}
   box-shadow:0 0 16px rgba(196,244,73,.4);
 }
 
+/* Интерактивный тултип при наведении на страну / хаб */
+.globe-tooltip{
+  position:absolute;pointer-events:none;z-index:40;
+  max-width:330px;min-width:270px;
+  background:rgba(5,13,38,.93);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:1.5px solid #F5BA42;
+  border-radius:16px;padding:12px 16px;
+  box-shadow:0 18px 45px rgba(0,0,0,.8),0 0 25px rgba(245,186,66,.4),inset 0 1px 0 rgba(255,255,255,.2);
+  color:#fff;
+  opacity:0;visibility:hidden;
+  transform:translate(-50%,-100%) translateY(-14px) scale(.92);
+  transition:opacity .2s var(--ease),transform .22s cubic-bezier(.2,.8,.2,1),visibility .2s;
+}
+.globe-tooltip.is-visible{
+  opacity:1;visibility:visible;
+  transform:translate(-50%,-100%) translateY(-14px) scale(1);
+}
+.globe-tooltip::after{
+  content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);
+  border-left:7px solid transparent;border-right:7px solid transparent;
+  border-top:8px solid #F5BA42;
+}
+.globe-tooltip__country{
+  display:flex;align-items:center;gap:10px;margin-bottom:8px;padding-bottom:8px;
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+.globe-tooltip__flag{font-size:22px;line-height:1}
+.globe-tooltip__meta{flex:1;min-width:0}
+.globe-tooltip__country-name{display:block;font-size:14px;font-weight:800;color:#fff;line-height:1.2}
+.globe-tooltip__city-name{display:block;font-size:11px;font-weight:600;color:rgba(255,255,255,.65);margin-top:2px}
+.globe-tooltip__badge{
+  font-size:10px;font-weight:700;color:#07122b;
+  background:#F5BA42;padding:3px 8px;border-radius:6px;
+  white-space:nowrap;box-shadow:0 0 10px rgba(245,186,66,.5);
+}
+.globe-tooltip__label{
+  display:block;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;
+  color:#F5BA42;margin-bottom:4px;
+}
+.globe-tooltip__text{
+  margin:0;font-size:12px;line-height:1.45;color:rgba(255,255,255,.9);
+}
+
 /* Карточка активного хаба */
 .globe-card{
   position:absolute;bottom:42px;left:50%;transform:translateX(-50%);
