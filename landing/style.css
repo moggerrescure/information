@@ -89,7 +89,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 .wrap{width:100%;max-width:calc(var(--w-wide) + var(--gut) * 2);margin:0 auto;padding:0 var(--gut)}
 .wrap>*{max-width:var(--w-grid);margin-inline:auto}       /* по умолчанию — сетка 1160 */
 .navbar,.hero__card,.clients__card,.reviews__card{max-width:var(--w-mid)}
-.why__card,.audit__card,.offer__card,.blog__card,.profit__card{max-width:var(--w-wide)}
+.why__card,.audit__card,.offer__card,.blog__card,.profit__card,.founders-card{max-width:var(--w-wide)}
 .offer{max-width:var(--w-wide)}   /* лежит внутри .wrap тёмной полосы с тарифами */
 .world__map{max-width:1214px}
 .faq__grid{max-width:1180px}
@@ -100,6 +100,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 .skip:focus{left:0}
 
 :where(a,button,input,summary,[tabindex]):focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:4px}
+section[id]{scroll-margin-top:90px}
 
 .h2{font-size:clamp(26px,3.4vw,40px);line-height:1.3;text-transform:uppercase;margin:0 0 var(--gap-h2)}
 .h2--light{color:var(--white)}
@@ -501,20 +502,96 @@ main>section{padding-block:0 var(--sec)}
 .team__text.is-clamped{max-height:154px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 50%,transparent 100%);mask-image:linear-gradient(180deg,#000 50%,transparent 100%)}
 .team .center{margin-top:24px}
 
-/* ------------------------------ основатель ------------------------------ */
-.founder-sec{overflow:hidden}
-.founder{
-  background:#3B3B3B;border-radius:40px;padding:0 60px 0 0;
-  display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:40px;align-items:end;position:relative;
+/* ------------------------------ основатели (Борис, Илья, Иван) ------------------------------ */
+.founders-sec{overflow:hidden}
+.founders-card{
+  background:radial-gradient(120% 100% at 50% 0%, #262626 0%, #171717 100%);
+  border-radius:var(--r-big);padding:var(--pad-wide);
+  border:1px solid rgba(255,255,255,0.08);box-shadow:0 24px 64px rgba(0,0,0,0.35);
 }
-.founder__pic{align-self:end;padding-left:14px}
-.founder__pic img{width:100%;max-width:420px;display:block}
-.founder__body{padding:56px 0}
-.founder__tags{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:22px}
-.founder__name{font-size:clamp(26px,2.6vw,34px);line-height:1.18;margin-bottom:26px}
-.founder__list{display:flex;flex-direction:column;gap:18px;margin-bottom:32px}
-.founder__list li{position:relative;padding-left:32px;font-size:16px;line-height:1.375}
-.founder__list li::before{content:"";position:absolute;left:0;top:6px;width:18px;height:18px;border-radius:8px;background:var(--lime-bright)}
+
+.founders__header{margin-bottom:var(--gap-h2);max-width:860px}
+.founders__badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);
+  color:#fff;padding:8px 18px;border-radius:var(--r-pill);
+  font-size:13px;font-weight:700;margin-bottom:16px;
+}
+.founders__badge-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--lime);
+  box-shadow:0 0 10px var(--lime);
+}
+.founders__header .h2{margin-bottom:16px}
+.founders__lead{font-size:17px;line-height:1.5;color:rgba(255,255,255,0.82)}
+
+/* Сетка 3 основателей */
+.founders__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:36px}
+.founder-card{
+  background:#222222;border-radius:24px;overflow:hidden;
+  border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 30px rgba(0,0,0,0.25);
+  display:flex;flex-direction:column;
+  transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.founder-card:hover{
+  transform:translateY(-4px);border-color:rgba(196,244,73,0.45);
+  box-shadow:0 16px 40px rgba(0,0,0,0.35);
+}
+.founder-card__media{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#141414}
+.founder-card__media img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  display:block;transition:transform .4s ease;
+}
+.founder-card:hover .founder-card__media img{transform:scale(1.03)}
+.founder-card__status{
+  position:absolute;bottom:14px;left:14px;
+  background:rgba(0,0,0,0.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  color:var(--lime);font-size:11px;font-weight:700;letter-spacing:.04em;
+  padding:4px 10px;border-radius:var(--r-pill);border:1px solid rgba(196,244,73,0.3);
+}
+
+.founder-card__body{padding:24px 22px;display:flex;flex-direction:column;flex:1}
+.founder-card__role{font-size:12px;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.founder-card__name{font-family:var(--head);font-size:26px;font-weight:800;color:#fff;margin-bottom:12px}
+.founder-card__tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.founder-card__tags span{
+  font-size:11px;font-weight:600;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.85);
+  padding:3px 8px;border-radius:6px;
+}
+.founder-card__bio{font-size:14px;line-height:1.45;color:rgba(255,255,255,0.76);flex:1}
+
+/* Манифест и честные принципы */
+.founders__manifesto{
+  background:rgba(255,255,255,0.04);border-radius:20px;
+  padding:32px 28px;border:1px solid rgba(255,255,255,0.08);
+}
+.manifesto__title{
+  font-family:var(--head);font-size:20px;font-weight:800;color:#fff;margin-bottom:22px;
+}
+.manifesto__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:28px}
+.manifesto__item{display:flex;align-items:flex-start;gap:14px}
+.manifesto__icon{
+  font-size:24px;line-height:1;background:rgba(255,255,255,0.07);
+  padding:10px;border-radius:12px;flex-shrink:0;
+}
+.manifesto__content b{display:block;font-size:15px;color:#fff;margin-bottom:4px}
+.manifesto__content p{margin:0;font-size:13px;line-height:1.42;color:rgba(255,255,255,0.72)}
+
+.manifesto__cta{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;
+  background:rgba(0,0,0,0.35);border-radius:16px;padding:20px 24px;border:1px solid rgba(255,255,255,0.08);
+}
+.manifesto__cta-text b{display:block;font-size:16px;color:#fff;margin-bottom:4px}
+.manifesto__cta-text span{font-size:13px;color:rgba(255,255,255,0.72);max-width:620px;display:block}
+.manifesto__cta .btn{flex-shrink:0}
+
+@media(max-width:980px){
+  .founders__grid{grid-template-columns:1fr;max-width:440px;margin-inline:auto}
+  .manifesto__grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .manifesto__cta{flex-direction:column;align-items:stretch;text-align:center}
+  .manifesto__cta .btn{width:100%;justify-content:center}
+}
 
 /* ------------------------------ отзывы ------------------------------ */
 .reviews{background:var(--blue)}
