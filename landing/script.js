@@ -237,6 +237,85 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- формы ---------- */
   document.querySelectorAll('form.form').forEach(f => attachSubmit(f, f.dataset.form || 'Заявка'));
 
+  /* ---------- интерактивная карта мира ---------- */
+  const stage = document.getElementById('worldStage');
+  const wtabs = [...document.querySelectorAll('.wtab')];
+  const wpins = [...document.querySelectorAll('.wpin')];
+
+  if (stage && wpins.length) {
+    // фильтрация по регионам
+    wtabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        wtabs.forEach(t => { t.classList.remove('is-on'); t.setAttribute('aria-selected', 'false'); });
+        tab.classList.add('is-on');
+        tab.setAttribute('aria-selected', 'true');
+        const reg = tab.dataset.region;
+        wpins.forEach(pin => {
+          const match = reg === 'all' || pin.dataset.region === reg;
+          pin.classList.toggle('is-dimmed', !match);
+        });
+      });
+    });
+
+    // клик по пину на мобильных / тач
+    wpins.forEach(pin => {
+      pin.addEventListener('click', e => {
+        e.stopPropagation();
+        const wasActive = pin.classList.contains('is-active');
+        wpins.forEach(p => p.classList.remove('is-active'));
+        if (!wasActive) pin.classList.add('is-active');
+      });
+    });
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.wpin')) {
+        wpins.forEach(p => p.classList.remove('is-active'));
+      }
+    });
+
+    // плавный 3D параллакс карты при движении мыши (только десктоп)
+    if (!reduce && !touch && !small) {
+      let mRaf = 0;
+      stage.addEventListener('mousemove', e => {
+        cancelAnimationFrame(mRaf);
+        mRaf = requestAnimationFrame(() => {
+          const rect = stage.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          stage.style.transform = `perspective(900px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 10).toFixed(2)}deg) translateZ(6px)`;
+        });
+      });
+      stage.addEventListener('mouseleave', () => {
+        cancelAnimationFrame(mRaf);
+        stage.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+      });
+    }
+
+    // ротация фокуса по ключевым городам, когда пользователь не взаимодействует
+    let activeIdx = 0;
+    let isUserHovering = false;
+    stage.addEventListener('mouseenter', () => { isUserHovering = true; });
+    stage.addEventListener('mouseleave', () => { isUserHovering = false; });
+
+    if (!reduce) {
+      setInterval(() => {
+        if (isUserHovering) return;
+        const rect = stage.getBoundingClientRect();
+        if (rect.top > innerHeight || rect.bottom < 0) return;
+
+        const visiblePins = wpins.filter(p => !p.classList.contains('is-dimmed'));
+        if (!visiblePins.length) return;
+
+        visiblePins.forEach(p => p.classList.remove('is-active'));
+        activeIdx = (activeIdx + 1) % visiblePins.length;
+        visiblePins[activeIdx].classList.add('is-active');
+
+        setTimeout(() => {
+          if (!isUserHovering) visiblePins[activeIdx]?.classList.remove('is-active');
+        }, 2200);
+      }, 4200);
+    }
+  }
+
   /* ==================== МОУШН ====================
      Правило: контент виден по умолчанию, анимация — надстройка.
      Элементы «взводятся» (.is-armed) только из JS, поэтому при отключённом
