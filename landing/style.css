@@ -239,100 +239,22 @@ main>section{padding-block:0 var(--sec)}
   pointer-events: none;
 }
 
-/* Подсказка в углу иллюстрации */
-.hero-stage__hint {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 15;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: #14151e;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  pointer-events: none;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  transition: opacity 0.3s ease;
-}
-.hero-stage__hint-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--lime, #c4f449);
-  box-shadow: 0 0 10px var(--lime, #c4f449);
-}
-
-/* Интерактивные хотспоты, вживленные в предметы рисунка */
+/* Интерактивные невидимые зоны ховера на объектах рисунка */
 .hero-spot {
   position: absolute;
   cursor: pointer;
   z-index: 20;
   outline: none;
+  border: none;
+  background: transparent;
   -webkit-tap-highlight-color: transparent;
 }
 .hero-spot:focus-visible {
-  outline: 2px solid var(--lime, #c4f449);
-  outline-offset: 2px;
+  outline: none;
 }
 .hero-spot:hover,
-.hero-spot.is-open,
-.hero-spot:focus-visible {
-  z-index: 70;
-}
-
-/* Интерактивная зона подсветки прямо на предмете рисунка */
-.hero-spot__area {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  border: 1.5px solid transparent;
-  background: transparent;
-  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
-}
-.hero-spot:hover .hero-spot__area,
-.hero-spot.is-open .hero-spot__area,
-.hero-spot:focus-visible .hero-spot__area {
-  border-color: var(--lime, #c4f449);
-  background: rgba(196, 244, 73, 0.12);
-  box-shadow: 0 0 24px rgba(196, 244, 73, 0.4), inset 0 0 16px rgba(196, 244, 73, 0.15);
-}
-
-/* Аккуратный микрометчик в углу предмета */
-.hero-spot__marker {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: rgba(20, 21, 30, 0.75);
-  border: 1px solid rgba(196, 244, 73, 0.4);
-  color: var(--lime, #c4f449);
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
-  opacity: 0.75;
-  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
-}
-.hero-spot:hover .hero-spot__marker,
-.hero-spot.is-open .hero-spot__marker {
-  transform: scale(1.15) rotate(45deg);
-  background: var(--lime, #c4f449);
-  color: #111;
-  opacity: 1;
-  box-shadow: 0 0 14px rgba(196, 244, 73, 0.7);
+.hero-spot.is-open {
+  z-index: 80;
 }
 
 /* Всплывающая карточка: быстрый GPU-рендер без лагов */
