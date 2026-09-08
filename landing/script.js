@@ -243,30 +243,81 @@ document.addEventListener('DOMContentLoaded', () => {
   const wpins = [...document.querySelectorAll('.wpin')];
 
   if (stage && wpins.length) {
-    // фильтрация по регионам и подсветка линий
+    // интерактивное зонирование: табы, карточки регионов, SVG-зоны и пины
     const arclines = [...document.querySelectorAll('.arc-line')];
+    const wcards = [...document.querySelectorAll('.wcard')];
+    const wzones = [...document.querySelectorAll('.world__zone-group')];
+
+    const setRegionFocus = (reg) => {
+      // табы
+      wtabs.forEach(t => {
+        const on = t.dataset.region === reg;
+        t.classList.toggle('is-on', on);
+        t.setAttribute('aria-selected', String(on));
+      });
+
+      // пины
+      wpins.forEach(pin => {
+        const match = reg === 'all' || pin.dataset.region === reg || pin.dataset.region === 'by';
+        pin.classList.toggle('is-dimmed', !match);
+      });
+
+      // линии
+      arclines.forEach(line => {
+        if (reg === 'all' || reg === 'by') {
+          line.classList.remove('is-dimmed', 'is-highlighted');
+        } else {
+          const match = line.dataset.region === reg;
+          line.classList.toggle('is-highlighted', match);
+          line.classList.toggle('is-dimmed', !match);
+        }
+      });
+
+      // SVG-зоны на карте
+      wzones.forEach(z => {
+        if (reg === 'all') {
+          z.classList.remove('is-dimmed', 'is-highlighted');
+        } else {
+          const match = z.dataset.region === reg;
+          z.classList.toggle('is-highlighted', match);
+          z.classList.toggle('is-dimmed', !match);
+        }
+      });
+
+      // карточки регионов
+      wcards.forEach(card => {
+        if (reg === 'all') {
+          card.classList.remove('is-dimmed', 'is-active');
+        } else {
+          const match = card.dataset.region === reg;
+          card.classList.toggle('is-active', match);
+          card.classList.toggle('is-dimmed', !match);
+        }
+      });
+    };
 
     wtabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        wtabs.forEach(t => { t.classList.remove('is-on'); t.setAttribute('aria-selected', 'false'); });
-        tab.classList.add('is-on');
-        tab.setAttribute('aria-selected', 'true');
-        const reg = tab.dataset.region;
+      tab.addEventListener('click', () => setRegionFocus(tab.dataset.region));
+    });
 
-        wpins.forEach(pin => {
-          const match = reg === 'all' || pin.dataset.region === reg || pin.dataset.region === 'by';
-          pin.classList.toggle('is-dimmed', !match);
-        });
+    wcards.forEach(card => {
+      card.addEventListener('click', () => setRegionFocus(card.dataset.region));
+    });
 
-        arclines.forEach(line => {
-          if (reg === 'all' || reg === 'by') {
-            line.classList.remove('is-dimmed', 'is-highlighted');
-          } else {
-            const match = line.dataset.region === reg;
-            line.classList.toggle('is-highlighted', match);
-            line.classList.toggle('is-dimmed', !match);
-          }
-        });
+    wzones.forEach(zone => {
+      zone.addEventListener('click', () => setRegionFocus(zone.dataset.region));
+      zone.addEventListener('mouseenter', () => {
+        const reg = zone.dataset.region;
+        if (reg) {
+          arclines.forEach(l => { if (l.dataset.region === reg) l.classList.add('is-highlighted'); });
+        }
+      });
+      zone.addEventListener('mouseleave', () => {
+        const currentTab = document.querySelector('.wtab.is-on');
+        const activeReg = currentTab ? currentTab.dataset.region : 'all';
+        if (activeReg === 'all' || activeReg === 'by') {
+          arclines.forEach(l => l.classList.remove('is-highlighted'));
+        }
       });
     });
 
@@ -278,6 +329,9 @@ document.addEventListener('DOMContentLoaded', () => {
           arclines.forEach(line => {
             if (line.dataset.region === reg) line.classList.add('is-highlighted');
           });
+          wzones.forEach(z => {
+            if (z.dataset.region === reg) z.classList.add('is-highlighted');
+          });
         }
       });
       pin.addEventListener('mouseleave', () => {
@@ -285,6 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeReg = currentTab ? currentTab.dataset.region : 'all';
         if (activeReg === 'all' || activeReg === 'by') {
           arclines.forEach(line => line.classList.remove('is-highlighted'));
+          wzones.forEach(z => z.classList.remove('is-highlighted'));
         }
       });
     });

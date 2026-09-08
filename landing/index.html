@@ -686,16 +686,16 @@
       <div class="world__header">
         <div class="world__title-block">
           <h2 class="h2 h2--light">Мы создаём сайты по всему миру</h2>
-          <p class="world__lead">Разрабатываем и продвигаем проекты для клиентов из Беларуси, СНГ, Европы, Ближнего Востока и США. Чёткая сеть региональных хабов и прозрачный процесс.</p>
+          <p class="world__lead">Разрабатываем и продвигаем проекты для клиентов из Беларуси, Европы, Ближнего Востока, СНГ и США. Чёткая сеть региональных хабов и прозрачный процесс работы.</p>
         </div>
         <div class="world__badge">
           <span class="world__badge-dot" aria-hidden="true"></span>
-          <span><b>16 ключевых хабов</b> в 5 мировых регионах</span>
+          <span><b>16 хабов</b> в 5 мировых регионах</span>
         </div>
       </div>
 
       <div class="world__filter" role="tablist" aria-label="Фильтр регионов">
-        <button class="wtab is-on" type="button" role="tab" aria-selected="true" data-region="all">Все хабы (16)</button>
+        <button class="wtab is-on" type="button" role="tab" aria-selected="true" data-region="all">Все регионы (16)</button>
         <button class="wtab" type="button" role="tab" aria-selected="false" data-region="by">Беларусь (HQ)</button>
         <button class="wtab" type="button" role="tab" aria-selected="false" data-region="eu">Европа</button>
         <button class="wtab" type="button" role="tab" aria-selected="false" data-region="me">Ближний Восток</button>
@@ -703,16 +703,15 @@
         <button class="wtab" type="button" role="tab" aria-selected="false" data-region="na">Северная Америка</button>
       </div>
 
-      <!-- 3D сцена карты -->
+      <!-- 3D сцена карты с региональным зонированием -->
       <div class="world__viewport">
         <div class="world__stage" id="worldStage" tabindex="0" role="region" aria-label="3D интерактивная карта хабов KV-web">
           <div class="world__pedestal" aria-hidden="true"></div>
           <div class="world__glow" aria-hidden="true"></div>
 
-          <!-- SVG слой: континенты + координатная сетка + логические линии -->
+          <!-- SVG слой: континенты + зоны регионов + координатная сетка + логические линии -->
           <svg class="world__svg" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
             <defs>
-              <!-- Градиент главных магистралей (от HQ) -->
               <linearGradient id="trunkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stop-color="#FF6915" stop-opacity="1"/>
                 <stop offset="30%" stop-color="#C4F449" stop-opacity="0.95"/>
@@ -720,7 +719,6 @@
                 <stop offset="100%" stop-color="#7574FF" stop-opacity="0.4"/>
               </linearGradient>
 
-              <!-- Градиент региональных ответвлений -->
               <linearGradient id="branchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#C4F449" stop-opacity="0.85"/>
                 <stop offset="60%" stop-color="#396CEB" stop-opacity="0.6"/>
@@ -742,6 +740,41 @@
 
             <!-- Векторные континенты -->
             <image href="img/world-continents.svg" width="1000" height="520" preserveAspectRatio="xMidYMid meet" opacity="0.95"/>
+
+
+            <!-- Региональные световые зоны (контуры рынков присутствия) -->
+            <g class="world__zones">
+              <!-- Северная Америка -->
+              <g class="world__zone-group" data-region="na">
+                <path class="world__zone-shape" d="M 150 140 C 200 95, 300 95, 335 135 C 360 175, 340 240, 275 255 C 200 260, 135 210, 150 140 Z" />
+                <text class="world__zone-label" x="235" y="115">Северная Америка</text>
+              </g>
+
+              <!-- Европа -->
+              <g class="world__zone-group" data-region="eu">
+                <path class="world__zone-shape" d="M 480 110 C 505 65, 570 65, 595 95 C 620 135, 615 195, 570 200 C 525 200, 465 160, 480 110 Z" />
+                <text class="world__zone-label" x="510" y="80">Европа</text>
+              </g>
+
+              <!-- СНГ и Кавказ -->
+              <g class="world__zone-group" data-region="cis">
+                <path class="world__zone-shape" d="M 605 90 C 660 60, 750 80, 755 125 C 760 170, 705 185, 660 175 C 615 165, 590 125, 605 90 Z" />
+                <text class="world__zone-label" x="685" y="85">СНГ & Азия</text>
+              </g>
+
+              <!-- Ближний Восток -->
+              <g class="world__zone-group" data-region="me">
+                <path class="world__zone-shape" d="M 575 185 C 610 160, 675 170, 680 205 C 685 245, 630 255, 600 245 C 565 235, 555 205, 575 185 Z" />
+                <text class="world__zone-label" x="635" y="255">Ближний Восток</text>
+              </g>
+
+              <!-- Минск HQ Зона фокуса -->
+              <g class="world__zone-group" data-region="by">
+                <circle class="world__zone-hq-aura" cx="576.6" cy="104.4" r="42" />
+                <text class="world__zone-label world__zone-label--hq" x="576.6" y="68">★ KV-web HQ</text>
+              </g>
+            </g>
+
 
             <!-- Логические линии связей -->
             <g class="world__network" fill="none" stroke-linecap="round">
@@ -992,6 +1025,61 @@
           </div>
         </div>
       </div>
+
+
+      <!-- Региональные карточки-хабы -->
+      <div class="world__regions" aria-label="Регионы присутствия">
+        <article class="wcard" data-region="by" tabindex="0" role="button">
+          <div class="wcard__top">
+            <span class="wcard__badge" style="--bc:#FF6915">Штаб-квартира</span>
+            <span class="wcard__count">50+ сайтов</span>
+          </div>
+          <h3 class="wcard__title">Беларусь (HQ)</h3>
+          <p class="wcard__city">Минск</p>
+          <p class="wcard__desc">Основной центр проектирования, вёрстки и сквозного маркетинга. Прямой контакт с основателем агентства.</p>
+        </article>
+
+        <article class="wcard" data-region="eu" tabindex="0" role="button">
+          <div class="wcard__top">
+            <span class="wcard__badge" style="--bc:#396CEB">Евросоюз</span>
+            <span class="wcard__count">18+ проектов</span>
+          </div>
+          <h3 class="wcard__title">Европа</h3>
+          <p class="wcard__city">Лондон • Берлин • Варшава • Лимассол</p>
+          <p class="wcard__desc">SaaS-платформы, B2B-сервисы и финтех. Разработка сайтов в строгом соответствии с GDPR и европейскими стандартами.</p>
+        </article>
+
+        <article class="wcard" data-region="me" tabindex="0" role="button">
+          <div class="wcard__top">
+            <span class="wcard__badge" style="--bc:#C4F449">Премиум</span>
+            <span class="wcard__count">12+ проектов</span>
+          </div>
+          <h3 class="wcard__title">Ближний Восток</h3>
+          <p class="wcard__city">Дубай • Эр-Рияд • Тель-Авив</p>
+          <p class="wcard__desc">Luxury недвижимость, e-commerce и венчурные проекты. Мультиязычная вёрстка (RTL/LTR) и высокая конверсия.</p>
+        </article>
+
+        <article class="wcard" data-region="cis" tabindex="0" role="button">
+          <div class="wcard__top">
+            <span class="wcard__badge" style="--bc:#00B1C9">СНГ & Азия</span>
+            <span class="wcard__count">25+ проектов</span>
+          </div>
+          <h3 class="wcard__title">СНГ и Кавказ</h3>
+          <p class="wcard__city">Москва • Астана • Алматы • Тбилиси • Ташкент</p>
+          <p class="wcard__desc">Крупные каталоги продукции, федеральные порталы, девелопмент и HoReCa. Интеграция с 1С и региональными CRM.</p>
+        </article>
+
+        <article class="wcard" data-region="na" tabindex="0" role="button">
+          <div class="wcard__top">
+            <span class="wcard__badge" style="--bc:#7574FF">Америка</span>
+            <span class="wcard__count">10+ проектов</span>
+          </div>
+          <h3 class="wcard__title">Северная Америка</h3>
+          <p class="wcard__city">Нью-Йорк • Майами • Лос-Анджелес</p>
+          <p class="wcard__desc">Продуктовые лендинги для американского рынка, маркетинг и медиа. Синхронизация по часовым поясам EST и PST.</p>
+        </article>
+      </div>
+
 
       <!-- Нижняя плашка со статистикой -->
       <div class="world__stats" aria-label="Статистика охвата">
