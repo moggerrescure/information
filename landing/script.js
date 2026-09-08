@@ -251,17 +251,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (globeCanvas && globeViewport && typeof THREE !== 'undefined') {
     // Каталог активных точек глобальной сети KV-web
+    // Каталог активных городов глобальной сети KV-web (реальные координаты, комфортное распределение)
     const HUBS = {
-      // --- Штаб-квартира ---
+      // --- Главный офис (HQ) ---
       minsk: {
         id: 'minsk',
-        name: 'Минск (HQ)',
+        name: 'Минск',
         country: 'Беларусь',
         flag: '🇧🇾',
         badge: 'Штаб-квартира',
-        tag: '⭐ Главный офис',
-        desc: 'Главный офис KV-web. Центр заказной веб-разработки, UI/UX и сквозной аналитики. 50+ реализованных проектов.',
-        caseStudy: 'Разработка 40+ корпоративных сайтов, B2B-порталов и интернет-магазинов. Сквозная аналитика и SEO в топ-3.',
+        tag: '⭐ Главный технологический офис',
+        desc: 'Главный технологический центр KV-web. Разработка высоконагруженных веб-сервисов, B2B платформ и SEO-стратегий.',
+        caseStudy: '50+ запущенных проектов: интернет-магазины, личные кабинеты, корпоративные порталы с выводом в топ-3.',
         lat: 53.9045, lon: 27.5615,
         color: 0xFF6915, colorHex: '#FF6915',
         region: 'by',
@@ -269,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isPrimary: true
       },
 
-      // --- Западная и Центральная Европа ---
+      // --- Западная, Северная и Южная Европа ---
       london: {
         id: 'london',
         name: 'Лондон',
@@ -277,9 +278,37 @@ document.addEventListener('DOMContentLoaded', () => {
         flag: '🇬🇧',
         badge: 'Fintech & SaaS',
         tag: '🚀 Western Europe',
-        desc: 'Финтех-сервисы и личные кабинеты по европейским стандартам безопасности.',
-        caseStudy: 'Личный кабинет финтех-платформы, калькулятор доходности и интеграция Open Banking API.',
+        desc: 'Финтех-сервисы, SaaS платформы и защищенные клиентские кабинеты по европейским стандартам.',
+        caseStudy: 'Личный кабинет финансовой платформы, интерактивный калькулятор доходности и Open Banking API.',
         lat: 51.5074, lon: -0.1278,
+        color: 0x34E07B, colorHex: '#34E07B',
+        region: 'eu',
+        isPrimary: true
+      },
+      paris: {
+        id: 'paris',
+        name: 'Париж',
+        country: 'Франция',
+        flag: '🇫🇷',
+        badge: 'Luxury & Brands',
+        tag: '🎨 France',
+        desc: 'Имиджевые сайты, премиальные интерфейсы и промо-страницы для европейских брендов.',
+        caseStudy: 'Имиджевый сайт архитектурного бюро с интерактивным 3D-каталогом проектов.',
+        lat: 48.8566, lon: 2.3522,
+        color: 0x34E07B, colorHex: '#34E07B',
+        region: 'eu',
+        parentHub: 'london'
+      },
+      berlin: {
+        id: 'berlin',
+        name: 'Берлин',
+        country: 'Германия',
+        flag: '🇩🇪',
+        badge: 'Tech & Startups',
+        tag: '💡 Germany',
+        desc: 'Веб-приложения и промо-сайты для европейских технологических стартапов.',
+        caseStudy: 'Презентационная платформа стартапа с интерактивным 3D-конфигуратором продукта.',
+        lat: 52.5200, lon: 13.4050,
         color: 0x34E07B, colorHex: '#34E07B',
         region: 'eu',
         isPrimary: true
@@ -291,109 +320,95 @@ document.addEventListener('DOMContentLoaded', () => {
         flag: '🇵🇱',
         badge: 'EU & GDPR',
         tag: '🇪🇺 Central Europe',
-        desc: 'Европейские порталы, мультиязычность и интеграции с CRM системами ЕС.',
-        caseStudy: 'Сервис аренды спецтехники с автоматическим расчетом стоимости и полным соответствием GDPR.',
+        desc: 'Европейские порталы, мультиязычные каталоги и интеграции с CRM системами ЕС.',
+        caseStudy: 'Сервис аренды оборудования с автоматическим расчетом стоимости и полным соответствием GDPR.',
         lat: 52.2297, lon: 21.0122,
         color: 0x34E07B, colorHex: '#34E07B',
         region: 'eu',
-        isPrimary: true
+        parentHub: 'berlin'
       },
-      berlin: {
-        id: 'berlin',
-        name: 'Берлин',
-        country: 'Германия',
-        flag: '🇩🇪',
-        badge: 'Tech & Startups',
-        tag: '🇪🇺 Германия',
-        desc: 'Промо-сайты и веб-платформы для немецких технологических стартапов.',
-        caseStudy: 'Презентационный сайт стартапа с интерактивным 3D-конфигуратором продукта.',
-        lat: 52.5200, lon: 13.4050,
+      stockholm: {
+        id: 'stockholm',
+        name: 'Стокгольм',
+        country: 'Швеция',
+        flag: '🇸🇪',
+        badge: 'Nordic Highload',
+        tag: '❄️ Скандинавия',
+        desc: 'Минималистичные высокопроизводительные веб-сервисы для рынка Северной Европы.',
+        caseStudy: 'B2B-сервис аналитики с адаптивным интерфейсом под стандарты доступности WCAG.',
+        lat: 59.3293, lon: 18.0686,
         color: 0x34E07B, colorHex: '#34E07B',
         region: 'eu',
-        parentHub: 'warsaw'
+        parentHub: 'berlin'
       },
-      paris: {
-        id: 'paris',
-        name: 'Париж',
-        country: 'Франция',
-        flag: '🇫🇷',
-        badge: 'Luxury & Brands',
-        tag: '🇪🇺 Франция',
-        desc: 'Имиджевые сайты и премиальные посадочные страницы для европейских брендов.',
-        caseStudy: 'Имиджевый сайт архитектурного бюро с интерактивным портфолио проектов.',
-        lat: 48.8566, lon: 2.3522,
+      milan: {
+        id: 'milan',
+        name: 'Милан',
+        country: 'Италия',
+        flag: '🇮🇹',
+        badge: 'Fashion & E-Com',
+        tag: '🏛️ Южная Европа',
+        desc: 'Премиальные интернет-магазины, fashion-каталоги и сервисы бронирования.',
+        caseStudy: 'Эксклюзивный интернет-магазин дизайнерской мебели с мультивалютной корзиной.',
+        lat: 45.4642, lon: 9.1900,
         color: 0x34E07B, colorHex: '#34E07B',
         region: 'eu',
-        parentHub: 'london'
+        parentHub: 'paris'
       },
-      frankfurt: {
-        id: 'frankfurt',
-        name: 'Франкфурт',
-        country: 'Германия',
-        flag: '🇩🇪',
-        badge: 'B2B Финансы',
-        tag: '🇪🇺 Германия',
-        desc: 'Корпоративные порталы для финансового и логистического секторов Европы.',
-        caseStudy: 'B2B личный кабинет для управления оптовыми цепочками поставок.',
-        lat: 50.1109, lon: 8.6821,
+      barcelona: {
+        id: 'barcelona',
+        name: 'Барселона',
+        country: 'Испания',
+        flag: '🇪🇸',
+        badge: 'Travel & Media',
+        tag: '☀️ Пиренеи',
+        desc: 'Порталы бронирования, медиа-проекты и мультиязычные платформы юга Европы.',
+        caseStudy: 'Платформа бронирования премиальных яхт и апартаментов с онлайн-календарем занятости.',
+        lat: 41.3851, lon: 2.1734,
         color: 0x34E07B, colorHex: '#34E07B',
         region: 'eu',
-        parentHub: 'london'
-      },
-      vilnius: {
-        id: 'vilnius',
-        name: 'Вильнюс',
-        country: 'Литва',
-        flag: '🇱🇹',
-        badge: 'Digital Commerce',
-        tag: '🇪🇺 Прибалтика',
-        desc: 'Мультиязычные каталоги и интеграция платежных систем Прибалтики.',
-        caseStudy: 'Интернет-магазин электроники с мультивалютной корзиной и интеграцией Omniva.',
-        lat: 54.6872, lon: 25.2797,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'eu',
-        parentHub: 'warsaw'
+        parentHub: 'paris'
       },
 
-      // --- Ближний Восток (MENA) ---
+      // --- Ближний Восток & Азия (MENA) ---
       dubai: {
         id: 'dubai',
         name: 'Дубай',
         country: 'ОАЭ',
         flag: '🇦🇪',
         badge: 'E-Commerce & Luxury',
-        tag: '🌍 Middle East',
-        desc: 'Мультиязычные интернет-магазины и порталы элитной недвижимости.',
+        tag: '🌍 Ближний Восток',
+        desc: 'Мультиязычные интернет-магазины, порталы элитной недвижимости и сервисы ОАЭ.',
         caseStudy: 'Премиум-магазин парфюмерии со шлюзами Stripe/Tap и каталог элитной недвижимости.',
         lat: 25.2048, lon: 55.2708,
         color: 0x34E07B, colorHex: '#34E07B',
         region: 'mena',
         isPrimary: true
       },
-      abudhabi: {
-        id: 'abudhabi',
-        name: 'Абу-Даби',
-        country: 'ОАЭ',
-        flag: '🇦🇪',
-        badge: 'Инвест-фонды',
-        tag: '🌍 ОАЭ',
-        desc: 'Представительские сайты для инвестиционных компаний и консалтинга.',
-        caseStudy: 'Официальный портал инвестиционной группы с кабинетом акционера.',
-        lat: 24.4539, lon: 54.3773,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'mena',
-        parentHub: 'dubai'
-      },
       riyadh: {
         id: 'riyadh',
         name: 'Эр-Рияд',
         country: 'Саудовская Аравия',
         flag: '🇸🇦',
-        badge: 'B2B Порталы',
-        tag: '🌍 Саудовская Аравия',
-        desc: 'Локализация под арабский рынок (RTL) и интеграция с Mada / STC Pay.',
+        badge: 'B2B Порталы & RTL',
+        tag: '🇸🇦 Саудовская Аравия',
+        desc: 'Локализация под арабский рынок (RTL) и интеграция с национальными шлюзами Mada / STC Pay.',
         caseStudy: 'Корпоративный сайт производственного холдинга с полной поддержкой арабского языка.',
         lat: 24.7136, lon: 46.6753,
+        color: 0x34E07B, colorHex: '#34E07B',
+        region: 'mena',
+        parentHub: 'dubai'
+      },
+      istanbul: {
+        id: 'istanbul',
+        name: 'Стамбул',
+        country: 'Турция',
+        flag: '🇹🇷',
+        badge: 'Trade & Logistics',
+        tag: '🌉 Трансконтинентальный хаб',
+        desc: 'Торговые площадки, оптовые B2B-каталоги и логистические сервисы между Европой и Азией.',
+        caseStudy: 'Мультиязычный B2B-каталог фабрики с автоматической выгрузкой коммерческих предложений.',
+        lat: 41.0082, lon: 28.9784,
         color: 0x34E07B, colorHex: '#34E07B',
         region: 'mena',
         parentHub: 'dubai'
@@ -403,17 +418,31 @@ document.addEventListener('DOMContentLoaded', () => {
         name: 'Доха',
         country: 'Катар',
         flag: '🇶🇦',
-        badge: 'Digital Events',
-        tag: '🌍 Катар',
-        desc: 'Сайты мероприятий и презентационные посадочные страницы.',
-        caseStudy: 'Лендинг международной технологической выставки с онлайн-регистрацией.',
+        badge: 'Invest & Events',
+        tag: '🇶🇦 Катар',
+        desc: 'Сайты инвестиционных фондов и презентационные посадочные страницы мероприятий.',
+        caseStudy: 'Лендинг международного инвестиционного саммита с онлайн-регистрацией.',
         lat: 25.2854, lon: 51.5310,
         color: 0x34E07B, colorHex: '#34E07B',
         region: 'mena',
         parentHub: 'dubai'
       },
+      singapore: {
+        id: 'singapore',
+        name: 'Сингапур',
+        country: 'Сингапур',
+        flag: '🇸🇬',
+        badge: 'Fintech & Cloud',
+        tag: '🌏 Азиатский хаб',
+        desc: 'Азиатский технологический хаб: облачные платформы и финансовые сервисы.',
+        caseStudy: 'Веб-платформа финтех-сервиса с мультиязычной документацией и API интеграцией.',
+        lat: 1.3521, lon: 103.8198,
+        color: 0x34E07B, colorHex: '#34E07B',
+        region: 'mena',
+        parentHub: 'dubai'
+      },
 
-      // --- СНГ & Центральная Азия ---
+      // --- СНГ, Кавказ & Центральная Азия ---
       astana: {
         id: 'astana',
         name: 'Астана',
@@ -421,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
         flag: '🇰🇿',
         badge: 'Корп. порталы & 1С',
         tag: '🤝 Центральная Азия',
-        desc: 'Корпоративные сайты холдингов, каталоги и автоматизация продаж.',
+        desc: 'Корпоративные сайты холдингов, оптовые каталоги и автоматизация продаж.',
         caseStudy: 'B2B портал холдинга на 15 000 товаров с интеграцией 1С и личным кабинетом дилера.',
         lat: 51.1694, lon: 71.4491,
         color: 0x34E07B, colorHex: '#34E07B',
@@ -447,11 +476,39 @@ document.addEventListener('DOMContentLoaded', () => {
         name: 'Ташкент',
         country: 'Узбекистан',
         flag: '🇺🇿',
-        badge: 'B2B Каталоги',
+        badge: 'B2B Каталоги & Payme',
         tag: '🤝 Узбекистан',
-        desc: 'Сайты производителей и дистрибьюторов в Центральной Азии.',
-        caseStudy: 'Официальный каталог продукции строительного комбината с калькулятором.',
+        desc: 'Сайты производителей, интеграция платежных систем Payme / Click.',
+        caseStudy: 'Официальный каталог продукции строительного комбината с онлайн-калькулятором.',
         lat: 41.2995, lon: 69.2401,
+        color: 0x34E07B, colorHex: '#34E07B',
+        region: 'cis',
+        parentHub: 'astana'
+      },
+      tbilisi: {
+        id: 'tbilisi',
+        name: 'Тбилиси',
+        country: 'Грузия',
+        flag: '🇬🇪',
+        badge: 'IT Services & Expat',
+        tag: '🇬🇪 Кавказ',
+        desc: 'Сайты для международных IT-компаний, релокационных сервисов и туризма.',
+        caseStudy: 'Мультиязычный портал сервиса аренды авто с моментальным подтверждением брони.',
+        lat: 41.7151, lon: 44.8271,
+        color: 0x34E07B, colorHex: '#34E07B',
+        region: 'cis',
+        parentHub: 'astana'
+      },
+      baku: {
+        id: 'baku',
+        name: 'Баку',
+        country: 'Азербайджан',
+        flag: '🇦🇿',
+        badge: 'Logistics & Energy',
+        tag: '🇦🇿 Каспийский регион',
+        desc: 'Корпоративные порталы логистических и промышленных предприятий региона.',
+        caseStudy: 'Портал логистического оператора с личным кабинетом клиента и трекингом грузов.',
+        lat: 40.4093, lon: 49.8671,
         color: 0x34E07B, colorHex: '#34E07B',
         region: 'cis',
         parentHub: 'astana'
@@ -470,29 +527,15 @@ document.addEventListener('DOMContentLoaded', () => {
         region: 'cis',
         parentHub: 'minsk'
       },
-      spb: {
-        id: 'spb',
-        name: 'Санкт-Петербург',
-        country: 'Россия',
-        flag: '🇷🇺',
-        badge: 'Digital & SEO',
-        tag: '🤝 Digital',
-        desc: 'Продающие сайты и комплексное SEO-продвижение.',
-        caseStudy: 'Серия посадочных страниц для медицинской клиники с выводом в топ-3.',
-        lat: 59.9343, lon: 30.3351,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'cis',
-        parentHub: 'minsk'
-      },
 
-      // --- Северная Америка (США) ---
+      // --- Северная Америка (США & Канада) ---
       newyork: {
         id: 'newyork',
         name: 'Нью-Йорк',
         country: 'США',
         flag: '🇺🇸',
         badge: 'B2B Платформы',
-        tag: '⚡ USA',
+        tag: '⚡ East Coast',
         desc: 'Высоконагруженные лендинги и маркетинговые воронки для клиентов на рынке США.',
         caseStudy: 'Высоконагруженный B2B маркетплейс оптовых поставок с оптимизацией под Google Ads США.',
         lat: 40.7128, lon: -74.0060,
@@ -500,19 +543,19 @@ document.addEventListener('DOMContentLoaded', () => {
         region: 'us',
         isPrimary: true
       },
-      boston: {
-        id: 'boston',
-        name: 'Бостон',
+      sanfrancisco: {
+        id: 'sanfrancisco',
+        name: 'Сан-Франциско',
         country: 'США',
         flag: '🇺🇸',
-        badge: 'EdTech & Biotech',
-        tag: '⚡ USA',
-        desc: 'Сайты для технологических, научных и образовательных проектов.',
-        caseStudy: 'Платформа онлайн-курсов с защищенным видеоплеером и тестированием.',
-        lat: 42.3601, lon: -71.0589,
+        badge: 'Silicon Valley & AI',
+        tag: '⚡ Silicon Valley',
+        desc: 'Промо-сайты и веб-приложения для AI-стартапов и технологических платформ Калифорнии.',
+        caseStudy: 'Презентационный сайт генеративного AI-сервиса с интерактивной демо-песочницей в браузере.',
+        lat: 37.7749, lon: -122.4194,
         color: 0x34E07B, colorHex: '#34E07B',
         region: 'us',
-        parentHub: 'newyork'
+        isPrimary: true
       },
       chicago: {
         id: 'chicago',
@@ -520,24 +563,10 @@ document.addEventListener('DOMContentLoaded', () => {
         country: 'США',
         flag: '🇺🇸',
         badge: 'Logistics & Trade',
-        tag: '⚡ USA',
+        tag: '⚡ Midwest',
         desc: 'Корпоративные порталы логистических и производственных компаний.',
         caseStudy: 'Кабинет отслеживания грузов и расчет стоимости логистики в реальном времени.',
         lat: 41.8781, lon: -87.6298,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'us',
-        parentHub: 'newyork'
-      },
-      losangeles: {
-        id: 'losangeles',
-        name: 'Лос-Анджелес',
-        country: 'США',
-        flag: '🇺🇸',
-        badge: 'Media & Studios',
-        tag: '⚡ USA',
-        desc: 'Имиджевые сайты для медиа, продакшнов и креативных агентств.',
-        caseStudy: 'Интерактивное портфолио видеостудии с полноэкранным видео фоном.',
-        lat: 34.0522, lon: -118.2437,
         color: 0x34E07B, colorHex: '#34E07B',
         region: 'us',
         parentHub: 'newyork'
@@ -548,43 +577,28 @@ document.addEventListener('DOMContentLoaded', () => {
         country: 'США',
         flag: '🇺🇸',
         badge: 'Luxury Real Estate',
-        tag: '⚡ USA',
-        desc: 'Лендинги премиальной недвижимости и брокерских компаний.',
-        caseStudy: 'Презентационный лендинг кондоминиума во Флориде с формой бронирования.',
+        tag: '⚡ Florida',
+        desc: 'Лендинги премиальной недвижимости, яхтенных чартеров и инвестиций во Флориде.',
+        caseStudy: 'Презентационный лендинг жилого комплекса в Майами-Бич с интерактивными 3D-планировками.',
         lat: 25.7617, lon: -80.1918,
         color: 0x34E07B, colorHex: '#34E07B',
         region: 'us',
         parentHub: 'newyork'
+      },
+      toronto: {
+        id: 'toronto',
+        name: 'Торонто',
+        country: 'Канада',
+        flag: '🇨🇦',
+        badge: 'Enterprise & FinTech',
+        tag: '🇨🇦 Canada',
+        desc: 'Корпоративные сайты и B2B порталы для канадского финансового и ритейл секторов.',
+        caseStudy: 'Корпоративный сайт страховой группы с онлайн-калькулятором полисов.',
+        lat: 43.6532, lon: -79.3832,
+        color: 0x34E07B, colorHex: '#34E07B',
+        region: 'us',
+        parentHub: 'newyork'
       }
-    };
-
-    // Золотые границы стран и регионов присутствия
-    const REGION_BOUNDARIES = {
-      by: [
-        [51.2, 23.5], [52.1, 23.2], [53.6, 23.8], [55.8, 26.5], [56.2, 28.2],
-        [55.9, 30.9], [54.5, 31.8], [53.4, 32.2], [52.1, 31.6], [51.3, 30.4],
-        [51.2, 27.5], [51.2, 23.5]
-      ],
-      mena: [
-        [21.5, 51.5], [24.0, 51.2], [26.2, 56.1], [25.5, 56.8], [24.2, 56.0],
-        [23.0, 55.4], [22.0, 54.8], [21.5, 51.5]
-      ],
-      london: [
-        [49.8, -5.5], [50.8, 1.6], [53.2, 0.4], [55.8, -1.8], [58.6, -3.2],
-        [58.6, -5.2], [56.2, -5.8], [54.5, -3.2], [51.5, -4.8], [49.8, -5.5]
-      ],
-      us: [
-        [36.5, -76.2], [39.0, -74.8], [40.8, -73.6], [42.4, -70.8], [44.8, -66.9],
-        [45.1, -73.5], [43.0, -78.9], [39.8, -79.6], [37.2, -78.8], [36.5, -76.2]
-      ],
-      cis: [
-        [45.2, 50.4], [51.1, 50.8], [54.8, 69.1], [54.2, 76.8], [50.1, 83.2],
-        [43.2, 80.2], [42.1, 70.3], [44.8, 55.2], [45.2, 50.4]
-      ],
-      warsaw: [
-        [49.1, 19.0], [49.4, 22.8], [51.5, 23.9], [54.2, 22.9], [54.5, 18.6],
-        [54.0, 14.3], [51.0, 15.0], [49.1, 19.0]
-      ]
     };
 
     // Конвертер географических координат в координаты сферы Three.js
@@ -675,28 +689,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const gridMesh = new THREE.Mesh(gridGeo, gridMat);
     globeGroup.add(gridMesh);
-
-    // Золотые контуры ключевых стран присутствия (скрыты по умолчанию, не висят в воздухе)
-    const goldenLines = {};
-    const BORDER_RADIUS = GLOBE_RADIUS * 1.005;
-
-    Object.keys(REGION_BOUNDARIES).forEach(regKey => {
-      const rawCoords = REGION_BOUNDARIES[regKey];
-      const pts = rawCoords.map(([lat, lon]) => latLonToVec3(lat, lon, BORDER_RADIUS));
-      const curve = new THREE.CatmullRomCurve3(pts, true, 'centripetal', 0.25);
-      const densePts = curve.getPoints(rawCoords.length * 6);
-      const borderGeo = new THREE.BufferGeometry().setFromPoints(densePts);
-      const borderMat = new THREE.LineBasicMaterial({
-        color: 0xFFD700,
-        transparent: true,
-        opacity: 0, // Невидима по умолчанию!
-        blending: THREE.AdditiveBlending
-      });
-      const borderLine = new THREE.LineLoop(borderGeo, borderMat);
-      borderLine.userData = { regionKey: regKey };
-      globeGroup.add(borderLine);
-      goldenLines[regKey] = borderLine;
-    });
 
     // Коллекции интерактивных 3D объектов
     const hubObjects = {};
@@ -877,45 +869,17 @@ document.addEventListener('DOMContentLoaded', () => {
     globeGroup.rotation.x = targetRotX;
     globeGroup.rotation.y = targetRotY;
 
-    // Подсветка золотых контуров региона
-    const highlightGoldenRegion = (hubKey) => {
-      // Сброс золотых линий (скрыты, чтобы не казались странной нитью)
-      Object.keys(goldenLines).forEach(k => {
-        goldenLines[k].material.opacity = 0;
-      });
-
-      // Подсветка линии связанной страны при выборе хаба
+    // Подсветка активного города и его связи с Минском HQ
+    const highlightActiveCityNetwork = (hubKey) => {
       if (hubKey) {
         const hub = HUBS[hubKey];
-        const matchKeys = [];
-        if (hub.region === 'by') {
-          matchKeys.push('by');
-        } else if (hub.region === 'mena') {
-          matchKeys.push('mena');
-        } else if (hub.region === 'eu') {
-          if (hubKey === 'london') matchKeys.push('london');
-          else if (hubKey === 'warsaw') matchKeys.push('warsaw');
-        } else if (hub.region === 'us') {
-          matchKeys.push('us');
-        } else if (hub.region === 'cis') {
-          matchKeys.push('cis');
-        }
-
-        matchKeys.forEach(mk => {
-          if (goldenLines[mk]) {
-            goldenLines[mk].material.opacity = 0.90;
-            goldenLines[mk].material.color.setHex(0xFFD700); // Яркое чистое золото
-          }
-        });
-
-        // Подсветка дуги к этому хабу золотым
         arcObjects.forEach(arc => {
           if (arc.userData.hubKey === hubKey || (hub.parentHub && arc.userData.hubKey === hub.parentHub)) {
             arc.material.color.setHex(0xFFD700);
             arc.material.opacity = 1.0;
           } else {
             arc.material.color.setHex(arc.userData.baseColor);
-            arc.material.opacity = (hubKey === 'minsk' || arc.userData.hubKey === activeHubKey) ? 0.7 : 0.18;
+            arc.material.opacity = (hubKey === 'minsk' || arc.userData.hubKey === activeHubKey) ? 0.7 : 0.16;
           }
         });
       } else {
@@ -953,7 +917,7 @@ document.addEventListener('DOMContentLoaded', () => {
         t.setAttribute('aria-selected', String(on));
       });
 
-      highlightGoldenRegion(hubKey);
+      highlightActiveCityNetwork(hubKey);
 
       // Плавный поворот глобуса к выбранной точке
       if (smoothFly) {
@@ -989,7 +953,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (reg === 'eu') {
           selectHub('london', true);
         } else if (reg === 'us' || reg === 'na') {
-          selectHub('newyork', true);
+          selectHub('sanfrancisco', true);
         } else if (reg === 'cis') {
           selectHub('astana', true);
         }
