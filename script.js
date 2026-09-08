@@ -697,61 +697,79 @@ document.addEventListener('DOMContentLoaded', () => {
     const arcObjects = [];
     const pulseParticles = [];
 
-    // Создание пульсирующих выразительных точек хабов (зеленые кружки волны как в первой плоской версии)
+    // Высота физической булавки над поверхностью глобуса
+    const PIN_HEIGHT = 0.052;
+
+    // 1. Создание физических булавок (канцелярские гвоздики с металлическим стержнем и эмалевой шапочкой)
     Object.keys(HUBS).forEach(key => {
       const hub = HUBS[key];
-      const basePos = latLonToVec3(hub.lat, hub.lon, GLOBE_RADIUS * 1.002);
+      const basePos = latLonToVec3(hub.lat, hub.lon, GLOBE_RADIUS * 1.001);
       const normal = basePos.clone().normalize();
 
-      const dotColor = hub.isHQ ? 0xFF6915 : 0x34E07B; // Фирменный Orange для HQ, свежий изумрудно-зеленый для сети
-      const rippleColor = hub.isHQ ? 0xFF6915 : 0x38E585; // Зеленые кружки волны как в плоском макете .wpin__ripple
-      const dotRadius = hub.isHQ ? 0.036 : (hub.isPrimary ? 0.027 : 0.021); // Увеличенные, хорошо заметные точки хабов
+      // Точка крепления нити (шейка булавки) и вершина (шапочка)
+      const headPos = basePos.clone().add(normal.clone().multiplyScalar(PIN_HEIGHT));
+      const neckPos = basePos.clone().add(normal.clone().multiplyScalar(PIN_HEIGHT * 0.72));
 
-      // 1. Темная контрастная окантовка (как border: 1.5px solid #060e28 в оригинале)
-      const borderGeo = new THREE.RingGeometry(dotRadius * 0.75, dotRadius * 1.32, 28);
-      const borderMat = new THREE.MeshBasicMaterial({
-        color: 0x03081A,
-        side: THREE.DoubleSide
+      // Металлический стержень булавки (серебристая стальная игла)
+      const needleGeo = new THREE.CylinderGeometry(0.0035, 0.0022, PIN_HEIGHT, 8);
+      const needleMat = new THREE.MeshStandardMaterial({
+        color: 0xC4CBD5,
+        metalness: 0.88,
+        roughness: 0.22
       });
-      const borderMesh = new THREE.Mesh(borderGeo, borderMat);
-      borderMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.002)));
-      borderMesh.lookAt(basePos.clone().add(normal.clone().multiplyScalar(2)));
-      globeGroup.add(borderMesh);
+      const needleMesh = new THREE.Mesh(needleGeo, needleMat);
+      needleMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(PIN_HEIGHT * 0.5)));
+      needleMesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), normal);
+      globeGroup.add(needleMesh);
 
-      // 2. Выразительная светящаяся центральная точка (.wpin__dot)
-      const coreGeo = new THREE.SphereGeometry(dotRadius, 16, 16);
-      const coreMat = new THREE.MeshBasicMaterial({
-        color: dotColor
+      // Шапочка булавки (глянцевая эмалевая головка: оранжевая для Минска HQ, изумрудная для городов)
+      const headRadius = hub.isHQ ? 0.038 : (hub.isPrimary ? 0.027 : 0.022);
+      const headGeo = new THREE.SphereGeometry(headRadius, 16, 16);
+      const headMat = new THREE.MeshStandardMaterial({
+        color: hub.isHQ ? 0xFF6915 : 0x22C55E,
+        metalness: 0.15,
+        roughness: 0.30
       });
-      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-      coreMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.003)));
-      globeGroup.add(coreMesh);
+      const headMesh = new THREE.Mesh(headGeo, headMat);
+      headMesh.position.copy(headPos);
+      globeGroup.add(headMesh);
 
-      // 3. Мягкий световой ореол вокруг точки
-      const haloGeo = new THREE.SphereGeometry(dotRadius * 1.7, 16, 16);
+      // Маленький мягкий световой ореол вокруг шапочки
+      const haloGeo = new THREE.SphereGeometry(headRadius * 1.4, 16, 16);
       const haloMat = new THREE.MeshBasicMaterial({
-        color: dotColor,
+        color: hub.isHQ ? 0xFF6915 : 0x22C55E,
         transparent: true,
-        opacity: 0.30,
+        opacity: 0.22,
         blending: THREE.AdditiveBlending
       });
       const haloMesh = new THREE.Mesh(haloGeo, haloMat);
-      haloMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.003)));
+      haloMesh.position.copy(headPos);
       globeGroup.add(haloMesh);
 
-      // 4. Зеленые расходящиеся импульсы (двойные концентрические волны .wpin__ripple)
-      const ringGeo = new THREE.RingGeometry(dotRadius * 0.95, dotRadius * 1.30, 32);
+      // Тёмная металлическая шайба в основании у поверхности Земли
+      const washerGeo = new THREE.RingGeometry(0.010, headRadius * 1.05, 20);
+      const washerMat = new THREE.MeshBasicMaterial({
+        color: 0x03081A,
+        side: THREE.DoubleSide
+      });
+      const washerMesh = new THREE.Mesh(washerGeo, washerMat);
+      washerMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.002)));
+      washerMesh.lookAt(basePos.clone().add(normal.clone().multiplyScalar(2)));
+      globeGroup.add(washerMesh);
+
+      // Тонкая тактильная волна-пульс на поверхности Земли вокруг булавки (.wpin__ripple)
+      const ringGeo = new THREE.RingGeometry(headRadius * 0.95, headRadius * 1.30, 32);
       const rings = [];
       for (let i = 0; i < 2; i++) {
         const ringMat = new THREE.MeshBasicMaterial({
-          color: rippleColor,
+          color: hub.isHQ ? 0xFF6915 : 0x38E585,
           transparent: true,
           opacity: 0,
           side: THREE.DoubleSide,
           blending: THREE.AdditiveBlending
         });
         const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-        ringMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.005)));
+        ringMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.004)));
         ringMesh.lookAt(basePos.clone().add(normal.clone().multiplyScalar(2)));
         globeGroup.add(ringMesh);
         rings.push(ringMesh);
@@ -759,19 +777,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
       beaconRings.push({
         rings,
-        coreMesh,
+        headMesh,
         haloMesh,
         duration: hub.isHQ ? 2.2 : 3.0,
         offset: Math.random() * 3.0,
         isHQ: hub.isHQ
       });
 
-      // 5. Невидимый увеличенный хитбокс (радиус 0.085) для комфортного попадания курсором
+      // Невидимый увеличенный хитбокс для комфортного клика по булавке
       const hitGeo = new THREE.SphereGeometry(0.085, 8, 8);
       const hitMat = new THREE.MeshBasicMaterial({ visible: false });
       const hitMesh = new THREE.Mesh(hitGeo, hitMat);
-      hitMesh.position.copy(basePos);
-      hitMesh.userData = { hubKey: key, hubData: hub, basePos, normal };
+      hitMesh.position.copy(headPos);
+      hitMesh.userData = { hubKey: key, hubData: hub, basePos, normal, headPos };
       globeGroup.add(hitMesh);
       interactiveHitMeshes.push(hitMesh);
 
@@ -779,64 +797,62 @@ document.addEventListener('DOMContentLoaded', () => {
         data: hub,
         basePos,
         normal,
-        coreMesh,
+        headPos,
+        neckPos,
+        needleMesh,
+        coreMesh: headMesh,
+        headMesh,
         haloMesh,
         rings
       };
     });
 
-    // Создание 3D дуг сети: магистральные дуги от Минска HQ и региональные ветви
+    // 2. Создание физических натянутых нитей (стиль «булавки и нити на глобусе»)
     const minskHub = hubObjects['minsk'];
-    const minskPos = minskHub.basePos;
+    const minskNeck = minskHub.neckPos;
 
     Object.keys(HUBS).forEach(key => {
       if (key === 'minsk') return;
       const targetHub = hubObjects[key];
       const target = targetHub.data;
 
-      // Источник линии: Минск HQ для первичных хабов, или родительский хаб для вторичных
+      // Источник нити: Минск HQ или региональный центр
       const parentKey = target.parentHub || 'minsk';
       const sourceHub = hubObjects[parentKey] || minskHub;
-      const sourcePos = sourceHub.basePos;
-      const targetPos = targetHub.basePos;
+      const sourceNeck = sourceHub.neckPos;
+      const targetNeck = targetHub.neckPos;
 
-      const dist = sourcePos.distanceTo(targetPos);
-      const mid = sourcePos.clone().add(targetPos).multiplyScalar(0.5);
+      const dist = sourceNeck.distanceTo(targetNeck);
+      const mid = sourceNeck.clone().add(targetNeck).multiplyScalar(0.5);
       mid.normalize();
+
+      // Физическая нить натянута по сфере и слегка приподнимается над поверхностью
       const isTrunk = target.isPrimary;
-      const arcHeight = GLOBE_RADIUS + Math.max(isTrunk ? 0.16 : 0.09, dist * (isTrunk ? 0.20 : 0.14));
-      mid.multiplyScalar(arcHeight);
+      const threadLift = GLOBE_RADIUS + PIN_HEIGHT * 0.72 + Math.min(0.14, dist * 0.085);
+      mid.multiplyScalar(threadLift);
 
-      const curve = new THREE.QuadraticBezierCurve3(sourcePos, mid, targetPos);
-      const points = curve.getPoints(isTrunk ? 48 : 32);
-      const curveGeo = new THREE.BufferGeometry().setFromPoints(points);
-      const curveMat = new THREE.LineBasicMaterial({
-        color: 0x4FA3E8,
+      const curve = new THREE.QuadraticBezierCurve3(sourceNeck, mid, targetNeck);
+
+      // Настоящая 3D трубка-нить с матовой текстильной фактурой
+      const tubeRadius = isTrunk ? 0.0040 : 0.0030;
+      const tubeGeo = new THREE.TubeGeometry(curve, 32, tubeRadius, 6, false);
+      const threadMat = new THREE.MeshStandardMaterial({
+        color: 0xFF6915, // Фирменная тёплая оранжевая нить
+        roughness: 0.78, // Матовая шерстяная / шёлковая нить
+        metalness: 0.05,
         transparent: true,
-        opacity: isTrunk ? 0.42 : 0.22,
-        blending: THREE.AdditiveBlending
+        opacity: isTrunk ? 0.45 : 0.22
       });
-      const curveLine = new THREE.Line(curveGeo, curveMat);
-      curveLine.userData = { hubKey: key, region: target.region, baseColor: 0x4FA3E8, isTrunk };
-      globeGroup.add(curveLine);
-      arcObjects.push(curveLine);
-
-      // Аккуратный микро-импульс данных по дуге
-      const particleGeo = new THREE.SphereGeometry(isTrunk ? 0.014 : 0.010, 8, 8);
-      const particleMat = new THREE.MeshBasicMaterial({
-        color: 0x5299E0,
-        blending: THREE.AdditiveBlending
-      });
-      const particleMesh = new THREE.Mesh(particleGeo, particleMat);
-      globeGroup.add(particleMesh);
-      pulseParticles.push({
-        mesh: particleMesh,
-        curve,
-        speed: 0.0032 + (1 / dist) * 0.0022,
-        progress: Math.random(),
+      const threadMesh = new THREE.Mesh(tubeGeo, threadMat);
+      threadMesh.userData = {
         hubKey: key,
-        baseColor: 0x5299E0
-      });
+        region: target.region,
+        baseColor: 0xFF6915,
+        baseOpacity: isTrunk ? 0.45 : 0.22,
+        isTrunk
+      };
+      globeGroup.add(threadMesh);
+      arcObjects.push(threadMesh);
     });
 
     // UI Элементы управления и карточка
@@ -869,23 +885,44 @@ document.addEventListener('DOMContentLoaded', () => {
     globeGroup.rotation.x = targetRotX;
     globeGroup.rotation.y = targetRotY;
 
-    // Подсветка активного города и его связи с Минском HQ
+    // Подсветка активного города и натянутой к нему физической нити
     const highlightActiveCityNetwork = (hubKey) => {
       if (hubKey) {
         const hub = HUBS[hubKey];
-        arcObjects.forEach(arc => {
-          if (arc.userData.hubKey === hubKey || (hub.parentHub && arc.userData.hubKey === hub.parentHub)) {
-            arc.material.color.setHex(0xFFD700);
-            arc.material.opacity = 1.0;
+        arcObjects.forEach(thread => {
+          if (thread.userData.hubKey === hubKey || (hub.parentHub && thread.userData.hubKey === hub.parentHub)) {
+            // Натянутая активная нить ярко подсвечивается
+            thread.material.color.setHex(0xFF7A1A);
+            thread.material.opacity = 1.0;
+            thread.scale.set(1.25, 1.25, 1.25);
           } else {
-            arc.material.color.setHex(arc.userData.baseColor);
-            arc.material.opacity = (hubKey === 'minsk' || arc.userData.hubKey === activeHubKey) ? 0.7 : 0.16;
+            thread.material.color.setHex(thread.userData.baseColor);
+            thread.material.opacity = (hubKey === 'minsk' || thread.userData.hubKey === activeHubKey) ? 0.65 : 0.16;
+            thread.scale.set(1.0, 1.0, 1.0);
+          }
+        });
+
+        // Подсветка активной булавки
+        Object.keys(hubObjects).forEach(k => {
+          const h = hubObjects[k];
+          if (k === hubKey) {
+            h.headMesh.scale.set(1.25, 1.25, 1.25);
+            h.haloMesh.material.opacity = 0.50;
+          } else {
+            h.headMesh.scale.set(1.0, 1.0, 1.0);
+            h.haloMesh.material.opacity = 0.22;
           }
         });
       } else {
-        arcObjects.forEach(arc => {
-          arc.material.color.setHex(arc.userData.baseColor);
-          arc.material.opacity = 0.45;
+        arcObjects.forEach(thread => {
+          thread.material.color.setHex(thread.userData.baseColor);
+          thread.material.opacity = thread.userData.baseOpacity;
+          thread.scale.set(1.0, 1.0, 1.0);
+        });
+        Object.keys(hubObjects).forEach(k => {
+          const h = hubObjects[k];
+          h.headMesh.scale.set(1.0, 1.0, 1.0);
+          h.haloMesh.material.opacity = 0.22;
         });
       }
     };
@@ -1173,21 +1210,7 @@ document.addEventListener('DOMContentLoaded', () => {
         b.haloMesh.scale.set(1 + pulse, 1 + pulse, 1 + pulse);
       });
 
-      // Анимация летящих световых импульсов по дугам
-      pulseParticles.forEach(p => {
-        p.progress = (p.progress + p.speed) % 1;
-        const pt = p.curve.getPoint(p.progress);
-        p.mesh.position.copy(pt);
 
-        // Если дуга подсвечена золотом, частица тоже золотая
-        if (hoveredHubKey === p.hubKey || activeHubKey === p.hubKey) {
-          p.mesh.material.color.setHex(0xFFD700);
-          p.mesh.scale.set(1.3, 1.3, 1.3);
-        } else {
-          p.mesh.material.color.setHex(p.baseColor);
-          p.mesh.scale.set(1, 1, 1);
-        }
-      });
 
       // Позиционирование 3D попапа при наведении на микро-маяк
       if (hoveredHubKey && globeTooltip && hubObjects[hoveredHubKey]) {
