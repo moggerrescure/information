@@ -260,7 +260,7 @@ main>section{padding-block:0 var(--sec)}
 .hero-cue {
   position: absolute;
   left: 53.5%;
-  top: -62px;
+  top: -48px;
   transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
