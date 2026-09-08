@@ -17,6 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..700&family=Montserrat:wght@400..800&display=swap" rel="stylesheet">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
@@ -679,23 +680,23 @@
   </div>
 </section>
 
-<!-- ============ ГЕОГРАФИЯ ============ -->
+<!-- ============ 3D ГЛОБУС ============ -->
 <section class="world" id="geography">
   <div class="wrap">
     <div class="world__card reveal">
       <div class="world__header">
         <div class="world__title-block">
           <h2 class="h2 h2--light">Мы создаём сайты по всему миру</h2>
-          <p class="world__lead">Разрабатываем и продвигаем проекты для клиентов из Беларуси, Европы, Ближнего Востока, СНГ и США. Чёткая сеть региональных хабов и прозрачный процесс работы.</p>
+          <p class="world__lead">Интерактивный 3D-глобус присутствия: исследуйте наши ключевые хабы в Европе, на Ближнем Востоке, в США и СНГ. Вращайте глобус и выбирайте регион.</p>
         </div>
         <div class="world__badge">
           <span class="world__badge-dot" aria-hidden="true"></span>
-          <span><b>16 хабов</b> в 5 мировых регионах</span>
+          <span><b>3D Глобус</b> • 15+ стран охвата</span>
         </div>
       </div>
 
-      <div class="world__filter" role="tablist" aria-label="Фильтр регионов">
-        <button class="wtab is-on" type="button" role="tab" aria-selected="true" data-region="all">Все регионы (16)</button>
+      <div class="world__filter" role="tablist" aria-label="Быстрый выбор региона">
+        <button class="wtab is-on" type="button" role="tab" aria-selected="true" data-region="all">Весь мир (360°)</button>
         <button class="wtab" type="button" role="tab" aria-selected="false" data-region="by">Беларусь (HQ)</button>
         <button class="wtab" type="button" role="tab" aria-selected="false" data-region="eu">Европа</button>
         <button class="wtab" type="button" role="tab" aria-selected="false" data-region="me">Ближний Восток</button>
@@ -703,390 +704,98 @@
         <button class="wtab" type="button" role="tab" aria-selected="false" data-region="na">Северная Америка</button>
       </div>
 
-      <!-- 3D сцена карты с региональным зонированием -->
-      <div class="world__viewport">
-        <div class="world__stage" id="worldStage" tabindex="0" role="region" aria-label="3D интерактивная карта хабов KV-web">
-          <div class="world__pedestal" aria-hidden="true"></div>
-          <div class="world__glow" aria-hidden="true"></div>
+      <!-- 3D Глобус сцена -->
+      <div class="world__globe-viewport" id="globeViewport">
+        <!-- 3D WebGL Canvas -->
+        <div class="world__globe-canvas-wrap" id="globeCanvasWrap">
+          <canvas id="globeCanvas"></canvas>
+          <div class="globe-atmosphere" aria-hidden="true"></div>
+        </div>
 
-          <!-- SVG слой: континенты + зоны регионов + координатная сетка + логические линии -->
-          <svg class="world__svg" viewBox="0 0 1000 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <defs>
-              <linearGradient id="trunkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#FF6915" stop-opacity="1"/>
-                <stop offset="30%" stop-color="#C4F449" stop-opacity="0.95"/>
-                <stop offset="80%" stop-color="#396CEB" stop-opacity="0.7"/>
-                <stop offset="100%" stop-color="#7574FF" stop-opacity="0.4"/>
-              </linearGradient>
-
-              <linearGradient id="branchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#C4F449" stop-opacity="0.85"/>
-                <stop offset="60%" stop-color="#396CEB" stop-opacity="0.6"/>
-                <stop offset="100%" stop-color="#7574FF" stop-opacity="0.2"/>
-              </linearGradient>
-            </defs>
-
-            <!-- Координатная сетка -->
-            <g class="world__grid-lines" stroke="rgba(255,255,255,0.07)" stroke-width="0.6" stroke-dasharray="3 5">
-              <line x1="0" y1="104" x2="1000" y2="104"/>
-              <line x1="0" y1="208" x2="1000" y2="208"/>
-              <line x1="0" y1="312" x2="1000" y2="312"/>
-              <line x1="0" y1="416" x2="1000" y2="416"/>
-              <line x1="200" y1="0" x2="200" y2="520"/>
-              <line x1="400" y1="0" x2="400" y2="520"/>
-              <line x1="600" y1="0" x2="600" y2="520"/>
-              <line x1="800" y1="0" x2="800" y2="520"/>
-            </g>
-
-            <!-- Векторные континенты -->
-            <image href="img/world-continents.svg" width="1000" height="520" preserveAspectRatio="xMidYMid meet" opacity="0.95"/>
-
-
-            <!-- Региональные световые зоны (контуры рынков присутствия) -->
-            <g class="world__zones">
-              <!-- Северная Америка -->
-              <g class="world__zone-group" data-region="na">
-                <path class="world__zone-shape" d="M 150 140 C 200 95, 300 95, 335 135 C 360 175, 340 240, 275 255 C 200 260, 135 210, 150 140 Z" />
-                <text class="world__zone-label" x="235" y="115">Северная Америка</text>
-              </g>
-
-              <!-- Европа -->
-              <g class="world__zone-group" data-region="eu">
-                <path class="world__zone-shape" d="M 480 110 C 505 65, 570 65, 595 95 C 620 135, 615 195, 570 200 C 525 200, 465 160, 480 110 Z" />
-                <text class="world__zone-label" x="510" y="80">Европа</text>
-              </g>
-
-              <!-- СНГ и Кавказ -->
-              <g class="world__zone-group" data-region="cis">
-                <path class="world__zone-shape" d="M 605 90 C 660 60, 750 80, 755 125 C 760 170, 705 185, 660 175 C 615 165, 590 125, 605 90 Z" />
-                <text class="world__zone-label" x="685" y="85">СНГ & Азия</text>
-              </g>
-
-              <!-- Ближний Восток -->
-              <g class="world__zone-group" data-region="me">
-                <path class="world__zone-shape" d="M 575 185 C 610 160, 675 170, 680 205 C 685 245, 630 255, 600 245 C 565 235, 555 205, 575 185 Z" />
-                <text class="world__zone-label" x="635" y="255">Ближний Восток</text>
-              </g>
-
-              <!-- Минск HQ Зона фокуса -->
-              <g class="world__zone-group" data-region="by">
-                <circle class="world__zone-hq-aura" cx="576.6" cy="104.4" r="42" />
-                <text class="world__zone-label world__zone-label--hq" x="576.6" y="68">★ KV-web HQ</text>
-              </g>
-            </g>
-
-
-            <!-- Логические линии связей -->
-            <g class="world__network" fill="none" stroke-linecap="round">
-
-            <!-- Главные магистрали от Минска (HQ) к хабам континентов -->
-            <g class="world__arcs-main">
-              <path class="arc-line arc-line--trunk" data-region="eu" d="M 576.6 104.4 Q 538 65 499.6 113.3" /> <!-- Минск -> Лондон -->
-              <path class="arc-line arc-line--trunk" data-region="me" d="M 576.6 104.4 Q 625 125 653.5 211.0" /> <!-- Минск -> Дубай -->
-              <path class="arc-line arc-line--trunk" data-region="na" d="M 576.6 104.4 Q 425 25 294.4 153.4" /> <!-- Минск -> Нью-Йорк -->
-              <path class="arc-line arc-line--trunk" data-region="cis" d="M 576.6 104.4 Q 590 85 604.5 97.5" /> <!-- Минск -> Москва -->
-              <path class="arc-line arc-line--trunk" data-region="cis" d="M 576.6 104.4 Q 637 50 698.5 114.5" /> <!-- Минск -> Астана -->
-            </g>
-
-            <!-- Региональные ветви от хабов к городам региона -->
-            <g class="world__arcs-branch">
-              <!-- Европа -->
-              <path class="arc-line arc-line--branch" data-region="eu" d="M 499.6 113.3 Q 518 95 537.2 109.5" /> <!-- Лондон -> Берлин -->
-              <path class="arc-line arc-line--branch" data-region="eu" d="M 537.2 109.5 Q 548 100 558.4 110.6" /> <!-- Берлин -> Варшава -->
-              <path class="arc-line arc-line--branch" data-region="eu" d="M 537.2 109.5 Q 570 135 591.8 175.8" /> <!-- Берлин -> Лимассол -->
-
-              <!-- Ближний Восток -->
-              <path class="arc-line arc-line--branch" data-region="me" d="M 653.5 211.0 Q 642 205 629.6 212.9" /> <!-- Дубай -> Эр-Рияд -->
-              <path class="arc-line arc-line--branch" data-region="me" d="M 653.5 211.0 Q 625 190 596.6 185.4" /> <!-- Дубай -> Тель-Авив -->
-
-              <!-- Северная Америка -->
-              <path class="arc-line arc-line--branch" data-region="na" d="M 294.4 153.4 Q 292 185 277.2 208.9" /> <!-- Нью-Йорк -> Майами -->
-              <path class="arc-line arc-line--branch" data-region="na" d="M 294.4 153.4 Q 230 110 171.5 178.1" /> <!-- Нью-Йорк -> Лос-Анджелес -->
-
-              <!-- СНГ и Кавказ -->
-              <path class="arc-line arc-line--branch" data-region="cis" d="M 604.5 97.5 Q 618 120 624.4 149.6" /> <!-- Москва -> Тбилиси -->
-              <path class="arc-line arc-line--branch" data-region="cis" d="M 698.5 114.5 Q 710 125 713.5 144.0" /> <!-- Астана -> Алматы -->
-              <path class="arc-line arc-line--branch" data-region="cis" d="M 698.5 114.5 Q 692 130 692.3 151.2" /> <!-- Астана -> Ташкент -->
-            </g>
-
-            </g>
-          </svg>
-
-          <!-- Слой четких 3D точек -->
-          <div class="world__pins" id="worldPins" aria-label="Точки проектов">
-          <div class="wpin wpin--hq" style="left:57.66%;top:20.08%;--d:0.00s" data-region="by" data-city="Минск (HQ)" tabindex="0" role="button" aria-label="Минск (HQ), Беларусь">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇧🇾</span>
-                <strong>Минск (HQ)</strong>
-                <span class="wpin__tag">⭐ Главный офис</span>
+        <!-- Левый HUD-виджет переключения хабов -->
+        <div class="globe-hud" aria-label="Список ключевых хабов">
+          <div class="globe-hud__header">Ключевые хабы</div>
+          <ul class="globe-hud__list">
+            <li class="globe-hud__item is-active" data-hub="minsk">
+              <span class="globe-hud__dot" style="--c:#FF6915"></span>
+              <div class="globe-hud__info">
+                <b>Минск</b>
+                <small>Штаб-квартира • HQ</small>
               </div>
-              <p class="wpin__pop-desc">Штаб-квартира KV-web • Центр разработки</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:55.84%;top:21.27%;--d:0.18s" data-region="eu" data-city="Варшава" tabindex="0" role="button" aria-label="Варшава, Польша">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇵🇱</span>
-                <strong>Варшава</strong>
-                <span class="wpin__tag">🚀 SaaS платформы</span>
+            </li>
+            <li class="globe-hud__item" data-hub="dubai">
+              <span class="globe-hud__dot" style="--c:#C4F449"></span>
+              <div class="globe-hud__info">
+                <b>Дубай</b>
+                <small>Ближний Восток • E-com</small>
               </div>
-              <p class="wpin__pop-desc">SaaS & B2B платформы</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:53.72%;top:21.06%;--d:0.36s" data-region="eu" data-city="Берлин" tabindex="0" role="button" aria-label="Берлин, Германия">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇩🇪</span>
-                <strong>Берлин</strong>
-                <span class="wpin__tag">⚡ Продуктовый лендинг</span>
+            </li>
+            <li class="globe-hud__item" data-hub="london">
+              <span class="globe-hud__dot" style="--c:#396CEB"></span>
+              <div class="globe-hud__info">
+                <b>Лондон</b>
+                <small>Европа • Финтех & SaaS</small>
               </div>
-              <p class="wpin__pop-desc">Стартапы и продуктовые лендинги</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:49.96%;top:21.79%;--d:0.54s" data-region="eu" data-city="Лондон" tabindex="0" role="button" aria-label="Лондон, Великобритания">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇬🇧</span>
-                <strong>Лондон</strong>
-                <span class="wpin__tag">💼 Финтех & Маркетинг</span>
+            </li>
+            <li class="globe-hud__item" data-hub="newyork">
+              <span class="globe-hud__dot" style="--c:#7574FF"></span>
+              <div class="globe-hud__info">
+                <b>Нью-Йорк</b>
+                <small>США • B2B платформы</small>
               </div>
-              <p class="wpin__pop-desc">Финтех & Конверсионный маркетинг</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:59.18%;top:33.81%;--d:0.72s" data-region="eu" data-city="Лимассол" tabindex="0" role="button" aria-label="Лимассол, Кипр">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇨🇾</span>
-                <strong>Лимассол</strong>
-                <span class="wpin__tag">🏢 IT & Недвижимость</span>
+            </li>
+            <li class="globe-hud__item" data-hub="astana">
+              <span class="globe-hud__dot" style="--c:#00B1C9"></span>
+              <div class="globe-hud__info">
+                <b>Астана</b>
+                <small>СНГ • Корп. порталы</small>
               </div>
-              <p class="wpin__pop-desc">IT-компании & Недвижимость</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:65.35%;top:40.58%;--d:0.90s" data-region="me" data-city="Дубай" tabindex="0" role="button" aria-label="Дубай, ОАЭ">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇦🇪</span>
-                <strong>Дубай</strong>
-                <span class="wpin__tag">🏢 Luxury Real Estate</span>
+            </li>
+            <li class="globe-hud__item" data-hub="warsaw">
+              <span class="globe-hud__dot" style="--c:#396CEB"></span>
+              <div class="globe-hud__info">
+                <b>Варшава</b>
+                <small>ЕС • Продукты & GDPR</small>
               </div>
-              <p class="wpin__pop-desc">Luxury недвижимость & E-commerce</p>
-            </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Правый блок управления 3D глобусом -->
+        <div class="globe-controls" aria-label="Управление глобусом">
+          <button class="globe-btn" id="globeSpinBtn" type="button" title="Включить / остановить автовращение" aria-label="Автоспин">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+          </button>
+          <button class="globe-btn" id="globeZoomIn" type="button" title="Приблизить" aria-label="Приблизить">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+          <button class="globe-btn" id="globeZoomOut" type="button" title="Отдалить" aria-label="Отдалить">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14"/></svg>
+          </button>
+        </div>
+
+        <!-- Всплывающая карточка города -->
+        <div class="globe-card" id="globeCard" aria-live="polite">
+          <div class="globe-card__header">
+            <span class="globe-card__flag" id="gcardFlag">🇧🇾</span>
+            <strong id="gcardCity">Минск (HQ)</strong>
+            <span class="globe-card__tag" id="gcardTag">⭐ Главный офис</span>
           </div>
-          <div class="wpin" style="left:62.97%;top:40.92%;--d:1.08s" data-region="me" data-city="Эр-Рияд" tabindex="0" role="button" aria-label="Эр-Рияд, Саудовская Аравия">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇸🇦</span>
-                <strong>Эр-Рияд</strong>
-                <span class="wpin__tag">🎯 E-commerce</span>
-              </div>
-              <p class="wpin__pop-desc">Инвестиционные и e-com порталы</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:59.66%;top:35.65%;--d:1.26s" data-region="me" data-city="Тель-Авив" tabindex="0" role="button" aria-label="Тель-Авив, Израиль">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇮🇱</span>
-                <strong>Тель-Авив</strong>
-                <span class="wpin__tag">🚀 High-Tech</span>
-              </div>
-              <p class="wpin__pop-desc">High-Tech стартапы & сервисы</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:60.45%;top:18.75%;--d:1.44s" data-region="cis" data-city="Москва" tabindex="0" role="button" aria-label="Москва, Россия">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇷🇺</span>
-                <strong>Москва</strong>
-                <span class="wpin__tag">🎯 E-commerce</span>
-              </div>
-              <p class="wpin__pop-desc">Крупные E-commerce & Порталы</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:62.44%;top:28.77%;--d:1.62s" data-region="cis" data-city="Тбилиси" tabindex="0" role="button" aria-label="Тбилиси, Грузия">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇬🇪</span>
-                <strong>Тбилиси</strong>
-                <span class="wpin__tag">⚡ Landing</span>
-              </div>
-              <p class="wpin__pop-desc">HoReCa & Девелоперские сайты</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:69.85%;top:22.02%;--d:1.80s" data-region="cis" data-city="Астана" tabindex="0" role="button" aria-label="Астана, Казахстан">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇰🇿</span>
-                <strong>Астана</strong>
-                <span class="wpin__tag">💼 Корпоративный портал</span>
-              </div>
-              <p class="wpin__pop-desc">Федеральные проекты & B2B</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:71.35%;top:27.69%;--d:1.98s" data-region="cis" data-city="Алматы" tabindex="0" role="button" aria-label="Алматы, Казахстан">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇰🇿</span>
-                <strong>Алматы</strong>
-                <span class="wpin__tag">🎯 Каталог товаров</span>
-              </div>
-              <p class="wpin__pop-desc">Сервисы и интернет-каталоги</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:69.23%;top:29.08%;--d:2.16s" data-region="cis" data-city="Ташкент" tabindex="0" role="button" aria-label="Ташкент, Узбекистан">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇺🇿</span>
-                <strong>Ташкент</strong>
-                <span class="wpin__tag">🎯 Интернет-магазин</span>
-              </div>
-              <p class="wpin__pop-desc">Ритейл и интернет-магазины</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:29.44%;top:29.5%;--d:2.34s" data-region="na" data-city="Нью-Йорк" tabindex="0" role="button" aria-label="Нью-Йорк, США">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇺🇸</span>
-                <strong>Нью-Йорк</strong>
-                <span class="wpin__tag">🚀 B2B SaaS</span>
-              </div>
-              <p class="wpin__pop-desc">B2B платформы & Маркетинг</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:27.72%;top:40.17%;--d:2.52s" data-region="na" data-city="Майами" tabindex="0" role="button" aria-label="Майами, США">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇺🇸</span>
-                <strong>Майами</strong>
-                <span class="wpin__tag">🏢 Недвижимость</span>
-              </div>
-              <p class="wpin__pop-desc">Real Estate лендинги & Брендинг</p>
-            </div>
-          </div>
-          <div class="wpin" style="left:17.15%;top:34.25%;--d:2.70s" data-region="na" data-city="Лос-Анджелес" tabindex="0" role="button" aria-label="Лос-Анджелес, США">
-            <span class="wpin__stalk" aria-hidden="true"></span>
-            <span class="wpin__ripple" aria-hidden="true"></span>
-            <span class="wpin__dot" aria-hidden="true"></span>
-            <div class="wpin__pop">
-              <div class="wpin__pop-header">
-                <span class="wpin__flag">🇺🇸</span>
-                <strong>Лос-Анджелес</strong>
-                <span class="wpin__tag">🎬 Медиа & Digital</span>
-              </div>
-              <p class="wpin__pop-desc">Медиа, Entertainment & Digital</p>
-            </div>
-          </div>
-          </div>
+          <p class="globe-card__desc" id="gcardDesc">Штаб-квартира KV-web. Центр веб-разработки, дизайна и сквозной аналитики. 50+ проектов.</p>
+        </div>
+
+        <div class="globe-hint" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+          <span>Зажмите и потяните мышь или палец для вращения глобуса</span>
         </div>
       </div>
 
-
-      <!-- Региональные карточки-хабы -->
-      <div class="world__regions" aria-label="Регионы присутствия">
-        <article class="wcard" data-region="by" tabindex="0" role="button">
-          <div class="wcard__top">
-            <span class="wcard__badge" style="--bc:#FF6915">Штаб-квартира</span>
-            <span class="wcard__count">50+ сайтов</span>
-          </div>
-          <h3 class="wcard__title">Беларусь (HQ)</h3>
-          <p class="wcard__city">Минск</p>
-          <p class="wcard__desc">Основной центр проектирования, вёрстки и сквозного маркетинга. Прямой контакт с основателем агентства.</p>
-        </article>
-
-        <article class="wcard" data-region="eu" tabindex="0" role="button">
-          <div class="wcard__top">
-            <span class="wcard__badge" style="--bc:#396CEB">Евросоюз</span>
-            <span class="wcard__count">18+ проектов</span>
-          </div>
-          <h3 class="wcard__title">Европа</h3>
-          <p class="wcard__city">Лондон • Берлин • Варшава • Лимассол</p>
-          <p class="wcard__desc">SaaS-платформы, B2B-сервисы и финтех. Разработка сайтов в строгом соответствии с GDPR и европейскими стандартами.</p>
-        </article>
-
-        <article class="wcard" data-region="me" tabindex="0" role="button">
-          <div class="wcard__top">
-            <span class="wcard__badge" style="--bc:#C4F449">Премиум</span>
-            <span class="wcard__count">12+ проектов</span>
-          </div>
-          <h3 class="wcard__title">Ближний Восток</h3>
-          <p class="wcard__city">Дубай • Эр-Рияд • Тель-Авив</p>
-          <p class="wcard__desc">Luxury недвижимость, e-commerce и венчурные проекты. Мультиязычная вёрстка (RTL/LTR) и высокая конверсия.</p>
-        </article>
-
-        <article class="wcard" data-region="cis" tabindex="0" role="button">
-          <div class="wcard__top">
-            <span class="wcard__badge" style="--bc:#00B1C9">СНГ & Азия</span>
-            <span class="wcard__count">25+ проектов</span>
-          </div>
-          <h3 class="wcard__title">СНГ и Кавказ</h3>
-          <p class="wcard__city">Москва • Астана • Алматы • Тбилиси • Ташкент</p>
-          <p class="wcard__desc">Крупные каталоги продукции, федеральные порталы, девелопмент и HoReCa. Интеграция с 1С и региональными CRM.</p>
-        </article>
-
-        <article class="wcard" data-region="na" tabindex="0" role="button">
-          <div class="wcard__top">
-            <span class="wcard__badge" style="--bc:#7574FF">Америка</span>
-            <span class="wcard__count">10+ проектов</span>
-          </div>
-          <h3 class="wcard__title">Северная Америка</h3>
-          <p class="wcard__city">Нью-Йорк • Майами • Лос-Анджелес</p>
-          <p class="wcard__desc">Продуктовые лендинги для американского рынка, маркетинг и медиа. Синхронизация по часовым поясам EST и PST.</p>
-        </article>
-      </div>
-
-
-      <!-- Нижняя плашка со статистикой -->
+      <!-- Нижняя палуба бизнес-метрик -->
       <div class="world__stats" aria-label="Статистика охвата">
-        <div class="wstat"><b>100%</b><span>Онлайн-сопровождение</span></div>
-        <div class="wstat"><b>от 3 дней</b><span>Сроки разработки</span></div>
-        <div class="wstat"><b>&gt; 4 лет</b><span>Опыт работы на рынке</span></div>
-        <div class="wstat"><b>5 регионов</b><span>Глобальный охват</span></div>
+        <div class="wstat"><b>15+ стран</b><span>Охват мировых рынков</span></div>
+        <div class="wstat"><b>65+ сайтов</b><span>Реализовано под ключ</span></div>
+        <div class="wstat"><b>+45% рост</b><span>Средний прирост конверсии</span></div>
+        <div class="wstat"><b>от 3 дней</b><span>Сроки запуска проекта</span></div>
       </div>
     </div>
   </div>
