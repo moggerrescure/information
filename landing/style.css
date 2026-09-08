@@ -650,13 +650,24 @@ main>section{padding-block:0 var(--sec)}
 }
 .world__svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
 
-.arc-path{
-  stroke-dasharray:10 8;animation:arcFlow 16s linear infinite;opacity:.8;
+/* Линии сети */
+.world__network{pointer-events:none}
+.arc-line{
+  transition:opacity .35s var(--ease),stroke-width .35s var(--ease);
 }
-.arc-path--pri{
-  stroke:url(#arcGradPri);stroke-width:2.2;opacity:.95;animation-duration:12s;
+.arc-line--trunk{
+  stroke:url(#trunkGrad);stroke-width:2.2;stroke-dasharray:12 8;
+  animation:trunkDash 14s linear infinite;opacity:.9;
 }
-@keyframes arcFlow{to{stroke-dashoffset:-360}}
+.arc-line--branch{
+  stroke:url(#branchGrad);stroke-width:1.6;stroke-dasharray:8 6;
+  animation:branchDash 18s linear infinite;opacity:.65;
+}
+.arc-line.is-dimmed{opacity:.08}
+.arc-line.is-highlighted{opacity:1;stroke-width:2.8;filter:drop-shadow(0 0 6px rgba(196,244,73,.6))}
+
+@keyframes trunkDash{to{stroke-dashoffset:-320}}
+@keyframes branchDash{to{stroke-dashoffset:-240}}
 
 /* 3D точки */
 .world__pins{position:absolute;inset:0;pointer-events:none;transform-style:preserve-3d}
@@ -1064,6 +1075,6 @@ main>section{padding-block:0 var(--sec)}
   .star,.case__shot,.type__ico{transform:none!important}
   .btn--orange::after,.btn--lime::after{display:none}
   .progress{display:none}
-  .wpin__ripple,.world__badge-dot,.arc-path{animation:none!important}
+  .wpin__ripple,.world__badge-dot,.arc-line{animation:none!important}
 }
 

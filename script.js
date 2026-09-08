@@ -243,17 +243,49 @@ document.addEventListener('DOMContentLoaded', () => {
   const wpins = [...document.querySelectorAll('.wpin')];
 
   if (stage && wpins.length) {
-    // фильтрация по регионам
+    // фильтрация по регионам и подсветка линий
+    const arclines = [...document.querySelectorAll('.arc-line')];
+
     wtabs.forEach(tab => {
       tab.addEventListener('click', () => {
         wtabs.forEach(t => { t.classList.remove('is-on'); t.setAttribute('aria-selected', 'false'); });
         tab.classList.add('is-on');
         tab.setAttribute('aria-selected', 'true');
         const reg = tab.dataset.region;
+
         wpins.forEach(pin => {
-          const match = reg === 'all' || pin.dataset.region === reg;
+          const match = reg === 'all' || pin.dataset.region === reg || pin.dataset.region === 'by';
           pin.classList.toggle('is-dimmed', !match);
         });
+
+        arclines.forEach(line => {
+          if (reg === 'all' || reg === 'by') {
+            line.classList.remove('is-dimmed', 'is-highlighted');
+          } else {
+            const match = line.dataset.region === reg;
+            line.classList.toggle('is-highlighted', match);
+            line.classList.toggle('is-dimmed', !match);
+          }
+        });
+      });
+    });
+
+    // подсветка линий при наведении на пин
+    wpins.forEach(pin => {
+      pin.addEventListener('mouseenter', () => {
+        const reg = pin.dataset.region;
+        if (reg && reg !== 'by') {
+          arclines.forEach(line => {
+            if (line.dataset.region === reg) line.classList.add('is-highlighted');
+          });
+        }
+      });
+      pin.addEventListener('mouseleave', () => {
+        const currentTab = document.querySelector('.wtab.is-on');
+        const activeReg = currentTab ? currentTab.dataset.region : 'all';
+        if (activeReg === 'all' || activeReg === 'by') {
+          arclines.forEach(line => line.classList.remove('is-highlighted'));
+        }
       });
     });
 
@@ -317,8 +349,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
           if (!isUserHovering) visiblePins[activeIdx]?.classList.remove('is-active');
-        }, 2200);
-      }, 4200);
+        }, 2400);
+      }, 4500);
     }
   }
 
