@@ -633,20 +633,20 @@ document.addEventListener('DOMContentLoaded', () => {
     scene.add(globeGroup);
 
     // Освещение: мягкий студийный свет
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xbdd6ff, 1.35);
+    const sunLight = new THREE.DirectionalLight(0xe8f0ff, 1.15);
     sunLight.position.set(5, 4, 6);
     scene.add(sunLight);
 
-    const rimLight = new THREE.DirectionalLight(0x396ceb, 0.8);
+    const rimLight = new THREE.DirectionalLight(0x396ceb, 0.85);
     rimLight.position.set(-6, -2, -5);
     scene.add(rimLight);
 
-    // Текстура глобуса (настоящая космическая карта Земли NASA Blue Marble + Night Lights)
+    // Текстура глобуса (натуральная фотореалистичная гео-карта Земли высокой четкости)
     const textureLoader = new THREE.TextureLoader();
-    const texturePath = (window.location.pathname.includes('/landing/') ? '' : 'landing/') + 'img/globe-texture.png?v=real_earth_v5';
+    const texturePath = (window.location.pathname.includes('/landing/') ? '' : 'landing/') + 'img/globe-texture.png?v=true_earth_v10';
     const globeTexture = textureLoader.load(texturePath, (t) => {
       t.minFilter = THREE.LinearMipmapLinearFilter;
       t.magFilter = THREE.LinearFilter;
@@ -659,10 +659,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const globeGeo = new THREE.SphereGeometry(GLOBE_RADIUS, 64, 64);
     const globeMat = new THREE.MeshStandardMaterial({
       map: globeTexture,
-      roughness: 0.55,
+      roughness: 0.52,
       metalness: 0.08,
-      emissive: 0x050f28,
-      emissiveIntensity: 0.2
+      emissive: 0x030a1c,
+      emissiveIntensity: 0.18
     });
     const globeMesh = new THREE.Mesh(globeGeo, globeMat);
     globeGroup.add(globeMesh);
