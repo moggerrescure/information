@@ -630,9 +630,9 @@ document.addEventListener('DOMContentLoaded', () => {
     rimLight.position.set(-6, -2, -5);
     scene.add(rimLight);
 
-    // Текстура глобуса (без устаревшего кэша и слепящих белых точек)
+    // Текстура глобуса (настоящая космическая карта Земли NASA Blue Marble + Night Lights)
     const textureLoader = new THREE.TextureLoader();
-    const texturePath = (window.location.pathname.includes('/landing/') ? '' : 'landing/') + 'img/globe-texture.png?v=clean_v4';
+    const texturePath = (window.location.pathname.includes('/landing/') ? '' : 'landing/') + 'img/globe-texture.png?v=real_earth_v5';
     const globeTexture = textureLoader.load(texturePath, (t) => {
       t.minFilter = THREE.LinearMipmapLinearFilter;
       t.magFilter = THREE.LinearFilter;
@@ -713,7 +713,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const dotColor = hub.isHQ ? 0xFF6915 : 0x34E07B; // Фирменный Orange для HQ, свежий изумрудно-зеленый для сети
       const rippleColor = hub.isHQ ? 0xFF6915 : 0x38E585; // Зеленые кружки волны как в плоском макете .wpin__ripple
-      const dotRadius = hub.isHQ ? 0.028 : (hub.isPrimary ? 0.021 : 0.016); // Чуть более выраженные точки
+      const dotRadius = hub.isHQ ? 0.036 : (hub.isPrimary ? 0.027 : 0.021); // Увеличенные, хорошо заметные точки хабов
 
       // 1. Темная контрастная окантовка (как border: 1.5px solid #060e28 в оригинале)
       const borderGeo = new THREE.RingGeometry(dotRadius * 0.75, dotRadius * 1.32, 28);
