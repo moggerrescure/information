@@ -663,8 +663,8 @@ main>section{padding-block:0 var(--sec)}
   background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.16);
 }
 .globe-hud__item.is-active{
-  background:rgba(57,108,235,.32);border-color:rgba(79,163,232,.65);
-  box-shadow:0 4px 16px rgba(0,0,0,.35), 0 0 12px rgba(79,163,232,.25);
+  background:rgba(57,108,235,.32);border-color:rgba(52,224,123,.65);
+  box-shadow:0 4px 16px rgba(0,0,0,.35), 0 0 12px rgba(52,224,123,.25);
 }
 .globe-hud__dot{
   width:8px;height:8px;border-radius:50%;background:var(--c,#396CEB);
@@ -755,8 +755,8 @@ main>section{padding-block:0 var(--sec)}
 }
 .globe-card__flag{font-size:18px;line-height:1}
 .globe-card__tag{
-  margin-left:auto;font-size:11px;font-weight:700;color:#4FA3E8;
-  background:rgba(79,163,232,.15);border:1px solid rgba(79,163,232,.35);
+  margin-left:auto;font-size:11px;font-weight:700;color:#34E07B;
+  background:rgba(52,224,123,.15);border:1px solid rgba(52,224,123,.35);
   padding:2px 8px;border-radius:6px;
 }
 .globe-card__desc{

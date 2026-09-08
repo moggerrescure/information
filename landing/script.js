@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Главный офис KV-web. Центр заказной веб-разработки, UI/UX и сквозной аналитики. 50+ реализованных проектов.',
         caseStudy: 'Разработка 40+ корпоративных сайтов, B2B-порталов и интернет-магазинов. Сквозная аналитика и SEO в топ-3.',
         lat: 53.9045, lon: 27.5615,
-        color: 0xFF8A48, colorHex: '#FF8A48',
+        color: 0xFF6915, colorHex: '#FF6915',
         region: 'by',
         isHQ: true,
         isPrimary: true
@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Финтех-сервисы и личные кабинеты по европейским стандартам безопасности.',
         caseStudy: 'Личный кабинет финтех-платформы, калькулятор доходности и интеграция Open Banking API.',
         lat: 51.5074, lon: -0.1278,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'eu',
         isPrimary: true
       },
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Европейские порталы, мультиязычность и интеграции с CRM системами ЕС.',
         caseStudy: 'Сервис аренды спецтехники с автоматическим расчетом стоимости и полным соответствием GDPR.',
         lat: 52.2297, lon: 21.0122,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'eu',
         isPrimary: true
       },
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Промо-сайты и веб-платформы для немецких технологических стартапов.',
         caseStudy: 'Презентационный сайт стартапа с интерактивным 3D-конфигуратором продукта.',
         lat: 52.5200, lon: 13.4050,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'eu',
         parentHub: 'warsaw'
       },
@@ -322,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Имиджевые сайты и премиальные посадочные страницы для европейских брендов.',
         caseStudy: 'Имиджевый сайт архитектурного бюро с интерактивным портфолио проектов.',
         lat: 48.8566, lon: 2.3522,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'eu',
         parentHub: 'london'
       },
@@ -336,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Корпоративные порталы для финансового и логистического секторов Европы.',
         caseStudy: 'B2B личный кабинет для управления оптовыми цепочками поставок.',
         lat: 50.1109, lon: 8.6821,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'eu',
         parentHub: 'london'
       },
@@ -350,7 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Мультиязычные каталоги и интеграция платежных систем Прибалтики.',
         caseStudy: 'Интернет-магазин электроники с мультивалютной корзиной и интеграцией Omniva.',
         lat: 54.6872, lon: 25.2797,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'eu',
         parentHub: 'warsaw'
       },
@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Мультиязычные интернет-магазины и порталы элитной недвижимости.',
         caseStudy: 'Премиум-магазин парфюмерии со шлюзами Stripe/Tap и каталог элитной недвижимости.',
         lat: 25.2048, lon: 55.2708,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'mena',
         isPrimary: true
       },
@@ -380,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Представительские сайты для инвестиционных компаний и консалтинга.',
         caseStudy: 'Официальный портал инвестиционной группы с кабинетом акционера.',
         lat: 24.4539, lon: 54.3773,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'mena',
         parentHub: 'dubai'
       },
@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Локализация под арабский рынок (RTL) и интеграция с Mada / STC Pay.',
         caseStudy: 'Корпоративный сайт производственного холдинга с полной поддержкой арабского языка.',
         lat: 24.7136, lon: 46.6753,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'mena',
         parentHub: 'dubai'
       },
@@ -408,7 +408,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Сайты мероприятий и презентационные посадочные страницы.',
         caseStudy: 'Лендинг международной технологической выставки с онлайн-регистрацией.',
         lat: 25.2854, lon: 51.5310,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'mena',
         parentHub: 'dubai'
       },
@@ -424,7 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Корпоративные сайты холдингов, каталоги и автоматизация продаж.',
         caseStudy: 'B2B портал холдинга на 15 000 товаров с интеграцией 1С и личным кабинетом дилера.',
         lat: 51.1694, lon: 71.4491,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'cis',
         isPrimary: true
       },
@@ -438,7 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Интернет-магазины с интеграцией Kaspi Pay и локальной логистикой.',
         caseStudy: 'Онлайн-магазин товаров для дома с синхронизацией Kaspi Магазина.',
         lat: 43.2389, lon: 76.8897,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'cis',
         parentHub: 'astana'
       },
@@ -452,7 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Сайты производителей и дистрибьюторов в Центральной Азии.',
         caseStudy: 'Официальный каталог продукции строительного комбината с калькулятором.',
         lat: 41.2995, lon: 69.2401,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'cis',
         parentHub: 'astana'
       },
@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Высоконагруженные порталы, интеграции 1С и сквозная аналитика.',
         caseStudy: 'Оптовый B2B портал с кабинетом партнера и интеграцией Битрикс24.',
         lat: 55.7558, lon: 37.6173,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'cis',
         parentHub: 'minsk'
       },
@@ -480,7 +480,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Продающие сайты и комплексное SEO-продвижение.',
         caseStudy: 'Серия посадочных страниц для медицинской клиники с выводом в топ-3.',
         lat: 59.9343, lon: 30.3351,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'cis',
         parentHub: 'minsk'
       },
@@ -496,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Высоконагруженные лендинги и маркетинговые воронки для клиентов на рынке США.',
         caseStudy: 'Высоконагруженный B2B маркетплейс оптовых поставок с оптимизацией под Google Ads США.',
         lat: 40.7128, lon: -74.0060,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'us',
         isPrimary: true
       },
@@ -510,7 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Сайты для технологических, научных и образовательных проектов.',
         caseStudy: 'Платформа онлайн-курсов с защищенным видеоплеером и тестированием.',
         lat: 42.3601, lon: -71.0589,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'us',
         parentHub: 'newyork'
       },
@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Корпоративные порталы логистических и производственных компаний.',
         caseStudy: 'Кабинет отслеживания грузов и расчет стоимости логистики в реальном времени.',
         lat: 41.8781, lon: -87.6298,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'us',
         parentHub: 'newyork'
       },
@@ -538,7 +538,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Имиджевые сайты для медиа, продакшнов и креативных агентств.',
         caseStudy: 'Интерактивное портфолио видеостудии с полноэкранным видео фоном.',
         lat: 34.0522, lon: -118.2437,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'us',
         parentHub: 'newyork'
       },
@@ -552,7 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
         desc: 'Лендинги премиальной недвижимости и брокерских компаний.',
         caseStudy: 'Презентационный лендинг кондоминиума во Флориде с формой бронирования.',
         lat: 25.7617, lon: -80.1918,
-        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        color: 0x34E07B, colorHex: '#34E07B',
         region: 'us',
         parentHub: 'newyork'
       }
@@ -716,17 +716,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const arcObjects = [];
     const pulseParticles = [];
 
-    // Создание пульсирующих аккуратных точек хабов (в благородных неслепящих тонах)
+    // Создание пульсирующих выразительных точек хабов (зеленые кружки волны как в первой плоской версии)
     Object.keys(HUBS).forEach(key => {
       const hub = HUBS[key];
       const basePos = latLonToVec3(hub.lat, hub.lon, GLOBE_RADIUS * 1.002);
       const normal = basePos.clone().normalize();
 
-      const dotColor = hub.isHQ ? 0xFF8A48 : 0x5299E0; // Теплый янтарный для HQ, благородный лазурно-сапфировый для сети
-      const dotRadius = hub.isHQ ? 0.024 : (hub.isPrimary ? 0.017 : 0.013);
+      const dotColor = hub.isHQ ? 0xFF6915 : 0x34E07B; // Фирменный Orange для HQ, свежий изумрудно-зеленый для сети
+      const rippleColor = hub.isHQ ? 0xFF6915 : 0x38E585; // Зеленые кружки волны как в плоском макете .wpin__ripple
+      const dotRadius = hub.isHQ ? 0.028 : (hub.isPrimary ? 0.021 : 0.016); // Чуть более выраженные точки
 
       // 1. Темная контрастная окантовка (как border: 1.5px solid #060e28 в оригинале)
-      const borderGeo = new THREE.RingGeometry(dotRadius * 0.8, dotRadius * 1.35, 24);
+      const borderGeo = new THREE.RingGeometry(dotRadius * 0.75, dotRadius * 1.32, 28);
       const borderMat = new THREE.MeshBasicMaterial({
         color: 0x03081A,
         side: THREE.DoubleSide
@@ -736,8 +737,8 @@ document.addEventListener('DOMContentLoaded', () => {
       borderMesh.lookAt(basePos.clone().add(normal.clone().multiplyScalar(2)));
       globeGroup.add(borderMesh);
 
-      // 2. Спокойная светящаяся центральная точка (.wpin__dot)
-      const coreGeo = new THREE.SphereGeometry(dotRadius, 14, 14);
+      // 2. Выразительная светящаяся центральная точка (.wpin__dot)
+      const coreGeo = new THREE.SphereGeometry(dotRadius, 16, 16);
       const coreMat = new THREE.MeshBasicMaterial({
         color: dotColor
       });
@@ -745,24 +746,24 @@ document.addEventListener('DOMContentLoaded', () => {
       coreMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.003)));
       globeGroup.add(coreMesh);
 
-      // 3. Мягкий неслепящий световой ореол вокруг точки
-      const haloGeo = new THREE.SphereGeometry(dotRadius * 1.8, 14, 14);
+      // 3. Мягкий световой ореол вокруг точки
+      const haloGeo = new THREE.SphereGeometry(dotRadius * 1.7, 16, 16);
       const haloMat = new THREE.MeshBasicMaterial({
         color: dotColor,
         transparent: true,
-        opacity: 0.24,
+        opacity: 0.30,
         blending: THREE.AdditiveBlending
       });
       const haloMesh = new THREE.Mesh(haloGeo, haloMat);
       haloMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.003)));
       globeGroup.add(haloMesh);
 
-      // 4. Мягкое пульсирующее расширяющееся кольцо волны (opacity 0.45 -> 0, мягко для глаз)
-      const ringGeo = new THREE.RingGeometry(dotRadius * 1.1, dotRadius * 1.25, 28);
+      // 4. Зеленые расширяющиеся кружки волны (.wpin__ripple как в первой версии: scale 0.55 -> 2.8, opacity 0.85 -> 0)
+      const ringGeo = new THREE.RingGeometry(dotRadius * 1.05, dotRadius * 1.28, 32);
       const ringMat = new THREE.MeshBasicMaterial({
-        color: dotColor,
+        color: rippleColor,
         transparent: true,
-        opacity: 0.45,
+        opacity: 0.85,
         side: THREE.DoubleSide,
         blending: THREE.AdditiveBlending
       });
@@ -776,12 +777,12 @@ document.addEventListener('DOMContentLoaded', () => {
         coreMesh,
         haloMesh,
         duration: hub.isHQ ? 2.0 : 2.8,
-        offset: Math.random() * 2.5,
+        offset: Math.random() * 2.8,
         isHQ: hub.isHQ
       });
 
-      // 5. Невидимый увеличенный хитбокс (радиус 0.08) для комфортного попадания курсором
-      const hitGeo = new THREE.SphereGeometry(0.08, 8, 8);
+      // 5. Невидимый увеличенный хитбокс (радиус 0.085) для комфортного попадания курсором
+      const hitGeo = new THREE.SphereGeometry(0.085, 8, 8);
       const hitMat = new THREE.MeshBasicMaterial({ visible: false });
       const hitMesh = new THREE.Mesh(hitGeo, hitMat);
       hitMesh.position.copy(basePos);
@@ -1200,17 +1201,17 @@ document.addEventListener('DOMContentLoaded', () => {
       // Плавный зум камеры
       camera.position.z += (targetZoomZ - camera.position.z) * 0.1;
 
-      // Анимация пульсирующих волн радара (мягкие спокойные волны, не слепят глаза)
+      // Анимация пульсирующих зеленых кружков волны (.wpin__ripple: scale 0.55 -> 2.8, opacity 0.85 -> 0)
       beaconRings.forEach((b) => {
         const phase = ((elapsed + b.offset) % b.duration) / b.duration;
-        // Плавное кубическое ускорение волны
-        const easedPhase = Math.pow(phase, 0.85);
-        const scale = 0.5 + easedPhase * 2.0;
+        // Плавное кубическое ускорение волны как cubic-bezier(.2,.8,.2,1)
+        const easedPhase = Math.pow(phase, 0.75);
+        const scale = 0.55 + easedPhase * 2.25;
         b.ring.scale.set(scale, scale, scale);
-        b.ring.material.opacity = Math.max(0, (1 - easedPhase) * 0.42);
+        b.ring.material.opacity = Math.max(0, (1 - easedPhase) * 0.85);
 
         // Мягкое свечение ореола микро-точки
-        const pulse = Math.sin(elapsed * 2.5 + b.offset) * 0.08;
+        const pulse = Math.sin(elapsed * 2.8 + b.offset) * 0.12;
         b.haloMesh.scale.set(1 + pulse, 1 + pulse, 1 + pulse);
       });
 
