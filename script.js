@@ -275,18 +275,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // плавный 3D параллакс карты при движении мыши (только десктоп)
     if (!reduce && !touch && !small) {
       let mRaf = 0;
+      const baseRotX = 22;
+      const baseRotZ = -1.2;
+
       stage.addEventListener('mousemove', e => {
         cancelAnimationFrame(mRaf);
         mRaf = requestAnimationFrame(() => {
           const rect = stage.getBoundingClientRect();
           const x = (e.clientX - rect.left) / rect.width - 0.5;
           const y = (e.clientY - rect.top) / rect.height - 0.5;
-          stage.style.transform = `perspective(900px) rotateX(${(-y * 8).toFixed(2)}deg) rotateY(${(x * 10).toFixed(2)}deg) translateZ(6px)`;
+          const rx = baseRotX - y * 14;
+          const ry = x * 16;
+          const rz = baseRotZ + x * 3;
+          stage.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) rotateZ(${rz.toFixed(2)}deg) scale(0.98) translateZ(10px)`;
         });
       });
       stage.addEventListener('mouseleave', () => {
         cancelAnimationFrame(mRaf);
-        stage.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
+        stage.style.transform = `rotateX(${baseRotX}deg) rotateZ(${baseRotZ}deg) scale(0.97)`;
       });
     }
 
