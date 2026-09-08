@@ -432,15 +432,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const textureLoader = new THREE.TextureLoader();
     const texturePath = (window.location.pathname.includes('/landing/') ? '' : 'landing/') + 'img/globe-texture.png';
     const globeTexture = textureLoader.load(texturePath, (t) => {
-      t.minFilter = THREE.LinearFilter;
+      t.minFilter = THREE.LinearMipmapLinearFilter;
+      t.magFilter = THREE.LinearFilter;
       t.generateMipmaps = true;
-    }, undefined, () => {
-      const canvas = document.createElement('canvas');
-      canvas.width = 512; canvas.height = 256;
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = '#06112d';
-      ctx.fillRect(0, 0, 512, 256);
-      globeMesh.material.map = new THREE.CanvasTexture(canvas);
+      if (renderer) t.anisotropy = renderer.capabilities.getMaxAnisotropy();
       globeMesh.material.needsUpdate = true;
     });
 
@@ -448,10 +443,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const globeGeo = new THREE.SphereGeometry(GLOBE_RADIUS, 64, 64);
     const globeMat = new THREE.MeshStandardMaterial({
       map: globeTexture,
-      roughness: 0.65,
-      metalness: 0.12,
-      emissive: 0x071536,
-      emissiveIntensity: 0.25
+      roughness: 0.55,
+      metalness: 0.08,
+      emissive: 0x050f28,
+      emissiveIntensity: 0.2
     });
     const globeMesh = new THREE.Mesh(globeGeo, globeMat);
     globeGroup.add(globeMesh);
@@ -461,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const haloMat = new THREE.MeshBasicMaterial({
       color: 0x396ceb,
       transparent: true,
-      opacity: 0.16,
+      opacity: 0.14,
       side: THREE.BackSide,
       blending: THREE.AdditiveBlending
     });
@@ -474,7 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
       color: 0x396ceb,
       wireframe: true,
       transparent: true,
-      opacity: 0.055
+      opacity: 0.045
     });
     const gridMesh = new THREE.Mesh(gridGeo, gridMat);
     globeGroup.add(gridMesh);
@@ -508,61 +503,72 @@ document.addEventListener('DOMContentLoaded', () => {
     const arcObjects = [];
     const pulseParticles = [];
 
-    // Создание утонченных МИКРО-МАЯКОВ хабов (вместо тяжеловесных столбиков)
+    // Создание пульсирующих аккуратных точек хабов (точно как в исходном плоском макете .wpin__dot + .wpin__ripple)
     Object.keys(HUBS).forEach(key => {
       const hub = HUBS[key];
       const basePos = latLonToVec3(hub.lat, hub.lon, GLOBE_RADIUS * 1.002);
       const normal = basePos.clone().normalize();
 
-      const coreRadius = hub.isHQ ? 0.028 : 0.021;
-      const haloRadius = coreRadius * 2.2;
+      const dotColor = hub.isHQ ? 0xFF6915 : 0xC4F449; // Фирменный Orange для HQ, Lime для хабов
+      const dotRadius = hub.isHQ ? 0.026 : 0.018;
 
-      // 1. Центральное яркое ядро микро-маяка
-      const coreGeo = new THREE.SphereGeometry(coreRadius, 16, 16);
+      // 1. Темная контрастная окантовка (как border: 1.5px solid #060e28 в оригинале)
+      const borderGeo = new THREE.RingGeometry(dotRadius * 0.85, dotRadius * 1.25, 28);
+      const borderMat = new THREE.MeshBasicMaterial({
+        color: 0x060E28,
+        side: THREE.DoubleSide
+      });
+      const borderMesh = new THREE.Mesh(borderGeo, borderMat);
+      borderMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.002)));
+      borderMesh.lookAt(basePos.clone().add(normal.clone().multiplyScalar(2)));
+      globeGroup.add(borderMesh);
+
+      // 2. Светящаяся яркая центральная точка (.wpin__dot)
+      const coreGeo = new THREE.SphereGeometry(dotRadius, 16, 16);
       const coreMat = new THREE.MeshBasicMaterial({
-        color: hub.isHQ ? 0xFF9F1C : hub.color
+        color: dotColor
       });
       const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-      coreMesh.position.copy(basePos);
+      coreMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.003)));
       globeGroup.add(coreMesh);
 
-      // 2. Мягкая полупрозрачная световая аура (Glow Halo)
-      const auraGeo = new THREE.SphereGeometry(haloRadius, 16, 16);
-      const auraMat = new THREE.MeshBasicMaterial({
-        color: hub.color,
+      // 3. Мягкий световой ореол вокруг точки
+      const haloGeo = new THREE.SphereGeometry(dotRadius * 1.9, 16, 16);
+      const haloMat = new THREE.MeshBasicMaterial({
+        color: dotColor,
         transparent: true,
-        opacity: 0.36,
+        opacity: 0.32,
         blending: THREE.AdditiveBlending
       });
-      const auraMesh = new THREE.Mesh(auraGeo, auraMat);
-      auraMesh.position.copy(basePos);
-      globeGroup.add(auraMesh);
+      const haloMesh = new THREE.Mesh(haloGeo, haloMat);
+      haloMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.003)));
+      globeGroup.add(haloMesh);
 
-      // 3. Тонкие концентрические кольца радара на поверхности сферы
-      const ringGeo = new THREE.RingGeometry(coreRadius * 1.3, coreRadius * 1.5, 32);
+      // 4. Пульсирующее расширяющееся кольцо волны (.wpin__ripple: scale 0.5 -> 2.6, opacity 0.95 -> 0)
+      const ringGeo = new THREE.RingGeometry(dotRadius * 1.1, dotRadius * 1.28, 32);
       const ringMat = new THREE.MeshBasicMaterial({
-        color: hub.isHQ ? 0xFFD700 : hub.color,
+        color: dotColor,
         transparent: true,
-        opacity: 0.75,
+        opacity: 0.9,
         side: THREE.DoubleSide,
         blending: THREE.AdditiveBlending
       });
       const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-      ringMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.003)));
+      ringMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.004)));
       ringMesh.lookAt(basePos.clone().add(normal.clone().multiplyScalar(2)));
       globeGroup.add(ringMesh);
 
       beaconRings.push({
         ring: ringMesh,
         coreMesh,
-        auraMesh,
-        baseScale: 1,
-        offset: Math.random() * Math.PI,
+        haloMesh,
+        duration: hub.isHQ ? 2.0 : 2.8, // Точные тайминги из оригинального CSS: 2s и 2.8s
+        offset: Math.random() * 2.0,
         isHQ: hub.isHQ
       });
 
-      // 4. Невидимый увеличенный хитбокс (радиус 0.09) для комфортного попадания курсором
-      const hitGeo = new THREE.SphereGeometry(0.095, 8, 8);
+      // 5. Невидимый хитбокс для легкого наведения мышью
+      const hitGeo = new THREE.SphereGeometry(0.085, 8, 8);
       const hitMat = new THREE.MeshBasicMaterial({ visible: false });
       const hitMesh = new THREE.Mesh(hitGeo, hitMat);
       hitMesh.position.copy(basePos);
@@ -575,7 +581,7 @@ document.addEventListener('DOMContentLoaded', () => {
         basePos,
         normal,
         coreMesh,
-        auraMesh,
+        haloMesh,
         ringMesh
       };
     });
@@ -593,7 +599,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const dist = minskPos.distanceTo(targetPos);
       const mid = minskPos.clone().add(targetPos).multiplyScalar(0.5);
       mid.normalize();
-      // Элегантные низкопрофильные дуги, аккуратно огибающие сферу
       const arcHeight = GLOBE_RADIUS + Math.max(0.18, dist * 0.22);
       mid.multiplyScalar(arcHeight);
 
@@ -601,20 +606,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const points = curve.getPoints(50);
       const curveGeo = new THREE.BufferGeometry().setFromPoints(points);
       const curveMat = new THREE.LineBasicMaterial({
-        color: target.color,
+        color: 0xC4F449,
         transparent: true,
-        opacity: 0.5,
+        opacity: 0.45,
         blending: THREE.AdditiveBlending
       });
       const curveLine = new THREE.Line(curveGeo, curveMat);
-      curveLine.userData = { hubKey: key, region: target.region, baseColor: target.color };
+      curveLine.userData = { hubKey: key, region: target.region, baseColor: 0xC4F449 };
       globeGroup.add(curveLine);
       arcObjects.push(curveLine);
 
       // Аккуратный микро-импульс данных по дуге
-      const particleGeo = new THREE.SphereGeometry(0.016, 8, 8);
+      const particleGeo = new THREE.SphereGeometry(0.015, 8, 8);
       const particleMat = new THREE.MeshBasicMaterial({
-        color: target.color,
+        color: 0xC4F449,
         blending: THREE.AdditiveBlending
       });
       const particleMesh = new THREE.Mesh(particleGeo, particleMat);
@@ -622,10 +627,10 @@ document.addEventListener('DOMContentLoaded', () => {
       pulseParticles.push({
         mesh: particleMesh,
         curve,
-        speed: 0.0035 + (1 / dist) * 0.0028,
+        speed: 0.0035 + (1 / dist) * 0.0026,
         progress: Math.random(),
         hubKey: key,
-        baseColor: target.color
+        baseColor: 0xC4F449
       });
     });
 
@@ -968,18 +973,18 @@ document.addEventListener('DOMContentLoaded', () => {
       // Плавный зум камеры
       camera.position.z += (targetZoomZ - camera.position.z) * 0.1;
 
-      // Анимация утонченных микро-маяков хабов
+      // Анимация пульсирующих волн радара (точно как @keyframes pinPulse из плоского макета: scale 0.5 -> 2.6, opacity 0.95 -> 0)
       beaconRings.forEach((b) => {
-        const speed = b.isHQ ? 3.8 : 3.0;
-        const pulse = (Math.sin(elapsed * speed + b.offset) + 1) * 0.5;
-        // Тонкие волны радара на поверхности
-        const scale = 1 + pulse * (b.isHQ ? 1.8 : 1.5);
+        const phase = ((elapsed + b.offset) % b.duration) / b.duration;
+        // Плавное кубическое ускорение волны
+        const easedPhase = Math.pow(phase, 0.85);
+        const scale = 0.5 + easedPhase * 2.1;
         b.ring.scale.set(scale, scale, scale);
-        b.ring.material.opacity = (1 - pulse) * (b.isHQ ? 0.85 : 0.65);
+        b.ring.material.opacity = Math.max(0, (1 - easedPhase) * 0.92);
 
-        // Мягкое пульсирующее дыхание световой ауры микро-точки
-        const auraBreath = 1 + Math.sin(elapsed * 2.2 + b.offset) * 0.18;
-        b.auraMesh.scale.set(auraBreath, auraBreath, auraBreath);
+        // Мягкое свечение ореола микро-точки
+        const pulse = Math.sin(elapsed * 3.0 + b.offset) * 0.12;
+        b.haloMesh.scale.set(1 + pulse, 1 + pulse, 1 + pulse);
       });
 
       // Анимация летящих световых импульсов по дугам
