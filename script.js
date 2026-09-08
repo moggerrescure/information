@@ -250,7 +250,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const gtipText = document.getElementById('gtipText');
 
   if (globeCanvas && globeViewport && typeof THREE !== 'undefined') {
+    // Каталог активных точек глобальной сети KV-web
     const HUBS = {
+      // --- Штаб-квартира ---
       minsk: {
         id: 'minsk',
         name: 'Минск (HQ)',
@@ -258,60 +260,160 @@ document.addEventListener('DOMContentLoaded', () => {
         flag: '🇧🇾',
         badge: 'Штаб-квартира',
         tag: '⭐ Главный офис',
-        desc: 'Штаб-квартира KV-web. Центр заказной веб-разработки, UI/UX дизайна и сквозной аналитики. 50+ реализованных проектов.',
+        desc: 'Главный офис KV-web. Центр заказной веб-разработки, UI/UX и сквозной аналитики. 50+ реализованных проектов.',
         caseStudy: 'Разработка 40+ корпоративных сайтов, B2B-порталов и интернет-магазинов. Сквозная аналитика и SEO в топ-3.',
-        lat: 53.9045,
-        lon: 27.5615,
-        color: 0xff6915,
-        colorHex: '#FF6915',
+        lat: 53.9045, lon: 27.5615,
+        color: 0xFF8A48, colorHex: '#FF8A48',
         region: 'by',
-        isHQ: true
+        isHQ: true,
+        isPrimary: true
       },
-      dubai: {
-        id: 'dubai',
-        name: 'Дубай',
-        country: 'ОАЭ',
-        flag: '🇦🇪',
-        badge: 'E-Commerce & Luxury',
-        tag: '🌍 Middle East • E-com',
-        desc: 'Разработка мультиязычных интернет-магазинов, интеграция платежных шлюзов MENA и презентационные порталы недвижимости.',
-        caseStudy: 'Премиальный интернет-магазин с шлюзами Stripe/Tap, а также интерактивный каталог элитной недвижимости с 3D-турами.',
-        lat: 25.2048,
-        lon: 55.2708,
-        color: 0xc4f449,
-        colorHex: '#C4F449',
-        region: 'mena'
-      },
+
+      // --- Западная и Центральная Европа ---
       london: {
         id: 'london',
         name: 'Лондон',
         country: 'Великобритания',
         flag: '🇬🇧',
         badge: 'Fintech & SaaS',
-        tag: '🚀 Western Europe • Fintech',
-        desc: 'Веб-сервисы, личные кабинеты для финтех-стартапов и B2B SaaS платформ по строгим европейским стандартам.',
-        caseStudy: 'Личный кабинет финтех-платформы, калькулятор доходности в реальном времени и интеграция Open Banking API.',
-        lat: 51.5074,
-        lon: -0.1278,
-        color: 0x396ceb,
-        colorHex: '#396CEB',
-        region: 'eu'
+        tag: '🚀 Western Europe',
+        desc: 'Финтех-сервисы и личные кабинеты по европейским стандартам безопасности.',
+        caseStudy: 'Личный кабинет финтех-платформы, калькулятор доходности и интеграция Open Banking API.',
+        lat: 51.5074, lon: -0.1278,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'eu',
+        isPrimary: true
       },
-      newyork: {
-        id: 'newyork',
-        name: 'Нью-Йорк',
-        country: 'США',
-        flag: '🇺🇸',
-        badge: 'B2B Платформы',
-        tag: '⚡ USA • B2B Platforms',
-        desc: 'Корпоративные порталы, высоконагруженные лендинги и маркетинговые воронки для клиентов на рынке США и Канады.',
-        caseStudy: 'Высоконагруженный B2B маркетплейс оптовых поставок, оптимизация конверсии воронки и интеграция с CRM (HubSpot, Salesforce).',
-        lat: 40.7128,
-        lon: -74.0060,
-        color: 0x7574ff,
-        colorHex: '#7574FF',
-        region: 'us'
+      warsaw: {
+        id: 'warsaw',
+        name: 'Варшава',
+        country: 'Польша',
+        flag: '🇵🇱',
+        badge: 'EU & GDPR',
+        tag: '🇪🇺 Central Europe',
+        desc: 'Европейские порталы, мультиязычность и интеграции с CRM системами ЕС.',
+        caseStudy: 'Сервис аренды спецтехники с автоматическим расчетом стоимости и полным соответствием GDPR.',
+        lat: 52.2297, lon: 21.0122,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'eu',
+        isPrimary: true
       },
+      berlin: {
+        id: 'berlin',
+        name: 'Берлин',
+        country: 'Германия',
+        flag: '🇩🇪',
+        badge: 'Tech & Startups',
+        tag: '🇪🇺 Германия',
+        desc: 'Промо-сайты и веб-платформы для немецких технологических стартапов.',
+        caseStudy: 'Презентационный сайт стартапа с интерактивным 3D-конфигуратором продукта.',
+        lat: 52.5200, lon: 13.4050,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'eu',
+        parentHub: 'warsaw'
+      },
+      paris: {
+        id: 'paris',
+        name: 'Париж',
+        country: 'Франция',
+        flag: '🇫🇷',
+        badge: 'Luxury & Brands',
+        tag: '🇪🇺 Франция',
+        desc: 'Имиджевые сайты и премиальные посадочные страницы для европейских брендов.',
+        caseStudy: 'Имиджевый сайт архитектурного бюро с интерактивным портфолио проектов.',
+        lat: 48.8566, lon: 2.3522,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'eu',
+        parentHub: 'london'
+      },
+      frankfurt: {
+        id: 'frankfurt',
+        name: 'Франкфурт',
+        country: 'Германия',
+        flag: '🇩🇪',
+        badge: 'B2B Финансы',
+        tag: '🇪🇺 Германия',
+        desc: 'Корпоративные порталы для финансового и логистического секторов Европы.',
+        caseStudy: 'B2B личный кабинет для управления оптовыми цепочками поставок.',
+        lat: 50.1109, lon: 8.6821,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'eu',
+        parentHub: 'london'
+      },
+      vilnius: {
+        id: 'vilnius',
+        name: 'Вильнюс',
+        country: 'Литва',
+        flag: '🇱🇹',
+        badge: 'Digital Commerce',
+        tag: '🇪🇺 Прибалтика',
+        desc: 'Мультиязычные каталоги и интеграция платежных систем Прибалтики.',
+        caseStudy: 'Интернет-магазин электроники с мультивалютной корзиной и интеграцией Omniva.',
+        lat: 54.6872, lon: 25.2797,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'eu',
+        parentHub: 'warsaw'
+      },
+
+      // --- Ближний Восток (MENA) ---
+      dubai: {
+        id: 'dubai',
+        name: 'Дубай',
+        country: 'ОАЭ',
+        flag: '🇦🇪',
+        badge: 'E-Commerce & Luxury',
+        tag: '🌍 Middle East',
+        desc: 'Мультиязычные интернет-магазины и порталы элитной недвижимости.',
+        caseStudy: 'Премиум-магазин парфюмерии со шлюзами Stripe/Tap и каталог элитной недвижимости.',
+        lat: 25.2048, lon: 55.2708,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'mena',
+        isPrimary: true
+      },
+      abudhabi: {
+        id: 'abudhabi',
+        name: 'Абу-Даби',
+        country: 'ОАЭ',
+        flag: '🇦🇪',
+        badge: 'Инвест-фонды',
+        tag: '🌍 ОАЭ',
+        desc: 'Представительские сайты для инвестиционных компаний и консалтинга.',
+        caseStudy: 'Официальный портал инвестиционной группы с кабинетом акционера.',
+        lat: 24.4539, lon: 54.3773,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'mena',
+        parentHub: 'dubai'
+      },
+      riyadh: {
+        id: 'riyadh',
+        name: 'Эр-Рияд',
+        country: 'Саудовская Аравия',
+        flag: '🇸🇦',
+        badge: 'B2B Порталы',
+        tag: '🌍 Саудовская Аравия',
+        desc: 'Локализация под арабский рынок (RTL) и интеграция с Mada / STC Pay.',
+        caseStudy: 'Корпоративный сайт производственного холдинга с полной поддержкой арабского языка.',
+        lat: 24.7136, lon: 46.6753,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'mena',
+        parentHub: 'dubai'
+      },
+      doha: {
+        id: 'doha',
+        name: 'Доха',
+        country: 'Катар',
+        flag: '🇶🇦',
+        badge: 'Digital Events',
+        tag: '🌍 Катар',
+        desc: 'Сайты мероприятий и презентационные посадочные страницы.',
+        caseStudy: 'Лендинг международной технологической выставки с онлайн-регистрацией.',
+        lat: 25.2854, lon: 51.5310,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'mena',
+        parentHub: 'dubai'
+      },
+
+      // --- СНГ & Центральная Азия ---
       astana: {
         id: 'astana',
         name: 'Астана',
@@ -319,28 +421,140 @@ document.addEventListener('DOMContentLoaded', () => {
         flag: '🇰🇿',
         badge: 'Корп. порталы & 1С',
         tag: '🤝 Центральная Азия',
-        desc: 'Казахстан и рынки Центральной Азии: корпоративные сайты производственных компаний, каталоги и автоматизация продаж.',
-        caseStudy: 'Официальный портал холдинга, B2B каталог на 15 000 товаров с двусторонней интеграцией 1С и кабинетом дилера.',
-        lat: 51.1694,
-        lon: 71.4491,
-        color: 0x00b1c9,
-        colorHex: '#00B1C9',
-        region: 'cis'
+        desc: 'Корпоративные сайты холдингов, каталоги и автоматизация продаж.',
+        caseStudy: 'B2B портал холдинга на 15 000 товаров с интеграцией 1С и личным кабинетом дилера.',
+        lat: 51.1694, lon: 71.4491,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'cis',
+        isPrimary: true
       },
-      warsaw: {
-        id: 'warsaw',
-        name: 'Варшава',
-        country: 'Польша',
-        flag: '🇵🇱',
-        badge: 'EU Решения & GDPR',
-        tag: '🇪🇺 Central Europe • GDPR',
-        desc: 'Разработка веб-решений для европейского рынка: соответствие GDPR, мультиязычность и интеграции с CRM системами ЕС.',
-        caseStudy: 'Сервис аренды спецтехники с автоматическим расчетом стоимости, мультиязычностью и полным соответствием GDPR.',
-        lat: 52.2297,
-        lon: 21.0122,
-        color: 0x396ceb,
-        colorHex: '#396CEB',
-        region: 'eu'
+      almaty: {
+        id: 'almaty',
+        name: 'Алматы',
+        country: 'Казахстан',
+        flag: '🇰🇿',
+        badge: 'E-commerce & Kaspi',
+        tag: '🤝 Казахстан',
+        desc: 'Интернет-магазины с интеграцией Kaspi Pay и локальной логистикой.',
+        caseStudy: 'Онлайн-магазин товаров для дома с синхронизацией Kaspi Магазина.',
+        lat: 43.2389, lon: 76.8897,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'cis',
+        parentHub: 'astana'
+      },
+      tashkent: {
+        id: 'tashkent',
+        name: 'Ташкент',
+        country: 'Узбекистан',
+        flag: '🇺🇿',
+        badge: 'B2B Каталоги',
+        tag: '🤝 Узбекистан',
+        desc: 'Сайты производителей и дистрибьюторов в Центральной Азии.',
+        caseStudy: 'Официальный каталог продукции строительного комбината с калькулятором.',
+        lat: 41.2995, lon: 69.2401,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'cis',
+        parentHub: 'astana'
+      },
+      moscow: {
+        id: 'moscow',
+        name: 'Москва',
+        country: 'Россия',
+        flag: '🇷🇺',
+        badge: 'E-commerce & Highload',
+        tag: '🤝 B2B Сеть',
+        desc: 'Высоконагруженные порталы, интеграции 1С и сквозная аналитика.',
+        caseStudy: 'Оптовый B2B портал с кабинетом партнера и интеграцией Битрикс24.',
+        lat: 55.7558, lon: 37.6173,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'cis',
+        parentHub: 'minsk'
+      },
+      spb: {
+        id: 'spb',
+        name: 'Санкт-Петербург',
+        country: 'Россия',
+        flag: '🇷🇺',
+        badge: 'Digital & SEO',
+        tag: '🤝 Digital',
+        desc: 'Продающие сайты и комплексное SEO-продвижение.',
+        caseStudy: 'Серия посадочных страниц для медицинской клиники с выводом в топ-3.',
+        lat: 59.9343, lon: 30.3351,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'cis',
+        parentHub: 'minsk'
+      },
+
+      // --- Северная Америка (США) ---
+      newyork: {
+        id: 'newyork',
+        name: 'Нью-Йорк',
+        country: 'США',
+        flag: '🇺🇸',
+        badge: 'B2B Платформы',
+        tag: '⚡ USA',
+        desc: 'Высоконагруженные лендинги и маркетинговые воронки для клиентов на рынке США.',
+        caseStudy: 'Высоконагруженный B2B маркетплейс оптовых поставок с оптимизацией под Google Ads США.',
+        lat: 40.7128, lon: -74.0060,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'us',
+        isPrimary: true
+      },
+      boston: {
+        id: 'boston',
+        name: 'Бостон',
+        country: 'США',
+        flag: '🇺🇸',
+        badge: 'EdTech & Biotech',
+        tag: '⚡ USA',
+        desc: 'Сайты для технологических, научных и образовательных проектов.',
+        caseStudy: 'Платформа онлайн-курсов с защищенным видеоплеером и тестированием.',
+        lat: 42.3601, lon: -71.0589,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'us',
+        parentHub: 'newyork'
+      },
+      chicago: {
+        id: 'chicago',
+        name: 'Чикаго',
+        country: 'США',
+        flag: '🇺🇸',
+        badge: 'Logistics & Trade',
+        tag: '⚡ USA',
+        desc: 'Корпоративные порталы логистических и производственных компаний.',
+        caseStudy: 'Кабинет отслеживания грузов и расчет стоимости логистики в реальном времени.',
+        lat: 41.8781, lon: -87.6298,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'us',
+        parentHub: 'newyork'
+      },
+      losangeles: {
+        id: 'losangeles',
+        name: 'Лос-Анджелес',
+        country: 'США',
+        flag: '🇺🇸',
+        badge: 'Media & Studios',
+        tag: '⚡ USA',
+        desc: 'Имиджевые сайты для медиа, продакшнов и креативных агентств.',
+        caseStudy: 'Интерактивное портфолио видеостудии с полноэкранным видео фоном.',
+        lat: 34.0522, lon: -118.2437,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'us',
+        parentHub: 'newyork'
+      },
+      miami: {
+        id: 'miami',
+        name: 'Майами',
+        country: 'США',
+        flag: '🇺🇸',
+        badge: 'Luxury Real Estate',
+        tag: '⚡ USA',
+        desc: 'Лендинги премиальной недвижимости и брокерских компаний.',
+        caseStudy: 'Презентационный лендинг кондоминиума во Флориде с формой бронирования.',
+        lat: 25.7617, lon: -80.1918,
+        color: 0x4FA3E8, colorHex: '#4FA3E8',
+        region: 'us',
+        parentHub: 'newyork'
       }
     };
 
@@ -371,7 +585,6 @@ document.addEventListener('DOMContentLoaded', () => {
         [49.1, 19.0], [49.4, 22.8], [51.5, 23.9], [54.2, 22.9], [54.5, 18.6],
         [54.0, 14.3], [51.0, 15.0], [49.1, 19.0]
       ],
-      // Контуры континентов для подсветки при наведении
       europe: [
         [36.0, -9.5], [43.5, -9.3], [48.0, -4.8], [54.0, 8.5], [58.0, 5.0],
         [62.0, 5.0], [70.5, 28.0], [67.0, 42.0], [58.0, 55.0], [45.0, 48.0],
@@ -416,21 +629,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const globeGroup = new THREE.Group();
     scene.add(globeGroup);
 
-    // Освещение: студийный свет со световым контуром
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.88);
+    // Освещение: мягкий студийный свет
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
     scene.add(ambientLight);
 
-    const sunLight = new THREE.DirectionalLight(0xbdd6ff, 1.45);
+    const sunLight = new THREE.DirectionalLight(0xbdd6ff, 1.35);
     sunLight.position.set(5, 4, 6);
     scene.add(sunLight);
 
-    const rimLight = new THREE.DirectionalLight(0x396ceb, 0.85);
+    const rimLight = new THREE.DirectionalLight(0x396ceb, 0.8);
     rimLight.position.set(-6, -2, -5);
     scene.add(rimLight);
 
-    // Текстура глобуса
+    // Текстура глобуса (без устаревшего кэша и слепящих белых точек)
     const textureLoader = new THREE.TextureLoader();
-    const texturePath = (window.location.pathname.includes('/landing/') ? '' : 'landing/') + 'img/globe-texture.png';
+    const texturePath = (window.location.pathname.includes('/landing/') ? '' : 'landing/') + 'img/globe-texture.png?v=clean_v4';
     const globeTexture = textureLoader.load(texturePath, (t) => {
       t.minFilter = THREE.LinearMipmapLinearFilter;
       t.magFilter = THREE.LinearFilter;
@@ -487,7 +700,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const borderMat = new THREE.LineBasicMaterial({
         color: 0xF5BA42,
         transparent: true,
-        opacity: 0.18,
+        opacity: 0.16,
         blending: THREE.AdditiveBlending
       });
       const borderLine = new THREE.LineLoop(borderGeo, borderMat);
@@ -503,19 +716,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const arcObjects = [];
     const pulseParticles = [];
 
-    // Создание пульсирующих аккуратных точек хабов (точно как в исходном плоском макете .wpin__dot + .wpin__ripple)
+    // Создание пульсирующих аккуратных точек хабов (в благородных неслепящих тонах)
     Object.keys(HUBS).forEach(key => {
       const hub = HUBS[key];
       const basePos = latLonToVec3(hub.lat, hub.lon, GLOBE_RADIUS * 1.002);
       const normal = basePos.clone().normalize();
 
-      const dotColor = hub.isHQ ? 0xFF6915 : 0xC4F449; // Фирменный Orange для HQ, Lime для хабов
-      const dotRadius = hub.isHQ ? 0.026 : 0.018;
+      const dotColor = hub.isHQ ? 0xFF8A48 : 0x5299E0; // Теплый янтарный для HQ, благородный лазурно-сапфировый для сети
+      const dotRadius = hub.isHQ ? 0.024 : (hub.isPrimary ? 0.017 : 0.013);
 
       // 1. Темная контрастная окантовка (как border: 1.5px solid #060e28 в оригинале)
-      const borderGeo = new THREE.RingGeometry(dotRadius * 0.85, dotRadius * 1.25, 28);
+      const borderGeo = new THREE.RingGeometry(dotRadius * 0.8, dotRadius * 1.35, 24);
       const borderMat = new THREE.MeshBasicMaterial({
-        color: 0x060E28,
+        color: 0x03081A,
         side: THREE.DoubleSide
       });
       const borderMesh = new THREE.Mesh(borderGeo, borderMat);
@@ -523,8 +736,8 @@ document.addEventListener('DOMContentLoaded', () => {
       borderMesh.lookAt(basePos.clone().add(normal.clone().multiplyScalar(2)));
       globeGroup.add(borderMesh);
 
-      // 2. Светящаяся яркая центральная точка (.wpin__dot)
-      const coreGeo = new THREE.SphereGeometry(dotRadius, 16, 16);
+      // 2. Спокойная светящаяся центральная точка (.wpin__dot)
+      const coreGeo = new THREE.SphereGeometry(dotRadius, 14, 14);
       const coreMat = new THREE.MeshBasicMaterial({
         color: dotColor
       });
@@ -532,24 +745,24 @@ document.addEventListener('DOMContentLoaded', () => {
       coreMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.003)));
       globeGroup.add(coreMesh);
 
-      // 3. Мягкий световой ореол вокруг точки
-      const haloGeo = new THREE.SphereGeometry(dotRadius * 1.9, 16, 16);
+      // 3. Мягкий неслепящий световой ореол вокруг точки
+      const haloGeo = new THREE.SphereGeometry(dotRadius * 1.8, 14, 14);
       const haloMat = new THREE.MeshBasicMaterial({
         color: dotColor,
         transparent: true,
-        opacity: 0.32,
+        opacity: 0.24,
         blending: THREE.AdditiveBlending
       });
       const haloMesh = new THREE.Mesh(haloGeo, haloMat);
       haloMesh.position.copy(basePos.clone().add(normal.clone().multiplyScalar(0.003)));
       globeGroup.add(haloMesh);
 
-      // 4. Пульсирующее расширяющееся кольцо волны (.wpin__ripple: scale 0.5 -> 2.6, opacity 0.95 -> 0)
-      const ringGeo = new THREE.RingGeometry(dotRadius * 1.1, dotRadius * 1.28, 32);
+      // 4. Мягкое пульсирующее расширяющееся кольцо волны (opacity 0.45 -> 0, мягко для глаз)
+      const ringGeo = new THREE.RingGeometry(dotRadius * 1.1, dotRadius * 1.25, 28);
       const ringMat = new THREE.MeshBasicMaterial({
         color: dotColor,
         transparent: true,
-        opacity: 0.9,
+        opacity: 0.45,
         side: THREE.DoubleSide,
         blending: THREE.AdditiveBlending
       });
@@ -562,13 +775,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ring: ringMesh,
         coreMesh,
         haloMesh,
-        duration: hub.isHQ ? 2.0 : 2.8, // Точные тайминги из оригинального CSS: 2s и 2.8s
-        offset: Math.random() * 2.0,
+        duration: hub.isHQ ? 2.0 : 2.8,
+        offset: Math.random() * 2.5,
         isHQ: hub.isHQ
       });
 
-      // 5. Невидимый хитбокс для легкого наведения мышью
-      const hitGeo = new THREE.SphereGeometry(0.085, 8, 8);
+      // 5. Невидимый увеличенный хитбокс (радиус 0.08) для комфортного попадания курсором
+      const hitGeo = new THREE.SphereGeometry(0.08, 8, 8);
       const hitMat = new THREE.MeshBasicMaterial({ visible: false });
       const hitMesh = new THREE.Mesh(hitGeo, hitMat);
       hitMesh.position.copy(basePos);
@@ -586,7 +799,7 @@ document.addEventListener('DOMContentLoaded', () => {
       };
     });
 
-    // Создание 3D дуг сети (от Минска HQ ко всем остальным хабам)
+    // Создание 3D дуг сети: магистральные дуги от Минска HQ и региональные ветви
     const minskHub = hubObjects['minsk'];
     const minskPos = minskHub.basePos;
 
@@ -594,32 +807,38 @@ document.addEventListener('DOMContentLoaded', () => {
       if (key === 'minsk') return;
       const targetHub = hubObjects[key];
       const target = targetHub.data;
+
+      // Источник линии: Минск HQ для первичных хабов, или родительский хаб для вторичных
+      const parentKey = target.parentHub || 'minsk';
+      const sourceHub = hubObjects[parentKey] || minskHub;
+      const sourcePos = sourceHub.basePos;
       const targetPos = targetHub.basePos;
 
-      const dist = minskPos.distanceTo(targetPos);
-      const mid = minskPos.clone().add(targetPos).multiplyScalar(0.5);
+      const dist = sourcePos.distanceTo(targetPos);
+      const mid = sourcePos.clone().add(targetPos).multiplyScalar(0.5);
       mid.normalize();
-      const arcHeight = GLOBE_RADIUS + Math.max(0.18, dist * 0.22);
+      const isTrunk = target.isPrimary;
+      const arcHeight = GLOBE_RADIUS + Math.max(isTrunk ? 0.16 : 0.09, dist * (isTrunk ? 0.20 : 0.14));
       mid.multiplyScalar(arcHeight);
 
-      const curve = new THREE.QuadraticBezierCurve3(minskPos, mid, targetPos);
-      const points = curve.getPoints(50);
+      const curve = new THREE.QuadraticBezierCurve3(sourcePos, mid, targetPos);
+      const points = curve.getPoints(isTrunk ? 48 : 32);
       const curveGeo = new THREE.BufferGeometry().setFromPoints(points);
       const curveMat = new THREE.LineBasicMaterial({
-        color: 0xC4F449,
+        color: 0x4FA3E8,
         transparent: true,
-        opacity: 0.45,
+        opacity: isTrunk ? 0.42 : 0.22,
         blending: THREE.AdditiveBlending
       });
       const curveLine = new THREE.Line(curveGeo, curveMat);
-      curveLine.userData = { hubKey: key, region: target.region, baseColor: 0xC4F449 };
+      curveLine.userData = { hubKey: key, region: target.region, baseColor: 0x4FA3E8, isTrunk };
       globeGroup.add(curveLine);
       arcObjects.push(curveLine);
 
       // Аккуратный микро-импульс данных по дуге
-      const particleGeo = new THREE.SphereGeometry(0.015, 8, 8);
+      const particleGeo = new THREE.SphereGeometry(isTrunk ? 0.014 : 0.010, 8, 8);
       const particleMat = new THREE.MeshBasicMaterial({
-        color: 0xC4F449,
+        color: 0x5299E0,
         blending: THREE.AdditiveBlending
       });
       const particleMesh = new THREE.Mesh(particleGeo, particleMat);
@@ -627,10 +846,10 @@ document.addEventListener('DOMContentLoaded', () => {
       pulseParticles.push({
         mesh: particleMesh,
         curve,
-        speed: 0.0035 + (1 / dist) * 0.0026,
+        speed: 0.0032 + (1 / dist) * 0.0022,
         progress: Math.random(),
         hubKey: key,
-        baseColor: 0xC4F449
+        baseColor: 0x5299E0
       });
     });
 
@@ -676,12 +895,19 @@ document.addEventListener('DOMContentLoaded', () => {
       if (hubKey) {
         const hub = HUBS[hubKey];
         const matchKeys = [];
-        if (hubKey === 'minsk') matchKeys.push('by', 'europe');
-        else if (hubKey === 'dubai') matchKeys.push('mena');
-        else if (hubKey === 'london') matchKeys.push('london', 'europe');
-        else if (hubKey === 'newyork') matchKeys.push('us', 'north_america');
-        else if (hubKey === 'astana') matchKeys.push('cis');
-        else if (hubKey === 'warsaw') matchKeys.push('warsaw', 'europe');
+        if (hub.region === 'by') {
+          matchKeys.push('by', 'europe');
+        } else if (hub.region === 'mena') {
+          matchKeys.push('mena');
+        } else if (hub.region === 'eu') {
+          if (hubKey === 'london') matchKeys.push('london', 'europe');
+          else if (hubKey === 'warsaw') matchKeys.push('warsaw', 'europe');
+          else matchKeys.push('europe');
+        } else if (hub.region === 'us') {
+          matchKeys.push('us', 'north_america');
+        } else if (hub.region === 'cis') {
+          matchKeys.push('cis');
+        }
 
         matchKeys.forEach(mk => {
           if (goldenLines[mk]) {
@@ -692,18 +918,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Подсветка дуги к этому хабу золотым
         arcObjects.forEach(arc => {
-          if (arc.userData.hubKey === hubKey) {
+          if (arc.userData.hubKey === hubKey || (hub.parentHub && arc.userData.hubKey === hub.parentHub)) {
             arc.material.color.setHex(0xFFD700);
             arc.material.opacity = 1.0;
           } else {
             arc.material.color.setHex(arc.userData.baseColor);
-            arc.material.opacity = (hubKey === 'minsk' || arc.userData.hubKey === activeHubKey) ? 0.8 : 0.15;
+            arc.material.opacity = (hubKey === 'minsk' || arc.userData.hubKey === activeHubKey) ? 0.7 : 0.18;
           }
         });
       } else {
         arcObjects.forEach(arc => {
           arc.material.color.setHex(arc.userData.baseColor);
-          arc.material.opacity = 0.6;
+          arc.material.opacity = 0.45;
         });
       }
     };
@@ -729,7 +955,8 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       wtabs.forEach(t => {
-        const on = t.dataset.region === hub.region;
+        const tr = t.dataset.region;
+        const on = tr === hub.region || (tr === 'me' && hub.region === 'mena') || (tr === 'na' && hub.region === 'us');
         t.classList.toggle('is-on', on);
         t.setAttribute('aria-selected', String(on));
       });
@@ -765,11 +992,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (reg === 'all' || reg === 'by') {
           selectHub('minsk', true);
-        } else if (reg === 'mena') {
+        } else if (reg === 'mena' || reg === 'me') {
           selectHub('dubai', true);
         } else if (reg === 'eu') {
           selectHub('london', true);
-        } else if (reg === 'us') {
+        } else if (reg === 'us' || reg === 'na') {
           selectHub('newyork', true);
         } else if (reg === 'cis') {
           selectHub('astana', true);
@@ -973,17 +1200,17 @@ document.addEventListener('DOMContentLoaded', () => {
       // Плавный зум камеры
       camera.position.z += (targetZoomZ - camera.position.z) * 0.1;
 
-      // Анимация пульсирующих волн радара (точно как @keyframes pinPulse из плоского макета: scale 0.5 -> 2.6, opacity 0.95 -> 0)
+      // Анимация пульсирующих волн радара (мягкие спокойные волны, не слепят глаза)
       beaconRings.forEach((b) => {
         const phase = ((elapsed + b.offset) % b.duration) / b.duration;
         // Плавное кубическое ускорение волны
         const easedPhase = Math.pow(phase, 0.85);
-        const scale = 0.5 + easedPhase * 2.1;
+        const scale = 0.5 + easedPhase * 2.0;
         b.ring.scale.set(scale, scale, scale);
-        b.ring.material.opacity = Math.max(0, (1 - easedPhase) * 0.92);
+        b.ring.material.opacity = Math.max(0, (1 - easedPhase) * 0.42);
 
         // Мягкое свечение ореола микро-точки
-        const pulse = Math.sin(elapsed * 3.0 + b.offset) * 0.12;
+        const pulse = Math.sin(elapsed * 2.5 + b.offset) * 0.08;
         b.haloMesh.scale.set(1 + pulse, 1 + pulse, 1 + pulse);
       });
 
