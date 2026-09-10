@@ -1162,7 +1162,7 @@
       <!-- 3 технологических направления продакшна (живые инженерные виджеты) -->
       <div class="founders__grid stagger">
         <!-- Направление 1: Frontend & High-Speed UI -->
-        <article class="founder-card">
+        <article class="founder-card founder-card--interactive" id="widget-card-frontend">
           <div class="founder-card__widget widget-code">
             <div class="widget-window-bar">
               <div class="widget-dots">
@@ -1171,32 +1171,47 @@
                 <span class="w-dot w-dot--green"></span>
               </div>
               <div class="widget-title">performance.config.ts</div>
-              <div class="widget-pill widget-pill--lime">60 FPS</div>
+              <div class="widget-pill widget-pill--lime js-perf-fps">60 FPS</div>
             </div>
             <div class="widget-body widget-code__body">
-              <div class="widget-score-row">
+              <!-- Интерактивные пресеты архитектуры -->
+              <div class="widget-presets-bar">
+                <button type="button" class="wpreset is-active js-perf-preset" data-preset="vanilla">⚡ Чистый код</button>
+                <button type="button" class="wpreset js-perf-preset" data-preset="builder">🐢 Конструктор</button>
+                <button type="button" class="wpreset js-perf-preset" data-preset="catalog">📦 Каталог 10k</button>
+              </div>
+
+              <!-- Спидометр Google PageSpeed -->
+              <div class="widget-score-row js-perf-score-row">
                 <div class="widget-score-circle">
                   <svg viewBox="0 0 36 36" class="circular-chart">
                     <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                    <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                    <text x="18" y="20.35" class="percentage">100</text>
+                    <path class="circle js-perf-circle" stroke-dasharray="100, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                    <text x="18" y="20.35" class="percentage js-perf-score">100</text>
                   </svg>
                 </div>
                 <div class="widget-score-info">
                   <div class="widget-score-label">Google PageSpeed</div>
-                  <div class="widget-score-val">Отклик 0.28 сек</div>
+                  <div class="widget-score-val js-perf-time">Отклик 0.28 сек</div>
                 </div>
+                <button type="button" class="wbench-run-btn js-perf-rerun" title="Перезапустить бенчмарк">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+                  <span>Тест</span>
+                </button>
               </div>
-              <div class="widget-code-lines">
+
+              <!-- Живой интерактивный код -->
+              <div class="widget-code-lines js-perf-code">
                 <div class="code-line"><span class="c-kw">const</span> app = <span class="c-fn">renderUI</span>({</div>
-                <div class="code-line indent"><span class="c-prop">vanillaCore</span>: <span class="c-bool">true</span>,</div>
-                <div class="code-line indent"><span class="c-prop">bundleWeight</span>: <span class="c-str">'12.4 kB'</span>,</div>
-                <div class="code-line indent"><span class="c-prop">mobileSpeed</span>: <span class="c-str">'60 FPS'</span></div>
+                <div class="code-line indent"><span class="c-prop">engine</span>: <span class="c-str js-code-engine">'Vanilla + Vite'</span>,</div>
+                <div class="code-line indent"><span class="c-prop">bundleWeight</span>: <span class="c-str js-code-weight">'12.4 kB'</span>,</div>
+                <div class="code-line indent"><span class="c-prop">rendering</span>: <span class="c-str js-code-speed">'60 FPS'</span></div>
                 <div class="code-line">});</div>
               </div>
+
               <div class="widget-tags-row">
-                <span class="wtag wtag--lime">Core Web Vitals: PASS</span>
-                <span class="wtag">0 конструкторов</span>
+                <span class="wtag wtag--lime js-perf-vitals">Core Web Vitals: PASS</span>
+                <span class="wtag js-perf-tag2">0 лишних скриптов</span>
               </div>
             </div>
           </div>
@@ -1216,7 +1231,7 @@
         </article>
 
         <!-- Направление 2: Backend, Архитектура & Базы данных -->
-        <article class="founder-card">
+        <article class="founder-card founder-card--interactive" id="widget-card-backend">
           <div class="founder-card__widget widget-terminal">
             <div class="widget-window-bar">
               <div class="widget-dots">
@@ -1225,27 +1240,47 @@
                 <span class="w-dot w-dot--green"></span>
               </div>
               <div class="widget-title">bash: kv-cluster --prod</div>
-              <div class="widget-pill widget-pill--lime">online</div>
+              <div class="widget-pill widget-pill--lime js-term-pill">online</div>
             </div>
             <div class="widget-body widget-terminal__body">
-              <div class="term-line term-line--cmd">
-                <span class="term-prompt">$</span> kv-status --health
+              <!-- Экран консоли со скроллом -->
+              <div class="term-screen js-term-screen">
+                <div class="term-line term-line--cmd">
+                  <span class="term-prompt">$</span> kv-status --health
+                </div>
+                <div class="term-line">
+                  <span class="term-icon">✔</span> PostgreSQL 16 <span class="term-meta">[lat: 0.8ms]</span>
+                </div>
+                <div class="term-line">
+                  <span class="term-icon">✔</span> Redis Cache <span class="term-meta">[hit: 99.4%]</span>
+                </div>
+                <div class="term-line">
+                  <span class="term-icon">✔</span> REST API Gate <span class="term-meta">[p99: 12ms]</span>
+                </div>
+                <div class="term-line">
+                  <span class="term-icon">✔</span> Banking Gate <span class="term-meta">[ЕРИП/РФ]</span>
+                </div>
+                <div class="term-dynamic-logs js-term-logs"></div>
               </div>
-              <div class="term-line">
-                <span class="term-icon">✔</span> PostgreSQL 16 <span class="term-meta">[lat: 0.8ms]</span>
+
+              <!-- Быстрые команды в один клик -->
+              <div class="term-chips-row">
+                <button type="button" class="term-chip js-term-btn" data-cmd="load">⚡ load 10k</button>
+                <button type="button" class="term-chip js-term-btn" data-cmd="ping">📶 ping</button>
+                <button type="button" class="term-chip js-term-btn" data-cmd="backup">💾 backup</button>
+                <button type="button" class="term-chip js-term-btn" data-cmd="clear">✕ clear</button>
               </div>
-              <div class="term-line">
-                <span class="term-icon">✔</span> Redis Cache <span class="term-meta">[hit: 99.4%]</span>
-              </div>
-              <div class="term-line">
-                <span class="term-icon">✔</span> REST API Gate <span class="term-meta">[p99: 12ms]</span>
-              </div>
-              <div class="term-line">
-                <span class="term-icon">✔</span> Banking Gate <span class="term-meta">[ЕРИП/РФ]</span>
-              </div>
+
+              <!-- Интерактивная строка ввода -->
+              <form class="term-input-form js-term-form" action="#" onsubmit="return false;">
+                <span class="term-prompt">$</span>
+                <input type="text" class="term-input js-term-input" placeholder="введите команду (load, ping, help)..." autocomplete="off" spellcheck="false" aria-label="Команда в терминале">
+                <button type="submit" class="term-enter-btn" title="Выполнить">↵</button>
+              </form>
+
               <div class="term-footer">
-                <span class="term-pulse-dot"></span>
-                <span>Uptime 99.98% • Защита от DDoS</span>
+                <span class="term-pulse-dot js-term-pulse"></span>
+                <span class="js-term-footer-text">Uptime 99.98% • Защита от DDoS</span>
               </div>
             </div>
           </div>
@@ -1265,7 +1300,7 @@
         </article>
 
         <!-- Направление 3: Telegram Mini Apps & Автоматизация -->
-        <article class="founder-card">
+        <article class="founder-card founder-card--interactive" id="widget-card-telegram">
           <div class="founder-card__widget widget-tg">
             <div class="widget-tg__bar">
               <div class="widget-tg__avatar">
@@ -1273,24 +1308,39 @@
               </div>
               <div class="widget-tg__chat-info">
                 <div class="widget-tg__name">KV-Bot • Заявки &amp; CRM</div>
-                <div class="widget-tg__status">бот онлайн</div>
+                <div class="widget-tg__status js-tg-status">бот онлайн</div>
               </div>
               <div class="widget-pill widget-pill--lime">Mini App</div>
             </div>
             <div class="widget-body widget-tg__body">
-              <div class="tg-msg">
-                <div class="tg-msg__badge">⚡ Новая заявка с сайта #148</div>
-                <div class="tg-msg__row"><b>Клиент:</b> Алексей (Минск)</div>
-                <div class="tg-msg__row"><b>Тариф:</b> Интернет-магазин</div>
-                <div class="tg-msg__row"><b>Бюджет:</b> 2 850 BYN</div>
-                <div class="tg-msg__meta">
-                  <span class="tg-crm-tag">✓ Сделка в amoCRM</span>
-                  <span class="tg-time">14:28 ✓✓</span>
-                </div>
+              <!-- Верхняя кнопка симуляции -->
+              <div class="tg-sim-bar">
+                <button type="button" class="tg-sim-btn js-tg-simulate">
+                  <span class="tg-sim-btn__dot"></span>
+                  <span>⚡ Смоделировать заявку</span>
+                </button>
               </div>
+
+              <!-- Лента сообщений чата -->
+              <div class="tg-chat-feed js-tg-feed">
+                <div class="tg-msg js-tg-msg-lead">
+                  <div class="tg-msg__badge js-tg-badge">⚡ Новая заявка с сайта #148</div>
+                  <div class="tg-msg__row"><b>Клиент:</b> <span class="js-tg-client">Алексей (Минск)</span></div>
+                  <div class="tg-msg__row"><b>Тариф:</b> <span class="js-tg-tariff">Интернет-магазин</span></div>
+                  <div class="tg-msg__row"><b>Бюджет:</b> <span class="js-tg-budget">2 850 BYN</span></div>
+                  <div class="tg-msg__meta">
+                    <span class="tg-crm-tag js-tg-crm-status">✓ Сделка в amoCRM</span>
+                    <span class="tg-time js-tg-time">14:28 ✓✓</span>
+                  </div>
+                </div>
+                <div class="tg-chat-replies js-tg-replies"></div>
+              </div>
+
+              <!-- Быстрые действия с заявкой -->
               <div class="tg-btns">
-                <span class="tg-btn">📁 Карточка в CRM</span>
-                <span class="tg-btn tg-btn--main">💬 Чат с клиентом</span>
+                <button type="button" class="tg-btn js-tg-btn-crm">📁 amoCRM</button>
+                <button type="button" class="tg-btn tg-btn--main js-tg-btn-reply">💬 Ответить</button>
+                <button type="button" class="tg-btn js-tg-btn-invoice">💳 Счёт</button>
               </div>
             </div>
           </div>

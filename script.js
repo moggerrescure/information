@@ -1941,4 +1941,332 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     if (!res.ok) throw new Error('HTTP ' + res.status);
   }
+
+  /* =========================================================
+     ИНТЕРАКТИВНЫЕ ИНЖЕНЕРНЫЕ ВИДЖЕТЫ В БЛОКЕ «О НАС»
+     ========================================================= */
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
+  }
+
+  function initFounderWidgets() {
+    // 1. ВИДЖЕТ FRONTEND & СКОРОСТЬ
+    const widgetFrontend = document.getElementById('widget-card-frontend');
+    if (widgetFrontend) {
+      const presets = widgetFrontend.querySelectorAll('.js-perf-preset');
+      const circle = widgetFrontend.querySelector('.js-perf-circle');
+      const scoreEl = widgetFrontend.querySelector('.js-perf-score');
+      const timeEl = widgetFrontend.querySelector('.js-perf-time');
+      const fpsEl = widgetFrontend.querySelector('.js-perf-fps');
+      const codeLines = widgetFrontend.querySelector('.js-perf-code');
+      const engineEl = widgetFrontend.querySelector('.js-code-engine');
+      const weightEl = widgetFrontend.querySelector('.js-code-weight');
+      const speedEl = widgetFrontend.querySelector('.js-code-speed');
+      const vitalsEl = widgetFrontend.querySelector('.js-perf-vitals');
+      const tag2El = widgetFrontend.querySelector('.js-perf-tag2');
+      const rerunBtn = widgetFrontend.querySelector('.js-perf-rerun');
+
+      const presetData = {
+        vanilla: {
+          score: 100,
+          time: 'Отклик 0.28 сек',
+          fps: '60 FPS',
+          engine: "'Vanilla + Vite'",
+          weight: "'12.4 kB'",
+          speed: "'60 FPS'",
+          vitals: 'Core Web Vitals: PASS',
+          tag2: '0 лишних скриптов',
+          isBad: false
+        },
+        builder: {
+          score: 38,
+          time: 'Отклик 3.90 сек',
+          fps: '24 FPS',
+          engine: "'WP-Bakery / Tilda'",
+          weight: "'842 kB'",
+          speed: "'24 FPS'",
+          vitals: 'Core Web Vitals: FAILED',
+          tag2: '62 лишних скрипта',
+          isBad: true
+        },
+        catalog: {
+          score: 98,
+          time: 'Отклик 0.42 сек',
+          fps: '60 FPS',
+          engine: "'Next.js + FastSSR'",
+          weight: "'48.6 kB'",
+          speed: "'60 FPS'",
+          vitals: 'Core Web Vitals: PASS',
+          tag2: 'Edge Caching: HIT',
+          isBad: false
+        }
+      };
+
+      let currentScore = 100;
+      let animId = null;
+
+      function animateScore(targetScore, isBad) {
+        if (animId) cancelAnimationFrame(animId);
+        const startScore = currentScore;
+        const startTime = performance.now();
+        const duration = 400;
+
+        function step(now) {
+          const progress = Math.min(1, (now - startTime) / duration);
+          const ease = 1 - Math.pow(1 - progress, 3);
+          const val = Math.round(startScore + (targetScore - startScore) * ease);
+          if (scoreEl) scoreEl.textContent = val;
+          if (circle) circle.setAttribute('stroke-dasharray', `${val}, 100`);
+
+          if (progress < 1) {
+            animId = requestAnimationFrame(step);
+          } else {
+            currentScore = targetScore;
+            if (scoreEl) scoreEl.textContent = targetScore;
+            if (circle) circle.setAttribute('stroke-dasharray', `${targetScore}, 100`);
+          }
+        }
+        animId = requestAnimationFrame(step);
+
+        if (isBad) {
+          circle?.classList.add('circle--bad');
+          scoreEl?.classList.add('percentage--bad');
+          timeEl?.classList.add('widget-score-val--bad');
+          vitalsEl?.classList.remove('wtag--lime');
+          vitalsEl?.classList.add('wtag--bad');
+          fpsEl?.classList.remove('widget-pill--lime');
+        } else {
+          circle?.classList.remove('circle--bad');
+          scoreEl?.classList.remove('percentage--bad');
+          timeEl?.classList.remove('widget-score-val--bad');
+          vitalsEl?.classList.remove('wtag--bad');
+          vitalsEl?.classList.add('wtag--lime');
+          fpsEl?.classList.add('widget-pill--lime');
+        }
+      }
+
+      function applyPreset(key) {
+        const d = presetData[key];
+        if (!d) return;
+
+        presets.forEach(p => {
+          const active = p.dataset.preset === key;
+          p.classList.toggle('is-active', active);
+          if (active && key === 'builder') p.classList.add('is-builder');
+          else p.classList.remove('is-builder');
+        });
+
+        animateScore(d.score, d.isBad);
+        if (timeEl) timeEl.textContent = d.time;
+        if (fpsEl) fpsEl.textContent = d.fps;
+        if (engineEl) engineEl.textContent = d.engine;
+        if (weightEl) weightEl.textContent = d.weight;
+        if (speedEl) speedEl.textContent = d.speed;
+        if (vitalsEl) vitalsEl.textContent = d.vitals;
+        if (tag2El) tag2El.textContent = d.tag2;
+
+        if (codeLines) {
+          codeLines.classList.add('is-flash');
+          setTimeout(() => codeLines.classList.remove('is-flash'), 300);
+        }
+      }
+
+      presets.forEach(btn => {
+        btn.addEventListener('click', () => {
+          applyPreset(btn.dataset.preset);
+        });
+      });
+
+      rerunBtn?.addEventListener('click', () => {
+        const activePreset = widgetFrontend.querySelector('.js-perf-preset.is-active')?.dataset.preset || 'vanilla';
+        const d = presetData[activePreset];
+        currentScore = 0;
+        if (scoreEl) scoreEl.textContent = '0';
+        if (circle) circle.setAttribute('stroke-dasharray', '0, 100');
+        setTimeout(() => animateScore(d.score, d.isBad), 80);
+      });
+    }
+
+    // 2. ВИДЖЕТ BACKEND & ТЕРМИНАЛ
+    const widgetBackend = document.getElementById('widget-card-backend');
+    if (widgetBackend) {
+      const screen = widgetBackend.querySelector('.js-term-screen');
+      const logsContainer = widgetBackend.querySelector('.js-term-logs');
+      const form = widgetBackend.querySelector('.js-term-form');
+      const input = widgetBackend.querySelector('.js-term-input');
+      const pulseDot = widgetBackend.querySelector('.js-term-pulse');
+      const chips = widgetBackend.querySelectorAll('.js-term-btn');
+
+      function scrollTerminal() {
+        if (screen) screen.scrollTop = screen.scrollHeight;
+      }
+
+      function addTerminalLine(html, isCmd = false) {
+        if (!logsContainer) return;
+        const line = document.createElement('div');
+        line.className = 'term-line term-line--stream' + (isCmd ? ' term-line--cmd' : '');
+        line.innerHTML = html;
+        logsContainer.appendChild(line);
+        scrollTerminal();
+      }
+
+      function executeCommand(cmd) {
+        const cleanCmd = cmd.trim().toLowerCase();
+        if (!cleanCmd) return;
+
+        addTerminalLine(`<span class="term-prompt">$</span> ${escapeHtml(cleanCmd)}`, true);
+        if (pulseDot) pulseDot.classList.add('is-busy');
+
+        if (cleanCmd === 'load' || cleanCmd.startsWith('load') || cleanCmd === 'stress') {
+          setTimeout(() => addTerminalLine('<span class="term-prompt">&gt;</span> Запуск теста: 10 000 параллельных rps...'), 120);
+          setTimeout(() => addTerminalLine('<span class="term-icon">✔</span> Redis Cache: hit rate 99.8% <span class="term-meta">[0.3ms]</span>'), 280);
+          setTimeout(() => addTerminalLine('<span class="term-icon">✔</span> PostgreSQL: пул 42/500 соединений OK'), 440);
+          setTimeout(() => {
+            addTerminalLine('<span class="term-icon">✔</span> 10 000 запросов обработано за 0.78с. Ошибок: 0 (200 OK)');
+            if (pulseDot) pulseDot.classList.remove('is-busy');
+          }, 600);
+        } else if (cleanCmd === 'ping') {
+          setTimeout(() => addTerminalLine('<span class="term-prompt">&gt;</span> Минск (BY-IX): <span class="term-icon">1.1ms</span>'), 100);
+          setTimeout(() => addTerminalLine('<span class="term-prompt">&gt;</span> Москва (MSK-IX): <span class="term-icon">7.9ms</span>'), 200);
+          setTimeout(() => {
+            addTerminalLine('<span class="term-prompt">&gt;</span> Франкфурт: <span class="term-icon">23.4ms</span>');
+            if (pulseDot) pulseDot.classList.remove('is-busy');
+          }, 320);
+        } else if (cleanCmd === 'backup') {
+          setTimeout(() => addTerminalLine('<span class="term-prompt">&gt;</span> Создание снепшота PostgreSQL базы...'), 120);
+          setTimeout(() => {
+            addTerminalLine('<span class="term-icon">✔</span> Снимок зашифрован (AES-256) и сохранен в S3 (2.8с)');
+            if (pulseDot) pulseDot.classList.remove('is-busy');
+          }, 350);
+        } else if (cleanCmd === 'clear') {
+          logsContainer.innerHTML = '';
+          if (pulseDot) pulseDot.classList.remove('is-busy');
+        } else if (cleanCmd === 'help') {
+          setTimeout(() => {
+            addTerminalLine('<span class="term-prompt">&gt;</span> Команды: <b>load</b>, <b>ping</b>, <b>backup</b>, <b>status</b>, <b>clear</b>');
+            if (pulseDot) pulseDot.classList.remove('is-busy');
+          }, 100);
+        } else if (cleanCmd === 'status') {
+          setTimeout(() => {
+            addTerminalLine('<span class="term-icon">✔</span> CPU: 7% • ОЗУ: 1.2/16 GB • Nginx workers: 8 • 0 сбоев');
+            if (pulseDot) pulseDot.classList.remove('is-busy');
+          }, 120);
+        } else {
+          setTimeout(() => {
+            addTerminalLine(`<span style="color:#ff5f56">kv-cluster: '${escapeHtml(cleanCmd)}' не найдена. Введите 'help'</span>`);
+            if (pulseDot) pulseDot.classList.remove('is-busy');
+          }, 120);
+        }
+      }
+
+      form?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (!input) return;
+        const val = input.value;
+        input.value = '';
+        executeCommand(val);
+      });
+
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          const cmd = chip.dataset.cmd;
+          executeCommand(cmd);
+        });
+      });
+    }
+
+    // 3. ВИДЖЕТ TELEGRAM & CRM СИМУЛЯТОР
+    const widgetTg = document.getElementById('widget-card-telegram');
+    if (widgetTg) {
+      const simBtn = widgetTg.querySelector('.js-tg-simulate');
+      const statusEl = widgetTg.querySelector('.js-tg-status');
+      const clientEl = widgetTg.querySelector('.js-tg-client');
+      const tariffEl = widgetTg.querySelector('.js-tg-tariff');
+      const budgetEl = widgetTg.querySelector('.js-tg-budget');
+      const badgeEl = widgetTg.querySelector('.js-tg-badge');
+      const timeEl = widgetTg.querySelector('.js-tg-time');
+      const crmStatusEl = widgetTg.querySelector('.js-tg-crm-status');
+      const repliesFeed = widgetTg.querySelector('.js-tg-replies');
+      const leadMsg = widgetTg.querySelector('.js-tg-msg-lead');
+
+      const btnCrm = widgetTg.querySelector('.js-tg-btn-crm');
+      const btnReply = widgetTg.querySelector('.js-tg-btn-reply');
+      const btnInvoice = widgetTg.querySelector('.js-tg-btn-invoice');
+
+      let leadNum = 148;
+      const sampleLeads = [
+        { name: 'Екатерина (Минск)', tariff: 'Интернет-магазин + CRM', budget: '3 200 BYN', crm: '✓ amoCRM («Новый лид»)' },
+        { name: 'Дмитрий (Гродно)', tariff: 'Telegram Mini App (Доставка)', budget: '2 400 BYN', crm: '✓ Bitrix24 («В обработке»)' },
+        { name: 'Максим (Брест)', tariff: 'Сайт-сервис + Калькулятор', budget: '3 800 BYN', crm: '✓ amoCRM («Квалификация»)' },
+        { name: 'Ольга (Витебск)', tariff: 'Корпоративный портал', budget: '1 950 BYN', crm: '✓ amoCRM («Новый лид»)' }
+      ];
+      let leadIdx = 0;
+
+      function getCurrentTimeStr() {
+        const now = new Date();
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        return `${hh}:${mm} ✓✓`;
+      }
+
+      simBtn?.addEventListener('click', () => {
+        if (!statusEl) return;
+        statusEl.textContent = 'печатает...';
+        statusEl.classList.add('is-typing');
+
+        setTimeout(() => {
+          statusEl.textContent = 'бот онлайн';
+          statusEl.classList.remove('is-typing');
+
+          leadNum++;
+          const data = sampleLeads[leadIdx % sampleLeads.length];
+          leadIdx++;
+
+          if (badgeEl) badgeEl.textContent = `⚡ Новая заявка с сайта #${leadNum}`;
+          if (clientEl) clientEl.textContent = data.name;
+          if (tariffEl) tariffEl.textContent = data.tariff;
+          if (budgetEl) budgetEl.textContent = data.budget;
+          if (crmStatusEl) {
+            crmStatusEl.textContent = data.crm;
+            crmStatusEl.style.color = '#00D26A';
+          }
+          if (timeEl) timeEl.textContent = getCurrentTimeStr();
+
+          if (leadMsg) {
+            leadMsg.classList.remove('is-pop');
+            void leadMsg.offsetWidth; // force reflow
+            leadMsg.classList.add('is-pop');
+          }
+        }, 400);
+      });
+
+      btnCrm?.addEventListener('click', () => {
+        if (!crmStatusEl) return;
+        crmStatusEl.textContent = '✓ amoCRM: «Квалифицирован инженером»';
+        crmStatusEl.style.color = 'var(--lime)';
+      });
+
+      btnReply?.addEventListener('click', () => {
+        if (!repliesFeed) return;
+        const bubble = document.createElement('div');
+        bubble.className = 'tg-msg tg-msg--out is-pop';
+        bubble.innerHTML = `<b>Вы:</b> Здравствуйте! Изучили ваш проект #${leadNum}, свяжемся с вами в Telegram за 10 минут.`;
+        repliesFeed.appendChild(bubble);
+        bubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+
+      btnInvoice?.addEventListener('click', () => {
+        if (!repliesFeed) return;
+        const bubble = document.createElement('div');
+        bubble.className = 'tg-msg tg-msg--sys is-pop';
+        bubble.innerHTML = `🧾 <b>Счет в ЕРИП:</b> #KV-${leadNum} выставлен. Оплата без комиссии по номеру заказа.`;
+        repliesFeed.appendChild(bubble);
+        bubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    }
+  }
+
+  // Запуск интерактивных виджетов
+  initFounderWidgets();
 });
+
