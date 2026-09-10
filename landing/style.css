@@ -1047,6 +1047,113 @@ main>section{padding-block:0 var(--sec)}
   padding:4px 10px;border-radius:var(--r-pill);border:1px solid rgba(196,244,73,0.3);
 }
 
+/* Инженерные UI-виджеты в карточках (Live Code & Systems) */
+.founder-card__widget{
+  position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;
+  background:#141519;border-bottom:1px solid rgba(255,255,255,0.08);
+  display:flex;flex-direction:column;font-family:var(--font);
+}
+.widget-window-bar{
+  height:38px;padding:0 14px;background:rgba(255,255,255,0.04);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.widget-dots{display:flex;gap:6px}
+.w-dot{width:9px;height:9px;border-radius:50%}
+.w-dot--red{background:#ff5f56}
+.w-dot--yellow{background:#ffbd2e}
+.w-dot--green{background:#27c93f}
+.widget-title{font-size:11px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:rgba(255,255,255,0.5)}
+.widget-pill{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+  padding:2px 8px;border-radius:var(--r-pill);background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);
+}
+.widget-pill--lime{background:rgba(196,244,73,0.15);color:var(--lime);border:1px solid rgba(196,244,73,0.3)}
+
+.widget-body{padding:16px 14px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+
+/* 1. Виджет Frontend & Скорость */
+.widget-score-row{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,0.03);padding:9px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.05)}
+.widget-score-circle{width:42px;height:42px;flex-shrink:0}
+.circular-chart{display:block;margin:0 auto;max-width:100%;max-height:100%}
+.circle-bg{fill:none;stroke:rgba(255,255,255,0.1);stroke-width:3.2}
+.circle{fill:none;stroke:#00D26A;stroke-width:3.2;stroke-linecap:round}
+.percentage{fill:#00D26A;font-family:var(--head);font-size:11px;font-weight:800;text-anchor:middle}
+.widget-score-label{font-size:10.5px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:.04em;font-weight:700}
+.widget-score-val{font-size:13.5px;font-weight:800;color:#fff}
+
+.widget-code-lines{
+  background:#0c0d10;border-radius:10px;padding:9px 12px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;line-height:1.55;
+  border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.7);margin:6px 0;
+}
+.code-line.indent{padding-left:14px}
+.c-kw{color:#ff7b72}
+.c-fn{color:#79c0ff}
+.c-prop{color:#d2a8ff}
+.c-bool{color:#ff7b72}
+.c-str{color:#a5d6ff}
+
+.widget-tags-row{display:flex;gap:6px;flex-wrap:wrap}
+.wtag{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.75)}
+.wtag--lime{background:rgba(0,210,106,0.15);color:#00D26A;border:1px solid rgba(0,210,106,0.3)}
+
+/* 2. Виджет Backend & Сервер */
+.widget-terminal__body{
+  background:#0c0d10;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:11px;line-height:1.6;gap:6px;
+}
+.term-line{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.85);font-size:11px}
+.term-line--cmd{color:#fff;font-weight:700;border-bottom:1px solid rgba(255,255,255,0.06);padding-bottom:6px;margin-bottom:2px}
+.term-prompt{color:var(--lime)}
+.term-icon{color:#00D26A;font-weight:900}
+.term-meta{color:rgba(255,255,255,0.45);font-size:10px;margin-left:auto}
+.term-footer{
+  display:flex;align-items:center;gap:8px;padding-top:8px;
+  border-top:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.5);font-size:10.5px;
+}
+.term-pulse-dot{
+  width:7px;height:7px;border-radius:50%;background:#00D26A;
+  box-shadow:0 0 8px #00D26A;animation:termPulse 2s infinite;
+}
+@keyframes termPulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* 3. Виджет Telegram Apps & CRM */
+.widget-tg__bar{
+  height:42px;padding:0 14px;background:rgba(255,255,255,0.04);
+  border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:10px;
+}
+.widget-tg__avatar{
+  width:26px;height:26px;border-radius:50%;background:#2AABEE;
+  display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0;
+}
+.widget-tg__chat-info{flex:1;min-width:0}
+.widget-tg__name{font-size:11.5px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.widget-tg__status{font-size:9.5px;color:#2AABEE;font-weight:600}
+
+.widget-tg__body{gap:10px}
+.tg-msg{
+  background:#1e232c;border-radius:14px;border-top-left-radius:4px;
+  padding:11px 13px;border:1px solid rgba(255,255,255,0.06);
+  font-size:11px;line-height:1.45;color:rgba(255,255,255,0.88);
+}
+.tg-msg__badge{
+  display:inline-block;font-size:10px;font-weight:800;color:var(--lime);
+  background:rgba(196,244,73,0.12);padding:2px 8px;border-radius:4px;margin-bottom:5px;
+}
+.tg-msg__row{margin-bottom:2px}
+.tg-msg__row b{color:#fff}
+.tg-msg__meta{display:flex;align-items:center;justify-content:space-between;margin-top:6px;padding-top:5px;border-top:1px solid rgba(255,255,255,0.06)}
+.tg-crm-tag{font-size:10px;color:#00D26A;font-weight:700}
+.tg-time{font-size:9.5px;color:rgba(255,255,255,0.4)}
+.tg-btns{display:flex;gap:8px}
+.tg-btn{
+  flex:1;padding:7px 4px;border-radius:8px;text-align:center;font-size:10.5px;font-weight:700;
+  background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.1);
+}
+.tg-btn--main{background:rgba(42,171,238,0.18);color:#2AABEE;border-color:rgba(42,171,238,0.35)}
+
+
 .founder-card__body{padding:24px 22px;display:flex;flex-direction:column;flex:1}
 .founder-card__role{font-size:12px;font-weight:700;color:var(--lime);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
 .founder-card__name{font-family:var(--head);font-size:26px;font-weight:800;color:#fff;margin-bottom:12px}
@@ -1065,6 +1172,23 @@ main>section{padding-block:0 var(--sec)}
 .manifesto__title{
   font-family:var(--head);font-size:20px;font-weight:800;color:#fff;margin-bottom:22px;
 }
+.manifesto__compare{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:28px}
+.compare-card{border-radius:18px;padding:26px 24px;display:flex;flex-direction:column}
+.compare-card--muted{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
+.compare-card--highlight{background:rgba(196,244,73,0.04);border:1px solid rgba(196,244,73,0.28);box-shadow:0 8px 32px rgba(196,244,73,0.06)}
+.compare-card__header{margin-bottom:18px}
+.compare-card__badge{display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:4px 10px;border-radius:var(--r-pill);margin-bottom:8px}
+.compare-card__badge--bad{background:rgba(255,75,75,0.12);color:#ff6b6b;border:1px solid rgba(255,75,75,0.25)}
+.compare-card__badge--good{background:rgba(196,244,73,0.14);color:var(--lime);border:1px solid rgba(196,244,73,0.35)}
+.compare-card__title{font-family:var(--head);font-size:18px;font-weight:800;color:#fff;margin:0}
+.compare-card__list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px}
+.compare-card__list li{display:flex;align-items:flex-start;gap:12px}
+.compare-card__icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0;margin-top:2px}
+.compare-card__icon--bad{background:rgba(255,75,75,0.15);color:#ff6b6b;border:1px solid rgba(255,75,75,0.3)}
+.compare-card__icon--good{background:rgba(196,244,73,0.18);color:var(--lime);border:1px solid rgba(196,244,73,0.4)}
+.compare-card__list b{display:block;font-size:14.5px;color:#fff;margin-bottom:3px}
+.compare-card__list p{margin:0;font-size:12.5px;line-height:1.42;color:rgba(255,255,255,0.72)}
+
 .manifesto__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:28px}
 .manifesto__item{display:flex;align-items:flex-start;gap:14px}
 .manifesto__icon{
@@ -1085,6 +1209,7 @@ main>section{padding-block:0 var(--sec)}
 @media(max-width:980px){
   .founders__grid{grid-template-columns:1fr;max-width:440px;margin-inline:auto}
   .manifesto__grid{grid-template-columns:1fr}
+  .manifesto__compare{grid-template-columns:1fr}
 }
 @media(max-width:640px){
   .manifesto__cta{flex-direction:column;align-items:stretch;text-align:center}
@@ -2367,13 +2492,30 @@ main>section{padding-block:0 var(--sec)}
   }
   .founders__grid::-webkit-scrollbar { display: none; }
   .founder-card {
-    flex: 0 0 80%;
-    max-width: 290px;
+    flex: 0 0 85%;
+    max-width: 320px;
     scroll-snap-align: center;
-    padding: 18px 16px;
+    padding: 0;
     border-radius: 20px;
   }
+  .founder-card__body { padding: 20px 16px; }
+  .founder-card__name { font-size: 21px; margin-bottom: 10px; }
   .founder-card__bio { font-size: 13px; line-height: 1.45; }
+  .widget-window-bar { height: 34px; padding: 0 10px; gap: 6px; }
+  .widget-title { font-size: 10.5px; }
+  .widget-pill { font-size: 9.5px; padding: 2px 6px; }
+  .widget-score-row { padding: 7px 10px; gap: 10px; }
+  .widget-code-lines { padding: 7px 10px; font-size: 10.5px; margin: 4px 0; }
+  .code-line.indent { padding-left: 10px; }
+  .term-line { font-size: 10.5px; gap: 6px; }
+  .term-meta { font-size: 9.5px; }
+  .tg-msg { padding: 9px 11px; font-size: 10.5px; }
+  .manifesto__compare { grid-template-columns: 1fr; gap: 14px; }
+  .compare-card { padding: 18px 14px; border-radius: 16px; }
+  .compare-card__title { font-size: 16px; }
+  .compare-card__list { gap: 12px; }
+  .compare-card__list b { font-size: 13.5px; }
+  .compare-card__list p { font-size: 12px; }
   .manifesto__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .manifesto__item { padding: 14px 12px; border-radius: 14px; }
   .manifesto__item b { font-size: 13.5px; }

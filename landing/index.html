@@ -1139,129 +1139,264 @@
   </div>
 </section>
 
-<!-- ============ ОСНОВАТЕЛИ (БОРИС, ИЛЬЯ, ИВАН) ============ -->
+<!-- ============ ИНЖЕНЕРНЫЙ ПРОДАКШН & ПРИНЦИПЫ РАБОТЫ ============ -->
 <section class="founders-sec dark-block" id="about">
   <div class="wrap">
     <div class="founders-card reveal">
       <div class="founders__header">
         <div class="founders__badge">
           <span class="founders__badge-dot" aria-hidden="true"></span>
-          <span>В деле с 2018 года • Без посредников и агентских накруток</span>
+          <span>Инженерный продакшн KV-web • В деле с 2018 года</span>
         </div>
-        <h2 class="h2 h2--light">Три товарища. Создаём сайты, веб-приложения и сервисы сами — от первой идеи до чистого кода и запуска</h2>
+        <h2 class="h2 h2--light">Создаем цифровые продукты полного цикла: от первой строчки кода до продаж</h2>
         <div class="founders__lead">
           <p>
-            Мы — Борис, Илья и Иван. Сошлись ещё в 2018 году и делаем <strong>абсолютно всё, что перечислено на этом сайте</strong>: от быстрых продающих лендингов и интернет-магазинов до сложных веб-приложений, сервисов, личных кабинетов, баз данных, интеграций с CRM и запуска рекламы. Прошло уже больше 7 лет, а наш подход прежний: выдавать первоклассное инженерное качество за честные, минимальные по рынку деньги.
+            KV-web — это компактная команда практикующих Fullstack-разработчиков. Мы не нанимаем субподрядчиков и не держим штат менеджеров-переводчиков: каждый проект ведут опытные инженеры, которые лично отвечают за архитектуру баз данных, скорость интерфейса и запуск продукта.
           </p>
           <p style="margin-top:14px;color:rgba(255,255,255,0.92);">
-            <strong>Главное правило нашей тройки: у нас каждый умеет всё.</strong> Никакого деления на «этот только рисует, а этот только нажимает кнопки». Каждый из нас троих — полноценный Fullstack-разработчик: сам продумывает архитектуру и интерфейс, пишет чистый и быстрый код (Frontend &amp; Backend), собирает приложения и калькуляторы, связывает всё с Telegram и CRM и доводит до результата. Поэтому у нас нет испорченного телефона, а проекты сдаются вовремя и без лишней бюрократии.
+            <strong>Наш ключевой принцип:</strong> никакого нагромождения раздутых конструкторов и чужих шаблонов. Мы пишем чистый, легковесный код под задачу вашего бизнеса. Продукт открывается за доли секунды, выдерживает реальные нагрузки рекламного трафика и навсегда принадлежит вам без скрытых абонентских плат.
           </p>
         </div>
       </div>
 
-      <!-- 3 карточки основателей -->
+      <!-- 3 технологических направления продакшна (живые инженерные виджеты) -->
       <div class="founders__grid stagger">
-        <!-- Борис -->
+        <!-- Направление 1: Frontend & High-Speed UI -->
         <article class="founder-card">
-          <div class="founder-card__media">
-            <img src="img/founder-boris.jpg" width="400" height="400" alt="Борис — сооснователь KV-web" loading="lazy" decoding="async">
-            <span class="founder-card__status">В деле с 2018</span>
+          <div class="founder-card__widget widget-code">
+            <div class="widget-window-bar">
+              <div class="widget-dots">
+                <span class="w-dot w-dot--red"></span>
+                <span class="w-dot w-dot--yellow"></span>
+                <span class="w-dot w-dot--green"></span>
+              </div>
+              <div class="widget-title">performance.config.ts</div>
+              <div class="widget-pill widget-pill--lime">60 FPS</div>
+            </div>
+            <div class="widget-body widget-code__body">
+              <div class="widget-score-row">
+                <div class="widget-score-circle">
+                  <svg viewBox="0 0 36 36" class="circular-chart">
+                    <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                    <path class="circle" stroke-dasharray="100, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                    <text x="18" y="20.35" class="percentage">100</text>
+                  </svg>
+                </div>
+                <div class="widget-score-info">
+                  <div class="widget-score-label">Google PageSpeed</div>
+                  <div class="widget-score-val">Отклик 0.28 сек</div>
+                </div>
+              </div>
+              <div class="widget-code-lines">
+                <div class="code-line"><span class="c-kw">const</span> app = <span class="c-fn">renderUI</span>({</div>
+                <div class="code-line indent"><span class="c-prop">vanillaCore</span>: <span class="c-bool">true</span>,</div>
+                <div class="code-line indent"><span class="c-prop">bundleWeight</span>: <span class="c-str">'12.4 kB'</span>,</div>
+                <div class="code-line indent"><span class="c-prop">mobileSpeed</span>: <span class="c-str">'60 FPS'</span></div>
+                <div class="code-line">});</div>
+              </div>
+              <div class="widget-tags-row">
+                <span class="wtag wtag--lime">Core Web Vitals: PASS</span>
+                <span class="wtag">0 конструкторов</span>
+              </div>
+            </div>
           </div>
           <div class="founder-card__body">
-            <div class="founder-card__role">Сайты &amp; Приложения • Полный стек</div>
-            <h3 class="founder-card__name">Борис</h3>
+            <div class="founder-card__role">Пользовательский опыт</div>
+            <h3 class="founder-card__name">Frontend &amp; Скорость UI</h3>
             <div class="founder-card__tags">
-              <span>Сайты &amp; Веб-приложения</span>
-              <span>UI/UX &amp; Архитектура</span>
-              <span>Чистый Frontend &amp; Backend</span>
+              <span>Чистый JS &amp; TS</span>
+              <span>React / Vue</span>
+              <span>Адаптив 60 FPS</span>
+              <span>Без конструкторов</span>
             </div>
             <p class="founder-card__bio">
-              С 2018 года собирает сайты, сервисы и веб-приложения своими руками. Сам продумывает архитектуру, сам пишет код, сам настраивает логику и тексты. Главный принцип — чтобы продукт открывался моментально на любом смартфоне, а логика сервиса была понятной и очевидной с первой секунды.
+              Мы не используем тяжелые шаблоны WordPress или конструкторы, где страница перегружена лишними скриптами. Пишем легкий модульный фронтенд: плавные 60 кадров в секунду, моментальная загрузка на смартфонах и максимальные баллы в Google PageSpeed. Клиенты не уходят с сайта из-за долгого отклика.
             </p>
           </div>
         </article>
 
-        <!-- Илья -->
+        <!-- Направление 2: Backend, Архитектура & Базы данных -->
         <article class="founder-card">
-          <div class="founder-card__media">
-            <img src="img/founder-ilya.jpg" width="400" height="400" alt="Илья — сооснователь KV-web" loading="lazy" decoding="async">
-            <span class="founder-card__status">В деле с 2018</span>
+          <div class="founder-card__widget widget-terminal">
+            <div class="widget-window-bar">
+              <div class="widget-dots">
+                <span class="w-dot w-dot--red"></span>
+                <span class="w-dot w-dot--yellow"></span>
+                <span class="w-dot w-dot--green"></span>
+              </div>
+              <div class="widget-title">bash: kv-cluster --prod</div>
+              <div class="widget-pill widget-pill--lime">online</div>
+            </div>
+            <div class="widget-body widget-terminal__body">
+              <div class="term-line term-line--cmd">
+                <span class="term-prompt">$</span> kv-status --health
+              </div>
+              <div class="term-line">
+                <span class="term-icon">✔</span> PostgreSQL 16 <span class="term-meta">[lat: 0.8ms]</span>
+              </div>
+              <div class="term-line">
+                <span class="term-icon">✔</span> Redis Cache <span class="term-meta">[hit: 99.4%]</span>
+              </div>
+              <div class="term-line">
+                <span class="term-icon">✔</span> REST API Gate <span class="term-meta">[p99: 12ms]</span>
+              </div>
+              <div class="term-line">
+                <span class="term-icon">✔</span> Banking Gate <span class="term-meta">[ЕРИП/РФ]</span>
+              </div>
+              <div class="term-footer">
+                <span class="term-pulse-dot"></span>
+                <span>Uptime 99.98% • Защита от DDoS</span>
+              </div>
+            </div>
           </div>
           <div class="founder-card__body">
-            <div class="founder-card__role">Сайты &amp; Приложения • Полный стек</div>
-            <h3 class="founder-card__name">Илья</h3>
+            <div class="founder-card__role">Серверная логика</div>
+            <h3 class="founder-card__name">Backend &amp; Архитектура</h3>
             <div class="founder-card__tags">
-              <span>Сайты &amp; Веб-платформы</span>
-              <span>Frontend, Backend &amp; API</span>
-              <span>Базы данных &amp; Скорость</span>
+              <span>Node.js / Python</span>
+              <span>PostgreSQL / Redis</span>
+              <span>REST API</span>
+              <span>ЕРИП / bePaid / РФ</span>
             </div>
             <p class="founder-card__bio">
-              Больше 7 лет в боевой разработке: от быстрых посадочных страниц до нагруженных веб-приложений и сложных сервисов. Принципиально не использует раздутые конструкторы: пишет аккуратный, чистый код и надежную серверную часть, которая легко держит трафик и не ломается годами.
+              Проектируем архитектуру под реальный трафик и бизнес-логику. Настраиваем отказоустойчивые базы данных, безопасную авторизацию, онлайн-платежи через банки Беларуси и РФ, а также автоматическое резервное копирование, чтобы сервисы работали стабильно и без сбоев 24/7.
             </p>
           </div>
         </article>
 
-        <!-- Иван -->
+        <!-- Направление 3: Telegram Mini Apps & Автоматизация -->
         <article class="founder-card">
-          <div class="founder-card__media">
-            <img src="img/founder-ivan.jpg" width="400" height="400" alt="Иван — сооснователь KV-web" loading="lazy" decoding="async">
-            <span class="founder-card__status">В деле с 2018</span>
+          <div class="founder-card__widget widget-tg">
+            <div class="widget-tg__bar">
+              <div class="widget-tg__avatar">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.93-1.28 4.88-2.12 5.86-2.55 2.79-1.16 3.37-1.36 3.75-1.36.08 0 .28.02.4.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+              </div>
+              <div class="widget-tg__chat-info">
+                <div class="widget-tg__name">KV-Bot • Заявки &amp; CRM</div>
+                <div class="widget-tg__status">бот онлайн</div>
+              </div>
+              <div class="widget-pill widget-pill--lime">Mini App</div>
+            </div>
+            <div class="widget-body widget-tg__body">
+              <div class="tg-msg">
+                <div class="tg-msg__badge">⚡ Новая заявка с сайта #148</div>
+                <div class="tg-msg__row"><b>Клиент:</b> Алексей (Минск)</div>
+                <div class="tg-msg__row"><b>Тариф:</b> Интернет-магазин</div>
+                <div class="tg-msg__row"><b>Бюджет:</b> 2 850 BYN</div>
+                <div class="tg-msg__meta">
+                  <span class="tg-crm-tag">✓ Сделка в amoCRM</span>
+                  <span class="tg-time">14:28 ✓✓</span>
+                </div>
+              </div>
+              <div class="tg-btns">
+                <span class="tg-btn">📁 Карточка в CRM</span>
+                <span class="tg-btn tg-btn--main">💬 Чат с клиентом</span>
+              </div>
+            </div>
           </div>
           <div class="founder-card__body">
-            <div class="founder-card__role">Сайты &amp; Приложения • Полный стек</div>
-            <h3 class="founder-card__name">Иван</h3>
+            <div class="founder-card__role">Автоматизация бизнеса</div>
+            <h3 class="founder-card__name">Telegram Apps &amp; CRM</h3>
             <div class="founder-card__tags">
-              <span>Приложения &amp; Сайты</span>
-              <span>Telegram Mini Apps &amp; CRM</span>
-              <span>Сквозная аналитика &amp; Трафик</span>
+              <span>Telegram Mini Apps</span>
+              <span>amoCRM / Bitrix24</span>
+              <span>Webhooks</span>
+              <span>Умные боты</span>
             </div>
             <p class="founder-card__bio">
-              Вместе с парнями со школьной скамьи и с самого старта в 2018-м. Также ведет проект целиком: от первого наброска до готового приложения, Telegram-ботов, онлайн-калькуляторов и рекламных связок. Следит, чтобы всё работало как единая система и приносило реальные заявки в бизнес прямо с первого дня.
+              Объединяем веб-сайт, мессенджер и отдел продаж в единую экосистему. Разрабатываем Telegram Mini Apps для быстрых заказов без ухода на сторонние ресурсы, настраиваем сквозную передачу лидов в CRM и доставку уведомлений менеджеру в чат за 2 секунды.
             </p>
           </div>
         </article>
       </div>
 
-      <!-- Принципы работы -->
+      <!-- Честное сравнение: KV-web против Типичных студий -->
       <div class="founders__manifesto">
-        <div class="manifesto__title">Почему с нами втроём спокойнее и в разы выгоднее, чем со студиями:</div>
-        <div class="manifesto__grid">
-          <div class="manifesto__item">
-            <div class="manifesto__icon">🛠️</div>
-            <div class="manifesto__content">
-              <b>Делаем всё под ключ: от лендинга до сложного приложения</b>
-              <p>Все услуги на сайте — сайты любого типа, веб-приложения, личные кабинеты, интеграции с CRM/Telegram и реклама — мы закрываем сами. Не нужно искать десяток разных подрядчиков.</p>
+        <div class="manifesto__title">Сравнение подходов: почему бизнесу спокойнее и выгоднее работать напрямую с инженерами</div>
+        <div class="manifesto__compare">
+          <!-- Обычная веб-студия -->
+          <div class="compare-card compare-card--muted">
+            <div class="compare-card__header">
+              <span class="compare-card__badge compare-card__badge--bad">Потоковые агентства &amp; Студии</span>
+              <h4 class="compare-card__title">Как устроен конвейерный процесс:</h4>
             </div>
+            <ul class="compare-card__list">
+              <li>
+                <span class="compare-card__icon compare-card__icon--bad">✕</span>
+                <div>
+                  <b>Общение через менеджеров-посредников</b>
+                  <p>В рабочем чате сидит менеджер по продажам. Любой технический вопрос или доработка передаются по цепочке и согласовываются днями.</p>
+                </div>
+              </li>
+              <li>
+                <span class="compare-card__icon compare-card__icon--bad">✕</span>
+                <div>
+                  <b>Высокие накладные расходы в смете</b>
+                  <p>Клиент оплачивает аренду переговорных, зарплаты секретарей, бухгалтеров и оклады сотрудников, которые не пишут код.</p>
+                </div>
+              </li>
+              <li>
+                <span class="compare-card__icon compare-card__icon--bad">✕</span>
+                <div>
+                  <b>Зависимость от платформ и аренда</b>
+                  <p>Часто собирают на Tilda или тяжелых шаблонах CMS, требующих регулярных платежей за сторонний софт и ограничивающих функционал.</p>
+                </div>
+              </li>
+              <li>
+                <span class="compare-card__icon compare-card__icon--bad">✕</span>
+                <div>
+                  <b>Размытая ответственность за результат</b>
+                  <p>Дизайнер винит верстальщика, верстальщик винит хостинг, а маркетолог разводит руками при низкой конверсии.</p>
+                </div>
+              </li>
+            </ul>
           </div>
-          <div class="manifesto__item">
-            <div class="manifesto__icon">🤝</div>
-            <div class="manifesto__content">
-              <b>Прямой контакт без испорченного телефона</b>
-              <p>В рабочем чате вы общаетесь лично с разработчиком. Любая доработка, идея или вопрос обсуждаются сразу с тем, кто прямо сейчас пишет для вас код, а не через менеджера-переводчика.</p>
+
+          <!-- Инженерный продакшн KV-web -->
+          <div class="compare-card compare-card--highlight">
+            <div class="compare-card__header">
+              <span class="compare-card__badge compare-card__badge--good">Инженерный продакшн KV-web</span>
+              <h4 class="compare-card__title">Стандарты нашей разработки:</h4>
             </div>
-          </div>
-          <div class="manifesto__item">
-            <div class="manifesto__icon">⚡</div>
-            <div class="manifesto__content">
-              <b>Честная цена: вы не кормите лишних людей</b>
-              <p>У нас нет офиса в центре, штата секретарей и маркетологов на окладе. Вся стоимость — это только реальные часы работы над проектом. Поэтому цена минимальная, а инженерный уровень высокий.</p>
-            </div>
-          </div>
-          <div class="manifesto__item">
-            <div class="manifesto__icon">🛡️</div>
-            <div class="manifesto__content">
-              <b>Опыт с 2018 года и взаимная страховка команды</b>
-              <p>Мы работаем вместе больше 7 лет. Всегда страхуем код друг друга: проект никогда не зависнет и не сорвется. После сдачи остаемся на связи и помогаем развивать продукт дальше.</p>
-            </div>
+            <ul class="compare-card__list">
+              <li>
+                <span class="compare-card__icon compare-card__icon--good">✓</span>
+                <div>
+                  <b>Прямой диалог с ведущим инженером</b>
+                  <p>Вы общаетесь напрямую со специалистом, который пишет ваш проект. Решения, архитектура и правки внедряются без лишней бюрократии.</p>
+                </div>
+              </li>
+              <li>
+                <span class="compare-card__icon compare-card__icon--good">✓</span>
+                <div>
+                  <b>Прозрачная смета строго за разработку</b>
+                  <p>Никаких лишних наценок. Стоимость рассчитывается исключительно из реальных часов работы старших инженеров над вашим кодом.</p>
+                </div>
+              </li>
+              <li>
+                <span class="compare-card__icon compare-card__icon--good">✓</span>
+                <div>
+                  <b>Чистый исходный код в вашей собственности</b>
+                  <p>Проект на 100% принадлежит вам, запускается за доли секунды, размещается на любом хостинге и легко масштабируется годами.</p>
+                </div>
+              </li>
+              <li>
+                <span class="compare-card__icon compare-card__icon--good">✓</span>
+                <div>
+                  <b>Единый центр ответственности и договор</b>
+                  <p>От архитектуры и кода до интеграции с CRM и запуска рекламы отвечает одна команда. Работаем по договору с четкими сроками.</p>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
 
         <div class="manifesto__cta">
           <div class="manifesto__cta-text">
-            <b>Нужен сайт, веб-приложение или сервис?</b>
-            <span>Напишите нам в чат. Борис, Илья или Иван лично посмотрят вашу задачу, по-человечески подскажут, какую архитектуру лучше выбрать (и на чем сэкономить), и назовут точную смету.</span>
+            <b>Обсудите задачу напрямую с инженером</b>
+            <span>Опишите ваш проект. Мы без навязчивого маркетинга оценим техническую сложность, подскажем оптимальную архитектуру и рассчитаем честную смету.</span>
           </div>
-          <a class="btn btn--lime btn--lg" href="#contacts">Обсудить проект с основателями</a>
+          <a class="btn btn--lime btn--lg" href="#contacts">Получить инженерную оценку проекта</a>
         </div>
       </div>
     </div>
