@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (casesTrack) {
     const getVisibleCases = () => cases.filter(c => !c.hidden && c.style.display !== 'none');
     const padZero = (n) => String(n).padStart(2, '0');
-    const getStep = () => (window.innerWidth > 760 ? 2 : 1);
+    const getStep = () => (window.innerWidth > 768 ? 2 : 1);
     const getTotalSlides = () => {
       const visible = getVisibleCases();
       const step = getStep();
@@ -445,20 +445,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---------- видео / текстовые отзывы ---------- */
-  const rtabs = [...document.querySelectorAll('.rtab')];
-  const revs = [...document.querySelectorAll('.rev')];
+  /* ---------- отзывы о команде ---------- */
   const scroller = document.querySelector('.reviews__scroller');
-  rtabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      rtabs.forEach(t => { t.classList.remove('is-on'); t.setAttribute('aria-selected', 'false'); });
-      tab.classList.add('is-on');
-      tab.setAttribute('aria-selected', 'true');
-      const kind = tab.dataset.rt;
-      revs.forEach(r => { r.hidden = r.dataset.kind !== kind; });
-      if (scroller) scroller.scrollTo({ left: 0, behavior: 'smooth' });
+  const revPrev = document.querySelector('.js-rev-prev');
+  const revNext = document.querySelector('.js-rev-next');
+
+  if (scroller && (revPrev || revNext)) {
+    const getScrollStep = () => {
+      const card = scroller.querySelector('.rev');
+      return card ? card.offsetWidth + 20 : 390;
+    };
+    const updateArrows = () => {
+      const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+      if (revPrev) revPrev.disabled = scroller.scrollLeft <= 5;
+      if (revNext) revNext.disabled = maxScroll <= 5 || scroller.scrollLeft >= maxScroll - 5;
+    };
+    revPrev?.addEventListener('click', () => {
+      scroller.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
     });
-  });
+    revNext?.addEventListener('click', () => {
+      scroller.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+    });
+    scroller.addEventListener('scroll', updateArrows, { passive: true });
+    window.addEventListener('resize', updateArrows);
+    // Initial check
+    setTimeout(updateArrows, 100);
+  }
 
   /* ---------- FAQ: плавное раскрытие, открыт всегда один ----------
      <details> сам по себе схлопывается рывком, поэтому высоту тела
@@ -527,9 +539,43 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         accs.forEach(o => { if (o !== acc && o.open) o._collapse(); });
         expand();
+        if (typeof window.triggerFaqGuyReaction === 'function') {
+          window.triggerFaqGuyReaction();
+        }
       }
     });
   });
+
+  /* ==========================================================================
+     ИНТЕРАКТИВНЫЙ ПЕРСОНАЖ FAQ (ПЛАВНЫЕ РЕАКЦИИ)
+     ========================================================================== */
+  function initFaqGuy() {
+    const head = document.getElementById('faqGuyHead');
+    const arm = document.getElementById('faqGuyArm');
+
+    if (!head || !arm) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // Реакция на клик по FAQ — плавное почесывание затылка и задумчивый кивок
+    let reactionTimer = null;
+    window.triggerFaqGuyReaction = function() {
+      clearTimeout(reactionTimer);
+      
+      arm.classList.remove('is-reacting');
+      head.classList.remove('is-nodding');
+      void arm.offsetWidth; // перезапуск CSS-анимации
+
+      arm.classList.add('is-reacting');
+      head.classList.add('is-nodding');
+
+      reactionTimer = setTimeout(() => {
+        arm.classList.remove('is-reacting');
+        head.classList.remove('is-nodding');
+      }, 1350);
+    };
+  }
+
+  initFaqGuy();
 
   /* ---------- «Показать всё» в блоке о команде ---------- */
   const more = document.getElementById('teamMore');
@@ -1674,7 +1720,7 @@ document.addEventListener('DOMContentLoaded', () => {
      где IntersectionObserver может не сработать.                         */
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const touch  = matchMedia('(hover: none)').matches;
-  const small  = matchMedia('(max-width: 760px)').matches;
+  const small  = matchMedia('(max-width: 768px)').matches;
 
   const armed = [...document.querySelectorAll('.reveal, .stagger')];
   let sweep = null;
@@ -1702,7 +1748,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                                 // приезжает уже проявленным
     armed.forEach(el => io.observe(el));
 
-    requestAnimationFrame(() => hero?.classList.add('is-in'));
+    setTimeout(() => hero?.classList.add('is-in'), 60);
 
     // Подстраховка на весь документ, а не только на первые экраны: если блок
     // уже на виду, а наблюдатель по какой-то причине молчит (скрытая вкладка,

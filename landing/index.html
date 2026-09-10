@@ -362,13 +362,13 @@
       </div>
     </div>
 
-    <div class="chips" role="tablist" aria-label="Фильтр проектов">
-      <button class="chip is-on" role="tab" aria-selected="true" data-filter="all">Все проекты (6)</button>
-      <button class="chip" role="tab" aria-selected="false" data-filter="swift">Приложения на Swift (iOS)</button>
-      <button class="chip" role="tab" aria-selected="false" data-filter="webapp">Веб-приложения &amp; Сервисы</button>
-      <button class="chip" role="tab" aria-selected="false" data-filter="ecommerce">Интернет-магазины</button>
-      <button class="chip" role="tab" aria-selected="false" data-filter="sites">Сайты &amp; Лендинги</button>
-      <button class="chip" role="tab" aria-selected="false" data-filter="traffic">Реклама &amp; Трафик</button>
+        <div class="chips" role="tablist" aria-label="Фильтр проектов">
+      <button class="chip is-on" role="tab" aria-selected="true" data-filter="all">Все проекты (13)</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="swift">Приложения на Swift (iOS &amp; Mac)</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="sites">B2B-порталы &amp; Сайты</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="motion">3D &amp; Motion-дизайн</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="webapp">Веб-приложения &amp; Финтех</button>
+      <button class="chip" role="tab" aria-selected="false" data-filter="traffic">Реклама &amp; Маркетинг</button>
     </div>
 
     <div class="cases-carousel" id="casesCarousel">
@@ -381,247 +381,530 @@
         <!-- Обертка трека с карточками -->
         <div class="cases-carousel__track-wrap">
           <div class="cases cases--track stagger" id="casesTrack" tabindex="0" role="region" aria-label="Карусель проектов">
-            <!-- 1. Swift iOS App -->
+            <!-- 1. App Store Ecosystem (Boris Serzhanovich) -->
             <article class="case" data-tags="swift">
-          <div class="case__media">
-            <div class="case__ios-bar" aria-hidden="true">
-              <span class="case__ios-time">9:41</span>
-              <span class="case__ios-island"></span>
-              <span class="case__ios-icons"><svg width="14" height="10" viewBox="0 0 17 11" fill="currentColor"><path d="M1 8.5C1 8.22 1.22 8 1.5 8H3.5C3.78 8 4 8.22 4 8.5V10.5C4 10.78 3.78 11 3.5 11H1.5C1.22 11 1 10.78 1 10.5V8.5Z M5 6C5 5.72 5.22 5.5 5.5 5.5H7.5C7.78 5.5 8 6V10.5C8 10.78 7.78 11 7.5 11H5.5C5.22 11 5 10.78 5 10.5V6Z M9 3.5C9 3.22 9.22 3 9.5 3H11.5C11.78 3 12 3.22 12 3.5V10.5C12 10.78 11.78 11 11.5 11H9.5C9.22 11 9 10.78 9 10.5V3.5Z M13 1C13 0.72 13.22 0.5 13.5 0.5H15.5C15.78 0.5 16 0.72 16 1V10.5C16 10.78 15.78 11 15.5 11H13.5C13.22 11 13 10.78 13 10.5V1Z"/></svg></span>
-            </div>
-            <img class="case__img" src="img/case-swift-ios.jpg" width="800" height="450" alt="Приложение на Swift Vital Health под iOS" loading="lazy" decoding="async">
-            <div class="case__badges">
-              <span class="case__badge-stack">Swift / SwiftUI • iOS 17</span>
-              <span class="case__badge-metric">★ 4.9 в App Store</span>
-            </div>
-          </div>
-          <div class="case__body">
-            <h3 class="case__title">Vital Health — Нативное iOS-приложение на Swift</h3>
-            <p class="case__desc">
-              Разработали мобильное приложение на Swift и SwiftUI под ключ: чистая архитектура MVVM, интеграция с Apple HealthKit, биометрия FaceID, динамические виджеты iOS 17 и интерактивные графики физической активности. Стабильные 60 FPS, нулевые вылеты и плавная темная тема.
-            </p>
-            <div class="case__result">
-              <span class="case__result-icon">🚀</span>
-              <span>Результат: запуск в App Store, 85 000+ установок за первые 3 месяца</span>
-            </div>
-            <div class="case__foot">
-              <div class="case__tags">
-                <span>SwiftUI</span>
-                <span>HealthKit</span>
-                <span>CoreData</span>
-                <span>WidgetKit</span>
+              <div class="case__media">
+                <div class="case__ios-bar" aria-hidden="true">
+                  <span class="case__ios-time">9:41</span>
+                  <span class="case__ios-island"></span>
+                  <span class="case__ios-icons"><svg width="14" height="10" viewBox="0 0 17 11" fill="currentColor"><path d="M1 8.5C1 8.22 1.22 8 1.5 8H3.5C3.78 8 4 8.22 4 8.5V10.5C4 10.78 3.78 11 3.5 11H1.5C1.22 11 1 10.78 1 10.5V8.5Z M5 6C5 5.72 5.22 5.5 5.5 5.5H7.5C7.78 5.5 8 6V10.5C8 10.78 7.78 11 7.5 11H5.5C5.22 11 5 10.78 5 10.5V6Z M9 3.5C9 3.22 9.22 3 9.5 3H11.5C11.78 3 12 3.22 12 3.5V10.5C12 10.78 11.78 11 11.5 11H9.5C9.22 11 9 10.78 9 10.5V3.5Z M13 1C13 0.72 13.22 0.5 13.5 0.5H15.5C15.78 0.5 16 0.72 16 1V10.5C16 10.78 15.78 11 15.5 11H13.5C13.22 11 13 10.78 13 10.5V1Z"/></svg></span>
+                </div>
+                <img class="case__img" src="img/case-appstore-ecosystem.jpg" width="800" height="450" alt="Экосистема приложений App Store от Boris Serzhanovich" loading="lazy" decoding="async">
+                <div class="case__badges">
+                  <span class="case__badge-stack">SwiftUI • HealthKit • CoreML • StoreKit 2</span>
+                  <span class="case__badge-metric">★ 4.9 • 150 000+ установок</span>
+                </div>
               </div>
-              <a class="case__btn" href="#contacts">Обсудить приложение <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            </div>
-          </div>
-        </article>
+              <div class="case__body">
+                <h3 class="case__title">Экосистема приложений для здоровья и фитнеса в App Store</h3>
+                <p class="case__desc">
+                  Линейка нативных мобильных продуктов в аккаунте разработчика Boris Serzhanovich: <strong>FoodTracker AI</strong> (нейросетевой трекинг макронутриентов по фото тарелки), <strong>AI Workout Coach</strong> (силовой дневник с таймерами и автопрогрессией), <strong>FitRPG</strong> (геймификация тренировок с прокачкой героя) и <strong>Yoga Coach &amp; Relax</strong>. Плавные 60 FPS, виджеты iOS 17, синхронизация с Apple Watch и выстроенная подписная экономика.
+                </p>
+                <div class="case__result">
+                  <span class="case__result-icon">🚀</span>
+                  <span>Результат: 4 продукта в топе категорий Health &amp; Fitness, LTV подписчиков вырос на 65%</span>
+                </div>
+                <div class="case__foot">
+                  <div class="case__tags">
+                    <span>SwiftUI</span>
+                    <span>HealthKit</span>
+                    <span>AI CoreML</span>
+                    <span>StoreKit 2</span>
+                    <span>watchOS</span>
+                  </div>
+                  <a class="case__btn" href="#contacts">Заказать iOS-приложение <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
+              </div>
+            </article>
 
-        <!-- 2. SaaS Web Platform -->
-        <article class="case" data-tags="webapp">
-          <div class="case__media">
-            <div class="case__browser-bar" aria-hidden="true">
-              <div class="case__browser-dots">
-                <span class="case__browser-dot case__browser-dot--red"></span>
-                <span class="case__browser-dot case__browser-dot--yellow"></span>
-                <span class="case__browser-dot case__browser-dot--green"></span>
+            <!-- 2. MTBank Mobile Online Banking -->
+            <article class="case" data-tags="swift webapp">
+              <div class="case__media">
+                <div class="case__ios-bar" aria-hidden="true">
+                  <span class="case__ios-time">9:41</span>
+                  <span class="case__ios-island"></span>
+                  <span class="case__ios-icons"><svg width="14" height="10" viewBox="0 0 17 11" fill="currentColor"><path d="M1 8.5C1 8.22 1.22 8 1.5 8H3.5C3.78 8 4 8.22 4 8.5V10.5C4 10.78 3.78 11 3.5 11H1.5C1.22 11 1 10.78 1 10.5V8.5Z M5 6C5 5.72 5.22 5.5 5.5 5.5H7.5C7.78 5.5 8 6V10.5C8 10.78 7.78 11 7.5 11H5.5C5.22 11 5 10.78 5 10.5V6Z M9 3.5C9 3.22 9.22 3 9.5 3H11.5C11.78 3 12 3.22 12 3.5V10.5C12 10.78 11.78 11 11.5 11H9.5C9.22 11 9 10.78 9 10.5V3.5Z M13 1C13 0.72 13.22 0.5 13.5 0.5H15.5C15.78 0.5 16 0.72 16 1V10.5C16 10.78 15.78 11 15.5 11H13.5C13.22 11 13 10.78 13 10.5V1Z"/></svg></span>
+                </div>
+                <img class="case__img" src="img/case-mtbank-mobile.jpg" width="800" height="450" alt="Мобильный онлайн-банкинг МТБанк" loading="lazy" decoding="async">
+                <div class="case__badges">
+                  <span class="case__badge-stack">FinTech • HighLoad • PCI DSS</span>
+                  <span class="case__badge-metric">500 000+ транзакций/мес</span>
+                </div>
               </div>
-              <div class="case__browser-url">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <span>logistream.io</span>
+              <div class="case__body">
+                <h3 class="case__title">МТБанк — Мобильный онлайн-банкинг и цифровой кошелек</h3>
+                <p class="case__desc">
+                  Разработка современного мобильного банка для частных клиентов и бизнеса: моментальные платежи в системе ЕРИП в один тап, мгновенные P2P-переводы по номеру телефона, выпуск цифровых карт Visa/Mastercard/Белкарт, интерактивная аналитика расходов по категориям, онлайн-обмен валют, биометрическая аутентификация FaceID и сквозное банковское шифрование.
+                </p>
+                <div class="case__result">
+                  <span class="case__result-icon">💳</span>
+                  <span>Результат: 99.99% стабильность под пиковыми нагрузками, проведение платежа за 4 секунды</span>
+                </div>
+                <div class="case__foot">
+                  <div class="case__tags">
+                    <span>FinTech</span>
+                    <span>Swift / iOS</span>
+                    <span>ЕРИП Платежи</span>
+                    <span>PCI DSS</span>
+                    <span>Биометрия</span>
+                  </div>
+                  <a class="case__btn" href="#contacts">Обсудить финтех <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
               </div>
-            </div>
-            <img class="case__img" src="img/case-saas-webapp.jpg" width="800" height="450" alt="SaaS платформа LogiStream" loading="lazy" decoding="async">
-            <div class="case__badges">
-              <span class="case__badge-stack">Fullstack SaaS • React / Node</span>
-              <span class="case__badge-metric">Скорость 0.8s</span>
-            </div>
-          </div>
-          <div class="case__body">
-            <h3 class="case__title">LogiStream — SaaS-платформа логистики и личный кабинет</h3>
-            <p class="case__desc">
-              Веб-приложение для управления международными перевозками и автопарком. Интерактивный живой трекинг на карте, автоматический расчёт таможенных смет, финансовый дашборд и моментальные пуши водителям и клиентам в Telegram.
-            </p>
-            <div class="case__result">
-              <span class="case__result-icon">⚡</span>
-              <span>Результат: автоматизировали 70% рутины менеджеров, обработка заявок ускорилась в 3 раза</span>
-            </div>
-            <div class="case__foot">
-              <div class="case__tags">
-                <span>React</span>
-                <span>Node.js</span>
-                <span>PostgreSQL</span>
-                <span>WebSockets</span>
-              </div>
-              <a class="case__btn" href="#contacts">Заказать веб-сервис <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            </div>
-          </div>
-        </article>
+            </article>
 
-        <!-- 3. E-Commerce Luxury -->
-        <article class="case" data-tags="ecommerce sites">
-          <div class="case__media">
-            <div class="case__browser-bar" aria-hidden="true">
-              <div class="case__browser-dots">
-                <span class="case__browser-dot case__browser-dot--red"></span>
-                <span class="case__browser-dot case__browser-dot--yellow"></span>
-                <span class="case__browser-dot case__browser-dot--green"></span>
+            <!-- 3. KONTUR (landing-na-zakaz.by) -->
+            <article class="case" data-tags="sites motion">
+              <div class="case__media">
+                <div class="case__browser-bar" aria-hidden="true">
+                  <div class="case__browser-dots">
+                    <span class="case__browser-dot case__browser-dot--red"></span>
+                    <span class="case__browser-dot case__browser-dot--yellow"></span>
+                    <span class="case__browser-dot case__browser-dot--green"></span>
+                  </div>
+                  <div class="case__browser-url">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>kontur-estate.by</span>
+                  </div>
+                </div>
+                <img class="case__img" src="img/case-kontur-dev.jpg" width="800" height="450" alt="Интерактивный 3D-квартал девелопера KONTUR" loading="lazy" decoding="async">
+                <div class="case__badges">
+                  <span class="case__badge-stack">Three.js • 3D Scrollytelling • WebGL</span>
+                  <span class="case__badge-metric">Awwwards Site • 3D Генплан</span>
+                </div>
               </div>
-              <div class="case__browser-url">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <span>nordicnest.by</span>
+              <div class="case__body">
+                <h3 class="case__title">KONTUR (landing-na-zakaz.by) — Интерактивный 3D-квартал девелопера</h3>
+                <p class="case__desc">
+                  Презентационный портал девелоперской компании KONTUR: жилой дом послойно собирается прямо по скроллу страницы, интерактивный 3D-генплан жилого квартала с обзором 360°, умный селектор планировок квартир с расчетом освещенности и геймифицированный конфигуратор отделки для будущих жильцов.
+                </p>
+                <div class="case__result">
+                  <span class="case__result-icon">🏢</span>
+                  <span>Результат: среднее время на сайте выросло до 4.8 минут, бронирование квартир через сайт +140%</span>
+                </div>
+                <div class="case__foot">
+                  <div class="case__tags">
+                    <span>Three.js</span>
+                    <span>WebGL 3D</span>
+                    <span>Застройщик</span>
+                    <span>Интерактивный генплан</span>
+                    <span>Scrollytelling</span>
+                  </div>
+                  <a class="case__btn" href="#contacts">Заказать 3D-сайт <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
               </div>
-            </div>
-            <img class="case__img" src="img/case-ecommerce-site.jpg" width="800" height="450" alt="Интернет-магазин мебели Nordic Nest" loading="lazy" decoding="async">
-            <div class="case__badges">
-              <span class="case__badge-stack">E-Commerce • 1С / Склад / Онлайн-оплата</span>
-              <span class="case__badge-metric">+240% к заказам</span>
-            </div>
-          </div>
-          <div class="case__body">
-            <h3 class="case__title">Nordic Nest — Интернет-магазин дизайнерской мебели</h3>
-            <p class="case__desc">
-              Премиальный интернет-магазин скандинавской мебели. Мгновенная фильтрация по параметрам без перезагрузки страницы, быстрая корзина в 1 клик, двусторонняя синхронизация остатков со складом/1С и онлайн-эквайринг.
-            </p>
-            <div class="case__result">
-              <span class="case__result-icon">📈</span>
-              <span>Результат: конверсия 3.8%, средний чек вырос на 45%, загрузка страниц 1.1 сек</span>
-            </div>
-            <div class="case__foot">
-              <div class="case__tags">
-                <span>E-Commerce</span>
-                <span>1С Синхронизация</span>
-                <span>Эквайринг</span>
-                <span>UI/UX</span>
-              </div>
-              <a class="case__btn" href="#contacts">Обсудить магазин <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            </div>
-          </div>
-        </article>
+            </article>
 
-        <!-- 4. Ads & Lead Generation -->
-        <article class="case" data-tags="traffic">
-          <div class="case__media">
-            <div class="case__browser-bar" aria-hidden="true">
-              <div class="case__browser-dots">
-                <span class="case__browser-dot case__browser-dot--red"></span>
-                <span class="case__browser-dot case__browser-dot--yellow"></span>
-                <span class="case__browser-dot case__browser-dot--green"></span>
+            <!-- 4. РИГЕЛЬ (landing-na-zakaz.by) -->
+            <article class="case" data-tags="sites webapp">
+              <div class="case__media">
+                <div class="case__browser-bar" aria-hidden="true">
+                  <div class="case__browser-dots">
+                    <span class="case__browser-dot case__browser-dot--red"></span>
+                    <span class="case__browser-dot case__browser-dot--yellow"></span>
+                    <span class="case__browser-dot case__browser-dot--green"></span>
+                  </div>
+                  <div class="case__browser-url">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>rigel-steel.by</span>
+                  </div>
+                </div>
+                <img class="case__img" src="img/case-rigel-metal.jpg" width="800" height="450" alt="Завод металлоконструкций РИГЕЛЬ" loading="lazy" decoding="async">
+                <div class="case__badges">
+                  <span class="case__badge-stack">BIM 3D • Инженерный Frontend</span>
+                  <span class="case__badge-metric">ТОП-1 РБ • Онлайн смета</span>
+                </div>
               </div>
-              <div class="case__browser-url">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <span>aethergrowth.agency</span>
+              <div class="case__body">
+                <h3 class="case__title">РИГЕЛЬ (landing-na-zakaz.by) — Завод металлоконструкций и BIM-смета</h3>
+                <p class="case__desc">
+                  Официальный промо-портал завода быстровозводимых металлоконструкций РИГЕЛЬ (Могилёв): архитектурный каркас ангара вычерчивается в векторе на глазах пользователя, моментальный онлайн-калькулятор сметы по площади и нагрузкам, интерактивный каталог модульных балок и автоматическая генерация ТЗ для отдела продаж.
+                </p>
+                <div class="case__result">
+                  <span class="case__result-icon">🏗️</span>
+                  <span>Результат: поток целевых B2B-заявок на ангары вырос в 3.2 раза, стоимость замера отсеяна до нуля</span>
+                </div>
+                <div class="case__foot">
+                  <div class="case__tags">
+                    <span>Металлоконструкции</span>
+                    <span>Калькулятор сметы</span>
+                    <span>BIM 3D</span>
+                    <span>B2B Производство</span>
+                    <span>Инженерия</span>
+                  </div>
+                  <a class="case__btn" href="#contacts">Заказать B2B-портал <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
               </div>
-            </div>
-            <img class="case__img" src="img/case-ads-traffic.jpg" width="800" height="450" alt="Сквозная реклама и дашборд AetherGrowth" loading="lazy" decoding="async">
-            <div class="case__badges">
-              <span class="case__badge-stack">Яндекс.Директ • Meta • Telegram-бот</span>
-              <span class="case__badge-metric">ROAS +380%</span>
-            </div>
-          </div>
-          <div class="case__body">
-            <h3 class="case__title">AetherGrowth — Сквозная реклама и воронка лидогенерации</h3>
-            <p class="case__desc">
-              Комплексная рекламная связка под ключ: быстрый конверсионный мультилендинг, тонкая настройка контекстной и таргетированной рекламы, плюс Telegram-бот моментальной квалификации лидов с передачей в CRM за 3 секунды.
-            </p>
-            <div class="case__result">
-              <span class="case__result-icon">🎯</span>
-              <span>Результат: 380+ целевых заявок ежемесячно по фиксированной цене $4.2 за лид</span>
-            </div>
-            <div class="case__foot">
-              <div class="case__tags">
-                <span>Контекст</span>
-                <span>Таргет</span>
-                <span>Сквозная CRM</span>
-                <span>Telegram-бот</span>
-              </div>
-              <a class="case__btn" href="#contacts">Настроить рекламу <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            </div>
-          </div>
-        </article>
+            </article>
 
-        <!-- 5. Telegram Mini App -->
-        <article class="case" data-tags="webapp swift">
-          <div class="case__media">
-            <div class="case__browser-bar" aria-hidden="true">
-              <div class="case__browser-dots">
-                <span class="case__browser-dot case__browser-dot--red"></span>
-                <span class="case__browser-dot case__browser-dot--yellow"></span>
-                <span class="case__browser-dot case__browser-dot--green"></span>
+            <!-- 5. КОСОБОК (landing-na-zakaz.by) -->
+            <article class="case" data-tags="sites motion">
+              <div class="case__media">
+                <div class="case__browser-bar" aria-hidden="true">
+                  <div class="case__browser-dots">
+                    <span class="case__browser-dot case__browser-dot--red"></span>
+                    <span class="case__browser-dot case__browser-dot--yellow"></span>
+                    <span class="case__browser-dot case__browser-dot--green"></span>
+                  </div>
+                  <div class="case__browser-url">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>kosobok.by</span>
+                  </div>
+                </div>
+                <img class="case__img" src="img/case-kosobok-burger.jpg" width="800" height="450" alt="Крафтовая бургерная КОСОБОК" loading="lazy" decoding="async">
+                <div class="case__badges">
+                  <span class="case__badge-stack">Frame-by-Frame Motion • Canvas</span>
+                  <span class="case__badge-metric">Доставка 30 мин • Конверсия 8.2%</span>
+                </div>
               </div>
-              <div class="case__browser-url">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <span>t.me/BeanLeafBot</span>
+              <div class="case__body">
+                <h3 class="case__title">КОСОБОК (landing-na-zakaz.by) — Интерактивная бургерная с 3D-сборкой</h3>
+                <p class="case__desc">
+                  Аппетитный промо-сайт крафтовой бургерной КОСОБОК (Гомель): интерактивная покадровая анимация сборки премиального бургера от мягкой бриоши до сочной говядины и тающего чеддера, атмосферный видеотизер открытой кухни с огнем, адаптивное меню и ультра-быстрый заказ доставки в 2 тапа.
+                </p>
+                <div class="case__result">
+                  <span class="case__result-icon">🍔</span>
+                  <span>Результат: конверсия посетителей в заказ доставки достигла 8.2%, средний чек вырос на 35%</span>
+                </div>
+                <div class="case__foot">
+                  <div class="case__tags">
+                    <span>HoReCa</span>
+                    <span>Покадровый 3D моушен</span>
+                    <span>Доставка еды</span>
+                    <span>Canvas</span>
+                    <span>Интерактивное меню</span>
+                  </div>
+                  <a class="case__btn" href="#contacts">Заказать вкусный сайт <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
               </div>
-            </div>
-            <img class="case__img" src="img/case-telegram-miniapp.jpg" width="800" height="450" alt="Telegram Mini App Bean and Leaf" loading="lazy" decoding="async">
-            <div class="case__badges">
-              <span class="case__badge-stack">Telegram Mini App • Apple Pay</span>
-              <span class="case__badge-metric">42 000+ юзеров</span>
-            </div>
-          </div>
-          <div class="case__body">
-            <h3 class="case__title">Bean &amp; Leaf — Telegram Mini App для сети кофеен</h3>
-            <p class="case__desc">
-              Нативное веб-приложение прямо внутри мессенджера Telegram. Интерактивное меню напитков и десертов, предзаказ к точному времени, быстрая оплата Apple Pay / картой и цифровая карта постоянного гостя с начислением бонусов.
-            </p>
-            <div class="case__result">
-              <span class="case__result-icon">☕</span>
-              <span>Результат: повторные заказы выросли на 47%, очереди в кофейнях сократились вдвое</span>
-            </div>
-            <div class="case__foot">
-              <div class="case__tags">
-                <span>Telegram WebApp</span>
-                <span>Apple Pay</span>
-                <span>Node.js</span>
-                <span>Loyalty CRM</span>
-              </div>
-              <a class="case__btn" href="#contacts">Заказать Mini App <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            </div>
-          </div>
-        </article>
+            </article>
 
-        <!-- 6. Corporate & 3D Interactive Platform -->
-        <article class="case" data-tags="sites webapp">
-          <div class="case__media">
-            <div class="case__browser-bar" aria-hidden="true">
-              <div class="case__browser-dots">
-                <span class="case__browser-dot case__browser-dot--red"></span>
-                <span class="case__browser-dot case__browser-dot--yellow"></span>
-                <span class="case__browser-dot case__browser-dot--green"></span>
+            <!-- 6. coolav.by & autora -->
+            <article class="case" data-tags="webapp swift">
+              <div class="case__media">
+                <div class="case__browser-bar" aria-hidden="true">
+                  <div class="case__browser-dots">
+                    <span class="case__browser-dot case__browser-dot--red"></span>
+                    <span class="case__browser-dot case__browser-dot--yellow"></span>
+                    <span class="case__browser-dot case__browser-dot--green"></span>
+                  </div>
+                  <div class="case__browser-url">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>coolav.by</span>
+                  </div>
+                </div>
+                <img class="case__img" src="img/case-coolav-auto.jpg" width="800" height="450" alt="Автомобильный маркетплейс coolav.by и autora" loading="lazy" decoding="async">
+                <div class="case__badges">
+                  <span class="case__badge-stack">TypeScript • Swift • HighLoad API</span>
+                  <span class="case__badge-metric">45 000+ авто в РБ • VIN-проверка</span>
+                </div>
               </div>
-              <div class="case__browser-url">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <span>structura.by</span>
+              <div class="case__body">
+                <h3 class="case__title">coolav.by &amp; autora — Автомобильный маркетплейс и классифайд Беларуси</h3>
+                <p class="case__desc">
+                  Высоконагруженный автомобильный портал и нативное iOS-приложение (autora) из репозиториев moggerrescure и Borisserz: моментальные фасетные фильтры по маркам, городам и пробегу, интеграция базы проверки истории авто по VIN, онлайн-расчет автокредита в BYN и защищенные чаты покупателя с продавцом.
+                </p>
+                <div class="case__result">
+                  <span class="case__result-icon">🚗</span>
+                  <span>Результат: 0.15s время отклика поисковой выдачи при каталоге 45 000+ объявлений по всей Беларуси</span>
+                </div>
+                <div class="case__foot">
+                  <div class="case__tags">
+                    <span>TypeScript</span>
+                    <span>Swift / iOS</span>
+                    <span>Классифайд</span>
+                    <span>Автокредиты BYN</span>
+                    <span>VIN Check</span>
+                  </div>
+                  <a class="case__btn" href="#contacts">Создать маркетплейс <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
               </div>
-            </div>
-            <img class="case__img" src="img/case-corporate-platform.jpg" width="800" height="450" alt="Интерактивный портал архитектурного бюро Structura" loading="lazy" decoding="async">
-            <div class="case__badges">
-              <span class="case__badge-stack">Корпоративный портал • 3D калькулятор</span>
-              <span class="case__badge-metric">ТОП-3 в Google</span>
-            </div>
+            </article>
+
+            <!-- 7. FitRPG (GitHub Pages & App Store) -->
+            <article class="case" data-tags="swift webapp">
+              <div class="case__media">
+                <div class="case__ios-bar" aria-hidden="true">
+                  <span class="case__ios-time">9:41</span>
+                  <span class="case__ios-island"></span>
+                  <span class="case__ios-icons"><svg width="14" height="10" viewBox="0 0 17 11" fill="currentColor"><path d="M1 8.5C1 8.22 1.22 8 1.5 8H3.5C3.78 8 4 8.22 4 8.5V10.5C4 10.78 3.78 11 3.5 11H1.5C1.22 11 1 10.78 1 10.5V8.5Z M5 6C5 5.72 5.22 5.5 5.5 5.5H7.5C7.78 5.5 8 6V10.5C8 10.78 7.78 11 7.5 11H5.5C5.22 11 5 10.78 5 10.5V6Z M9 3.5C9 3.22 9.22 3 9.5 3H11.5C11.78 3 12 3.22 12 3.5V10.5C12 10.78 11.78 11 11.5 11H9.5C9.22 11 9 10.78 9 10.5V3.5Z M13 1C13 0.72 13.22 0.5 13.5 0.5H15.5C15.78 0.5 16 0.72 16 1V10.5C16 10.78 15.78 11 15.5 11H13.5C13.22 11 13 10.78 13 10.5V1Z"/></svg></span>
+                </div>
+                <img class="case__img" src="img/case-fitrpg-game.jpg" width="800" height="450" alt="FitRPG геймифицированный фитнес-трекер" loading="lazy" decoding="async">
+                <div class="case__badges">
+                  <span class="case__badge-stack">Swift 6 • HealthKit • GitHub Pages</span>
+                  <span class="case__badge-metric">GameFi Fitness • Top-10 App Store</span>
+                </div>
+              </div>
+              <div class="case__body">
+                <h3 class="case__title">FitRPG — Фитнес-RPG игра на iOS и Web (GitHub Pages)</h3>
+                <p class="case__desc">
+                  Геймифицированная платформа мотивации здорового образа жизни в репозиториях Boris Serzhanovich и moggerrescure (rpg-fitness): реальные шаги и подходы в зале конвертируются в опыт персонажа (Elara Warrior), прокачку экипировки и рейдовые битвы с теневыми боссами. Кроссплатформенная веб-витрина на GitHub Pages и нативное приложение с HealthKit.
+                </p>
+                <div class="case__result">
+                  <span class="case__result-icon">⚔️</span>
+                  <span>Результат: Day-30 Retention пользователей вырос до 42% за счет глубокой игровой петли прогрессии</span>
+                </div>
+                <div class="case__foot">
+                  <div class="case__tags">
+                    <span>GameFi</span>
+                    <span>HealthKit</span>
+                    <span>SwiftUI</span>
+                    <span>GitHub Pages</span>
+                    <span>Геймификация</span>
+                  </div>
+                  <a class="case__btn" href="#contacts">Обсудить GameFi <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
+              </div>
+            </article>
+
+            <!-- 8. AI Workout Coach & Pose Tracker -->
+            <article class="case" data-tags="swift">
+              <div class="case__media">
+                <div class="case__ios-bar" aria-hidden="true">
+                  <span class="case__ios-time">9:41</span>
+                  <span class="case__ios-island"></span>
+                  <span class="case__ios-icons"><svg width="14" height="10" viewBox="0 0 17 11" fill="currentColor"><path d="M1 8.5C1 8.22 1.22 8 1.5 8H3.5C3.78 8 4 8.22 4 8.5V10.5C4 10.78 3.78 11 3.5 11H1.5C1.22 11 1 10.78 1 10.5V8.5Z M5 6C5 5.72 5.22 5.5 5.5 5.5H7.5C7.78 5.5 8 6V10.5C8 10.78 7.78 11 7.5 11H5.5C5.22 11 5 10.78 5 10.5V6Z M9 3.5C9 3.22 9.22 3 9.5 3H11.5C11.78 3 12 3.22 12 3.5V10.5C12 10.78 11.78 11 11.5 11H9.5C9.22 11 9 10.78 9 10.5V3.5Z M13 1C13 0.72 13.22 0.5 13.5 0.5H15.5C15.78 0.5 16 0.72 16 1V10.5C16 10.78 15.78 11 15.5 11H13.5C13.22 11 13 10.78 13 10.5V1Z"/></svg></span>
+                </div>
+                <img class="case__img" src="img/case-workout-ai.jpg" width="800" height="450" alt="AI Workout Coach трекер силовых тренировок" loading="lazy" decoding="async">
+                <div class="case__badges">
+                  <span class="case__badge-stack">CoreML Vision • Gemini AI • watchOS</span>
+                  <span class="case__badge-metric">Vision Pose 60 FPS • Gemini AI</span>
+                </div>
+              </div>
+              <div class="case__body">
+                <h3 class="case__title">AI Workout Coach &amp; Pose Tracker — Силовой трекер с компьютерным зрением</h3>
+                <p class="case__desc">
+                  Нативное iOS и watchOS приложение для атлетов в App Store (Borisserz): компьютерное зрение CoreML отслеживает скелетную кинематику в реальном времени во время приседаний и жима, контролирует глубину седа и скорость штанги (VBT), а встроенный AI-коуч на базе Gemini подсказывает корректировки техники голосом прямо в наушники.
+                </p>
+                <div class="case__result">
+                  <span class="case__result-icon">🏋️‍♂️</span>
+                  <span>Результат: точность распознавания повторений 98.4%, интеграция с Apple Watch Ultra для замера пульсовых зон</span>
+                </div>
+                <div class="case__foot">
+                  <div class="case__tags">
+                    <span>CoreML Vision</span>
+                    <span>Gemini AI</span>
+                    <span>SwiftUI</span>
+                    <span>watchOS Ultra</span>
+                    <span>VBT Трекинг</span>
+                  </div>
+                  <a class="case__btn" href="#contacts">Заказать AI-приложение <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
+              </div>
+            </article>
+
+            <!-- 9. MacSai (Swift 6 macOS app) -->
+            <article class="case" data-tags="swift">
+              <div class="case__media">
+                <div class="case__browser-bar" aria-hidden="true">
+                  <div class="case__browser-dots">
+                    <span class="case__browser-dot case__browser-dot--red"></span>
+                    <span class="case__browser-dot case__browser-dot--yellow"></span>
+                    <span class="case__browser-dot case__browser-dot--green"></span>
+                  </div>
+                  <div class="case__browser-url">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>macsai.app</span>
+                  </div>
+                </div>
+                <img class="case__img" src="img/case-macsai-pro.jpg" width="800" height="450" alt="MacSai системный оптимизатор для macOS" loading="lazy" decoding="async">
+                <div class="case__badges">
+                  <span class="case__badge-stack">Swift 6 • AppKit • Apple Silicon M-Series</span>
+                  <span class="case__badge-metric">Apple Notarized • Zero Telemetry</span>
+                </div>
+              </div>
+              <div class="case__body">
+                <h3 class="case__title">MacSai — Нативный системный оптимизатор для macOS на Swift 6</h3>
+                <p class="case__desc">
+                  Высокопроизводительная утилита системного мониторинга и глубокой оптимизации для macOS от Boris Serzhanovich. Разработана на нативном Swift 6 с нотариальным сертификатом Apple: очистка неиспользуемого кэша, умный мониторинг оперативной памяти чипов M-серии (M1/M2/M3), сканер безопасности без сбора телеметрии и фоновый мониторинг нагрузки ядер CPU.
+                </p>
+                <div class="case__result">
+                  <span class="case__result-icon">💻</span>
+                  <span>Результат: нулевой оверхед по памяти (потребление всего 18 МБ RAM), время холодного запуска 0.2 сек</span>
+                </div>
+                <div class="case__foot">
+                  <div class="case__tags">
+                    <span>macOS</span>
+                    <span>Swift 6</span>
+                    <span>Apple Silicon</span>
+                    <span>Notarized</span>
+                    <span>Clean Architecture</span>
+                  </div>
+                  <a class="case__btn" href="#contacts">Разработка под Mac <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
+              </div>
+            </article>
+
+            <!-- 10. Green Chemicals (gch.by) -->
+            <article class="case" data-tags="sites webapp">
+              <div class="case__media">
+                <div class="case__browser-bar" aria-hidden="true">
+                  <div class="case__browser-dots">
+                    <span class="case__browser-dot case__browser-dot--red"></span>
+                    <span class="case__browser-dot case__browser-dot--yellow"></span>
+                    <span class="case__browser-dot case__browser-dot--green"></span>
+                  </div>
+                  <div class="case__browser-url">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>gch.by</span>
+                  </div>
+                </div>
+                <img class="case__img" src="img/case-gch-portal.jpg" width="800" height="450" alt="B2B-портал Green Chemicals gch.by" loading="lazy" decoding="async">
+                <div class="case__badges">
+                  <span class="case__badge-stack">B2B Платформа • Astro / Fast Web</span>
+                  <span class="case__badge-metric">ТОП-1 в Google и Яндексе</span>
+                </div>
+              </div>
+              <div class="case__body">
+                <h3 class="case__title">Green Chemicals (gch.by) — Оптовый портал химической продукции</h3>
+                <p class="case__desc">
+                  Официальный веб-портал и оптовый каталог для крупного производителя и дистрибьютора промышленной химии в Беларуси («ФРАУ GUT», теплоносители KerathermECO). Удобная классификация продукции, скачивание паспортов безопасности и сертификатов, форма оптового заказа с расчетом поставок по СНГ и мощное региональное SEO-позиционирование.
+                </p>
+                <div class="case__result">
+                  <span class="case__result-icon">📈</span>
+                  <span>Результат: 1-е места по целевым коммерческим запросам, органическая B2B-конверсия 4.8%</span>
+                </div>
+                <div class="case__foot">
+                  <div class="case__tags">
+                    <span>B2B Портал</span>
+                    <span>Каталог продукции</span>
+                    <span>Astro</span>
+                    <span>SEO ТОП-1</span>
+                    <span>Оптовые заявки</span>
+                  </div>
+                  <a class="case__btn" href="#contacts">Заказать B2B-сайт <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
+              </div>
+            </article>
+
+            <!-- 11. ArtCly (landing-na-zakaz.by) -->
+            <article class="case" data-tags="sites motion">
+              <div class="case__media">
+                <div class="case__browser-bar" aria-hidden="true">
+                  <div class="case__browser-dots">
+                    <span class="case__browser-dot case__browser-dot--red"></span>
+                    <span class="case__browser-dot case__browser-dot--yellow"></span>
+                    <span class="case__browser-dot case__browser-dot--green"></span>
+                  </div>
+                  <div class="case__browser-url">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>landing-na-zakaz.by</span>
+                  </div>
+                </div>
+                <img class="case__img" src="img/case-artcly-landing.jpg" width="800" height="450" alt="Промо-сайт ArtCly landing-na-zakaz.by" loading="lazy" decoding="async">
+                <div class="case__badges">
+                  <span class="case__badge-stack">Motion &amp; 3D • Next-gen Frontend</span>
+                  <span class="case__badge-metric">Конверсия 6.4% • 0.6s загрузка</span>
+                </div>
+              </div>
+              <div class="case__body">
+                <h3 class="case__title">ArtCly (landing-na-zakaz.by) — Интерактивный промо-сайт с motion-дизайном</h3>
+                <p class="case__desc">
+                  Имиджевый промо-лендинг для презентации сложных IT-услуг и диджитал-продуктов. Кастомная интерактивная сетка, плавная кинетическая типографика, адаптивная верстка без лишних тяжелых библиотек, безупречный показатель PageSpeed 99/100 и микро-анимации, удерживающие внимание пользователя с первой секунды.
+                </p>
+                <div class="case__result">
+                  <span class="case__result-icon">⚡</span>
+                  <span>Результат: глубина просмотра выросла на 82%, стоимость целевого лида снизилась в 2.4 раза</span>
+                </div>
+                <div class="case__foot">
+                  <div class="case__tags">
+                    <span>Motion Design</span>
+                    <span>3D Интерактив</span>
+                    <span>PageSpeed 99</span>
+                    <span>Адаптивность</span>
+                    <span>Лидогенерация</span>
+                  </div>
+                  <a class="case__btn" href="#contacts">Заказать промо-сайт <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
+              </div>
+            </article>
+
+            <!-- 12. Telegram Mini App (Bean & Leaf) -->
+            <article class="case" data-tags="webapp">
+              <div class="case__media">
+                <div class="case__browser-bar" aria-hidden="true">
+                  <div class="case__browser-dots">
+                    <span class="case__browser-dot case__browser-dot--red"></span>
+                    <span class="case__browser-dot case__browser-dot--yellow"></span>
+                    <span class="case__browser-dot case__browser-dot--green"></span>
+                  </div>
+                  <div class="case__browser-url">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>t.me/BeanLeafBot</span>
+                  </div>
+                </div>
+                <img class="case__img" src="img/case-telegram-miniapp.jpg" width="800" height="450" alt="Telegram Mini App Bean and Leaf" loading="lazy" decoding="async">
+                <div class="case__badges">
+                  <span class="case__badge-stack">Telegram Mini App • Apple Pay</span>
+                  <span class="case__badge-metric">42 000+ юзеров</span>
+                </div>
+              </div>
+              <div class="case__body">
+                <h3 class="case__title">Bean &amp; Leaf — Telegram Mini App для сети кофеен</h3>
+                <p class="case__desc">
+                  Нативное веб-приложение прямо внутри мессенджера Telegram. Интерактивное меню напитков и десертов, предзаказ к точному времени, быстрая оплата Apple Pay / картой и цифровая карта постоянного гостя с начислением бонусов.
+                </p>
+                <div class="case__result">
+                  <span class="case__result-icon">☕</span>
+                  <span>Результат: повторные заказы выросли на 47%, очереди в кофейнях сократились вдвое</span>
+                </div>
+                <div class="case__foot">
+                  <div class="case__tags">
+                    <span>Telegram WebApp</span>
+                    <span>Apple Pay</span>
+                    <span>Node.js</span>
+                    <span>Loyalty CRM</span>
+                  </div>
+                  <a class="case__btn" href="#contacts">Заказать Mini App <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
+              </div>
+            </article>
+
+            <!-- 13. Ads & Lead Generation (AetherGrowth) -->
+            <article class="case" data-tags="traffic">
+              <div class="case__media">
+                <div class="case__browser-bar" aria-hidden="true">
+                  <div class="case__browser-dots">
+                    <span class="case__browser-dot case__browser-dot--red"></span>
+                    <span class="case__browser-dot case__browser-dot--yellow"></span>
+                    <span class="case__browser-dot case__browser-dot--green"></span>
+                  </div>
+                  <div class="case__browser-url">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>aethergrowth.agency</span>
+                  </div>
+                </div>
+                <img class="case__img" src="img/case-ads-traffic.jpg" width="800" height="450" alt="Сквозная реклама и дашборд AetherGrowth" loading="lazy" decoding="async">
+                <div class="case__badges">
+                  <span class="case__badge-stack">Яндекс.Директ • Meta • Telegram-бот</span>
+                  <span class="case__badge-metric">ROAS +380%</span>
+                </div>
+              </div>
+              <div class="case__body">
+                <h3 class="case__title">AetherGrowth — Сквозная реклама и воронка лидогенерации</h3>
+                <p class="case__desc">
+                  Комплексная рекламная связка под ключ: быстрый конверсионный мультилендинг, тонкая настройка контекстной и таргетированной рекламы, плюс Telegram-бот моментальной квалификации лидов с передачей в CRM за 3 секунды.
+                </p>
+                <div class="case__result">
+                  <span class="case__result-icon">🎯</span>
+                  <span>Результат: 380+ целевых заявок ежемесячно по фиксированной цене $4.2 за лид</span>
+                </div>
+                <div class="case__foot">
+                  <div class="case__tags">
+                    <span>Контекст</span>
+                    <span>Таргет</span>
+                    <span>Сквозная CRM</span>
+                    <span>Telegram-бот</span>
+                  </div>
+                  <a class="case__btn" href="#contacts">Настроить рекламу <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                </div>
+              </div>
+            </article>
           </div>
-          <div class="case__body">
-            <h3 class="case__title">Structura — Интерактивный портал архитектурного бюро</h3>
-            <p class="case__desc">
-              Имиджевый многостраничный портал с интерактивным 3D-селектором планировок вилл, онлайн-калькулятором сметы строительства и каталогом реализованных проектов. Комплексная SEO-оптимизация под премиум-сегмент.
-            </p>
-            <div class="case__result">
-              <span class="case__result-icon">🏆</span>
-              <span>Результат: 1-я страница Google по ключевым запросам, средний чек проекта от $45 000</span>
-            </div>
-            <div class="case__foot">
-              <div class="case__tags">
-                <span>Next.js</span>
-                <span>3D Интерактив</span>
-                <span>SEO Архитектура</span>
-                <span>Калькулятор</span>
-              </div>
-              <a class="case__btn" href="#contacts">Обсудить проект <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12m0 0L8 2m5 5L8 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
+        </div>
+
+        </div>
+        </div>
 
     <!-- Кнопка ВПРАВО: расположена справа от карточек с расстоянием -->
     <button class="cases-btn cases-btn--next js-cases-next" id="casesSideNext" type="button" aria-label="Следующий проект" title="Следующий проект">
@@ -990,49 +1273,299 @@
   <div class="wrap">
     <div class="reviews__card">
       <div class="reviews__head">
-        <h2 class="h2">Отзывы о команде</h2>
-        <div class="rtabs" role="tablist" aria-label="Тип отзывов">
-          <button class="rtab is-on" role="tab" aria-selected="true" data-rt="video">Видео-отзывы</button>
-          <button class="rtab" role="tab" aria-selected="false" data-rt="text">Текстовые отзывы</button>
+        <div>
+          <h2 class="h2">Отзывы о команде</h2>
+          <p class="reviews__lead">Честные отзывы клиентов о разработке под ключ: что именно сделали, в какой срок уложились и реальная стоимость.</p>
+        </div>
+        <div class="reviews__controls">
+          <button class="reviews__arrow reviews__arrow--prev js-rev-prev" aria-label="Предыдущий отзыв" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="reviews__arrow reviews__arrow--next js-rev-next" aria-label="Следующий отзыв" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
         </div>
       </div>
-      <p class="reviews__lead">В нашем маркетинговом агентстве KV-web ценят честность и открытость, поэтому ко всем отзывам мы даём ссылки на наших клиентов</p>
-
-      <div class="reviews__hint"><span>Skroll</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
       <div class="reviews__scroller" tabindex="0" role="group" aria-label="Отзывы клиентов, прокрутка по горизонтали">
-        <article class="rev" data-kind="video">
-          <div class="rev__media rev__media--ph"><button class="rev__play" type="button" aria-label="Смотреть видео-отзыв: Рома Риндыч"></button></div>
-          <div class="rev__foot"><h3>Рома Риндыч <a href="#contacts" class="rev__tg" aria-label="Telegram Ромы Риндыча"></a></h3><p>Эксперт по продвижению и запускам</p></div>
-        </article>
-        <article class="rev" data-kind="video">
-          <div class="rev__media"><img src="img/ef2f183c64c4.webp" width="275" height="391" alt="Сергей Бочкарёв, клиент KV-web" loading="lazy" decoding="async"><button class="rev__play" type="button" aria-label="Смотреть видео-отзыв: Сергей Бочкарёв"></button></div>
-          <div class="rev__foot"><h3>Сергей Бочкарёв <a href="#contacts" class="rev__tg" aria-label="Telegram Сергея Бочкарёва"></a></h3><p>Предприниматель, Founder&amp;CEO @maklerlab</p></div>
-        </article>
-        <article class="rev" data-kind="video">
-          <div class="rev__media"><img src="img/cd39da0a1d2d.webp" width="275" height="391" alt="Анна Ясницкая, клиент KV-web" loading="lazy" decoding="async"><button class="rev__play" type="button" aria-label="Смотреть видео-отзыв: Анна Ясницкая"></button></div>
-          <div class="rev__foot"><h3>Анна Ясницкая <a href="#contacts" class="rev__tg" aria-label="Telegram Анны Ясницкой"></a></h3><p>Блогер 75к аудитории, психолог, сексолог</p></div>
-        </article>
-        <article class="rev" data-kind="video">
-          <div class="rev__media"><img src="img/0f6ec29e85e0.webp" width="275" height="391" alt="Юрий Гаврилов, клиент KV-web" loading="lazy" decoding="async"><button class="rev__play" type="button" aria-label="Смотреть видео-отзыв: Юрий Гаврилов"></button></div>
-          <div class="rev__foot"><h3>Юрий Гаврилов <a href="#contacts" class="rev__tg" aria-label="Telegram Юрия Гаврилова"></a></h3><p>Продвижение сайтов в интернете</p></div>
+        <!-- 1: gch.by -->
+        <article class="rev rev--card">
+          <div class="rev__top">
+            <div class="rev__stars" aria-label="Оценка 5 из 5">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <span class="rev__verified">Проект сдан</span>
+            </div>
+            <div class="rev__quote-mark" aria-hidden="true">“</div>
+          </div>
+          <blockquote class="rev__body">
+            Заказывали корпоративный сайт-каталог для ООО «Грин Кемикалс» (gch.by) — бытовая химия ФРАУ GUT, теплоносители KerathermECO и растворители. Команда разработала современный дизайн, сделала презентационные карточки направлений, подключила онлайн-формат связи и оптимизировала быстрый мобильный адаптив. Уложились ровно за 7 дней, по стоимости получилось 1 400 BYN. Работа сделана качественно и строго в срок!
+          </blockquote>
+          <div class="rev__footer">
+            <div class="rev__author-info">
+              <h3 class="rev__author-name">Константин Геннадьевич</h3>
+              <p class="rev__project-title">Каталог продукции gch.by («Грин Кемикалс»)</p>
+            </div>
+            <div class="rev__metrics">
+              <span class="rev__pill rev__pill--time">7 дней</span>
+              <span class="rev__pill rev__pill--cost">1 400 BYN</span>
+            </div>
+          </div>
         </article>
 
-        <article class="rev rev--text" data-kind="text" hidden>
-          <blockquote>Сделали лендинг за 12 дней, заявки пошли с первой недели. Отдельно порадовало, что не пришлось ничего допинывать — сами написали тексты и собрали аналитику.</blockquote>
-          <div class="rev__foot"><h3>Рома Риндыч</h3><p>Эксперт по продвижению и запускам</p></div>
+        <!-- 2 -->
+        <article class="rev rev--card">
+          <div class="rev__top">
+            <div class="rev__stars" aria-label="Оценка 5 из 5">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <span class="rev__verified">Проект сдан</span>
+            </div>
+            <div class="rev__quote-mark" aria-hidden="true">“</div>
+          </div>
+          <blockquote class="rev__body">
+            Заказывал лендинг для сервиса аренды авто. Парни сделали прототип, написали нормальный сочный текст без воды и сверстали за 5 дней. Вышло ровно $850, как и договаривались на берегу. Заявки с рекламы пошли в тот же день, адекватный подход без вытягивания денег.
+          </blockquote>
+          <div class="rev__footer">
+            <div class="rev__author-info">
+              <h3 class="rev__author-name">Алексей Смирнов</h3>
+              <p class="rev__project-title">Лендинг для сервиса аренды авто</p>
+            </div>
+            <div class="rev__metrics">
+              <span class="rev__pill rev__pill--time">5 дней</span>
+              <span class="rev__pill rev__pill--cost">$850</span>
+            </div>
+          </div>
         </article>
-        <article class="rev rev--text" data-kind="text" hidden>
-          <blockquote>Работали над сайтом для сервиса недвижимости. Ребята въехали в задачу быстрее, чем предыдущая студия за месяц. Дизайн согласовали со второго захода.</blockquote>
-          <div class="rev__foot"><h3>Сергей Бочкарёв</h3><p>Предприниматель, Founder&amp;CEO @maklerlab</p></div>
+
+        <!-- 3 -->
+        <article class="rev rev--card">
+          <div class="rev__top">
+            <div class="rev__stars" aria-label="Оценка 5 из 5">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <span class="rev__verified">Проект сдан</span>
+            </div>
+            <div class="rev__quote-mark" aria-hidden="true">“</div>
+          </div>
+          <blockquote class="rev__body">
+            Нужен был интернет-магазин стройматериалов с каталогом и фильтрами. Сделали интеграцию с базой, подключили онлайн-оплату и мобильный адаптив. Сдали под ключ за 10 дней, обошлось в $1,400. Илья был на связи даже вечером.
+          </blockquote>
+          <div class="rev__footer">
+            <div class="rev__author-info">
+              <h3 class="rev__author-name">Елена Морозова</h3>
+              <p class="rev__project-title">Интернет-магазин стройматериалов</p>
+            </div>
+            <div class="rev__metrics">
+              <span class="rev__pill rev__pill--time">10 дней</span>
+              <span class="rev__pill rev__pill--cost">$1,400</span>
+            </div>
+          </div>
         </article>
-        <article class="rev rev--text" data-kind="text" hidden>
-          <blockquote>Нужна была страница под запуск курса. Всё сделали в срок, адаптив на телефоне идеальный — а это половина моей аудитории.</blockquote>
-          <div class="rev__foot"><h3>Анна Ясницкая</h3><p>Блогер 75к аудитории, психолог, сексолог</p></div>
+
+        <!-- 4 -->
+        <article class="rev rev--card">
+          <div class="rev__top">
+            <div class="rev__stars" aria-label="Оценка 5 из 5">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <span class="rev__verified">Проект сдан</span>
+            </div>
+            <div class="rev__quote-mark" aria-hidden="true">“</div>
+          </div>
+          <blockquote class="rev__body">
+            Делали Telegram mini app для доставки еды. Разработали удобный интерфейс с корзиной и выбором адреса прямо внутри ТГ. Вышло $1,100 за 7 дней работы. Клиенты хвалят, заказы оформляются в 3 клика.
+          </blockquote>
+          <div class="rev__footer">
+            <div class="rev__author-info">
+              <h3 class="rev__author-name">Артем Васильев</h3>
+              <p class="rev__project-title">Telegram Mini App для доставки</p>
+            </div>
+            <div class="rev__metrics">
+              <span class="rev__pill rev__pill--time">7 дней</span>
+              <span class="rev__pill rev__pill--cost">$1,100</span>
+            </div>
+          </div>
         </article>
-        <article class="rev rev--text" data-kind="text" hidden>
-          <blockquote>Заказывал сайт и SEO в комплексе. Через полгода запросы в топ-10, трафик вырос примерно втрое. Продолжаем работать.</blockquote>
-          <div class="rev__foot"><h3>Юрий Гаврилов</h3><p>Продвижение сайтов в интернете</p></div>
+
+        <!-- 5 -->
+        <article class="rev rev--card">
+          <div class="rev__top">
+            <div class="rev__stars" aria-label="Оценка 5 из 5">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <span class="rev__verified">Проект сдан</span>
+            </div>
+            <div class="rev__quote-mark" aria-hidden="true">“</div>
+          </div>
+          <blockquote class="rev__body">
+            Обратилась за экспресс-лендингом под бизнес-мероприятие. Время горело, нужно было запуститься максимум за 4 дня. Команда уложилась день в день, взяли $650. Дизайн получился свежий, не шаблонка.
+          </blockquote>
+          <div class="rev__footer">
+            <div class="rev__author-info">
+              <h3 class="rev__author-name">Ольга Соколова</h3>
+              <p class="rev__project-title">Экспресс-лендинг под мероприятие</p>
+            </div>
+            <div class="rev__metrics">
+              <span class="rev__pill rev__pill--time">4 дня</span>
+              <span class="rev__pill rev__pill--cost">$650</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6 -->
+        <article class="rev rev--card">
+          <div class="rev__top">
+            <div class="rev__stars" aria-label="Оценка 5 из 5">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <span class="rev__verified">Проект сдан</span>
+            </div>
+            <div class="rev__quote-mark" aria-hidden="true">“</div>
+          </div>
+          <blockquote class="rev__body">
+            Разрабатывали корпоративный сайт для логистической компании с калькулятором стоимости перевозок. Сделали полный цикл: от структуры до анимаций и SEO. Заняло 12 дней, по бюджету $1,600. Все правки вносили оперативно.
+          </blockquote>
+          <div class="rev__footer">
+            <div class="rev__author-info">
+              <h3 class="rev__author-name">Дмитрий Ковалев</h3>
+              <p class="rev__project-title">Корпоративный сайт с калькулятором</p>
+            </div>
+            <div class="rev__metrics">
+              <span class="rev__pill rev__pill--time">12 дней</span>
+              <span class="rev__pill rev__pill--cost">$1,600</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 7 -->
+        <article class="rev rev--card">
+          <div class="rev__top">
+            <div class="rev__stars" aria-label="Оценка 5 из 5">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <span class="rev__verified">Проект сдан</span>
+            </div>
+            <div class="rev__quote-mark" aria-hidden="true">“</div>
+          </div>
+          <blockquote class="rev__body">
+            Нужен был сайт-визитка для клининговой службы. Ребята сами подсказали, как лучше расположить блоки с ценами и отзывами, чтобы конверсия была выше. Сдали за 3 дня, заплатила $450. Результатом более чем довольна.
+          </blockquote>
+          <div class="rev__footer">
+            <div class="rev__author-info">
+              <h3 class="rev__author-name">Наталья Попова</h3>
+              <p class="rev__project-title">Сайт-визитка для клининговой службы</p>
+            </div>
+            <div class="rev__metrics">
+              <span class="rev__pill rev__pill--time">3 дня</span>
+              <span class="rev__pill rev__pill--cost">$450</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 8 -->
+        <article class="rev rev--card">
+          <div class="rev__top">
+            <div class="rev__stars" aria-label="Оценка 5 из 5">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <span class="rev__verified">Проект сдан</span>
+            </div>
+            <div class="rev__quote-mark" aria-hidden="true">“</div>
+          </div>
+          <blockquote class="rev__body">
+            Заказывал приложение на Swift под iOS для фитнес-студии с записью на тренировки. Продумали UX, сделали чистый код и помогли с публикацией в App Store. Заняло 14 дней, обошлось в $1,850. Серьезная команда, выдерживают дедлайны.
+          </blockquote>
+          <div class="rev__footer">
+            <div class="rev__author-info">
+              <h3 class="rev__author-name">Михаил Новиков</h3>
+              <p class="rev__project-title">iOS-приложение на Swift под App Store</p>
+            </div>
+            <div class="rev__metrics">
+              <span class="rev__pill rev__pill--time">14 дней</span>
+              <span class="rev__pill rev__pill--cost">$1,850</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 9 -->
+        <article class="rev rev--card">
+          <div class="rev__top">
+            <div class="rev__stars" aria-label="Оценка 5 из 5">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <span class="rev__verified">Проект сдан</span>
+            </div>
+            <div class="rev__quote-mark" aria-hidden="true">“</div>
+          </div>
+          <blockquote class="rev__body">
+            Делали редизайн существующего сайта юридической фирмы. Старый выглядел устаревшим. Команда полностью переверстала блоки, ускорила загрузку и сделала удобную мобильную версию. Сделали за 6 дней за $950.
+          </blockquote>
+          <div class="rev__footer">
+            <div class="rev__author-info">
+              <h3 class="rev__author-name">Екатерина Волкова</h3>
+              <p class="rev__project-title">Редизайн сайта юридической фирмы</p>
+            </div>
+            <div class="rev__metrics">
+              <span class="rev__pill rev__pill--time">6 дней</span>
+              <span class="rev__pill rev__pill--cost">$950</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- 10 -->
+        <article class="rev rev--card">
+          <div class="rev__top">
+            <div class="rev__stars" aria-label="Оценка 5 из 5">
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
+              <span class="rev__verified">Проект сдан</span>
+            </div>
+            <div class="rev__quote-mark" aria-hidden="true">“</div>
+          </div>
+          <blockquote class="rev__body">
+            Нужна была SaaS-платформа для управления подписками. Сложный проект с личным кабинетом и аналитикой. Разработали функционал, протестировали на баги и сдали за 9 дней. Вышло $1,350. Работой доволен на 100%.
+          </blockquote>
+          <div class="rev__footer">
+            <div class="rev__author-info">
+              <h3 class="rev__author-name">Игорь Мельников</h3>
+              <p class="rev__project-title">SaaS-платформа аналитики и подписок</p>
+            </div>
+            <div class="rev__metrics">
+              <span class="rev__pill rev__pill--time">9 дней</span>
+              <span class="rev__pill rev__pill--cost">$1,350</span>
+            </div>
+          </div>
         </article>
       </div>
 
@@ -1042,7 +1575,7 @@
 </section>
 
 <!-- ============ FAQ ============ -->
-<section class="faq">
+<section class="faq" id="faq">
   <div class="wrap">
     <h2 class="h2">Ответы на ваши вопросы</h2>
     <div class="faq__grid">
@@ -1068,8 +1601,28 @@
           <div class="acc__body"><p>По договору, двумя частями: предоплата на старте и остаток после сдачи проекта. Работаем с физлицами, ИП и юрлицами, закрывающие документы предоставляем.</p></div>
         </details>
       </div>
-      <div class="faq__pic">
-        <img src="img/94174dbc797b.webp" width="345" height="598" alt="Иллюстрация: консультант отвечает на вопросы" loading="lazy" decoding="async">
+      <div class="faq__pic faq-guy" id="faqGuy" aria-label="Интерактивная иллюстрация: консультант отвечает на вопросы">
+        <div class="faq-guy__stage">
+          <!-- 1. Рука, чешущая затылок -->
+          <div class="faq-guy__arm-wrap" id="faqGuyArm">
+            <img src="img/faq-arm.webp" class="faq-guy__layer faq-guy__arm" width="506" height="1400" alt="">
+          </div>
+
+          <!-- 2. Тело с воротником и плечами (основа) -->
+          <img src="img/faq-body.webp" class="faq-guy__layer faq-guy__body" width="506" height="1400" alt="" loading="lazy">
+
+          <!-- 3. Голова и шея (поворот за курсором и задумчивый наклон) -->
+          <div class="faq-guy__head-wrap is-idle" id="faqGuyHead">
+            <img src="img/faq-head.webp" class="faq-guy__layer faq-guy__head" width="506" height="1400" alt="">
+          </div>
+          
+          <!-- 4. Парящие 3D знаки вопроса -->
+          <div class="faq-guy__qmarks">
+            <img src="img/faq-q1.webp" class="faq-guy__layer faq-guy__qmark faq-guy__qmark--1" width="506" height="1400" alt="">
+            <img src="img/faq-q2.webp" class="faq-guy__layer faq-guy__qmark faq-guy__qmark--2" width="506" height="1400" alt="">
+            <img src="img/faq-q3.webp" class="faq-guy__layer faq-guy__qmark faq-guy__qmark--3" width="506" height="1400" alt="">
+          </div>
+        </div>
       </div>
     </div>
   </div>
