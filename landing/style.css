@@ -1022,6 +1022,26 @@ main>section{padding-block:0 var(--sec)}
 .founders__header .h2{margin-bottom:16px}
 .founders__lead{font-size:17px;line-height:1.5;color:rgba(255,255,255,0.82)}
 
+/* Бейдж-приглашение к интерактиву */
+.founders__sandbox-hint{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(196,244,73,0.08);border:1px solid rgba(196,244,73,0.22);
+  color:rgba(255,255,255,0.9);padding:7px 18px;border-radius:var(--r-pill);
+  font-size:13px;line-height:1.4;margin-bottom:24px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.2);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.founders__sandbox-hint b{color:var(--lime);font-weight:700}
+.sandbox-hint__pulse{
+  width:8px;height:8px;border-radius:50%;background:var(--lime);
+  box-shadow:0 0 10px var(--lime);flex-shrink:0;
+  animation:hintPulse 2s infinite ease-in-out;
+}
+@keyframes hintPulse{
+  0%,100%{transform:scale(1);opacity:1;box-shadow:0 0 8px var(--lime)}
+  50%{transform:scale(1.4);opacity:0.65;box-shadow:0 0 16px var(--lime)}
+}
+
 /* Сетка 3 основателей */
 .founders__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:36px}
 .founder-card{
@@ -1123,6 +1143,20 @@ main>section{padding-block:0 var(--sec)}
 .c-prop{color:#d2a8ff}
 .c-bool{color:#ff7b72}
 .c-str{color:#a5d6ff}
+.tune-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:2px 7px;font-size:9.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-weight:700;line-height:1.2;
+  background:rgba(196,244,73,0.12);color:var(--lime);
+  border:1px solid rgba(196,244,73,0.3);border-radius:4px;
+  cursor:pointer;margin-left:6px;vertical-align:middle;
+  transition:all .15s ease;
+}
+.tune-btn:hover{
+  background:var(--lime);color:#0a0b0d;border-color:var(--lime);
+  transform:translateY(-1px);box-shadow:0 0 10px rgba(196,244,73,0.4);
+}
+.tune-btn:active{transform:scale(0.92)}
 
 .widget-tags-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 .wtag{font-size:9.5px;font-weight:700;padding:3px 7px;border-radius:6px;background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.75);transition:all .3s ease}
@@ -2578,6 +2612,7 @@ main>section{padding-block:0 var(--sec)}
   .founders-card { padding: 24px 16px; border-radius: 24px; }
   .founders__header { margin-bottom: 24px; }
   .founders__lead p { font-size: 14px; line-height: 1.45; }
+  .founders__sandbox-hint { font-size: 11.5px; padding: 6px 14px; gap: 8px; margin-bottom: 16px; }
   .founders__grid {
     display: flex;
     overflow-x: auto;

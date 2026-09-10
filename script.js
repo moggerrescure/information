@@ -1949,6 +1949,51 @@ document.addEventListener('DOMContentLoaded', () => {
     return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
   }
 
+  // Синтез ультра-легких тактильных щелчков через Web Audio API (без внешних файлов)
+  let audioCtx = null;
+  function playHaptic(type = 'click') {
+    try {
+      const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtxClass) return;
+      if (!audioCtx) audioCtx = new AudioCtxClass();
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === 'click') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, now);
+        osc.frequency.exponentialRampToValueAtTime(420, now + 0.016);
+        gain.gain.setValueAtTime(0.045, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.016);
+        osc.start(now);
+        osc.stop(now + 0.018);
+      } else if (type === 'pop') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(560, now);
+        osc.frequency.exponentialRampToValueAtTime(220, now + 0.035);
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.035);
+        osc.start(now);
+        osc.stop(now + 0.04);
+      } else if (type === 'beep') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(1040, now);
+        gain.gain.setValueAtTime(0.035, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
+        osc.start(now);
+        osc.stop(now + 0.03);
+      }
+    } catch (err) {
+      // AudioContext unavailable or restricted
+    }
+  }
+
   function initFounderWidgets() {
     // 1. ВИДЖЕТ FRONTEND & СКОРОСТЬ
     const widgetFrontend = document.getElementById('widget-card-frontend');
@@ -1965,6 +2010,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const vitalsEl = widgetFrontend.querySelector('.js-perf-vitals');
       const tag2El = widgetFrontend.querySelector('.js-perf-tag2');
       const rerunBtn = widgetFrontend.querySelector('.js-perf-rerun');
+      const tuneWeightBtn = widgetFrontend.querySelector('.js-tune-weight');
 
       const presetData = {
         vanilla: {
@@ -2001,6 +2047,15 @@ document.addEventListener('DOMContentLoaded', () => {
           isBad: false
         }
       };
+
+      // Интерактивный тюнер веса бандла
+      const weightSteps = [
+        { weight: "'12.4 kB'", score: 100, time: 'Отклик 0.28 сек', tag2: '0 лишних скриптов', isBad: false },
+        { weight: "'48.2 kB'", score: 98, time: 'Отклик 0.39 сек', tag2: 'Tree-shaking: 100%', isBad: false },
+        { weight: "'184 kB'", score: 91, time: 'Отклик 0.85 сек', tag2: 'Оптимизированный бандл', isBad: false },
+        { weight: "'842 kB'", score: 38, time: 'Отклик 3.90 сек', tag2: '62 лишних скрипта', isBad: true }
+      ];
+      let weightIdx = 0;
 
       let currentScore = 100;
       let animId = null;
@@ -2049,6 +2104,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const d = presetData[key];
         if (!d) return;
 
+        if (key === 'vanilla') weightIdx = 0;
+        else if (key === 'catalog') weightIdx = 1;
+        else if (key === 'builder') weightIdx = 3;
+
         presets.forEach(p => {
           const active = p.dataset.preset === key;
           p.classList.toggle('is-active', active);
@@ -2073,17 +2132,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
       presets.forEach(btn => {
         btn.addEventListener('click', () => {
+          playHaptic('click');
           applyPreset(btn.dataset.preset);
         });
       });
 
       rerunBtn?.addEventListener('click', () => {
+        playHaptic('beep');
         const activePreset = widgetFrontend.querySelector('.js-perf-preset.is-active')?.dataset.preset || 'vanilla';
         const d = presetData[activePreset];
         currentScore = 0;
         if (scoreEl) scoreEl.textContent = '0';
         if (circle) circle.setAttribute('stroke-dasharray', '0, 100');
         setTimeout(() => animateScore(d.score, d.isBad), 80);
+      });
+
+      tuneWeightBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        playHaptic('click');
+        weightIdx = (weightIdx + 1) % weightSteps.length;
+        const current = weightSteps[weightIdx];
+        if (weightEl) weightEl.textContent = current.weight;
+        if (timeEl) timeEl.textContent = current.time;
+        if (tag2El) tag2El.textContent = current.tag2;
+        animateScore(current.score, current.isBad);
+        if (codeLines) {
+          codeLines.classList.add('is-flash');
+          setTimeout(() => codeLines.classList.remove('is-flash'), 250);
+        }
       });
     }
 
@@ -2096,6 +2172,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const input = widgetBackend.querySelector('.js-term-input');
       const pulseDot = widgetBackend.querySelector('.js-term-pulse');
       const chips = widgetBackend.querySelectorAll('.js-term-btn');
+      const uptimeEl = widgetBackend.querySelector('.js-term-uptime');
+
+      // Живой секундомер аптайма кластера
+      let uptimeSeconds = 342 * 86400 + 18 * 3600 + 42 * 60 + 19;
+      if (uptimeEl) {
+        function updateUptimeDisplay() {
+          const d = Math.floor(uptimeSeconds / 86400);
+          const h = Math.floor((uptimeSeconds % 86400) / 3600);
+          const m = Math.floor((uptimeSeconds % 3600) / 60);
+          const s = uptimeSeconds % 60;
+          uptimeEl.textContent = `Uptime: ${d}d ${h}h ${m}m ${s}s • Защита от DDoS`;
+        }
+        setInterval(() => {
+          uptimeSeconds++;
+          updateUptimeDisplay();
+        }, 1000);
+      }
 
       function scrollTerminal() {
         if (screen) screen.scrollTop = screen.scrollHeight;
@@ -2114,6 +2207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cleanCmd = cmd.trim().toLowerCase();
         if (!cleanCmd) return;
 
+        playHaptic('beep');
         addTerminalLine(`<span class="term-prompt">$</span> ${escapeHtml(cleanCmd)}`, true);
         if (pulseDot) pulseDot.classList.add('is-busy');
 
@@ -2169,6 +2263,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       chips.forEach(chip => {
         chip.addEventListener('click', () => {
+          playHaptic('click');
           const cmd = chip.dataset.cmd;
           executeCommand(cmd);
         });
@@ -2210,6 +2305,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       simBtn?.addEventListener('click', () => {
+        playHaptic('pop');
         if (!statusEl) return;
         statusEl.textContent = 'печатает...';
         statusEl.classList.add('is-typing');
@@ -2241,12 +2337,14 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       btnCrm?.addEventListener('click', () => {
+        playHaptic('click');
         if (!crmStatusEl) return;
         crmStatusEl.textContent = '✓ amoCRM: «Квалифицирован инженером»';
         crmStatusEl.style.color = 'var(--lime)';
       });
 
       btnReply?.addEventListener('click', () => {
+        playHaptic('click');
         if (!repliesFeed) return;
         const bubble = document.createElement('div');
         bubble.className = 'tg-msg tg-msg--out is-pop';
@@ -2256,6 +2354,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       btnInvoice?.addEventListener('click', () => {
+        playHaptic('click');
         if (!repliesFeed) return;
         const bubble = document.createElement('div');
         bubble.className = 'tg-msg tg-msg--sys is-pop';
