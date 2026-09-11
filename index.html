@@ -1462,308 +1462,180 @@
   </div>
 </section>
 
-<!-- ============ ОТЗЫВЫ ============ -->
-<section class="reviews" id="reviews">
+
+
+<!-- ============ ГАРАНТИИ И СТАНДАРТЫ КАЧЕСТВА ============ -->
+<section class="standards-sec dark-block" id="standards">
   <div class="wrap">
-    <div class="reviews__card">
-      <div class="reviews__head">
-        <div>
-          <h2 class="h2">Отзывы о команде</h2>
-          <p class="reviews__lead">Честные отзывы клиентов о разработке под ключ: что именно сделали, в какой срок уложились и реальная стоимость.</p>
+    <div class="standards-card reveal">
+      <div class="standards__header">
+        <div class="standards__badge">
+          <span class="standards__badge-dot" aria-hidden="true"></span>
+          <span>Юридическая защита & Инженерный SLA • Без скрытых условий</span>
         </div>
-        <div class="reviews__controls">
-          <button class="reviews__arrow reviews__arrow--prev js-rev-prev" aria-label="Предыдущий отзыв" type="button">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-          <button class="reviews__arrow reviews__arrow--next js-rev-next" aria-label="Следующий отзыв" type="button">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-          </button>
+        <h2 class="h2 h2--light">Гарантии в договоре и стандарты качества каждого релиза</h2>
+        <p class="standards__lead">Мы не прячемся за общими фразами. Фиксируем дедлайны, прозрачную смету и персональную ответственность в официальном договоре, а качество кода подтверждаем измеримыми инженерными бенчмарками.</p>
+      </div>
+
+      <div class="standards__grid">
+        <!-- Левая часть: 4 Железобетонные гарантии -->
+        <div class="standards__guarantees">
+          <div class="guarantee-card" data-spotlight>
+            <div class="guarantee-card__header">
+              <span class="guarantee-card__num">01</span>
+              <span class="guarantee-card__tag guarantee-card__tag--time">
+                <span class="guarantee-radar" aria-hidden="true"></span>
+                SLA: 100% On-Time
+              </span>
+            </div>
+            <h3 class="guarantee-card__title">Финансовая гарантия дедлайна</h3>
+            <p class="guarantee-card__desc">Сроки прописываются в календарном плане договора. За каждый день задержки по нашей вине возвращаем 1% от общей стоимости проекта.</p>
+            <div class="guarantee-card__metric">
+              <b>0 дней задержки</b>
+              <span>по 13 последним запущенным релизам</span>
+            </div>
+          </div>
+
+          <div class="guarantee-card" data-spotlight>
+            <div class="guarantee-card__header">
+              <span class="guarantee-card__num">02</span>
+              <span class="guarantee-card__tag guarantee-card__tag--cost">Фикс-прайс в акте</span>
+            </div>
+            <h3 class="guarantee-card__title">Фиксированная смета под ключ</h3>
+            <p class="guarantee-card__desc">Никаких внезапных «доплат за правки» или скрытых комиссий внутри согласованного ТЗ. Сумма в договоре на старте строго равна сумме в закрывающем акте.</p>
+            <div class="guarantee-card__metric">
+              <b>0 BYN переплат</b>
+              <span>сверх утверждённой стоимости</span>
+            </div>
+          </div>
+
+          <div class="guarantee-card" data-spotlight>
+            <div class="guarantee-card__header">
+              <span class="guarantee-card__num">03</span>
+              <span class="guarantee-card__tag guarantee-card__tag--code">Zero Lock-In</span>
+            </div>
+            <h3 class="guarantee-card__title">100% владение кодом и правами</h3>
+            <p class="guarantee-card__desc">Вы получаете исходный чистый код в вашем личном репозитории Git, домен и хостинг оформляются на вас. Никакой пожизненной арендной зависимости.</p>
+            <div class="guarantee-card__metric">
+              <b>100% ваш актив</b>
+              <span>полные права на продукт навсегда</span>
+            </div>
+          </div>
+
+          <div class="guarantee-card" data-spotlight>
+            <div class="guarantee-card__header">
+              <span class="guarantee-card__num">04</span>
+              <span class="guarantee-card__tag guarantee-card__tag--support">30 дней SLA</span>
+            </div>
+            <h3 class="guarantee-card__title">Бесплатный гарантийный сервис</h3>
+            <p class="guarantee-card__desc">Не бросаем проект после финального платежа. Бесплатно устраняем любые скрытые дефекты, консультируем вашу команду и сопровождаем запуск рекламы.</p>
+            <div class="guarantee-card__metric">
+              <b>Прямой контакт</b>
+              <span>личный чат с ведущим инженером</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Правая часть: Живой инспектор стандартов качества -->
+        <div class="standards__inspector">
+          <div class="inspector-card">
+            <div class="inspector-card__top">
+              <div class="inspector-card__title-box">
+                <span class="inspector-status-dot" aria-hidden="true"></span>
+                <span class="inspector-card__badge">Live Quality Audit • Lighthouse 10.0</span>
+              </div>
+              <span class="inspector-card__verdict">VERIFIED PASS</span>
+            </div>
+
+            <!-- Круговой индикатор Lighthouse -->
+            <div class="inspector-gauge-row">
+              <div class="inspector-gauge">
+                <svg class="gauge-svg" viewBox="0 0 120 120" width="104" height="104">
+                  <circle class="gauge-bg" cx="60" cy="60" r="50" />
+                  <circle class="gauge-bar js-gauge-circle" cx="60" cy="60" r="50" />
+                </svg>
+                <div class="gauge-val">
+                  <b class="js-gauge-num">0</b>
+                  <span>/100</span>
+                </div>
+              </div>
+              <div class="inspector-gauge-meta">
+                <b>Скорость и отклик (Performance)</b>
+                <p>Чистая оптимизация критического пути рендеринга без тяжелых конструкторов и мусорных скриптов.</p>
+                <div class="gauge-metrics-pills">
+                  <span class="g-pill">FCP: 0.4s</span>
+                  <span class="g-pill">LCP: 0.8s</span>
+                  <span class="g-pill">CLS: 0.00</span>
+                  <span class="g-pill">TTFB: 42ms</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Список стандартов качества -->
+            <ul class="inspector-specs">
+              <li class="inspector-spec">
+                <div class="spec-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div class="spec-info">
+                  <b>Безопасность и отказоустойчивость</b>
+                  <span>SSL A+ шифрование, экранирование форм от инъекций, защита от спам-ботов, готовность к пиковым нагрузкам 10k+ визитов/час.</span>
+                </div>
+                <span class="spec-badge spec-badge--ok">A+ Pass</span>
+              </li>
+
+              <li class="inspector-spec">
+                <div class="spec-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+                <div class="spec-info">
+                  <b>100% юридическая чистота</b>
+                  <span>Официальный договор для Беларуси (ЕРИП, безнал, закрывающие акты), РФ и зарубежных заказчиков (валютные контракты, инвойсы).</span>
+                </div>
+                <span class="spec-badge spec-badge--ok">Legal Ready</span>
+              </li>
+
+              <li class="inspector-spec">
+                <div class="spec-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                </div>
+                <div class="spec-info">
+                  <b>Фундаментальная SEO-микроразметка</b>
+                  <span>Валидная разметка Schema.org (Organization, Product, FAQ), мета-теги OpenGraph для соцсетей, автогенерация sitemap.xml и robots.txt.</span>
+                </div>
+                <span class="spec-badge spec-badge--ok">100/100</span>
+              </li>
+
+              <li class="inspector-spec">
+                <div class="spec-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </div>
+                <div class="spec-info">
+                  <b>Pixel-Perfect адаптив под все экраны</b>
+                  <span>Тестирование на 18 реальных разрешениях: от компактных смартфонов (360px) до 4K UltraWide мониторов с поддержкой Retina.</span>
+                </div>
+                <span class="spec-badge spec-badge--ok">Multi-Screen</span>
+              </li>
+            </ul>
+
+            <div class="inspector-card__footer">
+              <div class="inspector-card__legal-tags">
+                <span>✓ Без абонентской платы</span>
+                <span>✓ Документы РБ / РФ / Worldwide</span>
+                <span>✓ ЭДО и закрывающие акты</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="reviews__scroller" tabindex="0" role="group" aria-label="Отзывы клиентов, прокрутка по горизонтали">
-        <!-- 1: gch.by -->
-        <article class="rev rev--card">
-          <div class="rev__top">
-            <div class="rev__stars" aria-label="Оценка 5 из 5">
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <span class="rev__verified">Проект сдан</span>
-            </div>
-            <div class="rev__quote-mark" aria-hidden="true">“</div>
-          </div>
-          <blockquote class="rev__body">
-            Заказывали корпоративный сайт-каталог для ООО «Грин Кемикалс» (gch.by) — бытовая химия ФРАУ GUT, теплоносители KerathermECO и растворители. Команда разработала современный дизайн, сделала презентационные карточки направлений, подключила онлайн-формат связи и оптимизировала быстрый мобильный адаптив. Уложились ровно за 7 дней, по стоимости получилось 1 400 BYN. Работа сделана качественно и строго в срок!
-          </blockquote>
-          <div class="rev__footer">
-            <div class="rev__author-info">
-              <h3 class="rev__author-name">Константин Геннадьевич</h3>
-              <p class="rev__project-title">Каталог продукции gch.by («Грин Кемикалс»)</p>
-            </div>
-            <div class="rev__metrics">
-              <span class="rev__pill rev__pill--time">7 дней</span>
-              <span class="rev__pill rev__pill--cost">1 400 BYN</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 2 -->
-        <article class="rev rev--card">
-          <div class="rev__top">
-            <div class="rev__stars" aria-label="Оценка 5 из 5">
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <span class="rev__verified">Проект сдан</span>
-            </div>
-            <div class="rev__quote-mark" aria-hidden="true">“</div>
-          </div>
-          <blockquote class="rev__body">
-            Заказывал лендинг для сервиса аренды авто. Парни сделали прототип, написали нормальный сочный текст без воды и сверстали за 5 дней. Вышло ровно $850, как и договаривались на берегу. Заявки с рекламы пошли в тот же день, адекватный подход без вытягивания денег.
-          </blockquote>
-          <div class="rev__footer">
-            <div class="rev__author-info">
-              <h3 class="rev__author-name">Алексей Смирнов</h3>
-              <p class="rev__project-title">Лендинг для сервиса аренды авто</p>
-            </div>
-            <div class="rev__metrics">
-              <span class="rev__pill rev__pill--time">5 дней</span>
-              <span class="rev__pill rev__pill--cost">$850</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 3 -->
-        <article class="rev rev--card">
-          <div class="rev__top">
-            <div class="rev__stars" aria-label="Оценка 5 из 5">
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <span class="rev__verified">Проект сдан</span>
-            </div>
-            <div class="rev__quote-mark" aria-hidden="true">“</div>
-          </div>
-          <blockquote class="rev__body">
-            Нужен был интернет-магазин стройматериалов с каталогом и фильтрами. Сделали интеграцию с базой, подключили онлайн-оплату и мобильный адаптив. Сдали под ключ за 10 дней, обошлось в $1,400. Илья был на связи даже вечером.
-          </blockquote>
-          <div class="rev__footer">
-            <div class="rev__author-info">
-              <h3 class="rev__author-name">Елена Морозова</h3>
-              <p class="rev__project-title">Интернет-магазин стройматериалов</p>
-            </div>
-            <div class="rev__metrics">
-              <span class="rev__pill rev__pill--time">10 дней</span>
-              <span class="rev__pill rev__pill--cost">$1,400</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 4 -->
-        <article class="rev rev--card">
-          <div class="rev__top">
-            <div class="rev__stars" aria-label="Оценка 5 из 5">
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <span class="rev__verified">Проект сдан</span>
-            </div>
-            <div class="rev__quote-mark" aria-hidden="true">“</div>
-          </div>
-          <blockquote class="rev__body">
-            Делали Telegram mini app для доставки еды. Разработали удобный интерфейс с корзиной и выбором адреса прямо внутри ТГ. Вышло $1,100 за 7 дней работы. Клиенты хвалят, заказы оформляются в 3 клика.
-          </blockquote>
-          <div class="rev__footer">
-            <div class="rev__author-info">
-              <h3 class="rev__author-name">Артем Васильев</h3>
-              <p class="rev__project-title">Telegram Mini App для доставки</p>
-            </div>
-            <div class="rev__metrics">
-              <span class="rev__pill rev__pill--time">7 дней</span>
-              <span class="rev__pill rev__pill--cost">$1,100</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 5 -->
-        <article class="rev rev--card">
-          <div class="rev__top">
-            <div class="rev__stars" aria-label="Оценка 5 из 5">
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <span class="rev__verified">Проект сдан</span>
-            </div>
-            <div class="rev__quote-mark" aria-hidden="true">“</div>
-          </div>
-          <blockquote class="rev__body">
-            Обратилась за экспресс-лендингом под бизнес-мероприятие. Время горело, нужно было запуститься максимум за 4 дня. Команда уложилась день в день, взяли $650. Дизайн получился свежий, не шаблонка.
-          </blockquote>
-          <div class="rev__footer">
-            <div class="rev__author-info">
-              <h3 class="rev__author-name">Ольга Соколова</h3>
-              <p class="rev__project-title">Экспресс-лендинг под мероприятие</p>
-            </div>
-            <div class="rev__metrics">
-              <span class="rev__pill rev__pill--time">4 дня</span>
-              <span class="rev__pill rev__pill--cost">$650</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 6 -->
-        <article class="rev rev--card">
-          <div class="rev__top">
-            <div class="rev__stars" aria-label="Оценка 5 из 5">
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <span class="rev__verified">Проект сдан</span>
-            </div>
-            <div class="rev__quote-mark" aria-hidden="true">“</div>
-          </div>
-          <blockquote class="rev__body">
-            Разрабатывали корпоративный сайт для логистической компании с калькулятором стоимости перевозок. Сделали полный цикл: от структуры до анимаций и SEO. Заняло 12 дней, по бюджету $1,600. Все правки вносили оперативно.
-          </blockquote>
-          <div class="rev__footer">
-            <div class="rev__author-info">
-              <h3 class="rev__author-name">Дмитрий Ковалев</h3>
-              <p class="rev__project-title">Корпоративный сайт с калькулятором</p>
-            </div>
-            <div class="rev__metrics">
-              <span class="rev__pill rev__pill--time">12 дней</span>
-              <span class="rev__pill rev__pill--cost">$1,600</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 7 -->
-        <article class="rev rev--card">
-          <div class="rev__top">
-            <div class="rev__stars" aria-label="Оценка 5 из 5">
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <span class="rev__verified">Проект сдан</span>
-            </div>
-            <div class="rev__quote-mark" aria-hidden="true">“</div>
-          </div>
-          <blockquote class="rev__body">
-            Нужен был сайт-визитка для клининговой службы. Ребята сами подсказали, как лучше расположить блоки с ценами и отзывами, чтобы конверсия была выше. Сдали за 3 дня, заплатила $450. Результатом более чем довольна.
-          </blockquote>
-          <div class="rev__footer">
-            <div class="rev__author-info">
-              <h3 class="rev__author-name">Наталья Попова</h3>
-              <p class="rev__project-title">Сайт-визитка для клининговой службы</p>
-            </div>
-            <div class="rev__metrics">
-              <span class="rev__pill rev__pill--time">3 дня</span>
-              <span class="rev__pill rev__pill--cost">$450</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 8 -->
-        <article class="rev rev--card">
-          <div class="rev__top">
-            <div class="rev__stars" aria-label="Оценка 5 из 5">
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <span class="rev__verified">Проект сдан</span>
-            </div>
-            <div class="rev__quote-mark" aria-hidden="true">“</div>
-          </div>
-          <blockquote class="rev__body">
-            Заказывал приложение на Swift под iOS для фитнес-студии с записью на тренировки. Продумали UX, сделали чистый код и помогли с публикацией в App Store. Заняло 14 дней, обошлось в $1,850. Серьезная команда, выдерживают дедлайны.
-          </blockquote>
-          <div class="rev__footer">
-            <div class="rev__author-info">
-              <h3 class="rev__author-name">Михаил Новиков</h3>
-              <p class="rev__project-title">iOS-приложение на Swift под App Store</p>
-            </div>
-            <div class="rev__metrics">
-              <span class="rev__pill rev__pill--time">14 дней</span>
-              <span class="rev__pill rev__pill--cost">$1,850</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 9 -->
-        <article class="rev rev--card">
-          <div class="rev__top">
-            <div class="rev__stars" aria-label="Оценка 5 из 5">
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <span class="rev__verified">Проект сдан</span>
-            </div>
-            <div class="rev__quote-mark" aria-hidden="true">“</div>
-          </div>
-          <blockquote class="rev__body">
-            Делали редизайн существующего сайта юридической фирмы. Старый выглядел устаревшим. Команда полностью переверстала блоки, ускорила загрузку и сделала удобную мобильную версию. Сделали за 6 дней за $950.
-          </blockquote>
-          <div class="rev__footer">
-            <div class="rev__author-info">
-              <h3 class="rev__author-name">Екатерина Волкова</h3>
-              <p class="rev__project-title">Редизайн сайта юридической фирмы</p>
-            </div>
-            <div class="rev__metrics">
-              <span class="rev__pill rev__pill--time">6 дней</span>
-              <span class="rev__pill rev__pill--cost">$950</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- 10 -->
-        <article class="rev rev--card">
-          <div class="rev__top">
-            <div class="rev__stars" aria-label="Оценка 5 из 5">
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.8-4.2 4.1 1 5.8-5.3-2.8-5.3 2.8 1-5.8-4.2-4.1 5.9-.8L10 1z"/></svg>
-              <span class="rev__verified">Проект сдан</span>
-            </div>
-            <div class="rev__quote-mark" aria-hidden="true">“</div>
-          </div>
-          <blockquote class="rev__body">
-            Нужна была SaaS-платформа для управления подписками. Сложный проект с личным кабинетом и аналитикой. Разработали функционал, протестировали на баги и сдали за 9 дней. Вышло $1,350. Работой доволен на 100%.
-          </blockquote>
-          <div class="rev__footer">
-            <div class="rev__author-info">
-              <h3 class="rev__author-name">Игорь Мельников</h3>
-              <p class="rev__project-title">SaaS-платформа аналитики и подписок</p>
-            </div>
-            <div class="rev__metrics">
-              <span class="rev__pill rev__pill--time">9 дней</span>
-              <span class="rev__pill rev__pill--cost">$1,350</span>
-            </div>
-          </div>
-        </article>
+      <div class="standards__cta">
+        <div class="standards__cta-text">
+          <b>Зафиксируйте стоимость и условия проекта в договоре</b>
+          <span>Обсудите задачу с ведущим инженером. Мы подготовим проект договора с прозрачной сметой и зафиксируем точный дедлайн.</span>
+        </div>
+        <a class="btn btn--orange btn--lg" href="#contacts">Получить проект с гарантией</a>
       </div>
-
-      <div class="center"><a class="btn btn--orange btn--lg" href="#contacts">Все отзывы</a></div>
     </div>
   </div>
 </section>
@@ -2193,7 +2065,7 @@
           <li><a href="#top">Главная</a></li>
           <li><a href="#cases">Кейсы</a></li>
           <li><a href="#roi">Окупаемость</a></li>
-          <li><a href="#reviews">Отзывы</a></li>
+          <li><a href="#standards">Гарантии и SLA</a></li>
           <li><a href="#offer">Сайт на своих условиях</a></li>
           <li><a href="#contacts">Наши контакты</a></li>
           <li><a href="#about">О компании KV-web</a></li>

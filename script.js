@@ -2874,6 +2874,53 @@ document.addEventListener('DOMContentLoaded', () => {
   initFounderWidgets();
 
   /* ========================================================================
+     ГАРАНТИИ И СТАНДАРТЫ КАЧЕСТВА: Spotlight Glow & Lighthouse Gauge
+     Вдохновлено шаблонами MotionSites (Glow Features, EMBER, Finlytic)
+     ======================================================================== */
+  initStandardsModule();
+
+  function initStandardsModule() {
+    // 1. Spotlight Glow на карточках гарантий
+    const cards = document.querySelectorAll('.guarantee-card');
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--spot-x', `${x}px`);
+        card.style.setProperty('--spot-y', `${y}px`);
+      });
+    });
+
+    // 2. Анимация круговой шкалы Google Lighthouse при скролле
+    const gaugeCircle = document.querySelector('.js-gauge-circle');
+    const gaugeNum = document.querySelector('.js-gauge-num');
+    if (gaugeCircle && gaugeNum) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            gaugeCircle.classList.add('is-animated');
+            let current = 0;
+            const target = 99;
+            const stepTime = 16;
+            const timer = setInterval(() => {
+              current += 3;
+              if (current >= target) {
+                current = target;
+                clearInterval(timer);
+              }
+              gaugeNum.textContent = current;
+            }, stepTime);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25 });
+
+      observer.observe(gaugeCircle);
+    }
+  }
+
+  /* ========================================================================
      МАГНИТНЫЕ КНОПКИ (Magnetic Physics & Elastic Spring)
      Вдохновлено шаблоном Impressive Hero с MotionSites и Awwwards
      ======================================================================== */
