@@ -2512,7 +2512,7 @@ document.addEventListener('DOMContentLoaded', () => {
           score: 38,
           time: 'Отклик 3.90 сек',
           fps: '24 FPS',
-          engine: "'WP-Bakery / Tilda'",
+          engine: "'Конструктор / Bloated CMS'",
           weight: "'842 kB'",
           speed: "'24 FPS'",
           vitals: 'Core Web Vitals: FAILED',
