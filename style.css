@@ -133,6 +133,77 @@ section[id],[id="cases"]{scroll-margin-top:90px}
 
 .linkbtn{background:none;border:0;cursor:pointer;color:var(--blue);font-weight:800;font-size:16px;text-decoration:underline;padding:8px}
 
+/* ==========================================================================
+   МАГНИТНЫЕ КНОПКИ (Magnetic Physics, Spring & Specular Glass Shine)
+   Вдохновлено шаблонами MotionSites и Awwwards
+   ========================================================================== */
+.is-magnetic {
+  --mag-x: 0px;
+  --mag-y: 0px;
+  --mag-r: 0deg;
+  --mag-px: 50%;
+  --mag-py: 50%;
+  will-change: transform;
+  transform: translate3d(var(--mag-x), var(--mag-y), 0) rotate(var(--mag-r));
+  transition: box-shadow .25s ease, filter .2s ease;
+}
+
+.btn.is-magnetic:hover {
+  transform: translate3d(var(--mag-x), calc(var(--mag-y) - 2px), 0) rotate(var(--mag-r));
+}
+
+.btn.is-magnetic:active {
+  transform: translate3d(var(--mag-x), var(--mag-y), 0) rotate(var(--mag-r)) scale(0.975);
+}
+
+.cases__arrow.is-magnetic {
+  --mag-x: 0px;
+  --mag-y: 0px;
+  --mag-r: 0deg;
+  transform: translate3d(var(--mag-x), var(--mag-y), 0) rotate(var(--mag-r));
+  transition: transform .12s ease-out, border-color .25s ease, box-shadow .25s ease;
+}
+
+.cases__arrow.is-magnetic:hover {
+  transform: translate3d(var(--mag-x), var(--mag-y), 0) rotate(var(--mag-r)) scale(1.06);
+  border-color: rgba(196,244,73,0.6);
+  box-shadow: 0 0 22px rgba(196,244,73,0.32);
+}
+
+.is-magnetic.is-magnetic-release {
+  transition: transform 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+/* Двойной параллакс: вложенные элементы/текст внутри кнопки смещаются синхронно на 26% */
+.is-magnetic > * {
+  pointer-events: none;
+  display: inline-block;
+  transform: translate3d(calc(var(--mag-x) * 0.26), calc(var(--mag-y) * 0.26), 0);
+  transition: transform 0.1s ease-out;
+}
+
+.is-magnetic.is-magnetic-release > * {
+  transition: transform 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+/* Световой блик (specular sheen), следующий за точным положением мыши на кнопке */
+.btn.is-magnetic::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle 95px at var(--mag-px) var(--mag-py), rgba(255,255,255,0.24), transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 1;
+}
+
+.btn.is-magnetic:hover::before {
+  opacity: 1;
+}
+
+
 .tag{display:inline-block;font-size:14px;font-weight:700;padding:9px 16px;line-height:1}
 .tag--lime{background:var(--lime);color:var(--lime-ink);box-shadow:0 4px 40px rgba(255,255,255,.4)}
 .tag--orange{background:var(--orange);color:#fff;box-shadow:0 4px 40px rgba(255,255,255,.4)}

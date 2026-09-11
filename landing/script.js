@@ -2872,5 +2872,102 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Запуск интерактивных виджетов
   initFounderWidgets();
+
+  /* ========================================================================
+     МАГНИТНЫЕ КНОПКИ (Magnetic Physics & Elastic Spring)
+     Вдохновлено шаблоном Impressive Hero с MotionSites и Awwwards
+     ======================================================================== */
+  initMagneticPhysics();
+
+  function initMagneticPhysics() {
+    // Отключаем на тач-устройствах и при prefers-reduced-motion
+    if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const targetSelector = '.btn, .cases__arrow, .tg-sim-btn, .tg-clear-btn, .widget-presets-bar button';
+    const buttons = Array.from(document.querySelectorAll(targetSelector));
+    if (!buttons.length) return;
+
+    buttons.forEach(btn => {
+      btn.classList.add('is-magnetic');
+
+      let bounding = null;
+      let rafId = null;
+      let targetX = 0;
+      let targetY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let isHovered = false;
+
+      const isLarge = btn.classList.contains('btn--lg');
+      const isArrow = btn.classList.contains('cases__arrow');
+      const strength = isLarge ? 0.32 : (isArrow ? 0.44 : 0.28);
+      const maxDist = isLarge ? 16 : (isArrow ? 10 : 12);
+
+      function updateBounds() {
+        bounding = btn.getBoundingClientRect();
+      }
+
+      function lerp(start, end, factor) {
+        return start + (end - start) * factor;
+      }
+
+      function loop() {
+        currentX = lerp(currentX, targetX, 0.22);
+        currentY = lerp(currentY, targetY, 0.22);
+
+        const rot = (currentX / maxDist) * 3.2;
+
+        btn.style.setProperty('--mag-x', `${currentX.toFixed(2)}px`);
+        btn.style.setProperty('--mag-y', `${currentY.toFixed(2)}px`);
+        btn.style.setProperty('--mag-r', `${rot.toFixed(2)}deg`);
+
+        if (!isHovered && Math.abs(currentX) < 0.05 && Math.abs(currentY) < 0.05) {
+          btn.style.setProperty('--mag-x', '0px');
+          btn.style.setProperty('--mag-y', '0px');
+          btn.style.setProperty('--mag-r', '0deg');
+          rafId = null;
+          return;
+        }
+
+        rafId = requestAnimationFrame(loop);
+      }
+
+      btn.addEventListener('mouseenter', () => {
+        isHovered = true;
+        updateBounds();
+        btn.classList.remove('is-magnetic-release');
+        if (!rafId) rafId = requestAnimationFrame(loop);
+      });
+
+      btn.addEventListener('mousemove', (e) => {
+        if (!bounding) updateBounds();
+        const centerX = bounding.left + bounding.width / 2;
+        const centerY = bounding.top + bounding.height / 2;
+
+        const deltaX = (e.clientX - centerX) * strength;
+        const deltaY = (e.clientY - centerY) * strength;
+
+        targetX = Math.max(-maxDist, Math.min(maxDist, deltaX));
+        targetY = Math.max(-maxDist, Math.min(maxDist, deltaY));
+
+        const px = ((e.clientX - bounding.left) / bounding.width * 100).toFixed(1);
+        const py = ((e.clientY - bounding.top) / bounding.height * 100).toFixed(1);
+        btn.style.setProperty('--mag-px', `${px}%`);
+        btn.style.setProperty('--mag-py', `${py}%`);
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        isHovered = false;
+        targetX = 0;
+        targetY = 0;
+        btn.classList.add('is-magnetic-release');
+      });
+
+      window.addEventListener('scroll', updateBounds, { passive: true });
+      window.addEventListener('resize', updateBounds, { passive: true });
+    });
+  }
 });
+
 
