@@ -435,13 +435,497 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---------- табы тарифов ---------- */
+  /* ---------- ДИНАМИЧЕСКИЕ ТАРИФЫ (РЫНОЧНЫЕ ЦЕНЫ С ВЫЧЕТОМ 20%) ---------- */
+  const PLAN_DATA = {
+    landing: {
+      sub: 'Стоимость создания продающего лендинга в Беларуси с выгодой 20% от рынка',
+      plans: [
+        {
+          term: 'Сроки разработки: 4-7 дней',
+          desc: 'Быстрый запуск для теста ниши или услуги. До 5 конверсионных блоков с мобильной адаптацией.',
+          market: '1 740 BYN',
+          price: 'от 1 390 BYN',
+          val: 1390,
+          items: [
+            { t: 'Анализ ниши и конкурентов', on: true },
+            { t: 'Продающий текст и структура (4U / AIDA)', on: true },
+            { t: 'Индивидуальный дизайн (Figma)', on: true },
+            { t: 'Чистая адаптивная верстка (HTML5/CSS3/JS)', on: true },
+            { t: 'Подключение форм и уведомлений в Telegram', on: true },
+            { t: 'Базовая SEO-оптимизация и метатеги', on: true },
+            { t: 'Сложная 3D-графика и шейдеры', on: false },
+            { t: 'Интеграция с CRM-системами', on: false }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 8-14 дней',
+          desc: 'Полноценный высококонверсионный лендинг для товарного бизнеса, услуг или B2B-направления.',
+          market: '2 800 BYN',
+          price: 'от 2 240 BYN',
+          val: 2240,
+          items: [
+            { t: 'Глубокий CustDev и анализ целевой аудитории', on: true },
+            { t: 'Маркетинговый копирайтинг и прототипирование', on: true },
+            { t: 'Премиальный авторский UI/UX дизайн', on: true },
+            { t: 'Плавные микровзаимодействия и анимация', on: true },
+            { t: 'Интеграция с amoCRM / Bitrix24', on: true },
+            { t: 'Подключение онлайн-оплаты (ЕРИП / bePaid)', on: true },
+            { t: 'Настройка аналитики (Яндекс Метрика + цели)', on: true },
+            { t: 'Гарантия и техподдержка 30 дней', on: true }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 14-22 дня',
+          desc: 'Уникальный имиджевый лендинг уровня Awwwards: 3D-модели, интерактив, максимальный ROAS.',
+          market: '4 200 BYN',
+          price: 'от 3 360 BYN',
+          val: 3360,
+          items: [
+            { t: 'Полный цикл: стратегия + позиционирование', on: true },
+            { t: '3D-сцены (Three.js), Canvas и интерактивный моушн', on: true },
+            { t: 'Нестандартные калькуляторы и квиз-воронки', on: true },
+            { t: 'Интеграция сквозной аналитики и Telegram WebApp', on: true },
+            { t: 'Скорость 95+ баллов Google PageSpeed', on: true },
+            { t: 'A/B-тестирование первого экрана', on: true },
+            { t: 'Персональное ведение ведущим инженером', on: true },
+            { t: 'Приоритетная поддержка 60 дней', on: true }
+          ]
+        }
+      ]
+    },
+    ios: {
+      sub: 'Стоимость разработки нативных приложений для iOS (Swift / SwiftUI) в Беларуси с выгодой 20%',
+      plans: [
+        {
+          term: 'Сроки разработки: 12-20 дней',
+          desc: 'Быстрый нативный MVP на SwiftUI: до 3 экранов, базовая бизнес-логика, локальное хранение данных.',
+          market: '4 940 BYN',
+          price: 'от 3 950 BYN',
+          val: 3950,
+          items: [
+            { t: 'Проектирование экранов и архитектуры iOS', on: true },
+            { t: 'Нативная разработка на Swift 6 / SwiftUI', on: true },
+            { t: 'Поддержка iOS 17 / iOS 18 и Dynamic Island', on: true },
+            { t: 'Локальная база данных (SwiftData / CoreData)', on: true },
+            { t: 'Адаптация под все модели iPhone', on: true },
+            { t: 'Серверный бэкенд и push-уведомления', on: false },
+            { t: 'Встроенные покупки (In-App Purchases)', on: false },
+            { t: 'Публикация в App Store', on: false }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 20-35 дней',
+          desc: 'Полнофункциональное мобильное приложение с бэкендом, авторизацией и синхронизацией.',
+          market: '8 900 BYN',
+          price: 'от 7 120 BYN',
+          val: 7120,
+          items: [
+            { t: 'Индивидуальный дизайн iOS Human Interface', on: true },
+            { t: 'Нативный стек: Swift + SwiftUI + Combine', on: true },
+            { t: 'REST API бэкенд и облачная база данных', on: true },
+            { t: 'Авторизация (Apple ID, номер телефона)', on: true },
+            { t: 'Push-уведомления (APNs) и глубокие ссылки', on: true },
+            { t: 'Интеграция подписок (StoreKit 2)', on: true },
+            { t: 'Полная подготовка и публикация в App Store', on: true },
+            { t: 'Гарантийное сопровождение 45 дней', on: true }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 35-60 дней',
+          desc: 'Сложная мобильная экосистема: интеграция CoreML, видеотрекинг, виджеты, оффлайн-режим.',
+          market: '14 750 BYN',
+          price: 'от 11 800 BYN',
+          val: 11800,
+          items: [
+            { t: 'Архитектура высокой нагрузки и оффлайн-кэш', on: true },
+            { t: 'Нейросети на устройстве (CoreML / Vision / AI)', on: true },
+            { t: 'Интеграция HealthKit / фитнес-датчиков', on: true },
+            { t: 'Виджеты рабочего стола iOS + Live Activities', on: true },
+            { t: 'Многофакторная безопасность и шифрование', on: true },
+            { t: 'CI/CD сборка, TestFlight бета-тестирование', on: true },
+            { t: 'Прохождение строгой модерации App Store Review', on: true },
+            { t: 'Выделенная техподдержка 90 дней', on: true }
+          ]
+        }
+      ]
+    },
+    express: {
+      sub: 'Стоимость срочного запуска экспресс-лендинга за 2-4 дня в Беларуси с выгодой 20%',
+      plans: [
+        {
+          term: 'Сроки разработки: 2-3 дня',
+          desc: 'Срочный запуск промо-страницы акции, мероприятия или теста спроса на одну услугу.',
+          market: '860 BYN',
+          price: 'от 690 BYN',
+          val: 690,
+          items: [
+            { t: 'Готовая протестированная модульная сетка', on: true },
+            { t: 'Копирайтинг оффера и УТП за 24 часа', on: true },
+            { t: 'Адаптация под все мобильные экраны', on: true },
+            { t: 'Форма сбора лидов с уведомлением в Telegram', on: true },
+            { t: 'Установка счетчика Яндекс Метрики', on: true },
+            { t: 'Индивидуальная анимация', on: false },
+            { t: 'Интеграция с CRM', on: false }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 3-4 дня',
+          desc: 'Экспресс-лендинг до 4 экранов с фирменным стилем и интеграцией воронки продаж.',
+          market: '1 400 BYN',
+          price: 'от 1 120 BYN',
+          val: 1120,
+          items: [
+            { t: 'Индивидуальный дизайн первого экрана', on: true },
+            { t: 'Блок преимуществ, услуг и прайс-листа', on: true },
+            { t: 'Интерактивный калькулятор или квиз', on: true },
+            { t: 'Моментальная пересылка лидов менеджеру', on: true },
+            { t: 'Базовая интеграция с amoCRM', on: true },
+            { t: 'Настройка пикселей рекламы (VK / Meta)', on: true },
+            { t: 'Поддержка 14 дней после запуска', on: true }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 4-5 дней',
+          desc: 'Быстрый запуск «под ключ» с маркетинговой связкой и готовностью к платному трафику.',
+          market: '2 100 BYN',
+          price: 'от 1 680 BYN',
+          val: 1680,
+          items: [
+            { t: 'Проработка сильного позиционирования', on: true },
+            { t: 'Уникальная графика и брендированные баннеры', on: true },
+            { t: 'Подключение эквайринга (ЕРИП / карты)', on: true },
+            { t: 'Полная интеграция с CRM (сделки + контакты)', on: true },
+            { t: 'UTM-разметка и цели для контекстной рекламы', on: true },
+            { t: 'Домен и хостинг на 1 год в подарок', on: true },
+            { t: 'Техподдержка 30 дней', on: true }
+          ]
+        }
+      ]
+    },
+    card: {
+      sub: 'Стоимость создания презентабельного сайта-визитки компании в Беларуси с выгодой 20%',
+      plans: [
+        {
+          term: 'Сроки разработки: 3-5 дней',
+          desc: 'Аккуратная цифровая визитка специалиста, юриста, мастера или небольшой компании.',
+          market: '1 110 BYN',
+          price: 'от 890 BYN',
+          val: 890,
+          items: [
+            { t: 'Структура: о себе, услуги, прайс, контакты', on: true },
+            { t: 'Адаптация под смартфоны и планшеты', on: true },
+            { t: 'Кнопки быстрой связи: звонок, WhatsApp, Telegram', on: true },
+            { t: 'Интерактивная карта проезда', on: true },
+            { t: 'Почтовый ящик на вашем домене', on: true },
+            { t: 'Мультиязычность', on: false },
+            { t: 'Личный кабинет', on: false }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 5-8 дней',
+          desc: 'Многостраничная или расширенная визитка компании с каталогом работ и сертификатами.',
+          market: '1 860 BYN',
+          price: 'от 1 490 BYN',
+          val: 1490,
+          items: [
+            { t: 'До 5 структурированных разделов', on: true },
+            { t: 'Портфолио с галереей и кейсами', on: true },
+            { t: 'Форма онлайн-записи / расчета стоимости', on: true },
+            { t: 'Базовое SEO-продвижение под поисковики', on: true },
+            { t: 'Защищенный SSL-сертификат HTTPS', on: true },
+            { t: 'Подключение Google Analytics и Метрики', on: true },
+            { t: 'Техподдержка 30 дней', on: true }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 7-12 дней',
+          desc: 'Имиджевая цифровая визитка премиум-класса с эксклюзивным дизайном и каталогом.',
+          market: '2 740 BYN',
+          price: 'от 2 190 BYN',
+          val: 2190,
+          items: [
+            { t: 'Авторский фирменный стиль и типографика', on: true },
+            { t: 'Интерактивный прайс-лист с фильтрами', on: true },
+            { t: 'Двуязычная версия (RU / EN)', on: true },
+            { t: 'Сквозная интеграция с CRM-системой', on: true },
+            { t: 'Быстродействие 95+ PageSpeed', on: true },
+            { t: 'Настройка корпоративной почты для сотрудников', on: true },
+            { t: 'Расширенная гарантия 60 дней', on: true }
+          ]
+        }
+      ]
+    },
+    corp: {
+      sub: 'Стоимость разработки официального корпоративного сайта в Беларуси с выгодой 20%',
+      plans: [
+        {
+          term: 'Сроки разработки: 10-18 дней',
+          desc: 'Корпоративный сайт до 10 страниц: история, руководство, услуги, реквизиты, вакансии.',
+          market: '2 990 BYN',
+          price: 'от 2 390 BYN',
+          val: 2390,
+          items: [
+            { t: 'Проектирование информационной архитектуры', on: true },
+            { t: 'Каталог услуг компании с карточками', on: true },
+            { t: 'Раздел новостей / блог со статьями', on: true },
+            { t: 'Удобная панель управления контентом', on: true },
+            { t: 'Базовая SEO-оптимизация всех страниц', on: true },
+            { t: 'Интеграция с 1С / складом', on: false },
+            { t: 'Личный кабинет клиента', on: false }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 18-30 дней',
+          desc: 'Масштабный корпоративный ресурс для производства, логистики, медицины или B2B.',
+          market: '4 810 BYN',
+          price: 'от 3 850 BYN',
+          val: 3850,
+          items: [
+            { t: 'Многоуровневый каталог продукции с PDF-скачиванием', on: true },
+            { t: 'Калькулятор стоимости услуг для клиентов', on: true },
+            { t: 'Интеграция с amoCRM / Bitrix24', on: true },
+            { t: 'Раздел документов, лицензий и тендеров', on: true },
+            { t: 'Формы для разных отделов (продажи, закупки, HR)', on: true },
+            { t: 'Оптимизация скорости и Core Web Vitals', on: true },
+            { t: 'Обучение ваших сотрудников работе с сайтом', on: true },
+            { t: 'Гарантийное обслуживание 45 дней', on: true }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 30-50 дней',
+          desc: 'Флагманский корпоративный портал высокой сложности: интеграция с 1С, мультиязычность, API.',
+          market: '7 800 BYN',
+          price: 'от 6 240 BYN',
+          val: 6240,
+          items: [
+            { t: 'Высоконагруженная архитектура (Node.js/Python/Go)', on: true },
+            { t: 'Двусторонняя синхронизация с 1С / ERP', on: true },
+            { t: 'Личный кабинет оптового партнера / дилера', on: true },
+            { t: 'Мультиязычность (до 3 языковых версий)', on: true },
+            { t: 'Разграничение прав доступа для филиалов', on: true },
+            { t: 'Высокий уровень кибербезопасности и резервное копирование', on: true },
+            { t: 'Полное SEO-проектирование под Яндекс и Google', on: true },
+            { t: 'Персональное сопровождение 90 дней', on: true }
+          ]
+        }
+      ]
+    },
+    shop: {
+      sub: 'Стоимость создания интернет-магазина в Беларуси с выгодой 20% от рынка',
+      plans: [
+        {
+          term: 'Сроки разработки: 12-20 дней',
+          desc: 'Быстрый запуск e-commerce: каталог до 300 товаров, корзина, оформление заказа.',
+          market: '3 360 BYN',
+          price: 'от 2 690 BYN',
+          val: 2690,
+          items: [
+            { t: 'Каталог с категориями и поиском', on: true },
+            { t: 'Карточка товара с галереей и характеристиками', on: true },
+            { t: 'Удобная корзина и оформление за 1 шаг', on: true },
+            { t: 'Уведомления о заказах в Telegram и на почту', on: true },
+            { t: 'Базовая панель управления товарами', on: true },
+            { t: 'Онлайн-эквайринг банков', on: false },
+            { t: 'Автоматическая выгрузка из 1С', on: false }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 20-35 дней',
+          desc: 'Полноценный магазин с приемом платежей (ЕРИП / карты), фильтрами и доставкой.',
+          market: '5 700 BYN',
+          price: 'от 4 560 BYN',
+          val: 4560,
+          items: [
+            { t: 'Умный фильтр товаров по параметрам', on: true },
+            { t: 'Онлайн-оплата картами и ЕРИП (bePaid / Webpay)', on: true },
+            { t: 'Интеграция со службами доставки (Европочта, Белпочта, CDEK)', on: true },
+            { t: 'Личный кабинет покупателя с историей заказов', on: true },
+            { t: 'Скидки, промокоды и триггерные скидки', on: true },
+            { t: 'Синхронизация с CRM-системой', on: true },
+            { t: 'SEO-структура под ключевые товарные запросы', on: true },
+            { t: 'Сопровождение 45 дней', on: true }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 35-55 дней',
+          desc: 'Автоматизированный маркетплейс / гипермаркет: тысячи товаров, 1С, остатки онлайн.',
+          market: '9 350 BYN',
+          price: 'от 7 480 BYN',
+          val: 7480,
+          items: [
+            { t: 'Автоматический двусторонний обмен с 1С / МойСклад', on: true },
+            { t: 'Обновление цен и остатков в реальном времени', on: true },
+            { t: 'B2B-функционал: оптовые цены, счета для юрлиц', on: true },
+            { t: 'Программа бонусов, кешбэк и накопительные скидки', on: true },
+            { t: 'Высокая скорость фильтрации при 50 000+ товарах', on: true },
+            { t: 'Брошенные корзины и допродажи в Telegram', on: true },
+            { t: 'Защита от сбоев в пиковые распродажи', on: true },
+            { t: 'Приоритетная поддержка 90 дней', on: true }
+          ]
+        }
+      ]
+    },
+    wp: {
+      sub: 'Стоимость разработки сайта на WordPress в Беларуси с выгодой 20% от рынка',
+      plans: [
+        {
+          term: 'Сроки разработки: 5-9 дней',
+          desc: 'Чистый сайт на WordPress: легкая тема, удобное редактирование текстов и фото.',
+          market: '1 600 BYN',
+          price: 'от 1 280 BYN',
+          val: 1280,
+          items: [
+            { t: 'Установка и базовая настройка WP', on: true },
+            { t: 'Чистая верстка без тяжелых конструкторов Elementor', on: true },
+            { t: 'Удобное добавление страниц через блоки Gutenberg', on: true },
+            { t: 'Адаптивность для всех мобильных экранов', on: true },
+            { t: 'Защита админки от спама и взлома', on: true },
+            { t: 'Кастомные типы записей ACF Pro', on: false },
+            { t: 'Интеграция со сторонними сервисами', on: false }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 10-18 дней',
+          desc: 'Индивидуальная кастомная тема на WordPress + ACF: скорость загрузки 90+ баллов.',
+          market: '2 600 BYN',
+          price: 'от 2 080 BYN',
+          val: 2080,
+          items: [
+            { t: 'Разработка темы с нуля под ваш макет Figma', on: true },
+            { t: 'Полностью кастомные поля (ACF Pro)', on: true },
+            { t: 'Высокая скорость работы (отклик до 0.4 сек)', on: true },
+            { t: 'SEO-плагины (Yoast / RankMath) с правильной разметкой', on: true },
+            { t: 'Формы обратной связи с валидацией и спам-фильтром', on: true },
+            { t: 'Интеграция с Telegram-ботом заявок', on: true },
+            { t: 'Видеоинструкция по редактированию сайта', on: true },
+            { t: 'Поддержка 30 дней', on: true }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 18-28 дней',
+          desc: 'Мощный портал / сервис на WordPress + WooCommerce с оптимизацией высокой нагрузки.',
+          market: '3 990 BYN',
+          price: 'от 3 190 BYN',
+          val: 3190,
+          items: [
+            { t: 'Архитектура Headless WP или глубокая кастомизация', on: true },
+            { t: 'WooCommerce с кастомным оформлением корзины', on: true },
+            { t: 'Интеграция платежных шлюзов РБ (ЕРИП, банки)', on: true },
+            { t: 'Redis Object Cache для мгновенного отклика', on: true },
+            { t: 'Тонкая настройка безопасности и автобэкапы', on: true },
+            { t: 'Многоязычность через WPML / Polylang', on: true },
+            { t: 'Персональная поддержка 60 дней', on: true }
+          ]
+        }
+      ]
+    },
+    design: {
+      sub: 'Стоимость UX/UI дизайна и редизайна сайта в Беларуси с выгодой 20% от рынка',
+      plans: [
+        {
+          term: 'Сроки разработки: 4-7 дней',
+          desc: 'Редизайн ключевого экрана или лендинга: современный визуальный стиль и конверсионная сетка.',
+          market: '1 150 BYN',
+          price: 'от 920 BYN',
+          val: 920,
+          items: [
+            { t: 'Экспресс-аудит текущего сайта и ошибок UX', on: true },
+            { t: 'Проработка структуры первого экрана и оффера', on: true },
+            { t: 'Отрисовка дизайн-макета в Figma (десктоп)', on: true },
+            { t: 'Подбор цветовой палитры и шрифтовых пар', on: true },
+            { t: 'Подготовка ассетов для верстальщика', on: true },
+            { t: 'Мобильная адаптивная версия', on: false },
+            { t: 'Интерактивный кликабельный прототип', on: false }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 8-15 дней',
+          desc: 'Комплексный UI/UX дизайн сайта: десктоп + планшет + мобильные экраны, UI-кит.',
+          market: '2 060 BYN',
+          price: 'от 1 650 BYN',
+          val: 1650,
+          items: [
+            { t: 'Анализ конкурентов и CJM (пути клиента)', on: true },
+            { t: 'Черно-белый интерактивный прототип логики', on: true },
+            { t: 'Уникальный дизайн всех блоков в Figma', on: true },
+            { t: 'Адаптивные версии под все разрешения (Desktop + Mobile)', on: true },
+            { t: 'Полноценный UI Kit: кнопки, поля, состояния, иконки', on: true },
+            { t: 'Спецификация анимаций для разработчиков', on: true },
+            { t: '2 итерации правок включены в стоимость', on: true },
+            { t: 'Авторский надзор при верстке', on: true }
+          ]
+        },
+        {
+          term: 'Сроки разработки: 15-25 дней',
+          desc: 'Премиальный креативный дизайн уровня Awwwards: 3D-графика, дизайн-система, брендинг.',
+          market: '3 350 BYN',
+          price: 'от 2 680 BYN',
+          val: 2680,
+          items: [
+            { t: 'Глубокий брендинг и разработка айдентики', on: true },
+            { t: '3D-иллюстрации и эксклюзивные графические материалы', on: true },
+            { t: 'Полная дизайн-система с токенами и компонентами', on: true },
+            { t: 'Интерактивный кликабельный прототип высокой точности', on: true },
+            { t: 'Моушн-дизайн и раскадровка микровзаимодействий', on: true },
+            { t: 'Презентация концепций перед руководством', on: true },
+            { t: 'Полный авторский контроль реализации разработчиками', on: true },
+            { t: 'Пожизненная передача всех исходников и прав', on: true }
+          ]
+        }
+      ]
+    }
+  };
+
   const ptabs = [...document.querySelectorAll('.ptab')];
+  const pricingSub = document.querySelector('.js-pricing-sub');
+  const planCards = [...document.querySelectorAll('.js-plan-card')];
+
+  function updatePricingPlans(catKey) {
+    const data = PLAN_DATA[catKey];
+    if (!data) return;
+
+    if (pricingSub) {
+      pricingSub.textContent = data.sub;
+    }
+
+    planCards.forEach((card, idx) => {
+      const tierData = data.plans[idx];
+      if (!tierData) return;
+
+      const termEl = card.querySelector('.js-plan-term');
+      const descEl = card.querySelector('.js-plan-desc');
+      const listEl = card.querySelector('.js-plan-list');
+      const marketEl = card.querySelector('.plan__market-price s');
+      const valEl = card.querySelector('.js-plan-val');
+
+      if (termEl) termEl.textContent = tierData.term;
+      if (descEl) descEl.textContent = tierData.desc;
+
+      if (marketEl) marketEl.textContent = 'рыночная ' + tierData.market;
+      if (valEl) {
+        valEl.textContent = tierData.price;
+        valEl.setAttribute('data-count', tierData.val);
+        valEl.classList.remove('is-updated');
+        void valEl.offsetWidth;
+        valEl.classList.add('is-updated');
+      }
+
+      if (listEl && tierData.items) {
+        listEl.innerHTML = tierData.items.map(it => 
+          `<li class="${it.on ? 'on' : 'off'}">${it.t}</li>`
+        ).join('');
+      }
+    });
+  }
+
   ptabs.forEach(tab => {
     tab.addEventListener('click', () => {
+      playHaptic('tap');
       ptabs.forEach(t => { t.classList.remove('is-on'); t.setAttribute('aria-selected', 'false'); });
       tab.classList.add('is-on');
       tab.setAttribute('aria-selected', 'true');
+      const cat = tab.getAttribute('data-plan-cat') || 'landing';
+      updatePricingPlans(cat);
     });
   });
 
@@ -2274,6 +2758,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const widgetTg = document.getElementById('widget-card-telegram');
     if (widgetTg) {
       const simBtn = widgetTg.querySelector('.js-tg-simulate');
+      const clearBtn = widgetTg.querySelector('.js-tg-clear');
       const statusEl = widgetTg.querySelector('.js-tg-status');
       const clientEl = widgetTg.querySelector('.js-tg-client');
       const tariffEl = widgetTg.querySelector('.js-tg-tariff');
@@ -2290,10 +2775,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
       let leadNum = 148;
       const sampleLeads = [
-        { name: 'Екатерина (Минск)', tariff: 'Интернет-магазин + CRM', budget: '3 200 BYN', crm: '✓ amoCRM («Новый лид»)' },
-        { name: 'Дмитрий (Гродно)', tariff: 'Telegram Mini App (Доставка)', budget: '2 400 BYN', crm: '✓ Bitrix24 («В обработке»)' },
-        { name: 'Максим (Брест)', tariff: 'Сайт-сервис + Калькулятор', budget: '3 800 BYN', crm: '✓ amoCRM («Квалификация»)' },
-        { name: 'Ольга (Витебск)', tariff: 'Корпоративный портал', budget: '1 950 BYN', crm: '✓ amoCRM («Новый лид»)' }
+        { name: 'Екатерина (Минск)', tariff: 'Интернет-магазин + CRM', budget: '3 200 BYN', crm: 'amoCRM: Новый лид' },
+        { name: 'Дмитрий (Гродно)', tariff: 'Telegram Mini App (Каталог + Заказ)', budget: '2 400 BYN', crm: 'Bitrix24: Сделка создана' },
+        { name: 'Максим (Брест)', tariff: 'Сайт-сервис + Калькулятор', budget: '3 800 BYN', crm: 'amoCRM: Квалификация' },
+        { name: 'Ольга (Витебск)', tariff: 'Корпоративный портал', budget: '1 950 BYN', crm: 'amoCRM: Новый лид' }
       ];
       let leadIdx = 0;
 
@@ -2301,7 +2786,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const now = new Date();
         const hh = String(now.getHours()).padStart(2, '0');
         const mm = String(now.getMinutes()).padStart(2, '0');
-        return `${hh}:${mm} ✓✓`;
+        return `${hh}:${mm} • Доставлено`;
       }
 
       simBtn?.addEventListener('click', () => {
@@ -2318,7 +2803,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const data = sampleLeads[leadIdx % sampleLeads.length];
           leadIdx++;
 
-          if (badgeEl) badgeEl.textContent = `⚡ Новая заявка с сайта #${leadNum}`;
+          if (badgeEl) badgeEl.textContent = `Новая заявка • Сайт #${leadNum}`;
           if (clientEl) clientEl.textContent = data.name;
           if (tariffEl) tariffEl.textContent = data.tariff;
           if (budgetEl) budgetEl.textContent = data.budget;
@@ -2333,13 +2818,33 @@ document.addEventListener('DOMContentLoaded', () => {
             void leadMsg.offsetWidth; // force reflow
             leadMsg.classList.add('is-pop');
           }
-        }, 400);
+        }, 350);
+      });
+
+      clearBtn?.addEventListener('click', () => {
+        playHaptic('tap');
+        if (repliesFeed) {
+          repliesFeed.innerHTML = '';
+        }
+        if (statusEl) {
+          statusEl.textContent = 'история очищена';
+          statusEl.style.color = 'rgba(255,255,255,0.6)';
+          setTimeout(() => {
+            statusEl.textContent = 'бот онлайн';
+            statusEl.style.color = '';
+          }, 1000);
+        }
+        if (leadMsg) {
+          leadMsg.classList.remove('is-pop');
+          void leadMsg.offsetWidth;
+          leadMsg.classList.add('is-pop');
+        }
       });
 
       btnCrm?.addEventListener('click', () => {
         playHaptic('click');
         if (!crmStatusEl) return;
-        crmStatusEl.textContent = '✓ amoCRM: «Квалифицирован инженером»';
+        crmStatusEl.textContent = 'amoCRM: Квалифицирован инженером';
         crmStatusEl.style.color = 'var(--lime)';
       });
 
@@ -2348,7 +2853,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!repliesFeed) return;
         const bubble = document.createElement('div');
         bubble.className = 'tg-msg tg-msg--out is-pop';
-        bubble.innerHTML = `<b>Вы:</b> Здравствуйте! Изучили ваш проект #${leadNum}, свяжемся с вами в Telegram за 10 минут.`;
+        bubble.innerHTML = `<b>Вы:</b> Здравствуйте! Получили заявку #${leadNum}, свяжемся с вами в Telegram в течение 10 минут.`;
         repliesFeed.appendChild(bubble);
         bubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       });
@@ -2358,7 +2863,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!repliesFeed) return;
         const bubble = document.createElement('div');
         bubble.className = 'tg-msg tg-msg--sys is-pop';
-        bubble.innerHTML = `🧾 <b>Счет в ЕРИП:</b> #KV-${leadNum} выставлен. Оплата без комиссии по номеру заказа.`;
+        bubble.innerHTML = `<b>Счет в ЕРИП:</b> #KV-${leadNum} сформирован. Оплата через мобильный банк без комиссии.`;
         repliesFeed.appendChild(bubble);
         bubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       });

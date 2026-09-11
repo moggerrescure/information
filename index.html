@@ -1001,86 +1001,84 @@
 <section class="dark-block pricing-sec" id="pricing">
   <div class="wrap">
     <h2 class="h2 h2--light">Сколько стоит создать сайт в Беларуси</h2>
-    <p class="pricing__sub">Стоимость создания одностраничного сайта / лендинга в Беларуси</p>
+    <p class="pricing__sub js-pricing-sub">Стоимость создания лендинга в Беларуси с выгодой 20% от рынка</p>
 
     <div class="ptabs" role="tablist" aria-label="Тип сайта">
-      <button class="ptab is-on" role="tab" aria-selected="true">Создание лендинга</button>
-      <button class="ptab" role="tab" aria-selected="false">Приложения под iOS</button>
-      <button class="ptab" role="tab" aria-selected="false">Экспресс-лендинг</button>
-      <button class="ptab" role="tab" aria-selected="false">Сайт-визитка</button>
-      <button class="ptab" role="tab" aria-selected="false">Корпоративный сайт</button>
-      <button class="ptab" role="tab" aria-selected="false">Интернет-магазин</button>
-      <button class="ptab" role="tab" aria-selected="false">Сайт на WordPress</button>
-      <button class="ptab" role="tab" aria-selected="false">Дизайн / редизайн сайта</button>
+      <button class="ptab is-on" role="tab" data-plan-cat="landing" aria-selected="true">Создание лендинга</button>
+      <button class="ptab" role="tab" data-plan-cat="ios" aria-selected="false">Приложения под iOS</button>
+      <button class="ptab" role="tab" data-plan-cat="express" aria-selected="false">Экспресс-лендинг</button>
+      <button class="ptab" role="tab" data-plan-cat="card" aria-selected="false">Сайт-визитка</button>
+      <button class="ptab" role="tab" data-plan-cat="corp" aria-selected="false">Корпоративный сайт</button>
+      <button class="ptab" role="tab" data-plan-cat="shop" aria-selected="false">Интернет-магазин</button>
+      <button class="ptab" role="tab" data-plan-cat="wp" aria-selected="false">Сайт на WordPress</button>
+      <button class="ptab" role="tab" data-plan-cat="design" aria-selected="false">Дизайн / редизайн сайта</button>
     </div>
 
-    <div class="plans stagger">
-      <article class="plan">
+    <div class="plans stagger js-plans-grid">
+      <article class="plan js-plan-card" data-tier="0">
         <h3 class="plan__name">Для старта</h3>
-        <p class="plan__term">Сроки разработки: 6-20 дней</p>
-        <p class="plan__desc">Продающий, лендинг со стандартным дизайном до 5 блоков, подходит для тестирования новой идеи</p>
-        <ul class="plan__list">
-          <li class="on">Анализ вашего бизнеса</li>
-          <li class="on">Первичное исследование вашей целевой аудитории и конкурентов</li>
-          <li class="on">Копирайт/рерайт текста с заголовками по технологии 4U</li>
-          <li class="on">Создание стандартного дизайна</li>
-          <li class="on">Верстаем на Tilda, либо WordPress</li>
-          <li class="on">Адаптируем сайт под мобильные версии</li>
-          <li class="on">Подключение всех форм, системы аналитики, интеграция с CRM системой, тестирование сайта</li>
-          <li class="on">Создание доп.страниц: страница 404 ошибка, страница спасибо, политика конфиденциальности.</li>
-          <li class="on">Без анимации</li>
+        <p class="plan__term js-plan-term">Сроки разработки: 4-7 дней</p>
+        <p class="plan__desc js-plan-desc">Быстрый запуск для теста ниши или услуги. До 5 конверсионных блоков с мобильной адаптацией.</p>
+        <ul class="plan__list js-plan-list">
+          <li class="on">Анализ ниши и конкурентов</li>
+          <li class="on">Продающий текст и структура (4U / AIDA)</li>
+          <li class="on">Индивидуальный дизайн (Figma)</li>
+          <li class="on">Чистая адаптивная верстка (HTML5/CSS3/JS)</li>
+          <li class="on">Подключение форм и уведомлений в Telegram</li>
+          <li class="on">Базовая SEO-оптимизация и метатеги</li>
+          <li class="off">Сложная 3D-графика и шейдеры</li>
+          <li class="off">Интеграция с CRM-системами</li>
         </ul>
-        <p class="plan__price"><b data-count="2270">от 2 270 BYN</b></p>
+        <div class="plan__price">
+          <span class="plan__market-price"><s>рыночная 1 740 BYN</s> <span class="plan__save-tag">−20% выгода</span></span>
+          <b class="plan__val js-plan-val" data-count="1390">от 1 390 BYN</b>
+        </div>
         <a class="btn btn--orange" href="#offer">Обсудить задачу</a>
       </article>
 
-      <article class="plan plan--mid">
+      <article class="plan plan--mid js-plan-card" data-tier="1">
         <h3 class="plan__name">Для бизнеса</h3>
-        <p class="plan__term">Сроки разработки: 10-25 дней</p>
-        <p class="plan__desc">Красивый, конверсионный лендинг, подходит для товарной ниши и бизнеса в сфере услуг</p>
-        <ul class="plan__list">
-          <li class="off">Анализ вашего бизнеса</li>
-          <li class="on">Расширенное исследование вашей целевой аудитории и конкурентов</li>
-          <li class="off">Копирайт/рерайт текста с заголовками по технологии 4U</li>
-          <li class="on">Создание прототипа. Проработка структуры и юзабилити</li>
-          <li class="on">Создание индивидуального дизайна</li>
-          <li class="off">Верстаем на Tilda, либо WordPress</li>
-          <li class="off">Адаптируем сайт под мобильные версии</li>
-          <li class="off">Подключение всех форм, системы аналитики, интеграция с CRM системой, тестирование сайта</li>
-          <li class="off">Создание доп.страниц: страница 404 ошибка, страница спасибо, политика конфиденциальности.</li>
-          <li class="on">Базовая SEO оптимизация, заголовки H1, Н2, Н3, описание, alt теги</li>
-          <li class="on">Базовая анимация</li>
-          <li class="on">Техническая поддержка на протяжении 1 месяца</li>
+        <p class="plan__term js-plan-term">Сроки разработки: 8-14 дней</p>
+        <p class="plan__desc js-plan-desc">Полноценный высококонверсионный лендинг для товарного бизнеса, услуг или B2B-направления.</p>
+        <ul class="plan__list js-plan-list">
+          <li class="on">Глубокий CustDev и анализ целевой аудитории</li>
+          <li class="on">Маркетинговый копирайтинг и прототипирование</li>
+          <li class="on">Премиальный авторский UI/UX дизайн</li>
+          <li class="on">Плавные микровзаимодействия и анимация</li>
+          <li class="on">Интеграция с amoCRM / Bitrix24</li>
+          <li class="on">Подключение онлайн-оплаты (ЕРИП / bePaid)</li>
+          <li class="on">Настройка аналитики (Яндекс Метрика + цели)</li>
+          <li class="on">Гарантия и техподдержка 30 дней</li>
         </ul>
-        <p class="plan__price"><b data-count="4260">от 4 260 BYN</b></p>
+        <div class="plan__price">
+          <span class="plan__market-price"><s>рыночная 2 800 BYN</s> <span class="plan__save-tag">−20% выгода</span></span>
+          <b class="plan__val js-plan-val" data-count="2240">от 2 240 BYN</b>
+        </div>
         <a class="btn btn--orange" href="#offer">Выбрать пакет</a>
       </article>
 
-      <article class="plan">
+      <article class="plan js-plan-card" data-tier="2">
         <h3 class="plan__name">PRO бизнес</h3>
-        <p class="plan__term">Сроки разработки: 15-30 дней</p>
-        <p class="plan__desc">Уникальный, запоминающийся лендинг, с высокими показателями конверсии</p>
-        <ul class="plan__list">
-          <li class="off">Анализ вашего бизнеса</li>
-          <li class="on">Расширенное исследование вашей целевой аудитории и конкурентов</li>
-          <li class="on">Портрет пользователя</li>
-          <li class="off">Копирайт/рерайт текста с заголовками по технологии 4U</li>
-          <li class="on">Создание прототипа. Проработка структуры и юзабилити</li>
-          <li class="on">Создание уникального и запоминающегося дизайна сайта лично основателями команды</li>
-          <li class="off">Верстаем на Tilda, либо WordPress</li>
-          <li class="off">Адаптируем сайт под мобильные версии</li>
-          <li class="off">Подключение всех форм, системы аналитики, интеграция с CRM системой, тестирование сайта</li>
-          <li class="off">Создание доп.страниц: страница 404 ошибка, страница спасибо, политика конфиденциальности.</li>
-          <li class="on">Базовая SEO оптимизация, заголовки H1, Н2, Н3, описание, alt теги</li>
-          <li class="on">Сложная/базовая анимация</li>
-          <li class="on">Техническая поддержка на протяжении 1 месяца</li>
-          <li class="on">A/B тестирование и улучшение юзабилити сайта на основе данных аналитики</li>
+        <p class="plan__term js-plan-term">Сроки разработки: 14-22 дня</p>
+        <p class="plan__desc js-plan-desc">Уникальный имиджевый лендинг уровня Awwwards: 3D-модели, интерактив, максимальный ROAS.</p>
+        <ul class="plan__list js-plan-list">
+          <li class="on">Полный цикл: стратегия + позиционирование</li>
+          <li class="on">3D-сцены (Three.js), Canvas и интерактивный моушн</li>
+          <li class="on">Нестандартные калькуляторы и квиз-воронки</li>
+          <li class="on">Интеграция сквозной аналитики и Telegram WebApp</li>
+          <li class="on">Скорость 95+ баллов Google PageSpeed</li>
+          <li class="on">A/B-тестирование первого экрана</li>
+          <li class="on">Персональное ведение ведущим инженером</li>
+          <li class="on">Приоритетная поддержка 60 дней</li>
         </ul>
-        <p class="plan__price"><b data-count="5930">от 5 930 BYN</b></p>
+        <div class="plan__price">
+          <span class="plan__market-price"><s>рыночная 4 200 BYN</s> <span class="plan__save-tag">−20% выгода</span></span>
+          <b class="plan__val js-plan-val" data-count="3360">от 3 360 BYN</b>
+        </div>
         <a class="btn btn--orange" href="#offer">Выбрать пакет</a>
       </article>
     </div>
-    <p class="rate-note">Цены указаны в белорусских рублях. Точная стоимость фиксируется в договоре после брифа.</p>
+    <p class="rate-note">Цены указаны в белорусских рублях за вычетом 20% от средней рыночной ставки веб-студий Беларуси (без наценок на офис и менеджеров). Фиксируются в официальном договоре.</p>
 
       <!-- «на своих условиях» — в макете лежит на тёмной полосе с тарифами -->
 <div class="offer" id="offer">
@@ -1182,9 +1180,9 @@
             <div class="widget-body widget-code__body">
               <!-- Интерактивные пресеты архитектуры -->
               <div class="widget-presets-bar">
-                <button type="button" class="wpreset is-active js-perf-preset" data-preset="vanilla">⚡ Чистый код</button>
-                <button type="button" class="wpreset js-perf-preset" data-preset="builder">🐢 Конструктор</button>
-                <button type="button" class="wpreset js-perf-preset" data-preset="catalog">📦 Каталог 10k</button>
+                <button type="button" class="wpreset is-active js-perf-preset" data-preset="vanilla">Чистый код</button>
+                <button type="button" class="wpreset js-perf-preset" data-preset="builder">Конструктор</button>
+                <button type="button" class="wpreset js-perf-preset" data-preset="catalog">Каталог 10k</button>
               </div>
 
               <!-- Спидометр Google PageSpeed -->
@@ -1271,10 +1269,10 @@
 
               <!-- Быстрые команды в один клик -->
               <div class="term-chips-row">
-                <button type="button" class="term-chip js-term-btn" data-cmd="load">⚡ load 10k</button>
-                <button type="button" class="term-chip js-term-btn" data-cmd="ping">📶 ping</button>
-                <button type="button" class="term-chip js-term-btn" data-cmd="backup">💾 backup</button>
-                <button type="button" class="term-chip js-term-btn" data-cmd="clear">✕ clear</button>
+                <button type="button" class="term-chip js-term-btn" data-cmd="load">load 10k</button>
+                <button type="button" class="term-chip js-term-btn" data-cmd="ping">ping</button>
+                <button type="button" class="term-chip js-term-btn" data-cmd="backup">backup</button>
+                <button type="button" class="term-chip js-term-btn" data-cmd="clear">clear</button>
               </div>
 
               <!-- Интерактивная строка ввода -->
@@ -1313,30 +1311,34 @@
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.93-1.28 4.88-2.12 5.86-2.55 2.79-1.16 3.37-1.36 3.75-1.36.08 0 .28.02.4.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
               </div>
               <div class="widget-tg__chat-info">
-                <div class="widget-tg__name">KV-Bot • Заявки &amp; CRM</div>
+                <div class="widget-tg__name">KV-Bot • Сквозная CRM</div>
                 <div class="widget-tg__status js-tg-status">бот онлайн</div>
               </div>
               <div class="widget-pill widget-pill--lime">Mini App</div>
             </div>
             <div class="widget-body widget-tg__body">
-              <!-- Верхняя кнопка симуляции -->
+              <!-- Верхняя панель: симуляция лида и кнопка очистки -->
               <div class="tg-sim-bar">
-                <button type="button" class="tg-sim-btn js-tg-simulate">
+                <button type="button" class="tg-sim-btn js-tg-simulate" title="Смоделировать входящую заявку">
                   <span class="tg-sim-btn__dot"></span>
-                  <span>⚡ Смоделировать заявку</span>
+                  <span>Смоделировать лид</span>
+                </button>
+                <button type="button" class="tg-clear-btn js-tg-clear" title="Очистить историю чата">
+                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                  <span>Очистить</span>
                 </button>
               </div>
 
               <!-- Лента сообщений чата -->
               <div class="tg-chat-feed js-tg-feed">
                 <div class="tg-msg js-tg-msg-lead">
-                  <div class="tg-msg__badge js-tg-badge">⚡ Новая заявка с сайта #148</div>
+                  <div class="tg-msg__badge js-tg-badge">Новая заявка • Сайт #148</div>
                   <div class="tg-msg__row"><b>Клиент:</b> <span class="js-tg-client">Алексей (Минск)</span></div>
-                  <div class="tg-msg__row"><b>Тариф:</b> <span class="js-tg-tariff">Интернет-магазин</span></div>
+                  <div class="tg-msg__row"><b>Проект:</b> <span class="js-tg-tariff">Интернет-магазин + CRM</span></div>
                   <div class="tg-msg__row"><b>Бюджет:</b> <span class="js-tg-budget">2 850 BYN</span></div>
                   <div class="tg-msg__meta">
-                    <span class="tg-crm-tag js-tg-crm-status">✓ Сделка в amoCRM</span>
-                    <span class="tg-time js-tg-time">14:28 ✓✓</span>
+                    <span class="tg-crm-tag js-tg-crm-status">amoCRM: Сделка создана</span>
+                    <span class="tg-time js-tg-time">14:28 • Доставлено</span>
                   </div>
                 </div>
                 <div class="tg-chat-replies js-tg-replies"></div>
@@ -1344,23 +1346,23 @@
 
               <!-- Быстрые действия с заявкой -->
               <div class="tg-btns">
-                <button type="button" class="tg-btn js-tg-btn-crm">📁 amoCRM</button>
-                <button type="button" class="tg-btn tg-btn--main js-tg-btn-reply">💬 Ответить</button>
-                <button type="button" class="tg-btn js-tg-btn-invoice">💳 Счёт</button>
+                <button type="button" class="tg-btn js-tg-btn-crm">amoCRM</button>
+                <button type="button" class="tg-btn tg-btn--main js-tg-btn-reply">Ответить</button>
+                <button type="button" class="tg-btn js-tg-btn-invoice">Счет ЕРИП</button>
               </div>
             </div>
           </div>
           <div class="founder-card__body">
-            <div class="founder-card__role">Автоматизация бизнеса</div>
+            <div class="founder-card__role">Прямые продажи &amp; Автоматизация</div>
             <h3 class="founder-card__name">Telegram Apps &amp; CRM</h3>
             <div class="founder-card__tags">
               <span>Telegram Mini Apps</span>
               <span>amoCRM / Bitrix24</span>
-              <span>Webhooks</span>
-              <span>Умные боты</span>
+              <span>Двусторонние Webhooks</span>
+              <span>Мгновенный LTV</span>
             </div>
             <p class="founder-card__bio">
-              Объединяем веб-сайт, мессенджер и отдел продаж в единую экосистему. Разрабатываем Telegram Mini Apps для быстрых заказов без ухода на сторонние ресурсы, настраиваем сквозную передачу лидов в CRM и доставку уведомлений менеджеру в чат за 2 секунды.
+              Переводим холодный трафик из рекламы и сайта в прямой закрытый канал продаж. Разрабатываем нативные Telegram Mini Apps, где клиент оформляет заказ или бронирование за 3 клика без регистрации и ухода на сторонние платформы. Настраиваем мгновенную синхронизацию с amoCRM и Bitrix24: менеджер получает карточку сделки за 1.5 секунды, а бизнес — управляемую базу для повторных продаж без затрат на рекламу.
             </p>
           </div>
         </article>
@@ -1824,7 +1826,7 @@
   <div class="wrap">
     <div class="profit__card reveal">
       <div class="profit__header">
-        <span class="profit__badge">💰 Честная экономика</span>
+        <span class="profit__badge">Честная экономика</span>
         <h2 class="h2">Почему старый сайт сливает бюджет, а новый приносит деньги</h2>
         <p class="profit__lead">Большинство сайтов в СНГ сделаны «для галочки» и теряют до 70% клиентов ещё до первого звонка. Новый сайт окупается не потому, что он красивый, а потому что методично устраняет утечки денег на каждом этапе воронки.</p>
       </div>
