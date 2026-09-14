@@ -1112,7 +1112,64 @@ main>section{padding-block:0 var(--sec)}
 .plan__val.is-updated{animation:planPop .35s ease}
 @keyframes planPop{0%{transform:scale(0.95);opacity:0.6}50%{transform:scale(1.04)}100%{transform:scale(1);opacity:1}}
 .plan .btn{min-height:64px}
-.rate-note{margin-top:34px;font-size:13px;font-weight:600;line-height:1.5;color:rgba(255,255,255,.7);max-width:760px}
+.pricing__custom-box{
+  margin-top:28px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:20px;
+  padding:20px 24px;
+  display:flex;
+  align-items:flex-start;
+  gap:18px;
+  max-width:860px;
+  backdrop-filter:blur(10px);
+  transition:border-color .25s ease,background .25s ease;
+}
+.pricing__custom-box:hover{
+  background:rgba(255,255,255,.08);
+  border-color:rgba(196,244,73,.4);
+}
+.pricing__custom-icon{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  background:linear-gradient(135deg,rgba(59,130,246,.25),rgba(196,244,73,.2));
+  border:1px solid rgba(255,255,255,.15);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--lime);
+  flex:0 0 auto;
+}
+.pricing__custom-icon svg{
+  width:22px;
+  height:22px;
+}
+.pricing__custom-text{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.pricing__custom-title{
+  font-family:var(--head);
+  font-size:16px;
+  font-weight:700;
+  color:#fff;
+  letter-spacing:.01em;
+}
+.pricing__custom-desc{
+  font-size:14px;
+  line-height:1.55;
+  color:rgba(255,255,255,.78);
+}
+@media (max-width:640px){
+  .pricing__custom-box{
+    flex-direction:column;
+    gap:14px;
+    padding:18px;
+  }
+}
+.rate-note{margin-top:22px;font-size:13px;font-weight:600;line-height:1.5;color:rgba(255,255,255,.7);max-width:760px}
 
 /* ------------------------------ своё предложение ------------------------------ */
 .offer{position:relative;margin-top:var(--sec)}

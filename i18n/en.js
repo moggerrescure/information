@@ -105,10 +105,10 @@ window.I18N_EN = {
   'quiz.telegram-mini-app-servis': 'Telegram Mini App / Web service',
   'quiz.ne-znayu-podskazhite-vy': 'Not sure — you decide',
   'quiz.byudzhet-na-razrabotku': 'Development budget',
-  'quiz.do-2-300-byn': 'under $2,300',
-  'quiz.2300-4300': '$2,300 – $4,300',
-  'quiz.4300-6000': '$4,300 – $6,000',
-  'quiz.bolee-6-000-byn': 'over $6,000',
+  'quiz.do-2-300-byn': 'under $1,000',
+  'quiz.2300-4300': '$1,000 – $2,500',
+  'quiz.4300-6000': '$2,500 – $5,000',
+  'quiz.bolee-6-000-byn': 'over $5,000',
   'quiz.sroki-sozdaniya-sayta': 'Timeline',
   'quiz.6-20-dney': '6–20 days',
   'quiz.10-25-dney': '10–25 days',
@@ -297,18 +297,20 @@ window.I18N_EN = {
   'pricing.skolko-stoit-sozdat-sayt': 'How much does a website cost?',
   'pricing.label.tip-sayta': 'Website type',
   'pricing.dlya-starta': 'Starter',
-  'pricing.rynochnaya-1-740-byn': 'market $1,740',
-  'pricing.20-vygoda': 'save 20%',
-  'pricing.ot-1-390-byn': 'from $1,390',
+  'pricing.rynochnaya-1-740-byn': 'market $800',
+  'pricing.20-vygoda': 'save 35%',
+  'pricing.ot-1-390-byn': 'from $520',
   'pricing.obsudit-zadachu': 'Discuss my project',
   'pricing.dlya-biznesa': 'Business',
-  'pricing.rynochnaya-2-800-byn': 'market $2,800',
-  'pricing.ot-2-240-byn': 'from $2,240',
+  'pricing.rynochnaya-2-800-byn': 'market $1,600',
+  'pricing.ot-2-240-byn': 'from $1,040',
   'pricing.vybrat-paket': 'Choose this plan',
   'pricing.pro-biznes': 'PRO Business',
-  'pricing.rynochnaya-4-200-byn': 'market $4,200',
-  'pricing.ot-3-360-byn': 'from $3,360',
-  'pricing.tseny-ukazany-v-belorusskih': 'Prices are in USD and sit 20% below the average agency rate — no office or management overhead baked in. Every price is fixed in writing before work begins.',
+  'pricing.rynochnaya-4-200-byn': 'market $2,800',
+  'pricing.ot-3-360-byn': 'from $1,820',
+  'pricing.tseny-ukazany-v-belorusskih': 'Prices are in USD and sit 35% below the average market rate — no office or management overhead baked in. Every price is fixed in writing before work begins.',
+  'pricing.custom-title': 'Flexible scope & tailored options for every plan',
+  'pricing.custom-desc': 'The plans above serve as an architectural baseline. During project discovery, we can freely customize any scope: plug in bespoke integrations, trim unneeded modules, or craft a custom technical solution. The final quote is transparently calculated from your exact requirements and fixed in the contract.',
   'pricing.market-prefix': 'market ',
   'pricing.price-fmt': 'from ${n}',
 
@@ -642,90 +644,90 @@ window.I18N_EN = {
 
   plans: {
     landing: {
-      sub: 'Landing page pricing — 20% below the market rate',
+      sub: 'Landing page pricing — 35% below the market rate',
       plans: [
-        { term: 'Timeline: 4–7 days', desc: 'A quick launch to test a niche or service. Up to 5 conversion-focused sections, mobile-ready.', market: '$1,740', price: 'from $1,390',
+        { term: 'Timeline: 4–7 days', desc: 'A quick launch to test a niche or service. Up to 5 conversion-focused sections, mobile-ready.', market: '$800', price: 'from $520', val: 520,
           items: [{ t: 'Niche & competitor analysis' }, { t: 'Persuasive copy & structure (4U / AIDA)' }, { t: 'Custom design (Figma)' }, { t: 'Clean responsive code (HTML5/CSS3/JS)' }, { t: 'Forms with Telegram notifications' }, { t: 'Basic SEO & meta tags' }, { t: 'Advanced 3D graphics & shaders' }, { t: 'CRM integration' }] },
-        { term: 'Timeline: 8–14 days', desc: 'A full high-converting landing page for products, services or B2B.', market: '$2,800', price: 'from $2,240',
+        { term: 'Timeline: 8–14 days', desc: 'A full high-converting landing page for products, services or B2B.', market: '$1,600', price: 'from $1,040', val: 1040,
           items: [{ t: 'In-depth customer research & audience analysis' }, { t: 'Marketing copywriting & prototyping' }, { t: 'Premium bespoke UI/UX design' }, { t: 'Smooth micro-interactions & animation' }, { t: 'amoCRM / Bitrix24 integration' }, { t: 'Online payments (Stripe / PayPal)' }, { t: 'Analytics setup (GA4 + goals)' }, { t: '30-day warranty & support' }] },
-        { term: 'Timeline: 14–22 days', desc: 'A unique Awwwards-level brand landing page: 3D models, interaction, maximum ROAS.', market: '$4,200', price: 'from $3,360',
+        { term: 'Timeline: 14–22 days', desc: 'A unique Awwwards-level brand landing page: 3D models, interaction, maximum ROAS.', market: '$2,800', price: 'from $1,820', val: 1820,
           items: [{ t: 'Full cycle: strategy + positioning' }, { t: '3D scenes (Three.js), Canvas & interactive motion' }, { t: 'Custom calculators & quiz funnels' }, { t: 'End-to-end analytics & Telegram WebApp' }, { t: '95+ Google PageSpeed score' }, { t: 'A/B testing of the hero section' }, { t: 'Personal lead-engineer management' }, { t: '60-day priority support' }] }
       ]
     },
     ios: {
-      sub: 'Native iOS app development (Swift / SwiftUI) — 20% below market',
+      sub: 'Native iOS app development (Swift / SwiftUI) — 35% below market',
       plans: [
-        { term: 'Timeline: 12–20 days', desc: 'A fast native MVP in SwiftUI: up to 3 screens, core business logic, local data storage.', market: '$4,940', price: 'from $3,950',
+        { term: 'Timeline: 12–20 days', desc: 'A fast native MVP in SwiftUI: up to 3 screens, core business logic, local data storage.', market: '$3,850', price: 'from $2,500', val: 2500,
           items: [{ t: 'Screen & iOS architecture design' }, { t: 'Native Swift 6 / SwiftUI development' }, { t: 'iOS 17 / iOS 18 & Dynamic Island support' }, { t: 'Local database (SwiftData / CoreData)' }, { t: 'Adapted to every iPhone model' }, { t: 'Server backend & push notifications' }, { t: 'In-App Purchases' }, { t: 'App Store publishing' }] },
-        { term: 'Timeline: 20–35 days', desc: 'A full-featured mobile app with backend, authentication and sync.', market: '$8,900', price: 'from $7,120',
+        { term: 'Timeline: 20–35 days', desc: 'A full-featured mobile app with backend, authentication and sync.', market: '$7,700', price: 'from $5,000', val: 5000,
           items: [{ t: 'Custom iOS Human Interface design' }, { t: 'Native stack: Swift + SwiftUI + Combine' }, { t: 'REST API backend & cloud database' }, { t: 'Sign-in (Apple ID, phone number)' }, { t: 'Push notifications (APNs) & deep links' }, { t: 'Subscriptions (StoreKit 2)' }, { t: 'Full App Store preparation & release' }, { t: '45-day warranty support' }] },
-        { term: 'Timeline: 35–60 days', desc: 'A complex mobile ecosystem: CoreML, video tracking, widgets, offline mode.', market: '$14,750', price: 'from $11,800',
+        { term: 'Timeline: 35–60 days', desc: 'A complex mobile ecosystem: CoreML, video tracking, widgets, offline mode.', market: '$12,300', price: 'from $8,000', val: 8000,
           items: [{ t: 'High-load architecture & offline cache' }, { t: 'On-device AI (CoreML / Vision)' }, { t: 'HealthKit / fitness sensor integration' }, { t: 'iOS home-screen widgets + Live Activities' }, { t: 'Multi-factor security & encryption' }, { t: 'CI/CD builds, TestFlight beta testing' }, { t: 'Passing strict App Store Review' }, { t: '90-day dedicated support' }] }
       ]
     },
     express: {
-      sub: 'Express landing page, launched in 2–4 days — 20% below market',
+      sub: 'Express landing page, launched in 2–4 days — 35% below market',
       plans: [
-        { term: 'Timeline: 2–3 days', desc: 'An urgent promo page for a sale, an event or a demand test for a single service.', market: '$860', price: 'from $690',
+        { term: 'Timeline: 2–3 days', desc: 'An urgent promo page for a sale, an event or a demand test for a single service.', market: '$550', price: 'from $350', val: 350,
           items: [{ t: 'Proven, pre-tested modular grid' }, { t: 'Offer & USP copywriting in 24 hours' }, { t: 'Adapted to all mobile screens' }, { t: 'Lead form with Telegram notifications' }, { t: 'Analytics tracking setup' }, { t: 'Custom animation' }, { t: 'CRM integration' }] },
-        { term: 'Timeline: 3–4 days', desc: 'An express landing page of up to 4 screens with brand styling and a sales funnel.', market: '$1,400', price: 'from $1,120',
+        { term: 'Timeline: 3–4 days', desc: 'An express landing page of up to 4 screens with brand styling and a sales funnel.', market: '$950', price: 'from $610', val: 610,
           items: [{ t: 'Custom hero-section design' }, { t: 'Benefits, services & price-list sections' }, { t: 'Interactive calculator or quiz' }, { t: 'Instant lead forwarding to your manager' }, { t: 'Basic amoCRM integration' }, { t: 'Ad pixel setup (Meta / TikTok)' }, { t: '14-day post-launch support' }] },
-        { term: 'Timeline: 4–5 days', desc: 'A turnkey quick launch with a marketing stack, ready for paid traffic.', market: '$2,100', price: 'from $1,680',
+        { term: 'Timeline: 4–5 days', desc: 'A turnkey quick launch with a marketing stack, ready for paid traffic.', market: '$1,400', price: 'from $910', val: 910,
           items: [{ t: 'Strong positioning work' }, { t: 'Unique graphics & branded banners' }, { t: 'Payment gateway (Stripe / cards)' }, { t: 'Full CRM integration (deals + contacts)' }, { t: 'UTM tagging & goals for paid search' }, { t: 'Domain & hosting for 1 year included' }, { t: '30-day support' }] }
       ]
     },
     card: {
-      sub: 'A polished business card website — 20% below market',
+      sub: 'A polished business card website — 35% below market',
       plans: [
-        { term: 'Timeline: 3–5 days', desc: 'A neat digital business card for a specialist, lawyer, craftsman or small company.', market: '$1,110', price: 'from $890',
+        { term: 'Timeline: 3–5 days', desc: 'A neat digital business card for a specialist, lawyer, craftsman or small company.', market: '$700', price: 'from $450', val: 450,
           items: [{ t: 'Structure: about, services, prices, contacts' }, { t: 'Adapted to phones & tablets' }, { t: 'Quick-contact buttons: call, WhatsApp, Telegram' }, { t: 'Interactive map & directions' }, { t: 'Email on your own domain' }, { t: 'Multilingual' }, { t: 'Client area' }] },
-        { term: 'Timeline: 5–8 days', desc: 'A multi-page or extended company site with a portfolio and certificates.', market: '$1,860', price: 'from $1,490',
+        { term: 'Timeline: 5–8 days', desc: 'A multi-page or extended company site with a portfolio and certificates.', market: '$1,250', price: 'from $810', val: 810,
           items: [{ t: 'Up to 5 structured sections' }, { t: 'Portfolio with gallery & case studies' }, { t: 'Online booking / price-estimate form' }, { t: 'Basic SEO for search engines' }, { t: 'Secure SSL certificate (HTTPS)' }, { t: 'Google Analytics setup' }, { t: '30-day support' }] },
-        { term: 'Timeline: 7–12 days', desc: 'A premium brand website with exclusive design and a catalogue.', market: '$2,740', price: 'from $2,190',
+        { term: 'Timeline: 7–12 days', desc: 'A premium brand website with exclusive design and a catalogue.', market: '$1,800', price: 'from $1,170', val: 1170,
           items: [{ t: 'Bespoke brand style & typography' }, { t: 'Interactive price list with filters' }, { t: 'Bilingual version (EN + one more)' }, { t: 'End-to-end CRM integration' }, { t: '95+ PageSpeed performance' }, { t: 'Corporate email for your team' }, { t: '60-day extended warranty' }] }
       ]
     },
     corp: {
-      sub: 'Corporate website development — 20% below market',
+      sub: 'Corporate website development — 35% below market',
       plans: [
-        { term: 'Timeline: 10–18 days', desc: 'A corporate site of up to 10 pages: history, leadership, services, details, careers.', market: '$2,990', price: 'from $2,390',
+        { term: 'Timeline: 10–18 days', desc: 'A corporate site of up to 10 pages: history, leadership, services, details, careers.', market: '$2,200', price: 'from $1,430', val: 1430,
           items: [{ t: 'Information architecture design' }, { t: 'Service catalogue with cards' }, { t: 'News / blog section' }, { t: 'Easy content management panel' }, { t: 'Basic SEO on every page' }, { t: 'ERP / inventory integration' }, { t: 'Client area' }] },
-        { term: 'Timeline: 18–30 days', desc: 'A large corporate resource for manufacturing, logistics, healthcare or B2B.', market: '$4,810', price: 'from $3,850',
+        { term: 'Timeline: 18–30 days', desc: 'A large corporate resource for manufacturing, logistics, healthcare or B2B.', market: '$3,800', price: 'from $2,470', val: 2470,
           items: [{ t: 'Multi-level product catalogue with PDF downloads' }, { t: 'Service price calculator for clients' }, { t: 'amoCRM / Bitrix24 integration' }, { t: 'Documents, licences & tenders section' }, { t: 'Forms for different departments (sales, procurement, HR)' }, { t: 'Speed & Core Web Vitals optimisation' }, { t: 'Training for your staff' }, { t: '45-day warranty service' }] },
-        { term: 'Timeline: 30–50 days', desc: 'A flagship corporate portal: ERP integration, multilingual, API.', market: '$7,800', price: 'from $6,240',
+        { term: 'Timeline: 30–50 days', desc: 'A flagship corporate portal: ERP integration, multilingual, API.', market: '$6,500', price: 'from $4,220', val: 4220,
           items: [{ t: 'High-load architecture (Node.js/Python/Go)' }, { t: 'Two-way sync with ERP' }, { t: 'Wholesale partner / dealer client area' }, { t: 'Multilingual (up to 3 languages)' }, { t: 'Role-based access for branches' }, { t: 'Advanced cybersecurity & backups' }, { t: 'Full SEO architecture for Google' }, { t: '90-day personal support' }] }
       ]
     },
     shop: {
-      sub: 'E-commerce development — 20% below market',
+      sub: 'E-commerce development — 35% below market',
       plans: [
-        { term: 'Timeline: 12–20 days', desc: 'A quick e-commerce launch: catalogue of up to 300 products, cart, checkout.', market: '$3,360', price: 'from $2,690',
+        { term: 'Timeline: 12–20 days', desc: 'A quick e-commerce launch: catalogue of up to 300 products, cart, checkout.', market: '$2,600', price: 'from $1,690', val: 1690,
           items: [{ t: 'Catalogue with categories & search' }, { t: 'Product page with gallery & specs' }, { t: 'Convenient cart & one-step checkout' }, { t: 'Order notifications in Telegram & email' }, { t: 'Basic product management panel' }, { t: 'Online card payments' }, { t: 'Automatic ERP sync' }] },
-        { term: 'Timeline: 20–35 days', desc: 'A full store with payments (Stripe / cards), filters and delivery.', market: '$5,700', price: 'from $4,560',
+        { term: 'Timeline: 20–35 days', desc: 'A full store with payments (Stripe / cards), filters and delivery.', market: '$4,500', price: 'from $2,920', val: 2920,
           items: [{ t: 'Smart product filters by attributes' }, { t: 'Card payments (Stripe / PayPal)' }, { t: 'Delivery service integration (DHL, UPS, local couriers)' }, { t: 'Customer account with order history' }, { t: 'Discounts, promo codes & triggered offers' }, { t: 'CRM sync' }, { t: 'SEO structure for product queries' }, { t: '45-day support' }] },
-        { term: 'Timeline: 35–55 days', desc: 'An automated marketplace / hypermarket: thousands of SKUs, ERP, live stock.', market: '$9,350', price: 'from $7,480',
+        { term: 'Timeline: 35–55 days', desc: 'An automated marketplace / hypermarket: thousands of SKUs, ERP, live stock.', market: '$8,500', price: 'from $5,520', val: 5520,
           items: [{ t: 'Automatic two-way exchange with ERP' }, { t: 'Real-time prices & stock updates' }, { t: 'B2B features: wholesale prices, company invoices' }, { t: 'Loyalty programme, cashback & tiered discounts' }, { t: 'Fast filtering across 50,000+ products' }, { t: 'Abandoned carts & upsells via Telegram' }, { t: 'Resilience for peak-sale traffic' }, { t: '90-day priority support' }] }
       ]
     },
     wp: {
-      sub: 'WordPress website development — 20% below market',
+      sub: 'WordPress website development — 35% below market',
       plans: [
-        { term: 'Timeline: 5–9 days', desc: 'A clean WordPress site: a light theme, easy text and photo editing.', market: '$1,600', price: 'from $1,280',
+        { term: 'Timeline: 5–9 days', desc: 'A clean WordPress site: a light theme, easy text and photo editing.', market: '$1,100', price: 'from $715', val: 715,
           items: [{ t: 'WP installation & base configuration' }, { t: 'Clean code without heavy Elementor builders' }, { t: 'Easy page building with Gutenberg blocks' }, { t: 'Responsive on all mobile screens' }, { t: 'Admin protection from spam & hacking' }, { t: 'Custom post types (ACF Pro)' }, { t: 'Third-party service integrations' }] },
-        { term: 'Timeline: 10–18 days', desc: 'A custom WordPress theme + ACF: 90+ load-speed score.', market: '$2,600', price: 'from $2,080',
+        { term: 'Timeline: 10–18 days', desc: 'A custom WordPress theme + ACF: 90+ load-speed score.', market: '$2,000', price: 'from $1,300', val: 1300,
           items: [{ t: 'Theme built from scratch to your Figma design' }, { t: 'Fully custom fields (ACF Pro)' }, { t: 'High performance (under 0.4 s response)' }, { t: 'SEO plugins (Yoast / RankMath) with proper markup' }, { t: 'Contact forms with validation & spam filter' }, { t: 'Telegram lead-bot integration' }, { t: 'Video guide to editing your site' }, { t: '30-day support' }] },
-        { term: 'Timeline: 18–28 days', desc: 'A powerful WordPress + WooCommerce portal optimised for high load.', market: '$3,990', price: 'from $3,190',
+        { term: 'Timeline: 18–28 days', desc: 'A powerful WordPress + WooCommerce portal optimised for high load.', market: '$3,400', price: 'from $2,210', val: 2210,
           items: [{ t: 'Headless WP architecture or deep customisation' }, { t: 'WooCommerce with a custom checkout' }, { t: 'Payment gateway integration (Stripe, PayPal)' }, { t: 'Redis Object Cache for instant response' }, { t: 'Hardened security & automatic backups' }, { t: 'Multilingual via WPML / Polylang' }, { t: '60-day personal support' }] }
       ]
     },
     design: {
-      sub: 'UX/UI design and website redesign — 20% below market',
+      sub: 'UX/UI design and website redesign — 35% below market',
       plans: [
-        { term: 'Timeline: 4–7 days', desc: 'A redesign of a key screen or landing page: modern visuals and a conversion-focused grid.', market: '$1,150', price: 'from $920',
+        { term: 'Timeline: 4–7 days', desc: 'A redesign of a key screen or landing page: modern visuals and a conversion-focused grid.', market: '$750', price: 'from $490', val: 490,
           items: [{ t: 'Express audit of your current site & UX issues' }, { t: 'Hero-section structure & offer work' }, { t: 'Design mock-up in Figma (desktop)' }, { t: 'Colour palette & font pairing' }, { t: 'Assets prepared for the developer' }, { t: 'Mobile responsive version' }, { t: 'Interactive clickable prototype' }] },
-        { term: 'Timeline: 8–15 days', desc: 'Complete UI/UX design: desktop + tablet + mobile screens, UI kit.', market: '$2,060', price: 'from $1,650',
+        { term: 'Timeline: 8–15 days', desc: 'Complete UI/UX design: desktop + tablet + mobile screens, UI kit.', market: '$1,500', price: 'from $975', val: 975,
           items: [{ t: 'Competitor analysis & customer journey map' }, { t: 'Black-and-white interactive logic prototype' }, { t: 'Unique design of every section in Figma' }, { t: 'Responsive versions for all resolutions (desktop + mobile)' }, { t: 'Full UI kit: buttons, fields, states, icons' }, { t: 'Animation specs for developers' }, { t: '2 rounds of revisions included' }, { t: 'Design supervision during development' }] },
-        { term: 'Timeline: 15–25 days', desc: 'Premium creative design at Awwwards level: 3D graphics, design system, branding.', market: '$3,350', price: 'from $2,680',
+        { term: 'Timeline: 15–25 days', desc: 'Premium creative design at Awwwards level: 3D graphics, design system, branding.', market: '$2,600', price: 'from $1,690', val: 1690,
           items: [{ t: 'Deep branding & identity development' }, { t: '3D illustrations & exclusive graphics' }, { t: 'Full design system with tokens & components' }, { t: 'High-fidelity interactive prototype' }, { t: 'Motion design & micro-interaction storyboards' }, { t: 'Concept presentation to leadership' }, { t: 'Full design supervision of implementation' }, { t: 'Lifetime hand-over of all source files & rights' }] }
       ]
     }
