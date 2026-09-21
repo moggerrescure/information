@@ -1,6 +1,6 @@
 const SKIP = new Set(['company']);
 
-export function formatLead(data, site = 'KV-web') {
+export function formatLead(data, site = 'Nexus') {
   const lines = Object.entries(data)
     .filter(([key, value]) => !SKIP.has(key) && String(value ?? '').trim() !== '')
     .map(([key, value]) => `${key}: ${String(value).trim().slice(0, 2000)}`);
@@ -49,7 +49,7 @@ async function sendFormSubmit(env, data, fetchImpl) {
       Referer: 'https://borisserz.github.io/information/'
     },
     body: JSON.stringify({
-      _subject: `${env.SITE || 'KV-web'}: ${data['Форма'] || 'Заявка'}`,
+      _subject: `${env.SITE || 'Nexus'}: ${data['Форма'] || 'Заявка'}`,
       _template: 'table',
       _captcha: 'false',
       ...payload
@@ -65,8 +65,8 @@ async function sendMail(env, data, text, fetchImpl) {
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify({
       access_key: env.WEB3FORMS_ACCESS_KEY,
-      subject: `KV-web: ${data['Форма'] || 'Заявка'}`,
-      from_name: data['Имя'] || 'Сайт KV-web',
+      subject: `Nexus: ${data['Форма'] || 'Заявка'}`,
+      from_name: data['Имя'] || 'Сайт Nexus',
       message: text
     })
   });
@@ -87,7 +87,7 @@ export async function handleLead(request, env, fetchImpl = fetch) {
   let data;
   try {
     data = await request.json();
-  } catch {
+  } catch (err) {
     return json(400, { ok: false, error: 'json' }, headers);
   }
   if (!data || typeof data !== 'object' || Array.isArray(data)) {
@@ -100,7 +100,7 @@ export async function handleLead(request, env, fetchImpl = fetch) {
     return json(400, { ok: false, error: 'phone' }, headers);
   }
 
-  const text = formatLead(data, env.SITE || 'KV-web');
+  const text = formatLead(data, env.SITE || 'Nexus');
   const jobs = [];
   if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
     jobs.push(sendTelegram(env, text, fetchImpl).then(ok => ({ telegram: ok })));

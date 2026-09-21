@@ -1,5 +1,5 @@
 /* ==========================================================================
-   KV-web — логика лендинга.
+   Nexus — логика лендинга.
 
    Заявки: если ENDPOINT пустой, форма шлёт письмо через FormSubmit
    на CONTACT.email (первый раз нужно подтвердить ящик по ссылке из письма).
@@ -17,7 +17,7 @@ const CONTACT = {
 
 const FORM_CONFIG = {
   ENDPOINT: 'https://kv-web-leads.kvweb.workers.dev',
-  SITE: 'KV-web — лендинг'
+  SITE: 'Nexus — лендинг'
 };
 
 console.log('SCRIPT.JS TOP LEVEL: readyState =', document.readyState);
@@ -1107,7 +1107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       window.__GLOBE_STATUS__ = 'STARTING';
       console.log('GLOBE: Starting Three.js initialization');
-    // Каталог активных продуктов и технологий KV-web в App Store США (реальные координаты центров дистрибуции в США)
+    // Каталог активных продуктов и технологий Nexus в App Store США (реальные координаты центров дистрибуции в США)
     const HUBS = TD('hubs', {
       // --- США (Америка) ---
       foodtracker: {
@@ -1189,13 +1189,13 @@ document.addEventListener('DOMContentLoaded', () => {
       // --- Беларусь ---
       minsk: {
         id: 'minsk',
-        name: 'KV-web HQ',
+        name: 'Nexus HQ',
         country: 'Беларусь',
         city: 'Минск',
         flag: '🇧🇾',
         badge: 'Штаб-квартира & R&D',
         tag: '⭐ Главный технологический офис',
-        desc: 'Главный технологический центр KV-web: мобильная разработка, высоконагруженные Fullstack-системы и проектирование цифровых продуктов.',
+        desc: 'Главный технологический центр Nexus: мобильная разработка, высоконагруженные Fullstack-системы и проектирование цифровых продуктов.',
         caseStudy: 'Центр R&D и продакшна: запуск собственных B2C приложений в App Store и реализация сложных проектов для клиентов под ключ.',
         lat: 53.9045, lon: 27.5615,
         color: 0xFF6915, colorHex: '#FF6915',
@@ -2313,7 +2313,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function showSent(node, result) {
     if (!node) return;
-    const wa = CONTACT.whatsapp + '?text=' + encodeURIComponent(T('form.wa-text', 'Здравствуйте, пишу с сайта KV-web'));
+    const wa = CONTACT.whatsapp + '?text=' + encodeURIComponent(T('form.wa-text', 'Здравствуйте, пишу с сайта Nexus'));
     node.className = 'formmsg is-ok';
     node.replaceChildren();
     const lead = result.via === 'worker'
@@ -2678,7 +2678,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 120);
         } else {
           setTimeout(() => {
-            addTerminalLine(T('term.not-found', "<span style=\"color:#ff5f56\">kv-cluster: '{cmd}' не найдена. Введите 'help'</span>", { cmd: escapeHtml(cleanCmd) }));
+            addTerminalLine(T('term.not-found', "<span style=\"color:#ff5f56\">nexus-cluster: '{cmd}' не найдена. Введите 'help'</span>", { cmd: escapeHtml(cleanCmd) }));
             if (pulseDot) pulseDot.classList.remove('is-busy');
           }, 120);
         }
@@ -2810,7 +2810,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!repliesFeed) return;
         const bubble = document.createElement('div');
         bubble.className = 'tg-msg tg-msg--sys is-pop';
-        bubble.innerHTML = T('about.invoice-bubble', '<b>Счет в ЕРИП:</b> #KV-{n} сформирован. Оплата через мобильный банк без комиссии.', { n: leadNum });
+        bubble.innerHTML = T('about.invoice-bubble', '<b>Счет в ЕРИП:</b> #NEX-{n} сформирован. Оплата через мобильный банк без комиссии.', { n: leadNum });
         repliesFeed.appendChild(bubble);
         bubble.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       });

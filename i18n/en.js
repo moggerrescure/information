@@ -1,30 +1,27 @@
 /* ==========================================================================
-   KV-web — English dictionary.
+   Nexus — English dictionary.
 
-   • Keys map to data-i18n="…" attributes in index.html and to T('…') calls
-     in script.js. Missing key → the Russian text stays, nothing breaks.
-   • Values may contain HTML (b, span, a, br, mark…) — they are set via
-     innerHTML. Plain values are set as text.
-   • Structured blocks (plans, hubs, presets, weightSteps, leads) mirror the
-     Russian objects in script.js one-to-one; only the strings differ.
-   • __config: EN-only behaviour switches.
+   Nexus — English dictionary.
+   Source of truth for English text. Keys mirror index.html data-i18n attributes.
+   Elements without a matching key will stay in their original Russian form.
    ========================================================================== */
 window.I18N_EN = {
+  /* ---------- конфигурация для EN-режима ---------- */
   __config: {
-    /* regions of the globe hidden on the English version, e.g. ['eu']; empty = show everything */
+    // В английской версии показываем только проекты из США, России и Беларуси
     hideHubRegions: []
   },
 
   /* ---------- <head> ---------- */
-  'meta.title': 'Custom Website & App Development in 3+ Days — KV-web',
-  'meta.description': 'KV-web is a full-cycle digital agency: custom websites, e-commerce, iOS apps and Telegram Mini Apps built by senior engineers. Launch in 3 days, fixed price, you own the code.',
+  'meta.title': 'Custom Website & App Development in 3+ Days — Nexus',
+  'meta.description': 'Nexus is a full-cycle digital agency: custom websites, e-commerce, iOS apps and Telegram Mini Apps built by senior engineers. Launch in 3 days, fixed price, you own the code.',
   'meta.og-title': 'Custom Websites & Apps, Launched in 3+ Days',
   'meta.og-description': 'Since 2018 we help companies grow revenue with custom-built websites and apps — engineered, not templated.',
   'meta.og-locale': 'en_US',
 
   /* ---------- header / nav ---------- */
   'page.pereyti-k-soderzhimomu': 'Skip to content',
-  'top.label.kv-web-na': 'KV-web — home',
+  'top.label.kv-web-na': 'Nexus — home',
   'top.marketingovoe-agentstvo-polnogo-tsikla': 'Full-cycle<br>digital agency',
   'top.label.otkryt-menyu': 'Open menu',
   'top.label.zakryt-menyu': 'Close menu',
@@ -131,7 +128,7 @@ window.I18N_EN = {
   'quiz.poluchit-raschet': 'Get my estimate',
 
   /* ---------- why us ---------- */
-  'why.pochemu-my': 'Why KV-web?',
+  'why.pochemu-my': 'Why Nexus?',
   'why.alt.komanda-obsuzhdaet-strukturu': 'Team discussing the structure of a new website',
   'why.sozdaem-sayt-v-komplekse': 'Full-cycle delivery',
   'why.my-berem-na-sebya': 'We take care of the whole thing — marketing, custom design, development and promotion — so you deal with one team.',
@@ -329,9 +326,9 @@ window.I18N_EN = {
   'steps.sozdaem-chistuyu-bystruyu-verstku': 'Clean, fast code on a modern web stack, or WordPress / headless CMS if you prefer. We wire up forms, CRM and analytics and launch the project turnkey.',
 
   /* ---------- about (engineering production) ---------- */
-  'about.inzhenernyy-prodakshn-kv-web': 'KV-web engineering production • Since 2018',
+  'about.inzhenernyy-prodakshn-kv-web': 'Nexus engineering production • Since 2018',
   'about.sozdaem-tsifrovye-produkty-polnogo': 'Full-cycle digital products: from the first line of code to sales',
-  'about.kv-web-eto-kompaktnaya': 'KV-web is a compact team of hands-on full-stack developers. No subcontractors, no layers of account managers: every project is run by senior engineers who personally own the database architecture, interface speed and product launch.',
+  'about.kv-web-eto-kompaktnaya': 'Nexus is a compact team of hands-on full-stack developers. No subcontractors, no layers of account managers: every project is run by senior engineers who personally own the database architecture, interface speed and product launch.',
   'about.nash-klyuchevoy-printsip-nikakogo': '<strong>Our core principle:</strong> no piles of bloated site builders or someone else’s templates. We write clean, lightweight code for your specific business task. The product opens in a fraction of a second, survives real ad traffic and belongs to you forever — no hidden subscription fees.',
   'about.zhivaya-pesochnitsa-pereklyuchayte-presety': '<b>Live sandbox:</b> switch performance presets, run terminal commands and simulate an incoming lead',
   'about.chistyy-kod': 'Clean code',
@@ -359,7 +356,7 @@ window.I18N_EN = {
   'about.backend-arhitektura': 'Backend & architecture',
   'about.erip-bepaid-rf': 'Stripe / PayPal / SWIFT',
   'about.proektiruem-arhitekturu-pod-realnyy': 'We design architecture for real traffic and business logic: fault-tolerant databases, secure authentication, online payments through international gateways and automated backups — so your services run stably, 24/7.',
-  'about.kv-bot-skvoznaya-crm': 'KV-Bot • End-to-end CRM',
+  'about.kv-bot-skvoznaya-crm': 'Nexus-Bot • End-to-end CRM',
   'about.bot-onlayn': 'bot online',
   'about.bot-typing': 'typing...',
   'about.bot-cleared': 'history cleared',
@@ -382,7 +379,7 @@ window.I18N_EN = {
   'about.schet-erip': 'Send invoice',
   'about.crm-qualified': 'amoCRM: Qualified by engineer',
   'about.reply-bubble': '<b>You:</b> Hi! We received your request #{n} and will reach out on WhatsApp within 10 minutes.',
-  'about.invoice-bubble': '<b>Invoice:</b> #KV-{n} issued. Pay by card or bank transfer, no fees.',
+  'about.invoice-bubble': '<b>Invoice:</b> #NEX-{n} issued. Pay by card or bank transfer, no fees.',
   'about.pryamye-prodazhi-avtomatizatsiya': 'Direct sales & automation',
   'about.dvustoronnie-webhooks': 'Two-way webhooks',
   'about.mgnovennyy-ltv': 'Instant LTV',
@@ -398,7 +395,7 @@ window.I18N_EN = {
   'about.chasto-sobirayut-na-konstruktorah': 'Sites are often assembled on builders or heavy CMS templates that demand monthly subscriptions for third-party software and severely limit functionality.',
   'about.razmytaya-otvetstvennost-za-rezultat': 'Blurred responsibility for results',
   'about.dizayner-vinit-verstalschika-verstalschik': 'The designer blames the developer, the developer blames hosting, and the marketer shrugs at low conversion.',
-  'about.inzhenernyy-prodakshn-kv-web-2': 'KV-web engineering production',
+  'about.inzhenernyy-prodakshn-kv-web-2': 'Nexus engineering production',
   'about.standarty-nashey-razrabotki': 'Our development standards:',
   'about.pryamoy-dialog-s-veduschim': 'Direct dialogue with the lead engineer',
   'about.vy-obschaetes-napryamuyu-so': 'You talk directly to the specialist who writes your project. Decisions, architecture and edits happen without bureaucracy.',
@@ -500,7 +497,7 @@ window.I18N_EN = {
   'roi.prodazh-pri-30-zakrytii': 'Sales (at 30% close rate):',
   'roi.3-klienta': '3 customers',
   'roi.reklamnyy-byudzhet-ele-otbivaetsya': 'The ad budget barely breaks even; growth stalls',
-  'roi.novyy-prodayuschiy-sayt-kv': 'New KV-web website',
+  'roi.novyy-prodayuschiy-sayt-kv': 'New Nexus website',
   'roi.3-2-bystraya-zagruzka': '3.2% (fast load + sales flow)',
   'roi.32-obrascheniya-220': '32 enquiries <mark class="profit__pill">+220%</mark>',
   'roi.62-5-byn': '$62.50 <mark class="profit__pill">−68%</mark>',
@@ -531,7 +528,7 @@ window.I18N_EN = {
   'geography.hud-macsai-sub': 'Seattle • Swift 6 macOS',
   'geography.hud-aether': 'AetherGrowth • USA',
   'geography.hud-aether-sub': 'Miami • Full-Funnel Ads',
-  'geography.hud-minsk': 'KV-web HQ • Belarus',
+  'geography.hud-minsk': 'Nexus HQ • Belarus',
   'geography.hud-minsk-sub': 'Minsk • Head Office & R&D',
   'geography.hud-mtbank': 'MTBank Mobile • Belarus',
   'geography.hud-mtbank-sub': 'Minsk • Online Banking',
@@ -576,7 +573,7 @@ window.I18N_EN = {
   'clients.label.logotipy-klientov-agentstva': 'Client logos',
   'cta.ostavte-zayavku-a-my': 'Leave your number — we’ll message you on WhatsApp shortly',
   'cta.svyazhites-so-mnoy': 'Message me on WhatsApp',
-  'page.label.pozvonit-v-kv': 'Call KV-web',
+  'page.label.pozvonit-v-kv': 'Call Nexus',
   'page.rasschitat-stoimost': 'Get a quote',
   'page.napisat-nam': 'Message us',
   'page.label.tg': 'Message us on Telegram',
@@ -595,7 +592,7 @@ window.I18N_EN = {
   'contacts.garantii-i-sla': 'Guarantees & SLA',
   'contacts.sayt-na-svoih-usloviyah': 'Your own terms',
   'contacts.nashi-kontakty': 'Contact us',
-  'contacts.o-kompanii-kv-web': 'About KV-web',
+  'contacts.o-kompanii-kv-web': 'About Nexus',
   'contacts.napravleniya-uslug': 'Services',
   'contacts.sayt-vizitka': 'Business card site',
   'contacts.prodvizhenie-reklama-i-audit': 'SEO, advertising and audits',
@@ -619,7 +616,7 @@ window.I18N_EN = {
   'form.fail-prefix': 'Something went wrong. Call {phone} or message us on ',
   'form.sent-worker': 'Request received — we’ll message you on WhatsApp shortly. Or write to us right now: ',
   'form.sent-email': 'Request sent — we’ll message you on WhatsApp shortly. Or write to us right now: ',
-  'form.wa-text': 'Hi, I’m writing from the KV-web website',
+  'form.wa-text': 'Hi, I’m writing from the Nexus website',
   'form.ph-task': 'What do you need done?',
   'form.ph-audit': 'What should we check on your site?',
   'form.ph-describe': 'Describe your task',
@@ -637,7 +634,7 @@ window.I18N_EN = {
   'term.backup-2': '<span class="term-icon">✔</span> Snapshot encrypted (AES-256) and stored in S3 (2.8s)',
   'term.help': '<span class="term-prompt">&gt;</span> Commands: <b>load</b>, <b>ping</b>, <b>backup</b>, <b>status</b>, <b>clear</b>',
   'term.status': '<span class="term-icon">✔</span> CPU: 7% • RAM: 1.2/16 GB • Nginx workers: 8 • 0 failures',
-  'term.not-found': '<span style="color:#ff5f56">kv-cluster: \'{cmd}\' not found. Type \'help\'</span>',
+  'term.not-found': '<span style="color:#ff5f56">nexus-cluster: \'{cmd}\' not found. Type \'help\'</span>',
 
   /* ---------- script.js: structured data (mirrors PLAN_DATA etc.) ---------- */
   leads: [
@@ -802,13 +799,13 @@ window.I18N_EN = {
       caseStudy: 'Predictable user acquisition flow for tech products: 38% lower CPL and ROMI above 240%.'
     },
     minsk: {
-      name: 'KV-web HQ',
+      name: 'Nexus HQ',
       country: 'Belarus',
       city: 'Minsk',
       flag: '🇧🇾',
       badge: 'Headquarters & R&D',
       tag: '⭐ Head Office',
-      desc: 'KV-web engineering hub: mobile app engineering, high-load architecture and AI solutions.',
+      desc: 'Nexus engineering hub: mobile app engineering, high-load architecture and AI solutions.',
       caseStudy: 'R&D center: consumer App Store product deployment and high-performance B2B platform development.'
     },
     mtbank: {

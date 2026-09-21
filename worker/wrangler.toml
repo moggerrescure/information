@@ -3,5 +3,5 @@ main = "lead.mjs"
 compatibility_date = "2026-09-14"
 
 [vars]
-SITE = "KV-web — лендинг"
+SITE = "Nexus — лендинг"
 CONTACT_EMAIL = "krutko.marketing@gmail.com"
