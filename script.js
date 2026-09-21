@@ -20,7 +20,9 @@ const FORM_CONFIG = {
   SITE: 'KV-web — лендинг'
 };
 
+console.log('SCRIPT.JS TOP LEVEL: readyState =', document.readyState);
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('SCRIPT.JS DOMContentLoaded FIRED!');
 
   /* ---------- мобильное меню ---------- */
   const burger = document.querySelector('.burger');
@@ -1100,355 +1102,213 @@ document.addEventListener('DOMContentLoaded', () => {
   const gtipBadge = document.getElementById('gtipBadge');
   const gtipText = document.getElementById('gtipText');
 
+  console.log('GLOBE: Checking canvas & viewport', !!globeCanvas, !!globeViewport, typeof THREE);
   if (globeCanvas && globeViewport && typeof THREE !== 'undefined') {
-    // Каталог активных точек глобальной сети KV-web
-    // Каталог активных городов глобальной сети KV-web (реальные координаты, комфортное распределение)
+    try {
+      window.__GLOBE_STATUS__ = 'STARTING';
+      console.log('GLOBE: Starting Three.js initialization');
+    // Каталог активных продуктов и технологий KV-web в App Store США (реальные координаты центров дистрибуции в США)
     const HUBS = TD('hubs', {
-      // --- Главный офис (HQ) ---
+      // --- США (Америка) ---
+      foodtracker: {
+        id: 'foodtracker',
+        name: 'FoodTracker AI',
+        country: 'США',
+        city: 'Silicon Valley, CA',
+        flag: '🇺🇸',
+        badge: 'App Store US • AI & Vision',
+        tag: '⭐ Флагман • 150 000+ установок',
+        desc: 'Нейросетевой трекинг макронутриентов и КБЖУ по фото тарелки. Нативный Swift, CoreML и Vertex AI без серверов-посредников.',
+        caseStudy: 'Собственный B2C-продукт в App Store США: мгновенное распознавание блюд по фотографии, синхронизация с Apple Health и виджеты iOS 17.',
+        lat: 37.3382, lon: -121.8863,
+        color: 0xFF6915, colorHex: '#FF6915',
+        region: 'us',
+        isPrimary: true
+      },
+      workout: {
+        id: 'workout',
+        name: 'AI Workout Coach',
+        country: 'США',
+        city: 'New York, NY',
+        flag: '🇺🇸',
+        badge: 'App Store US • 60 FPS Pose CV',
+        tag: '🚀 Топ категорий Health & Fitness',
+        desc: 'Силовой дневник с трекингом повторений через камеру iPhone на базе Apple Vision (VNDetectHumanBodyPoseRequest) и защитой от перегрева.',
+        caseStudy: 'Собственный B2C-продукт для американских пользователей: подсчёт повторений по углам суставов в 60 FPS, голосовой коуч и защита от троттлинга.',
+        lat: 40.7128, lon: -74.0060,
+        color: 0x34E07B, colorHex: '#34E07B',
+        region: 'us',
+        isPrimary: true
+      },
+      fitrpg: {
+        id: 'fitrpg',
+        name: 'FitRPG Combat',
+        country: 'США',
+        city: 'Austin, TX',
+        flag: '🇺🇸',
+        badge: 'App Store US • Геймификация CV',
+        tag: '⚔️ RPG & Computer Vision',
+        desc: 'Геймификация фитнеса: маппинг движений тела в боевой урон по боссам. Распознавание техники через камеру смартфона.',
+        caseStudy: 'Собственный игровой продукт в App Store: конвертация реальных повторений в критические удары, прокачка персонажа и рейды без датчиков.',
+        lat: 30.2672, lon: -97.7431,
+        color: 0x34E07B, colorHex: '#34E07B',
+        region: 'us',
+        parentHub: 'foodtracker'
+      },
+      macsai: {
+        id: 'macsai',
+        name: 'MacSai Pro',
+        country: 'США',
+        city: 'Seattle, WA',
+        flag: '🇺🇸',
+        badge: 'macOS • Swift 6 Native',
+        tag: '⚡ Системный оптимизатор',
+        desc: 'Нативный системный оптимизатор для macOS на Swift 6: интеллектуальная очистка памяти RAM, кэшей и мониторинг чипов Apple Silicon.',
+        caseStudy: 'Системная утилита: нотаризация Apple, нулевая телеметрия, оптимизация памяти под M-серию процессоров без фонового расхода батареи.',
+        lat: 47.6062, lon: -122.3321,
+        color: 0x34E07B, colorHex: '#34E07B',
+        region: 'us',
+        parentHub: 'foodtracker'
+      },
+      aether: {
+        id: 'aether',
+        name: 'AetherGrowth',
+        country: 'США',
+        city: 'Miami, FL',
+        flag: '🇺🇸',
+        badge: 'US Traffic & LeadGen',
+        tag: '📈 Сквозная реклама',
+        desc: 'Сквозная реклама и воронка лидогенерации: автоматизированный закуп трафика Google Ads / Meta и сквозная когортная аналитика.',
+        caseStudy: 'Управляемый поток заявок для технологических продуктов в США: снижение CPL на 38% и окупаемость ROMI от 240%.',
+        lat: 25.7617, lon: -80.1918,
+        color: 0x34E07B, colorHex: '#34E07B',
+        region: 'us',
+        parentHub: 'workout'
+      },
+
+      // --- Беларусь ---
       minsk: {
         id: 'minsk',
-        name: 'Минск',
+        name: 'KV-web HQ',
         country: 'Беларусь',
+        city: 'Минск',
         flag: '🇧🇾',
-        badge: 'Штаб-квартира',
+        badge: 'Штаб-квартира & R&D',
         tag: '⭐ Главный технологический офис',
-        desc: 'Главный технологический центр KV-web. Разработка высоконагруженных веб-сервисов, B2B платформ и SEO-стратегий.',
-        caseStudy: '50+ запущенных проектов: интернет-магазины, личные кабинеты, корпоративные порталы с выводом в топ-3.',
+        desc: 'Главный технологический центр KV-web: мобильная разработка, высоконагруженные Fullstack-системы и проектирование цифровых продуктов.',
+        caseStudy: 'Центр R&D и продакшна: запуск собственных B2C приложений в App Store и реализация сложных проектов для клиентов под ключ.',
         lat: 53.9045, lon: 27.5615,
         color: 0xFF6915, colorHex: '#FF6915',
         region: 'by',
         isHQ: true,
         isPrimary: true
       },
-
-      // --- Западная, Северная и Южная Европа ---
-      london: {
-        id: 'london',
-        name: 'Лондон',
-        country: 'Великобритания',
-        flag: '🇬🇧',
-        badge: 'Fintech & SaaS',
-        tag: '🚀 Western Europe',
-        desc: 'Финтех-сервисы, SaaS платформы и защищенные клиентские кабинеты по европейским стандартам.',
-        caseStudy: 'Личный кабинет финансовой платформы, интерактивный калькулятор доходности и Open Banking API.',
-        lat: 51.5074, lon: -0.1278,
+      mtbank: {
+        id: 'mtbank',
+        name: 'МТБанк Мобайл',
+        country: 'Беларусь',
+        city: 'Минск',
+        flag: '🇧🇾',
+        badge: 'FinTech • HighLoad',
+        tag: '💳 Банкинг & ЕРИП',
+        desc: 'Мобильный онлайн-банкинг и цифровой кошелек: нативный быстрый интерфейс, платежи ЕРИП, переводы P2P и соответствие PCI DSS.',
+        caseStudy: 'Высоконагруженное банковское приложение с обработкой 500 000+ транзакций в месяц и интеграцией банковских шлюзов.',
+        lat: 53.9200, lon: 27.5800,
         color: 0x34E07B, colorHex: '#34E07B',
-        region: 'eu',
-        isPrimary: true
+        region: 'by',
+        parentHub: 'minsk'
       },
-      paris: {
-        id: 'paris',
-        name: 'Париж',
-        country: 'Франция',
-        flag: '🇫🇷',
-        badge: 'Luxury & Brands',
-        tag: '🎨 France',
-        desc: 'Имиджевые сайты, премиальные интерфейсы и промо-страницы для европейских брендов.',
-        caseStudy: 'Имиджевый сайт архитектурного бюро с интерактивным 3D-каталогом проектов.',
-        lat: 48.8566, lon: 2.3522,
+      coolav: {
+        id: 'coolav',
+        name: 'coolav.by & autora',
+        country: 'Беларусь',
+        city: 'Минск',
+        flag: '🇧🇾',
+        badge: 'Auto Classified • 45k+ авто',
+        tag: '🚗 Автомобильный маркетплейс',
+        desc: 'Автомобильный маркетплейс Беларуси: 45 000+ объявлений, онлайн-проверка VIN-истории, умный подбор авто и автокредитование.',
+        caseStudy: 'Высоконагруженный портал с удобным поиском авто, мобильной адаптацией 60 FPS и мгновенной загрузкой каталога.',
+        lat: 53.8900, lon: 27.5200,
         color: 0x34E07B, colorHex: '#34E07B',
-        region: 'eu',
-        parentHub: 'london'
+        region: 'by',
+        parentHub: 'minsk'
       },
-      berlin: {
-        id: 'berlin',
-        name: 'Берлин',
-        country: 'Германия',
-        flag: '🇩🇪',
-        badge: 'Tech & Startups',
-        tag: '💡 Germany',
-        desc: 'Веб-приложения и промо-сайты для европейских технологических стартапов.',
-        caseStudy: 'Презентационная платформа стартапа с интерактивным 3D-конфигуратором продукта.',
-        lat: 52.5200, lon: 13.4050,
+      gch: {
+        id: 'gch',
+        name: 'Green Chemicals (gch.by)',
+        country: 'Беларусь',
+        city: 'Гродно / Минск',
+        flag: '🇧🇾',
+        badge: 'B2B Каталог 12.5k+',
+        tag: '🧪 Промышленный B2B портал',
+        desc: 'Оптовый портал химической продукции: каталог на 12 500+ наименований, синхронизация с 1С, учет остатков и личные кабинеты дилеров.',
+        caseStudy: 'Международная B2B платформа поставок промышленной химии с автоматическим расчетом логистики и документооборотом.',
+        lat: 53.6884, lon: 23.8258,
         color: 0x34E07B, colorHex: '#34E07B',
-        region: 'eu',
-        isPrimary: true
-      },
-      warsaw: {
-        id: 'warsaw',
-        name: 'Варшава',
-        country: 'Польша',
-        flag: '🇵🇱',
-        badge: 'Порталы & Каталоги',
-        tag: '🇪🇺 Central Europe',
-        desc: 'Европейские порталы, мультиязычные каталоги и интеграции с CRM.',
-        caseStudy: 'Сервис аренды оборудования с автоматическим расчетом стоимости и полным соответствием GDPR.',
-        lat: 52.2297, lon: 21.0122,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'eu',
-        parentHub: 'berlin'
-      },
-      stockholm: {
-        id: 'stockholm',
-        name: 'Стокгольм',
-        country: 'Швеция',
-        flag: '🇸🇪',
-        badge: 'Nordic Highload',
-        tag: '❄️ Скандинавия',
-        desc: 'Минималистичные высокопроизводительные веб-сервисы для рынка Северной Европы.',
-        caseStudy: 'B2B-сервис аналитики с адаптивным интерфейсом под стандарты доступности WCAG.',
-        lat: 59.3293, lon: 18.0686,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'eu',
-        parentHub: 'berlin'
-      },
-      milan: {
-        id: 'milan',
-        name: 'Милан',
-        country: 'Италия',
-        flag: '🇮🇹',
-        badge: 'Fashion & E-Com',
-        tag: '🏛️ Южная Европа',
-        desc: 'Премиальные интернет-магазины, fashion-каталоги и сервисы бронирования.',
-        caseStudy: 'Эксклюзивный интернет-магазин дизайнерской мебели с мультивалютной корзиной.',
-        lat: 45.4642, lon: 9.1900,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'eu',
-        parentHub: 'paris'
-      },
-      barcelona: {
-        id: 'barcelona',
-        name: 'Барселона',
-        country: 'Испания',
-        flag: '🇪🇸',
-        badge: 'Travel & Media',
-        tag: '☀️ Пиренеи',
-        desc: 'Порталы бронирования, медиа-проекты и мультиязычные платформы юга Европы.',
-        caseStudy: 'Платформа бронирования премиальных яхт и апартаментов с онлайн-календарем занятости.',
-        lat: 41.3851, lon: 2.1734,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'eu',
-        parentHub: 'paris'
-      },
-
-      // --- Ближний Восток & Азия (MENA) ---
-      dubai: {
-        id: 'dubai',
-        name: 'Дубай',
-        country: 'ОАЭ',
-        flag: '🇦🇪',
-        badge: 'E-Commerce & Luxury',
-        tag: '🌍 Ближний Восток',
-        desc: 'Мультиязычные интернет-магазины, порталы элитной недвижимости и сервисы ОАЭ.',
-        caseStudy: 'Премиум-магазин парфюмерии со шлюзами Stripe/Tap и каталог элитной недвижимости.',
-        lat: 25.2048, lon: 55.2708,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'mena',
-        isPrimary: true
-      },
-      riyadh: {
-        id: 'riyadh',
-        name: 'Эр-Рияд',
-        country: 'Саудовская Аравия',
-        flag: '🇸🇦',
-        badge: 'B2B Порталы & RTL',
-        tag: '🇸🇦 Саудовская Аравия',
-        desc: 'Локализация под арабский рынок (RTL) и интеграция с национальными шлюзами Mada / STC Pay.',
-        caseStudy: 'Корпоративный сайт производственного холдинга с полной поддержкой арабского языка.',
-        lat: 24.7136, lon: 46.6753,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'mena',
-        parentHub: 'dubai'
-      },
-      istanbul: {
-        id: 'istanbul',
-        name: 'Стамбул',
-        country: 'Турция',
-        flag: '🇹🇷',
-        badge: 'Trade & Logistics',
-        tag: '🌉 Трансконтинентальный хаб',
-        desc: 'Торговые площадки, оптовые B2B-каталоги и логистические сервисы между Европой и Азией.',
-        caseStudy: 'Мультиязычный B2B-каталог фабрики с автоматической выгрузкой коммерческих предложений.',
-        lat: 41.0082, lon: 28.9784,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'mena',
-        parentHub: 'dubai'
-      },
-      doha: {
-        id: 'doha',
-        name: 'Доха',
-        country: 'Катар',
-        flag: '🇶🇦',
-        badge: 'Invest & Events',
-        tag: '🇶🇦 Катар',
-        desc: 'Сайты инвестиционных фондов и презентационные посадочные страницы мероприятий.',
-        caseStudy: 'Лендинг международного инвестиционного саммита с онлайн-регистрацией.',
-        lat: 25.2854, lon: 51.5310,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'mena',
-        parentHub: 'dubai'
-      },
-      singapore: {
-        id: 'singapore',
-        name: 'Сингапур',
-        country: 'Сингапур',
-        flag: '🇸🇬',
-        badge: 'Fintech & Cloud',
-        tag: '🌏 Азиатский хаб',
-        desc: 'Азиатский технологический хаб: облачные платформы и финансовые сервисы.',
-        caseStudy: 'Веб-платформа финтех-сервиса с мультиязычной документацией и API интеграцией.',
-        lat: 1.3521, lon: 103.8198,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'mena',
-        parentHub: 'dubai'
-      },
-
-      // --- СНГ, Кавказ & Центральная Азия ---
-      astana: {
-        id: 'astana',
-        name: 'Астана',
-        country: 'Казахстан',
-        flag: '🇰🇿',
-        badge: 'Корп. порталы & 1С',
-        tag: '🤝 Центральная Азия',
-        desc: 'Корпоративные сайты холдингов, оптовые каталоги и автоматизация продаж.',
-        caseStudy: 'B2B портал холдинга на 15 000 товаров с интеграцией 1С и личным кабинетом дилера.',
-        lat: 51.1694, lon: 71.4491,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'cis',
-        isPrimary: true
-      },
-      almaty: {
-        id: 'almaty',
-        name: 'Алматы',
-        country: 'Казахстан',
-        flag: '🇰🇿',
-        badge: 'E-commerce & Kaspi',
-        tag: '🤝 Казахстан',
-        desc: 'Интернет-магазины с интеграцией Kaspi Pay и локальной логистикой.',
-        caseStudy: 'Онлайн-магазин товаров для дома с синхронизацией Kaspi Магазина.',
-        lat: 43.2389, lon: 76.8897,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'cis',
-        parentHub: 'astana'
-      },
-      tashkent: {
-        id: 'tashkent',
-        name: 'Ташкент',
-        country: 'Узбекистан',
-        flag: '🇺🇿',
-        badge: 'B2B Каталоги & Payme',
-        tag: '🤝 Узбекистан',
-        desc: 'Сайты производителей, интеграция платежных систем Payme / Click.',
-        caseStudy: 'Официальный каталог продукции строительного комбината с онлайн-калькулятором.',
-        lat: 41.2995, lon: 69.2401,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'cis',
-        parentHub: 'astana'
-      },
-      tbilisi: {
-        id: 'tbilisi',
-        name: 'Тбилиси',
-        country: 'Грузия',
-        flag: '🇬🇪',
-        badge: 'IT Services & Expat',
-        tag: '🇬🇪 Кавказ',
-        desc: 'Сайты для международных IT-компаний, релокационных сервисов и туризма.',
-        caseStudy: 'Мультиязычный портал сервиса аренды авто с моментальным подтверждением брони.',
-        lat: 41.7151, lon: 44.8271,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'cis',
-        parentHub: 'astana'
-      },
-      baku: {
-        id: 'baku',
-        name: 'Баку',
-        country: 'Азербайджан',
-        flag: '🇦🇿',
-        badge: 'Logistics & Energy',
-        tag: '🇦🇿 Каспийский регион',
-        desc: 'Корпоративные порталы логистических и промышленных предприятий региона.',
-        caseStudy: 'Портал логистического оператора с личным кабинетом клиента и трекингом грузов.',
-        lat: 40.4093, lon: 49.8671,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'cis',
-        parentHub: 'astana'
-      },
-      moscow: {
-        id: 'moscow',
-        name: 'Москва',
-        country: 'Россия',
-        flag: '🇷🇺',
-        badge: 'E-commerce & Highload',
-        tag: '🤝 B2B Сеть',
-        desc: 'Высоконагруженные порталы, интеграции 1С и сквозная аналитика.',
-        caseStudy: 'Оптовый B2B портал с кабинетом партнера и интеграцией Битрикс24.',
-        lat: 55.7558, lon: 37.6173,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'cis',
+        region: 'by',
         parentHub: 'minsk'
       },
 
-      // --- Северная Америка (США & Канада) ---
-      newyork: {
-        id: 'newyork',
-        name: 'Нью-Йорк',
-        country: 'США',
-        flag: '🇺🇸',
-        badge: 'B2B Платформы',
-        tag: '⚡ East Coast',
-        desc: 'Высоконагруженные лендинги и маркетинговые воронки для клиентов на рынке США.',
-        caseStudy: 'Высоконагруженный B2B маркетплейс оптовых поставок с оптимизацией под Google Ads США.',
-        lat: 40.7128, lon: -74.0060,
+      // --- Россия ---
+      kontur: {
+        id: 'kontur',
+        name: 'KONTUR Девелопмент',
+        country: 'Россия',
+        city: 'Москва',
+        flag: '🇷🇺',
+        badge: 'Real Estate • 3D WebGL',
+        tag: '🏗️ Интерактивный 3D-квартал',
+        desc: 'Интерактивный 3D-квартал девелопера: трёхмерный генплан, выбор секций и этажей, визуализация планировок квартир в реальном времени.',
+        caseStudy: 'Инновационный промо-сайт для застройщика с Awwwards Site of the Day: рост вовлеченности покупателей жилья в 3.2 раза.',
+        lat: 55.7558, lon: 37.6173,
         color: 0x34E07B, colorHex: '#34E07B',
-        region: 'us',
+        region: 'ru',
         isPrimary: true
       },
-      sanfrancisco: {
-        id: 'sanfrancisco',
-        name: 'Сан-Франциско',
-        country: 'США',
-        flag: '🇺🇸',
-        badge: 'Silicon Valley & AI',
-        tag: '⚡ Silicon Valley',
-        desc: 'Промо-сайты и веб-приложения для AI-стартапов и технологических платформ Калифорнии.',
-        caseStudy: 'Презентационный сайт генеративного AI-сервиса с интерактивной демо-песочницей в браузере.',
-        lat: 37.7749, lon: -122.4194,
+      rigel: {
+        id: 'rigel',
+        name: 'РИГЕЛЬ Металлоконструкции',
+        country: 'Россия',
+        city: 'Москва',
+        flag: '🇷🇺',
+        badge: 'BIM 3D & Смета',
+        tag: '⚙️ Завод металлоконструкций',
+        desc: 'Промышленный портал завода металлоконструкций: интерактивный калькулятор быстровозводимых ангаров и моментальный расчет BIM-сметы.',
+        caseStudy: 'Инженерный конфигуратор с онлайн-расчетом коммерческого предложения за 45 секунд, конвертирующий до 14% посетителей в заявки.',
+        lat: 55.8200, lon: 37.5000,
         color: 0x34E07B, colorHex: '#34E07B',
-        region: 'us',
-        isPrimary: true
+        region: 'ru',
+        parentHub: 'kontur'
       },
-      chicago: {
-        id: 'chicago',
-        name: 'Чикаго',
-        country: 'США',
-        flag: '🇺🇸',
-        badge: 'Logistics & Trade',
-        tag: '⚡ Midwest',
-        desc: 'Корпоративные порталы логистических и производственных компаний.',
-        caseStudy: 'Кабинет отслеживания грузов и расчет стоимости логистики в реальном времени.',
-        lat: 41.8781, lon: -87.6298,
+      kosobok: {
+        id: 'kosobok',
+        name: 'КОСОБОК Бургерная',
+        country: 'Россия',
+        city: 'Санкт-Петербург',
+        flag: '🇷🇺',
+        badge: 'E-Commerce & 3D',
+        tag: '🍔 Интерактивная бургерная',
+        desc: 'Интерактивный сайт ресторанной сети: послойная 3D-сборка бургера, видеотизеры кухни и онлайн-заказ с доставкой за 30 минут.',
+        caseStudy: 'Яркий гастрономический e-commerce с интерактивным motion-дизайном и моментальной онлайн-оплатой.',
+        lat: 59.9343, lon: 30.3351,
         color: 0x34E07B, colorHex: '#34E07B',
-        region: 'us',
-        parentHub: 'newyork'
+        region: 'ru',
+        parentHub: 'kontur'
       },
-      miami: {
-        id: 'miami',
-        name: 'Майами',
-        country: 'США',
-        flag: '🇺🇸',
-        badge: 'Luxury Real Estate',
-        tag: '⚡ Florida',
-        desc: 'Лендинги премиальной недвижимости, яхтенных чартеров и инвестиций во Флориде.',
-        caseStudy: 'Презентационный лендинг жилого комплекса в Майами-Бич с интерактивными 3D-планировками.',
-        lat: 25.7617, lon: -80.1918,
+      beanleaf: {
+        id: 'beanleaf',
+        name: 'Bean & Leaf CRM',
+        country: 'Россия',
+        city: 'Москва',
+        flag: '🇷🇺',
+        badge: 'Telegram Mini App',
+        tag: '☕ Сеть кофеен & amoCRM',
+        desc: 'Telegram Mini App для сети кофеен: меню, программа лояльности, оплата в 3 клика и моментальная передача карточки клиента в amoCRM.',
+        caseStudy: 'Нативное мини-приложение внутри Telegram с ростом повторных заказов LTV на 42% без установки сторонних программ из маркетов.',
+        lat: 55.7300, lon: 37.6500,
         color: 0x34E07B, colorHex: '#34E07B',
-        region: 'us',
-        parentHub: 'newyork'
-      },
-      toronto: {
-        id: 'toronto',
-        name: 'Торонто',
-        country: 'Канада',
-        flag: '🇨🇦',
-        badge: 'Enterprise & FinTech',
-        tag: '🇨🇦 Canada',
-        desc: 'Корпоративные сайты и B2B порталы для канадского финансового и ритейл секторов.',
-        caseStudy: 'Корпоративный сайт страховой группы с онлайн-калькулятором полисов.',
-        lat: 43.6532, lon: -79.3832,
-        color: 0x34E07B, colorHex: '#34E07B',
-        region: 'us',
-        parentHub: 'newyork'
+        region: 'ru',
+        parentHub: 'kontur'
       }
     });
     // регионы, скрытые для текущего языка (i18n/en.js → __config.hideHubRegions)
@@ -1763,17 +1623,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     `;
 
-    const minskHub = hubObjects['minsk'];
-    const minskHead = minskHub.headPos;
-    const minskBase = minskHub.basePos;
+    const primaryHub = hubObjects['foodtracker'] || Object.values(hubObjects)[0];
+    const primaryHead = primaryHub.headPos;
+    const primaryBase = primaryHub.basePos;
 
     Object.keys(HUBS).forEach(key => {
-      if (key === 'minsk') return;
+      if (key === 'foodtracker') return;
       const targetHub = hubObjects[key];
       const targetHead = targetHub.headPos;
       const targetBase = targetHub.basePos;
 
-      const { geo: curtainGeo, topPoints } = createCurtainGeometry(minskHead, targetHead, minskBase, targetBase, 32, 0.14);
+      const { geo: curtainGeo, topPoints } = createCurtainGeometry(primaryHead, targetHead, primaryBase, targetBase, 32, 0.14);
 
       const isTrunk = targetHub.data.isPrimary;
       const baseCurtainOpacity = isTrunk ? 0.40 : 0.22;
@@ -1821,6 +1681,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // UI Элементы управления и карточка
     const hudItems = [...document.querySelectorAll('.globe-hud__item')];
+    console.log('GLOBE: Found hudItems count:', hudItems.length);
     const wtabs = [...document.querySelectorAll('.wtab')];
     const spinBtn = document.getElementById('globeSpinBtn');
     const zoomInBtn = document.getElementById('globeZoomIn');
@@ -1830,7 +1691,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const gcardTag = document.getElementById('gcardTag');
     const gcardDesc = document.getElementById('gcardDesc');
 
-    // Текущее состояние вращения
+    // Текущее состояние вращения — стартуем с прямого ракурса на США
     let autoSpin = true;
     let isDragging = false;
     let dragStartX = 0;
@@ -1839,9 +1700,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastMouseY = 0;
     let velX = 0;
     let velY = 0;
-    let targetRotX = (HUBS.minsk.lat * Math.PI / 180) * 0.65;
-    let targetRotY = -(HUBS.minsk.lon * Math.PI / 180) - Math.PI / 2;
-    let activeHubKey = 'minsk';
+    let targetRotX = (HUBS.foodtracker.lat * Math.PI / 180) * 0.65;
+    let targetRotY = -(HUBS.foodtracker.lon * Math.PI / 180) - Math.PI / 2;
+    let activeHubKey = 'foodtracker';
     let hoveredHubKey = null;
     let isTransitioning = true;
     let lastUserActionTime = Date.now();
@@ -1849,9 +1710,9 @@ document.addEventListener('DOMContentLoaded', () => {
     globeGroup.rotation.x = targetRotX;
     globeGroup.rotation.y = targetRotY;
 
-    // Подсветка активного города и натянутой к нему световой вуали (без изменения высоты/масштаба)
+    // Подсветка активного продукта и натянутой к нему световой вуали
     const highlightActiveCityNetwork = (hubKey) => {
-      if (hubKey && hubKey !== 'minsk') {
+      if (hubKey && hubKey !== 'foodtracker') {
         arcObjects.forEach(arc => {
           if (arc.hubKey === hubKey) {
             // Выбранная траектория озаряется яркой золотой вуалью
@@ -1898,7 +1759,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!hub) return;
       activeHubKey = hubKey;
 
-      if (gcardCity) gcardCity.textContent = hub.name;
+      if (gcardCity) gcardCity.textContent = `${hub.name} • ${hub.city || hub.country}`;
       if (gcardFlag) gcardFlag.textContent = hub.flag;
       if (gcardTag) {
         gcardTag.textContent = hub.tag;
@@ -1914,7 +1775,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       wtabs.forEach(t => {
         const tr = t.dataset.region;
-        const on = tr === hub.region || (tr === 'me' && hub.region === 'mena') || (tr === 'na' && hub.region === 'us');
+        const on = tr === hubKey || tr === hub.region ||
+          (tr === 'all' && (hubKey === 'foodtracker' || hubKey === 'minsk')) ||
+          (tr === 'us' && hub.region === 'us') ||
+          (tr === 'ru' && hub.region === 'ru') ||
+          (tr === 'by' && hub.region === 'by');
         t.classList.toggle('is-on', on);
         t.setAttribute('aria-selected', String(on));
       });
@@ -1929,12 +1794,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // Привязка кликов по HUD
+    // Привязка кликов по HUD: кликабельно по всей площади каждого пункта
+    window.__HUD_ITEMS_BOUND__ = hudItems.length;
     hudItems.forEach(item => {
-      item.addEventListener('click', () => {
+      item.style.cursor = 'pointer';
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const hubKey = item.dataset.hub;
-        selectHub(hubKey, true);
-        lastUserActionTime = Date.now();
+        if (hubKey && HUBS[hubKey]) {
+          selectHub(hubKey, true);
+          lastUserActionTime = Date.now();
+        }
       });
     });
 
@@ -1948,16 +1819,16 @@ document.addEventListener('DOMContentLoaded', () => {
           t.setAttribute('aria-selected', String(on));
         });
 
-        if (reg === 'all' || reg === 'by') {
+        if (reg === 'all') {
+          selectHub('foodtracker', true);
+        } else if (reg === 'us') {
+          selectHub('foodtracker', true);
+        } else if (reg === 'ru' || reg === 'moscow') {
+          selectHub('moscow', true);
+        } else if (reg === 'by' || reg === 'minsk') {
           selectHub('minsk', true);
-        } else if (reg === 'mena' || reg === 'me') {
-          selectHub('dubai', true);
-        } else if (reg === 'eu') {
-          selectHub('london', true);
-        } else if (reg === 'us' || reg === 'na') {
-          selectHub('sanfrancisco', true);
-        } else if (reg === 'cis') {
-          selectHub('astana', true);
+        } else if (HUBS[reg]) {
+          selectHub(reg, true);
         }
         lastUserActionTime = Date.now();
       });
@@ -2209,6 +2080,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     animate();
+    window.__GLOBE_STATUS__ = 'SUCCESS';
+    } catch (err) {
+      window.__GLOBE_ERROR__ = err.stack || err.toString();
+      console.error('GLOBE ERROR:', err);
+    }
   }
 
 
@@ -2291,8 +2167,9 @@ document.addEventListener('DOMContentLoaded', () => {
     nums.forEach(n => nio.observe(n));
   }
 
-  /* ---------- индикатор прочитанного ---------- */
+  /* ---------- индикатор прочитанного и шапка ---------- */
   const bar = document.querySelector('.progress__bar');
+  const siteHeader = document.querySelector('.site-header');
 
   /* ---------- панель действий на телефоне ----------
      Прячем её, когда квиз или нижняя форма и так на экране: дублировать
@@ -2323,6 +2200,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const max = document.documentElement.scrollHeight - innerHeight;
 
       if (bar && !reduce) bar.style.width = (max > 0 ? (y / max) * 100 : 0).toFixed(2) + '%';
+
+      if (siteHeader) siteHeader.classList.toggle('is-scrolled', y > 40);
 
       if (abar) abar.classList.toggle('is-up', y > 700 && formsVisible === 0);
 

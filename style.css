@@ -101,7 +101,7 @@ ul,ol{margin:0;padding:0;list-style:none}
 
 :where(a,button,input,summary,[tabindex]):focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:4px}
 [hidden]{display:none!important}
-section[id],[id="cases"]{scroll-margin-top:90px}
+section[id],[id="cases"]{scroll-margin-top:125px}
 
 .h2{font-size:clamp(26px,3.4vw,40px);line-height:1.3;text-transform:uppercase;margin:0 0 var(--gap-h2)}
 .h2--light{color:var(--white)}
@@ -239,10 +239,28 @@ main>section{padding-block:0 var(--sec)}
 :is(.hero,.dark-block,.reviews)+section{padding-top:var(--sec)}
 
 /* ------------------------------ шапка ------------------------------ */
-.site-header{position:sticky;top:0;z-index:var(--z-sticky);background:var(--blue);padding:16px 0}
+.site-header{
+  position:sticky;top:0;z-index:var(--z-sticky);
+  background:var(--blue);padding:14px 0;
+  transition:background-color .3s var(--ease),backdrop-filter .3s var(--ease),padding .3s var(--ease),box-shadow .3s var(--ease);
+}
+.site-header.is-scrolled{
+  background:rgba(18,20,26,0.65);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  padding:10px 0;
+  box-shadow:0 8px 30px rgba(0,0,0,.3);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
 .navbar{
   background:#fff;border-radius:55px;min-height:88px;
   display:flex;align-items:center;gap:24px;padding:12px 16px 12px 28px;
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+  transition:min-height .28s var(--ease),padding .28s var(--ease);
+}
+.site-header.is-scrolled .navbar{
+  min-height:76px;
+  padding:8px 16px 8px 24px;
 }
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:0 0 auto;color:var(--ink)}
 .brand__mark{width:40px;height:32px;flex:0 0 auto}
@@ -2280,19 +2298,29 @@ main>section{padding-block:0 var(--sec)}
 
 /* Левый HUD переключения хабов */
 .globe-hud{
-  position:absolute;top:22px;left:22px;width:220px;
+  position:absolute;top:22px;left:22px;width:240px;
   background:rgba(6,15,40,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:14px 12px;z-index:20;
   box-shadow:0 18px 40px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.15);
+  user-select:none;
 }
 .globe-hud__header{
   font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;
   color:rgba(255,255,255,.5);margin-bottom:8px;padding-left:6px;
 }
-.globe-hud__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px}
+.globe-hud__list{
+  list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:5px;
+  max-height:360px;overflow-y:auto;overscroll-behavior:contain;
+}
+.globe-hud__list::-webkit-scrollbar{width:4px}
+.globe-hud__list::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25);border-radius:4px}
 .globe-hud__item{
-  display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:11px;
+  display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;
   cursor:pointer;transition:all .22s var(--ease);border:1px solid transparent;
+  width:100%;box-sizing:border-box;
+}
+.globe-hud__item *{
+  pointer-events:none;
 }
 .globe-hud__item:hover{
   background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.16);
@@ -2305,9 +2333,12 @@ main>section{padding-block:0 var(--sec)}
   width:8px;height:8px;border-radius:50%;background:var(--c,#396CEB);
   box-shadow:0 0 10px var(--c);flex-shrink:0;
 }
+.globe-hud__info{
+  flex:1;min-width:0;
+}
 .globe-hud__info b{font-size:13px;font-weight:700;color:#fff;display:block;line-height:1.2}
 .globe-hud__info small{
-  font-size:10px;color:rgba(255,255,255,.6);display:block;white-space:nowrap;
+  font-size:10.5px;color:rgba(255,255,255,.65);display:block;white-space:nowrap;
   overflow:hidden;text-overflow:ellipsis;margin-top:2px;
 }
 
@@ -2421,8 +2452,9 @@ main>section{padding-block:0 var(--sec)}
    векторные и по отдельности не выгружаются, а так они попадают на страницу
    ровно такими, как в макете, вместе с подложкой. */
 .clients__grid{display:grid;grid-template-columns:repeat(6,1fr);column-gap:1.1%;row-gap:10px}
-.clogo{aspect-ratio:182/71}
-.clogo img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.clogo{aspect-ratio:182/71;transition:transform .28s cubic-bezier(0.16,1,0.3,1),filter .28s ease,box-shadow .28s ease;cursor:pointer}
+.clogo:hover{transform:translateY(-4px) scale(1.02);filter:brightness(1.09);box-shadow:0 12px 28px rgba(0,0,0,.45)}
+.clogo img{width:100%;height:100%;object-fit:cover;border-radius:10px;display:block}
 .clients__s1{width:77px;height:77px;border-radius:16px;right:6%;top:-20px}
 
 /* ------------------------------ нижний CTA ------------------------------ */
@@ -2936,7 +2968,7 @@ main>section{padding-block:0 var(--sec)}
   .post h3 { padding: 20px 16px 0; font-size: 22px; }
   .post p { padding: 14px 16px 20px; }
   .post .btn { margin: 0 16px 20px; }
-  .clients__grid { grid-template-columns: repeat(3, 1fr); gap: 10px 8px; }
+  .clients__grid { grid-template-columns: repeat(2, 1fr); gap: 12px 10px; }
   .cta__card { padding: 24px 16px; border-radius: 24px; }
   .cta__form { gap: 12px; }
   .cta__form .btn { width: 100%; min-height: 54px; }

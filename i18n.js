@@ -111,24 +111,34 @@
 
   /* ---------- переключатель RU / EN ---------- */
   function switchTo(next) {
-    if (next === lang) return;
+    if (!next || next === lang) return;
     try { localStorage.setItem('kv_lang', next); } catch (e) {}
     var url = new URL(location.href);
-    url.searchParams.delete('lang');
-    location.replace(url.toString());
+    url.searchParams.set('lang', next);
+    if (url.href === location.href) {
+      location.reload();
+    } else {
+      location.replace(url.toString());
+    }
   }
 
   function initSwitcher() {
     var btns = document.querySelectorAll('[data-lang]');
     for (var i = 0; i < btns.length; i++) {
       var b = btns[i];
-      var isOn = b.getAttribute('data-lang') === lang;
+      var targetLang = b.getAttribute('data-lang');
+      var isOn = targetLang === lang;
       b.classList.toggle('is-on', isOn);
       b.setAttribute('aria-pressed', String(isOn));
-      b.addEventListener('click', function (e) {
-        e.preventDefault();
-        switchTo(this.getAttribute('data-lang'));
-      });
+      b.onclick = (function (target) {
+        return function (e) {
+          if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+          switchTo(target);
+        };
+      })(targetLang);
     }
   }
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <script>
 /* Язык: ?lang= → localStorage → язык браузера + часовой пояс. Результат в window.KV_LANG; словарь и подстановка — i18n.js */
-(function(){var L="ru";try{var q=new URLSearchParams(location.search).get("lang");if(q==="en"||q==="ru"){localStorage.setItem("kv_lang",q)}var s=localStorage.getItem("kv_lang");if(s==="en"||s==="ru"){L=s}else{var langs=navigator.languages||[navigator.language||""];var ru=/^(ru|be|uk|kk|ky|uz|tg)\b/i;var tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}var cis=/^(Europe\/(Minsk|Moscow|Kaliningrad|Samara|Kirov|Volgograd|Astrakhan|Saratov|Ulyanovsk|Simferopol|Kiev|Kyiv)|Asia\/(Almaty|Qyzylorda|Aqtobe|Aqtau|Atyrau|Oral|Qostanay|Tashkent|Samarkand|Bishkek|Dushanbe|Yekaterinburg|Omsk|Novosibirsk|Barnaul|Tomsk|Novokuznetsk|Krasnoyarsk|Irkutsk|Chita|Yakutsk|Vladivostok|Magadan|Sakhalin|Kamchatka|Anadyr))$/;L=ru.test(langs[0]||"")||cis.test(tz)?"ru":"en"}}catch(e){}window.KV_LANG=L;var h=document.documentElement;h.lang=L;h.className+=" lang-"+L+(L==="en"?" i18n-wait":"")})();
+(function(){var L="ru";try{var q=new URLSearchParams(location.search).get("lang");if(q==="en"||q==="ru"){L=q;try{localStorage.setItem("kv_lang",q)}catch(e){}}else{var s=null;try{s=localStorage.getItem("kv_lang")}catch(e){}if(s==="en"||s==="ru"){L=s}else{var langs=navigator.languages||[navigator.language||""];var ru=/^(ru|be|uk|kk|ky|uz|tg)\b/i;var tz="";try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone||""}catch(e){}var cis=/^(Europe\/(Minsk|Moscow|Kaliningrad|Samara|Kirov|Volgograd|Astrakhan|Saratov|Ulyanovsk|Simferopol|Kiev|Kyiv)|Asia\/(Almaty|Qyzylorda|Aqtobe|Aqtau|Atyrau|Oral|Qostanay|Tashkent|Samarkand|Bishkek|Dushanbe|Yekaterinburg|Omsk|Novosibirsk|Barnaul|Tomsk|Novokuznetsk|Krasnoyarsk|Irkutsk|Chita|Yakutsk|Vladivostok|Magadan|Sakhalin|Kamchatka|Anadyr))$/;L=ru.test(langs[0]||"")||cis.test(tz)?"ru":"en"}}}catch(e){}window.KV_LANG=L;var h=document.documentElement;h.lang=L;h.className+=" lang-"+L+(L==="en"?" i18n-wait":"")})();
 </script>
 <style>html.i18n-wait body{visibility:hidden}</style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1901,22 +1901,20 @@
     <div class="world__card reveal">
       <div class="world__header">
         <div class="world__title-block">
-          <h2 data-i18n="geography.my-sozdaem-sayty-po" class="h2 h2--light">Мы создаём сайты по всему миру</h2>
-          <p data-i18n="geography.interaktivnyy-3d-globus-prisutstviya" class="world__lead">Интерактивный 3D-глобус присутствия: исследуйте ключевые города и цифровые хабы в Европе, на Ближнем Востоке, в США и СНГ. Вращайте планету и выбирайте город.</p>
+          <h2 data-i18n="geography.my-sozdaem-sayty-po" class="h2 h2--light">География наших проектов: США, Россия и Беларусь</h2>
+          <p data-i18n="geography.interaktivnyy-3d-globus-prisutstviya" class="world__lead">Интерактивный 3D-глобус присутствия: мобильные продукты и цифровые платформы, запущенные в Америке, России и Беларуси. Вращайте планету и исследуйте проекты в каждом регионе.</p>
         </div>
         <div class="world__badge">
           <span class="world__badge-dot" aria-hidden="true"></span>
-          <span data-i18n="geography.3d-globus-20-mirovyh"><b>3D Глобус</b> • 20+ мировых городов</span>
+          <span data-i18n="geography.3d-globus-20-mirovyh"><b>3D Глобус</b> • США • Россия • Беларусь</span>
         </div>
       </div>
 
-      <div data-i18n-aria-label="geography.label.bystryy-vybor-gorodov" class="world__filter" role="tablist" aria-label="Быстрый выбор городов">
-        <button data-i18n="geography.vse-goroda-360" class="wtab is-on" type="button" role="tab" aria-selected="true" data-region="all">Все города (360°)</button>
-        <button data-i18n="geography.minsk-hq" class="wtab" type="button" role="tab" aria-selected="false" data-region="by">Минск (HQ)</button>
-        <button data-i18n="geography.evropa" class="wtab" type="button" role="tab" aria-selected="false" data-region="eu">Европа</button>
-        <button data-i18n="geography.blizhniy-vostok" class="wtab" type="button" role="tab" aria-selected="false" data-region="me">Ближний Восток</button>
-        <button data-i18n="geography.sng-i-kavkaz" class="wtab" type="button" role="tab" aria-selected="false" data-region="cis">СНГ и Кавказ</button>
-        <button data-i18n="geography.severnaya-amerika" class="wtab" type="button" role="tab" aria-selected="false" data-region="na">Северная Америка</button>
+      <div data-i18n-aria-label="geography.label.bystryy-vybor-gorodov" class="world__filter" role="tablist" aria-label="Быстрый выбор регионов">
+        <button data-i18n="geography.vse-goroda-360" class="wtab is-on" type="button" role="tab" aria-selected="true" data-region="all">Все регионы (360°)</button>
+        <button data-i18n="geography.tab-us" class="wtab" type="button" role="tab" aria-selected="false" data-region="us">США</button>
+        <button data-i18n="geography.tab-ru" class="wtab" type="button" role="tab" aria-selected="false" data-region="ru">Россия</button>
+        <button data-i18n="geography.tab-by" class="wtab" type="button" role="tab" aria-selected="false" data-region="by">Беларусь</button>
       </div>
 
       <!-- 3D Глобус сцена -->
@@ -1927,57 +1925,104 @@
           <div class="globe-atmosphere" aria-hidden="true"></div>
         </div>
 
-        <!-- Левый HUD-виджет переключения хабов -->
-        <div data-i18n-aria-label="geography.label.spisok-klyuchevyh-gorodov" class="globe-hud" aria-label="Список ключевых городов">
-          <div data-i18n="geography.klyuchevye-goroda" class="globe-hud__header">Ключевые города</div>
+        <!-- Левый HUD-виджет переключения проектов -->
+        <div data-i18n-aria-label="geography.label.spisok-klyuchevyh-gorodov" class="globe-hud" aria-label="Список проектов в США, России и Беларуси">
+          <div data-i18n="geography.klyuchevye-goroda" class="globe-hud__header">Локации проектов</div>
           <ul class="globe-hud__list">
-            <li class="globe-hud__item is-active" data-hub="minsk">
+            <!-- США -->
+            <li class="globe-hud__item is-active" data-hub="foodtracker">
               <span class="globe-hud__dot" style="--c:#FF6915"></span>
               <div class="globe-hud__info">
-                <b data-i18n="geography.minsk">Минск</b>
-                <small data-i18n="geography.shtab-kvartira-hq">Штаб-квартира • HQ</small>
+                <b data-i18n="geography.hud-foodtracker">FoodTracker AI • США</b>
+                <small data-i18n="geography.hud-foodtracker-sub">Silicon Valley • Vision AI</small>
               </div>
             </li>
-            <li class="globe-hud__item" data-hub="dubai">
+            <li class="globe-hud__item" data-hub="workout">
               <span class="globe-hud__dot" style="--c:#34E07B"></span>
               <div class="globe-hud__info">
-                <b data-i18n="geography.dubay">Дубай</b>
-                <small>E-Commerce & Luxury</small>
+                <b data-i18n="geography.hud-workout">AI Workout Coach • США</b>
+                <small data-i18n="geography.hud-workout-sub">New York • 60 FPS Pose CV</small>
               </div>
             </li>
-            <li class="globe-hud__item" data-hub="london">
+            <li class="globe-hud__item" data-hub="fitrpg">
               <span class="globe-hud__dot" style="--c:#34E07B"></span>
               <div class="globe-hud__info">
-                <b data-i18n="geography.london">Лондон</b>
-                <small>Fintech & SaaS</small>
+                <b data-i18n="geography.hud-fitrpg">FitRPG Combat • США</b>
+                <small data-i18n="geography.hud-fitrpg-sub">Austin • Геймификация CV</small>
               </div>
             </li>
-            <li class="globe-hud__item" data-hub="sanfrancisco">
+            <li class="globe-hud__item" data-hub="macsai">
               <span class="globe-hud__dot" style="--c:#34E07B"></span>
               <div class="globe-hud__info">
-                <b data-i18n="geography.san-frantsisko">Сан-Франциско</b>
-                <small>Silicon Valley • AI</small>
+                <b data-i18n="geography.hud-macsai">MacSai Pro • США</b>
+                <small data-i18n="geography.hud-macsai-sub">Seattle • Swift 6 macOS</small>
               </div>
             </li>
-            <li class="globe-hud__item" data-hub="newyork">
+            <li class="globe-hud__item" data-hub="aether">
               <span class="globe-hud__dot" style="--c:#34E07B"></span>
               <div class="globe-hud__info">
-                <b data-i18n="geography.nyu-york">Нью-Йорк</b>
-                <small data-i18n="geography.b2b-platformy-marketing">B2B платформы & Маркетинг</small>
+                <b data-i18n="geography.hud-aether">AetherGrowth • США</b>
+                <small data-i18n="geography.hud-aether-sub">Miami • Сквозная реклама</small>
               </div>
             </li>
-            <li class="globe-hud__item" data-hub="astana">
-              <span class="globe-hud__dot" style="--c:#34E07B"></span>
+
+            <!-- Беларусь -->
+            <li class="globe-hud__item" data-hub="minsk">
+              <span class="globe-hud__dot" style="--c:#FF6915"></span>
               <div class="globe-hud__info">
-                <b data-i18n="geography.astana">Астана</b>
-                <small data-i18n="geography.tsentralnaya-aziya-portaly">Центральная Азия • Порталы</small>
+                <b data-i18n="geography.hud-minsk">KV-web HQ • Беларусь</b>
+                <small data-i18n="geography.hud-minsk-sub">Минск • Главный офис &amp; R&amp;D</small>
               </div>
             </li>
-            <li class="globe-hud__item" data-hub="berlin">
+            <li class="globe-hud__item" data-hub="mtbank">
               <span class="globe-hud__dot" style="--c:#34E07B"></span>
               <div class="globe-hud__info">
-                <b data-i18n="geography.berlin">Берлин</b>
-                <small>Tech & Startups</small>
+                <b data-i18n="geography.hud-mtbank">МТБанк Мобайл • Беларусь</b>
+                <small data-i18n="geography.hud-mtbank-sub">Минск • Онлайн-банкинг</small>
+              </div>
+            </li>
+            <li class="globe-hud__item" data-hub="coolav">
+              <span class="globe-hud__dot" style="--c:#34E07B"></span>
+              <div class="globe-hud__info">
+                <b data-i18n="geography.hud-coolav">coolav.by &amp; autora • Беларусь</b>
+                <small data-i18n="geography.hud-coolav-sub">Минск • Авто-маркетплейс</small>
+              </div>
+            </li>
+            <li class="globe-hud__item" data-hub="gch">
+              <span class="globe-hud__dot" style="--c:#34E07B"></span>
+              <div class="globe-hud__info">
+                <b data-i18n="geography.hud-gch">Green Chemicals • Беларусь</b>
+                <small data-i18n="geography.hud-gch-sub">Минск • Промышленный B2B</small>
+              </div>
+            </li>
+
+            <!-- Россия -->
+            <li class="globe-hud__item" data-hub="kontur">
+              <span class="globe-hud__dot" style="--c:#34E07B"></span>
+              <div class="globe-hud__info">
+                <b data-i18n="geography.hud-kontur">KONTUR • Россия</b>
+                <small data-i18n="geography.hud-kontur-sub">Москва • 3D-квартал</small>
+              </div>
+            </li>
+            <li class="globe-hud__item" data-hub="rigel">
+              <span class="globe-hud__dot" style="--c:#34E07B"></span>
+              <div class="globe-hud__info">
+                <b data-i18n="geography.hud-rigel">РИГЕЛЬ • Россия</b>
+                <small data-i18n="geography.hud-rigel-sub">Москва • BIM &amp; Металл</small>
+              </div>
+            </li>
+            <li class="globe-hud__item" data-hub="kosobok">
+              <span class="globe-hud__dot" style="--c:#34E07B"></span>
+              <div class="globe-hud__info">
+                <b data-i18n="geography.hud-kosobok">КОСОБОК • Россия</b>
+                <small data-i18n="geography.hud-kosobok-sub">Санкт-Петербург • 3D Бургерная</small>
+              </div>
+            </li>
+            <li class="globe-hud__item" data-hub="beanleaf">
+              <span class="globe-hud__dot" style="--c:#34E07B"></span>
+              <div class="globe-hud__info">
+                <b data-i18n="geography.hud-beanleaf">Bean &amp; Leaf • Россия</b>
+                <small data-i18n="geography.hud-beanleaf-sub">Москва • Telegram Mini App</small>
               </div>
             </li>
           </ul>
@@ -1996,30 +2041,30 @@
           </button>
         </div>
 
-        <!-- Интерактивный тултип при наведении на хаб / страну -->
+        <!-- Интерактивный тултип при наведении на продукт -->
         <div class="globe-tooltip" id="globeTooltip" aria-hidden="true">
           <div class="globe-tooltip__country">
-            <span class="globe-tooltip__flag" id="gtipFlag">🇧🇾</span>
+            <span class="globe-tooltip__flag" id="gtipFlag">🇺🇸</span>
             <div class="globe-tooltip__meta">
-              <strong data-i18n="geography.belarus" class="globe-tooltip__country-name" id="gtipCountry">Беларусь</strong>
-              <span data-i18n="geography.minsk-hq" class="globe-tooltip__city-name" id="gtipCity">Минск (HQ)</span>
+              <strong data-i18n="geography.tooltip-country" class="globe-tooltip__country-name" id="gtipCountry">США</strong>
+              <span data-i18n="geography.tooltip-city" class="globe-tooltip__city-name" id="gtipCity">FoodTracker AI</span>
             </div>
-            <span data-i18n="geography.shtab-kvartira" class="globe-tooltip__badge" id="gtipBadge">Штаб-квартира</span>
+            <span data-i18n="geography.tooltip-badge" class="globe-tooltip__badge" id="gtipBadge">App Store US • AI & Vision</span>
           </div>
           <div class="globe-tooltip__work">
-            <span data-i18n="geography.chto-sdelali-dlya-klienta" class="globe-tooltip__label">Что сделали для клиента:</span>
-            <p data-i18n="geography.razrabotka-40-korporativnyh-saytov" class="globe-tooltip__text" id="gtipText">Разработка 40+ корпоративных сайтов, B2B-порталов и интернет-магазинов. Сквозная аналитика и SEO в топ-3.</p>
+            <span data-i18n="geography.chto-sdelali-dlya-klienta" class="globe-tooltip__label">Наш продукт в US App Store:</span>
+            <p data-i18n="geography.tooltip-text" class="globe-tooltip__text" id="gtipText">Собственный B2C-продукт в App Store США: мгновенное распознавание блюд по фотографии, синхронизация с Apple Health и виджеты iOS 17.</p>
           </div>
         </div>
 
-        <!-- Всплывающая карточка города -->
+        <!-- Всплывающая карточка продукта -->
         <div class="globe-card" id="globeCard" aria-live="polite">
           <div class="globe-card__header">
-            <span class="globe-card__flag" id="gcardFlag">🇧🇾</span>
-            <strong data-i18n="geography.minsk-hq" id="gcardCity">Минск (HQ)</strong>
-            <span data-i18n="geography.glavnyy-ofis" class="globe-card__tag" id="gcardTag">⭐ Главный офис</span>
+            <span class="globe-card__flag" id="gcardFlag">🇺🇸</span>
+            <strong data-i18n="geography.card-city" id="gcardCity">FoodTracker AI • США</strong>
+            <span data-i18n="geography.card-tag" class="globe-card__tag" id="gcardTag">⭐ Флагман • 150 000+ установок</span>
           </div>
-          <p data-i18n="geography.shtab-kvartira-kv-web" class="globe-card__desc" id="gcardDesc">Штаб-квартира KV-web. Центр веб-разработки, дизайна и сквозной аналитики. 50+ проектов.</p>
+          <p data-i18n="geography.card-desc" class="globe-card__desc" id="gcardDesc">Нейросетевой трекинг макронутриентов и КБЖУ по фото тарелки. Нативный Swift, CoreML и Vertex AI без серверов-посредников.</p>
         </div>
 
         <div class="globe-hint" aria-hidden="true">
@@ -2028,12 +2073,12 @@
         </div>
       </div>
 
-      <!-- Нижняя палуба бизнес-метрик -->
-      <div data-i18n-aria-label="geography.label.statistika-ohvata" class="world__stats" aria-label="Статистика охвата">
-        <div class="wstat"><b data-i18n="geography.15-stran">15+ стран</b><span data-i18n="geography.ohvat-mirovyh-rynkov">Охват мировых рынков</span></div>
-        <div class="wstat"><b data-i18n="geography.65-saytov">65+ сайтов</b><span data-i18n="geography.realizovano-pod-klyuch">Реализовано под ключ</span></div>
-        <div class="wstat"><b data-i18n="geography.45-rost">+45% рост</b><span data-i18n="geography.sredniy-prirost-konversii">Средний прирост конверсии</span></div>
-        <div class="wstat"><b data-i18n="hero.ot-3-dney">от 3 дней</b><span data-i18n="geography.sroki-zapuska-proekta">Сроки запуска проекта</span></div>
+      <!-- Нижняя палуба продуктовых метрик -->
+      <div data-i18n-aria-label="geography.label.statistika-ohvata" class="world__stats" aria-label="Метрики продуктов в App Store">
+        <div class="wstat"><b data-i18n="geography.stat-installs">150 000+</b><span data-i18n="geography.stat-installs-desc">Пользователей в США</span></div>
+        <div class="wstat"><b data-i18n="geography.stat-rating">4.9 ★</b><span data-i18n="geography.stat-rating-desc">Рейтинг в App Store</span></div>
+        <div class="wstat"><b data-i18n="geography.stat-fps">60 FPS</b><span data-i18n="geography.stat-fps-desc">Real-time Pose & Vision</span></div>
+        <div class="wstat"><b data-i18n="geography.stat-privacy">100% On-Device</b><span data-i18n="geography.stat-privacy-desc">Локальный AI на CoreML</span></div>
       </div>
     </div>
   </div>
@@ -2045,24 +2090,24 @@
     <div class="clients__card reveal">
       <h2 data-i18n="clients.nashi-klienty" class="h2 h2--light">Наши клиенты</h2>
       <ul data-i18n-aria-label="clients.label.logotipy-klientov-agentstva" class="clients__grid stagger" aria-label="Логотипы клиентов агентства">
-        <li class="clogo"><img src="img/client-r1c1.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r1c2.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r1c3.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r1c4.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r1c5.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r1c6.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r2c1.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r2c2.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r2c3.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r2c4.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r2c5.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r2c6.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r3c1.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r3c2.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r3c3.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r3c4.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r3c5.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
-        <li class="clogo"><img src="img/client-r3c6.webp" width="182" height="71" alt="" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-green-chemicals.webp?v=3" width="182" height="71" alt="Green Chemicals (gch.by) — Промышленная химия и теплоносители" title="Green Chemicals (gch.by)" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-foodtracker.webp?v=3" width="182" height="71" alt="FoodTracker AI — iOS NutriScan &amp; CoreML" title="FoodTracker AI" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-workout.webp?v=3" width="182" height="71" alt="AI Workout Coach — 60 FPS Pose CV &amp; Силовой дневник" title="AI Workout Coach" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-fitrpg.webp?v=3" width="182" height="71" alt="FitRPG — Фитнес-RPG игра и компьютерное зрение" title="FitRPG" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-mtbank.webp?v=3" width="182" height="71" alt="МТБанк — Мобильный онлайн-банкинг и FinTech" title="МТБанк (MTBank)" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-macsai.webp?v=3" width="182" height="71" alt="MacSai Pro — Системный оптимизатор macOS Swift 6" title="MacSai Pro" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-coolav.webp?v=3" width="182" height="71" alt="coolav.by — Автомобильный маркетплейс Беларуси" title="coolav.by" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-autora.webp?v=3" width="182" height="71" alt="autora — Дилерская автоплатформа" title="autora" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-kontur.webp?v=3" width="182" height="71" alt="KONTUR — Интерактивный 3D-квартал девелопера" title="KONTUR Девелопмент" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-rigel.webp?v=3" width="182" height="71" alt="РИГЕЛЬ — Завод металлоконструкций и BIM" title="РИГЕЛЬ" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-kosobok.webp?v=3" width="182" height="71" alt="КОСОБОК — 3D Конфигуратор &amp; Бургеры" title="КОСОБОК" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-beanleaf.webp?v=3" width="182" height="71" alt="Bean &amp; Leaf — Telegram Mini App кофеен" title="Bean &amp; Leaf" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-aether.webp?v=3" width="182" height="71" alt="AetherGrowth — AI Сквозная реклама и воронки" title="AetherGrowth" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-yogacoach.webp?v=3" width="182" height="71" alt="Yoga Coach &amp; Relax — iOS Soundscapes &amp; Meditation" title="Yoga Coach &amp; Relax" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-artcly.webp?v=3" width="182" height="71" alt="ArtCly — Motion &amp; 3D Web Studio" title="ArtCly" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-fraugut.webp?v=3" width="182" height="71" alt="ФРАУ GUT — Премиальная бытовая химия (Green Chemicals)" title="ФРАУ GUT" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-keratherm.webp?v=3" width="182" height="71" alt="KerathermECO — Теплоносители и хладагенты (Green Chemicals)" title="KerathermECO" loading="lazy" decoding="async"></li>
+        <li class="clogo"><img src="img/client-landingnazakaz.webp?v=3" width="182" height="71" alt="landing-na-zakaz.by — Интерактивные 3D-сайты" title="landing-na-zakaz.by" loading="lazy" decoding="async"></li>
       </ul>
     </div>
     <span class="star star--o clients__s1" aria-hidden="true"></span>
